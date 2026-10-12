@@ -50,25 +50,25 @@
     out_of_scope: { label: 'Not a release run', cls: 'muted' }
   };
   var SCENARIO = { a: 'A healthy', 'b-stale': 'B stale evidence', c: 'C fairness regression', d: 'D repaired', regression: 'Injected regression (demo)' };
-  var STAGE = { eligible: 'Eligible', awaiting_approval: 'Awaiting approval', deploying: 'Deploying', deployed_mock: 'Deployed (mock)', deployed: 'Deployed', runtime_verified: 'Runtime verified', deploy_failed: 'Deploy failed', deploy_canceled: 'Deploy canceled' };
+  var STAGE = { eligible: 'Eligible', awaiting_approval: 'Awaiting approval', deploying: 'Deploying', deployed_mock: 'Release recorded', deployed: 'Deployed', runtime_verified: 'Runtime verified', deploy_failed: 'Deploy failed', deploy_canceled: 'Deploy canceled' };
   var STEPS = ['eligible', 'awaiting_approval', 'deployed', 'runtime_verified'];
 
-  // Eligible > Awaiting approval > Deployed > Runtime verified. A mock deployment never reaches the last two.
+  // Eligible > Awaiting approval > Deployed > Runtime verified. A recorded (mock) release never reaches the last two.
   function stageTracker(run) {
     var stage = run.release_stage;
     var reached = { eligible: 1, awaiting_approval: 2, deploying: 2, deployed_mock: 3, deploy_failed: 2, deploy_canceled: 2, deployed: 3, runtime_verified: 4 }[stage] || 0;
     var el = h('div', { class: 'stages' });
     STEPS.forEach(function (key, i) {
-      // A mock deployment turns this step green but dashed and labelled "(mock)": it happened, but no service was
-      // deployed, so Runtime verified never follows it.
+      // A recorded release (the mock job) turns this step green but dashed and labelled "Release recorded": the
+      // release was recorded, but no service was deployed, so Runtime verified never follows it.
       var mock = key === 'deployed' && stage === 'deployed_mock';
       var attrs = { class: 'stage ' + (i < reached ? 'done' : 'todo') + (mock ? ' mock' : '') + (i === reached - 1 ? ' now' : ''),
-        text: mock ? 'Deployed (mock)' : STAGE[key] };
-      if (mock) attrs.title = 'Deployment job succeeded, but it was a labelled mock: no service was deployed.';
+        text: mock ? 'Release recorded' : STAGE[key] };
+      if (mock) attrs.title = 'The release was recorded (receipt marked mock). No service was deployed.';
       el.appendChild(h('span', attrs));
     });
     var note = stage === 'awaiting_approval' ? 'The deploy job has not run. Whether anyone approved is read from GitLab\'s approval record, never inferred from the job being manual.'
-      : stage === 'deployed_mock' ? 'Deployment was a labelled mock: no service was deployed or verified.'
+      : stage === 'deployed_mock' ? 'Release recorded: no service was deployed or verified (the receipt is marked mock).'
       : stage === 'deploy_failed' ? 'Deployment failed' + (run.deployment && run.deployment.failure ? ' at ' + run.deployment.failure.stage + '; ' + (run.deployment.previous_revision_still_serving ? 'the previous revision is still serving.' : 'check the receipt.') : '.')
       : stage === 'runtime_verified' ? 'The running service reported the evidenced model hash and passed the smoke checks.'
       : '';
@@ -77,7 +77,7 @@
     var door = null;
     var BAR = {
       deploying: ['run', 'Deployment running\u2026'],
-      deployed_mock: ['done', 'Deployed (mock)'],
+      deployed_mock: ['done', 'Release recorded'],
       deployed: ['done', 'Deployed'],
       runtime_verified: ['done', 'Deployed and runtime verified'],
       deploy_failed: ['bad', 'Deployment failed'],
@@ -86,11 +86,11 @@
     if (stage === 'awaiting_approval' && run.web_url && /^https:\/\/gitlab\.com\//.test(run.web_url)) {
       door = h('p', { class: 'sub' }, [
         h('a', { class: 'btn-deploy', href: run.web_url, target: '_blank', rel: 'noopener',
-          title: 'Review and start the deploy in GitLab \u2192 (open the pipeline and start deploy-production)', text: 'Deploy \u2197' })
+          title: 'Review and start the deploy in GitLab \u2192 (open the pipeline and start the deploy job)', text: 'Deploy \u2197' })
       ]);
     } else if (BAR[stage]) {
       // Reflects the last synced state of the deploy job in GitLab; it is not a live feed.
-      var mockNote = stage === 'deployed_mock' ? ' Labelled mock: no service was deployed.' : '';
+      var mockNote = stage === 'deployed_mock' ? ' No service was deployed (the receipt is marked mock).' : '';
       door = h('p', { class: 'sub' }, [
         h('span', { class: 'deploybar ' + BAR[stage][0], role: 'status', title: 'Last synced state of the deploy job in GitLab.' + mockNote, text: BAR[stage][1] })
       ]);
@@ -425,7 +425,7 @@
       approval = dep.approval.approvals.map(function (a) { return '@' + a.username + ' ' + a.status; }).join(', ') + ' (from GitLab\'s approval record)';
     } else if (dep) approval = 'not recorded' + (dep.executed_by ? '. The job was executed by @' + dep.executed_by + ', which is not an approval.' : '.');
     var runtime = 'Pending: no deployment has been verified for this run.';
-    if (dep && dep.mock) runtime = 'Not applicable: the deployment was a labelled mock, so no running service was verified.';
+    if (dep && dep.mock) runtime = 'Not applicable: the release was recorded without deploying a service, so nothing running was verified.';
     else if (dep && dep.production_verified) runtime = 'Verified: the running service reported the evidenced model hash and passed the smoke checks.';
     else if (dep && dep.failure) runtime = 'Failed at ' + dep.failure.stage + (dep.previous_revision_still_serving ? '; the previous revision is still serving.' : '.');
     steps.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('tbody', {}, [
@@ -458,7 +458,7 @@
         row('Repair merge request', c && c.repair_mr ? h('span', {}, [link(c.repair_mr.web_url, '!' + c.repair_mr.iid + ' ' + c.repair_mr.title + (c.repair_mr.draft ? ' (draft)' : '')), ' · session ' + (c.repair_mr.session || 'not recorded')]) : 'No repair merge request recorded.', !!(c && c.repair_mr)),
         row('Corrected pipeline', corrected ? h('span', {}, [h('a', { href: '#/run/' + corrected.id, text: 'Pipeline ' + corrected.id }), ' · ' + OUTCOME[corrected.outcome].label + ' (a new run; the blocked result is unchanged)']) : 'No corrected pipeline yet.', !!corrected),
         row('Approval record', approval || 'not recorded', !!approval),
-        row('Deployment', dep ? (dep.mock ? 'Mock receipt (nothing deployed) by ' + (dep.executed_by || 'not recorded') : (dep.promoted_revision ? 'Revision ' + dep.promoted_revision : 'Deployment attempted')) : 'No deployment recorded.', !!(dep && !dep.mock && dep.promoted_revision)),
+        row('Deployment', dep ? (dep.mock ? 'Release recorded, nothing deployed (receipt marked mock), by ' + (dep.executed_by || 'not recorded') : (dep.promoted_revision ? 'Revision ' + dep.promoted_revision : 'Deployment attempted')) : 'No deployment recorded.', !!(dep && !dep.mock && dep.promoted_revision)),
         row('Runtime verification', release ? stageTracker(release) : 'Pending: no release run with a deployment is linked.', !!(release && release.release_stage === 'runtime_verified'))
       ])])]);
     }
@@ -485,7 +485,7 @@
     var st = k.stages || {};
     el.appendChild(h('div', { class: 'kpis', style: 'margin-top:10px' }, [
       kpi('Eligible', st.eligible || 0), kpi('Awaiting approval', st.awaiting_approval || 0),
-      kpi('Deployed (mock)', st.deployed_mock || 0), kpi('Deployed (real)', st.deployed || 0),
+      kpi('Release recorded', st.deployed_mock || 0), kpi('Deployed (real service)', st.deployed || 0),
       kpi('Runtime verified', st.runtime_verified || 0, st.runtime_verified ? 'ok' : '')
     ]));
     if (k.unexpected_passes) el.appendChild(h('p', { class: 'notice warn', text: k.unexpected_passes + ' run(s) of a negative scenario passed the Witness. Investigate.' }));
