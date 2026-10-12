@@ -1,0 +1,113 @@
+{
+ "generated_at": "2026-10-12T02:33:16Z",
+ "note": "Synthetic data and a demo policy. Hash-bound, not signed. Fields missing here were not recorded.",
+ "chains": [
+  {
+   "issue": {
+    "iid": 2,
+    "title": "Gasket investigation: pipeline 2936306584 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/2",
+    "session": null
+   },
+   "blocked_run": 2936306584,
+   "blocked_reasons": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "repair_mr": {
+    "iid": 1,
+    "title": "Draft: Restore equal-opportunity calibration in build_variant_d",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/1",
+    "draft": true,
+    "session": "9299455"
+   },
+   "corrected_run": 2936331370,
+   "corrected_outcome": "released_eligible",
+   "release_run": null,
+   "release_stage": null,
+   "deployment": null
+  }
+ ],
+ "runs": {
+  "2936306584": {
+   "id": 2936306584,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2936306584",
+   "ref": "demo/injected-calibration-regression",
+   "sha": "856281c2c8076856757ed543d2c4798e45032473",
+   "created_at": "2026-10-11T18:18:15.176Z",
+   "outcome": "expected_block",
+   "reason_codes": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "release_stage": null,
+   "deployment": null,
+   "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7842,
+    "fairness_gap": 0.1421,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.9888
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "failed",
+    "image_identity": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17095910756"
+  },
+  "2936331370": {
+   "id": 2936331370,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2936331370",
+   "ref": "refs/merge-requests/1/head",
+   "sha": "a481ed466c3bc04cbb611ebe4f2fccb1b8a2a99b",
+   "created_at": "2026-10-11T18:38:33.320Z",
+   "outcome": "released_eligible",
+   "reason_codes": [],
+   "release_stage": "eligible",
+   "deployment": null,
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "impact": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17096058680"
+  }
+ }
+}
