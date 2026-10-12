@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T22:36:28Z",
+ "generated_at": "2026-10-12T22:37:52Z",
  "outcomes": {
   "running": 1,
   "released_eligible": 14,
@@ -119,13 +119,13 @@
    "created_at": "2026-10-12T22:34:04.316Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 130.6,
+   "wall_seconds": 187.3,
    "stage_seconds": {
     "package": 76.2,
-    "evaluate": 11.7,
-    "secure": 11.6,
-    "bind": null,
-    "witness": null
+    "evaluate": 37.8,
+    "secure": 35.8,
+    "bind": 15.6,
+    "witness": 38.8
    },
    "deploy_job_state": "created",
    "outcome": "running",
@@ -146,12 +146,29 @@
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
-   "metrics": null,
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
    "thresholds": null,
    "impact": null,
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17124919970,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17124919970/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940321064/metrics.json"
+    }
+   ]
   },
   {
    "id": 2940290749,
@@ -2142,7 +2159,7 @@
  },
  "snapshot": {
   "date": "2026-10-12",
-  "taken_at": "2026-10-12T22:36:28Z",
+  "taken_at": "2026-10-12T22:37:52Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
