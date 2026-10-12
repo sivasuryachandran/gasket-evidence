@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T23:44:02Z",
+ "generated_at": "2026-10-12T23:45:41Z",
  "outcomes": {
   "running": 1,
   "no_decision": 4,
@@ -126,9 +126,9 @@
    "created_at": "2026-10-12T23:43:53.311Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": null,
+   "wall_seconds": 63.2,
    "stage_seconds": {
-    "package": null,
+    "package": 43.6,
     "evaluate": null,
     "secure": null,
     "bind": null,
@@ -147,7 +147,12 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "gemnasium-python-dependency_scanning",
+    "secret_detection",
+    "train-models",
+    "unit-tests"
+   ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17125779496",
    "reason_codes": null,
@@ -2715,7 +2720,7 @@
  },
  "snapshot": {
   "date": "2026-10-12",
-  "taken_at": "2026-10-12T23:44:02Z",
+  "taken_at": "2026-10-12T23:45:41Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -2792,6 +2797,12 @@
    "label": "GitLab Duo flows",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/2",
    "evidence": "1 investigation issue(s), 1 repair merge request(s) with a recorded session"
+  },
+  {
+   "key": "security_scans",
+   "label": "Secret / dependency scanning",
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940449299",
+   "evidence": "ran in pipeline 2940449299"
   },
   {
    "key": "environments",
