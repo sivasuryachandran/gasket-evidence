@@ -103,3 +103,10 @@ footer{margin-top:20px;color:var(--muted);font-size:12.5px}
 .notice.snapshot{background:var(--warn-bg);border:1px solid var(--warn-line)}
 .btn-deploy{display:inline-block;background:var(--pass);color:#fff;font-weight:700;font-size:13px;padding:6px 16px;border-radius:6px;text-decoration:none;border:1px solid var(--pass)}
 .btn-deploy:hover,.btn-deploy:focus-visible{filter:brightness(1.12);outline:2px solid var(--pass);outline-offset:2px}
+.stage.mock{border-style:dashed}
+.deploybar{display:block;max-width:420px;padding:8px 16px;border-radius:6px;font-weight:700;font-size:13px;color:#fff;border:1px solid transparent}
+.deploybar.done{background:var(--accent);border-color:var(--accent)}
+.deploybar.bad{background:var(--fail);border-color:var(--fail)}
+.deploybar.run{background:var(--warn-line);border-color:var(--warn-line);background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.18) 0 10px,transparent 10px 20px);background-size:28px 28px;animation:deploybar-move 1s linear infinite}
+@keyframes deploybar-move{to{background-position:28px 0}}
+@media (prefers-reduced-motion:reduce){.deploybar.run{animation:none}}
