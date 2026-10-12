@@ -66,7 +66,17 @@
       : stage === 'deploy_failed' ? 'Deployment failed' + (run.deployment && run.deployment.failure ? ' at ' + run.deployment.failure.stage + '; ' + (run.deployment.previous_revision_still_serving ? 'the previous revision is still serving.' : 'check the receipt.') : '.')
       : stage === 'runtime_verified' ? 'The running service reported the evidenced model hash and passed the smoke checks.'
       : '';
-    return h('div', {}, [el, note ? h('p', { class: 'sub', text: note }) : null]);
+    // The deploy is started in GitLab, in the real release pipeline. This page holds no token and starts nothing;
+    // it only links to the place where a person does it.
+    var door = null;
+    if (stage === 'awaiting_approval' && run.web_url && /^https:\/\/gitlab\.com\//.test(run.web_url)) {
+      door = h('p', { class: 'sub' }, [
+        h('a', { href: run.web_url, target: '_blank', rel: 'noopener', text: 'Review and start the deploy in GitLab \u2192' }),
+        ' (open the pipeline and start deploy-production) \u00b7 ',
+        h('a', { href: run.web_url.replace(/\/-\/pipelines\/\d+.*$/, '/-/environments'), target: '_blank', rel: 'noopener', text: 'Environments \u2192' })
+      ]);
+    }
+    return h('div', {}, [el, note ? h('p', { class: 'sub', text: note }) : null, door]);
   }
   var NOT_RECORDED = 'not recorded';
 
