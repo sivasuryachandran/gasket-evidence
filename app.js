@@ -118,13 +118,16 @@
     FAIRNESS_NOT_EVALUABLE: 'Unverifiable: fairness could not be measured',
     SECURITY_EVIDENCE_MISSING: 'Unverifiable: security evidence missing',
     EVIDENCE_MISSING: 'Unverifiable: evidence missing',
-    EVIDENCE_INVALID: 'Unverifiable: evidence value not trusted'
+    EVIDENCE_INVALID: 'Unverifiable: evidence value not trusted',
+    METRICS_MISMATCH: 'Disputed: claimed metrics differ from the recomputed metrics',
+    METRICS_UNVERIFIABLE: 'Unverifiable: the Witness could not recompute the metrics'
   };
   var TRUST = {
     trusted: { cls: 'ok', text: 'Trusted / Verified', hint: 'Evidence matches the build and the policy checks passed.' },
     stale: { cls: 'block', text: 'Stale / Untrusted', hint: 'Evidence no longer matches the build; it is not proof for this artifact.' },
     unverifiable: { cls: 'bad', text: 'Unverifiable', hint: 'Evidence is missing, invalid or not measurable.' },
-    policy_not_met: { cls: 'block', text: 'Policy not met', hint: 'Evidence matches the build, but a policy threshold was not met.' }
+    policy_not_met: { cls: 'block', text: 'Policy not met', hint: 'Evidence matches the build, but a policy threshold was not met.' },
+    disputed: { cls: 'block', text: 'Disputed', hint: 'The numbers the evidence claims do not match what the Witness recomputed from the exact model.' }
   };
   function trustChip(run) {
     var t = TRUST[run.trust];
