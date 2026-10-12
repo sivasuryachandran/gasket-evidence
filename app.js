@@ -600,7 +600,7 @@
     });
     var limit = Number(q.n) || 25;
     var shown = rows.slice(0, limit);
-    var head = h('tr', {}, ['Time', 'Triggered by', 'Scenario', 'Ref', 'Outcome', 'Trust', 'Reason', 'Witness', 'Deploy job', 'Links'].map(function (t) { return h('th', { text: t }); }));
+    var head = h('tr', {}, ['Pipeline', 'Time', 'Triggered by', 'Scenario', 'Ref', 'Outcome', 'Trust', 'Reason', 'Witness', 'Deploy job', 'Links'].map(function (t) { return h('th', { text: t }); }));
     var body = shown.map(function (r) {
       var links = h('span', {});
       if (r.has_decision) links.appendChild(h('a', { href: 'runs/' + r.id + '/', text: 'Evidence' }));
@@ -611,7 +611,8 @@
       var triggered = h('td', { class: 'nw' }, [who(r.actor, false)]);
       if (human) triggered.appendChild(h('a', { class: 'rel', href: hashFor('people/' + r.actor.username), text: 'related work' }));
       return h('tr', {}, [
-        h('td', { class: 'nw' }, [h('a', { href: '#/run/' + r.id, text: fmtTime(r.created_at) })]),
+        h('td', { class: 'nw' }, [h('a', { href: '#/run/' + r.id, text: '#' + r.id })]),
+        h('td', { class: 'nw', text: fmtTime(r.created_at) }),
         triggered,
         h('td', { text: SCENARIO[r.scenario] || r.scenario || NOT_RECORDED }),
         h('td', { class: 'nw' }, [h('code', { text: r.mr_iid ? 'MR !' + r.mr_iid : r.ref })]),
