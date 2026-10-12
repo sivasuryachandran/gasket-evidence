@@ -95,7 +95,7 @@
   }
 
   var DEPLOY = {
-    manual: 'Not started. A person starts it and an approver approves it in GitLab.',
+    manual: 'Not started. A person starts the deploy job in GitLab.',
     skipped: 'Skipped because the release was blocked.',
     success: 'Deployment job succeeded.',
     failed: 'Deployment job failed.',
