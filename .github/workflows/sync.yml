@@ -1,0 +1,44 @@
+# Lives in the public dashboard repository (gasket-evidence) as .github/workflows/sync.yml.
+# Rebuilds the static dashboard from the public GitLab project. It needs no secrets: GitLab is read through
+# its public API and the commit uses the workflow's own token.
+# Triggers: a GitLab webhook (repository_dispatch, near-immediate), every 10 minutes as a fallback, and by hand.
+name: sync-from-gitlab
+on:
+  repository_dispatch:
+    types: [gitlab-event]
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+concurrency:
+  group: sync
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site
+      - name: Fetch the Gasket source (public GitLab project)
+        run: git clone --quiet --depth 1 https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket.git src
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --quiet pyyaml
+      - name: Snapshot the public evidence and build the offline export
+        working-directory: src
+        run: |
+          python -m gasket.cli dashboard snapshot --project-id 87495719 --project-url https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket --out ../data
+          python -m gasket.cli dashboard export --snapshot ../data --static-dir dashboard --out ../export
+      - name: Publish if anything changed
+        working-directory: site
+        run: |
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github -exec rm -rf {} +
+          cp -R ../export/. .
+          touch .nojekyll
+          git add -A
+          if git diff --cached --quiet; then echo "Already up to date."; exit 0; fi
+          git -c user.name="gasket-sync" -c user.email="noreply@users.noreply.github.com" commit -qm "Sync from GitLab (${{ github.event_name }})"
+          git push
