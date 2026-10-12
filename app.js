@@ -50,26 +50,32 @@
     out_of_scope: { label: 'Not a release run', cls: 'gray' }
   };
   var SCENARIO = { a: 'A healthy', 'b-stale': 'B stale evidence', c: 'C fairness regression', d: 'D repaired', regression: 'Injected regression (demo)' };
-  var STAGE = { eligible: 'Eligible', awaiting_approval: 'Awaiting approval', deploying: 'Deploying', deployed_mock: 'Release recorded', deployed: 'Deployed', runtime_verified: 'Runtime verified', deploy_failed: 'Deploy failed', deploy_canceled: 'Deploy canceled' };
+  var STAGE = { eligible: 'Eligible', awaiting_approval: 'Awaiting approval', deploying: 'Deploying', deployed_mock: 'Release recorded', deployed: 'Deployed', runtime_verified: 'Runtime verified', artifact_verified: 'Runtime verified', runtime_verify_failed: 'Runtime verification failed', deploy_failed: 'Deploy failed', deploy_canceled: 'Deploy canceled' };
+  var RUNTIME_CAPTION = 'Runtime verified: the deployed artifact\'s digest matches the signed evidence. (Artifact-integrity check, not a live-inference test; deploy is still mock.)';
   var STEPS = ['eligible', 'awaiting_approval', 'deployed', 'runtime_verified'];
 
   // Eligible > Awaiting approval > Deployed > Runtime verified. A recorded (mock) release never reaches the last two.
   function stageTracker(run, compact) {
     var stage = run.release_stage;
-    var reached = { eligible: 1, awaiting_approval: 2, deploying: 2, deployed_mock: 3, deploy_failed: 2, deploy_canceled: 2, deployed: 3, runtime_verified: 4 }[stage] || 0;
+    var reached = { eligible: 1, awaiting_approval: 2, deploying: 2, deployed_mock: 3, artifact_verified: 4, runtime_verify_failed: 3, deploy_failed: 2, deploy_canceled: 2, deployed: 3, runtime_verified: 4 }[stage] || 0;
     var el = h('div', { class: 'stages' });
     STEPS.forEach(function (key, i) {
       // A recorded release (the mock job) turns this step green but dashed and labelled "Release recorded": the
       // release was recorded, but no service was deployed, so Runtime verified never follows it.
-      var mock = key === 'deployed' && stage === 'deployed_mock';
-      var attrs = { class: 'stage ' + (i < reached ? 'done' : 'todo') + (mock ? ' mock' : '') + (i === reached - 1 ? ' now' : ''),
+      var mock = key === 'deployed' && (stage === 'deployed_mock' || stage === 'artifact_verified' || stage === 'runtime_verify_failed');
+      // Runtime verified after a mock deploy is an artifact-integrity check: lit, but dashed and captioned as such.
+      var artifact = key === 'runtime_verified' && stage === 'artifact_verified';
+      var attrs = { class: 'stage ' + (i < reached ? 'done' : 'todo') + (mock || artifact ? ' mock' : '') + (i === reached - 1 ? ' now' : ''),
         text: mock ? 'Release recorded' : STAGE[key] };
       if (mock) attrs.title = 'The release was recorded (receipt marked mock). No service was deployed.';
+      if (artifact) attrs.title = RUNTIME_CAPTION;
       el.appendChild(h('span', attrs));
     });
     var note = stage === 'awaiting_approval' ? 'The deploy job has not run. Whether anyone approved is read from GitLab\'s approval record, never inferred from the job being manual.'
       : stage === 'deployed_mock' ? 'Release recorded: no service was deployed or verified (the receipt is marked mock).'
       : stage === 'deploy_failed' ? 'Deployment failed' + (run.deployment && run.deployment.failure ? ' at ' + run.deployment.failure.stage + '; ' + (run.deployment.previous_revision_still_serving ? 'the previous revision is still serving.' : 'check the receipt.') : '.')
+      : stage === 'artifact_verified' ? RUNTIME_CAPTION
+      : stage === 'runtime_verify_failed' ? ((run.runtime_verification && run.runtime_verification.note) || 'Runtime verification failed.')
       : stage === 'runtime_verified' ? 'The running service reported the evidenced model hash and passed the smoke checks.'
       : '';
     // The deploy is started in GitLab, in the real release pipeline. This page holds no token and starts nothing;
@@ -78,6 +84,8 @@
     var BAR = {
       deploying: ['run', 'Deployment running\u2026'],
       deployed_mock: ['done', 'Release recorded'],
+      artifact_verified: ['done', 'Release recorded \u00b7 artifact digest verified'],
+      runtime_verify_failed: ['bad', 'Runtime verification failed'],
       deployed: ['done', 'Deployed'],
       runtime_verified: ['done', 'Deployed and runtime verified'],
       deploy_failed: ['bad', 'Deployment failed'],
@@ -90,7 +98,7 @@
       ]);
     } else if (BAR[stage]) {
       // Reflects the last synced state of the deploy job in GitLab; it is not a live feed.
-      var mockNote = stage === 'deployed_mock' ? ' No service was deployed (the receipt is marked mock).' : '';
+      var mockNote = (stage === 'deployed_mock' || stage === 'artifact_verified') ? ' No service was deployed (the receipt is marked mock).' : '';
       door = h('p', { class: 'sub' }, [
         h('span', { class: 'deploybar ' + BAR[stage][0], role: 'status', title: 'Last synced state of the deploy job in GitLab.' + mockNote, text: BAR[stage][1] })
       ]);
@@ -257,6 +265,7 @@
         app.appendChild(title('Release proof', 'Does the model in the release image match the model the evidence was produced for?'));
         app.appendChild(latestPanel(data, byId));
         app.appendChild(proofChain(data, byId));
+        app.appendChild(coverageStrip(data));
         app.appendChild(overview(data));
       }
       app.appendChild(footer(data));
@@ -310,6 +319,52 @@
     return 'The release was blocked. Deployment was skipped.';
   }
 
+  // A command a reader can copy and run. Clipboard access can be refused (file://, old browsers), so it falls back to selecting.
+  function copyBox(cmd, label) {
+    var code = h('code', { text: cmd });
+    var btn = h('button', { type: 'button', class: 'copy', text: 'Copy', 'aria-label': 'Copy ' + (label || 'command') });
+    btn.addEventListener('click', function () {
+      function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(cmd).then(done, function () { selectText(code); });
+      else selectText(code);
+    });
+    function selectText(node) { var r = document.createRange(); r.selectNodeContents(node); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+    return h('div', { class: 'cmd' }, [code, btn]);
+  }
+
+  // Signed row: green only when the pipeline verified its own signature and a Rekor log entry exists.
+  function signedRow(run) {
+    var sig = run.signature && run.signature.evidence;
+    var ok = !!(sig && sig.signed && sig.rekor && sig.rekor.log_index != null);
+    var head = h('div', { class: 'srow' }, [h('span', { class: 'lbl', text: 'Signature' }),
+      h('span', { class: 'chip ' + (ok ? 'ok' : (sig ? 'amber' : 'gray')), text: ok ? 'Signed' : (sig ? 'Signature not verified' : 'Not signed') })]);
+    var kids = [head];
+    if (ok) {
+      kids.push(h('p', { class: 'sub' }, ['Sigstore keyless, GitLab CI identity, logged in Rekor: ',
+        h('a', { href: sig.rekor.url, target: '_blank', rel: 'noopener', text: 'log entry #' + sig.rekor.log_index + ' \u2197' }),
+        '. The signature proves the evidence came from this pipeline and is unaltered; it does not assert a human reviewed correctness.']));
+      kids.push(copyBox(sig.verify_command, 'verify command'));
+      kids.push(h('p', { class: 'sub', text: 'Download the two files under Verify at source (the evidence bundle and its signature) into one folder, then run the command.' }));
+    } else if (sig) {
+      kids.push(h('p', { class: 'sub', text: 'A signature was produced but it did not verify in the pipeline or has no Rekor entry, so it is not shown as signed.' }));
+    } else {
+      kids.push(h('p', { class: 'sub', text: 'Not signed. Signing runs on main-branch pipelines; runs from before it was added, and non-main runs, have no signature.' }));
+    }
+    return h('div', { class: 'signed' + (ok ? ' ok' : '') }, kids);
+  }
+
+  function provenanceBlock(run) {
+    if (!run.provenance) return null;
+    var psig = run.signature && run.signature.provenance;
+    var ok = !!(psig && psig.signed);
+    var body = [h('p', { class: 'sub', text: 'SLSA-style provenance, signed. Self-generated; not a GitLab-native SLSA Level 3 attestation.' })];
+    if (ok) body.push(h('p', { class: 'sub' }, ['Signed (Sigstore keyless) and logged in Rekor: ', h('a', { href: psig.rekor.url, target: '_blank', rel: 'noopener', text: 'log entry #' + psig.rekor.log_index + ' \u2197' })]));
+    else body.push(h('p', { class: 'sub', text: 'This statement is not shown as signed: no verified signature with a Rekor entry was recorded for it.' }));
+    if (ok) body.push(copyBox(psig.verify_command, 'provenance verify command'));
+    body.push(h('pre', { class: 'json', text: JSON.stringify(run.provenance, null, 2) }));
+    return h('details', { class: 'verify' }, [h('summary', { text: 'Provenance' }), h('div', { class: 'detailbody' }, body)]);
+  }
+
   var CHECK_SVG = function (ok) {
     return s('svg', { width: 16, height: 16, viewBox: '0 0 16 16', 'aria-hidden': 'true' },
       [s('path', { d: ok ? 'M3 8.5l3 3 7-7' : 'M4 4l8 8M12 4l-8 8', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' })]);
@@ -360,6 +415,7 @@
         h('span', { class: 'sub', text: differ === 0 ? 'Identical.' : 'Differ in ' + differ + ' of ' + Math.max(ev.length, ob.length) + ' characters.' })
       ]));
     }
+    panel.appendChild(signedRow(run));
     var th = run.thresholds || {}, m = run.metrics || {};
     var meters = [];
     if (m.accuracy != null && th.minimum_accuracy != null) meters.push(meter('Accuracy', m.accuracy, th.minimum_accuracy, 'min'));
@@ -384,6 +440,8 @@
       });
       panel.appendChild(h('details', { class: 'verify' }, [h('summary', { text: 'Verify at source' }), src]));
     }
+    var prov = provenanceBlock(run);
+    if (prov) panel.appendChild(prov);
     return panel;
   }
 
@@ -464,7 +522,10 @@
       approval = dep.approval.approvals.map(function (a) { return '@' + a.username + ' ' + a.status; }).join(', ') + ' (from GitLab\'s approval record)';
     } else if (dep) approval = 'not recorded' + (dep.executed_by ? '. The job was executed by @' + dep.executed_by + ', which is not an approval.' : '.');
     var runtime = 'Pending: no deployment has been verified for this run.';
-    if (dep && dep.mock) runtime = 'Not applicable: the release was recorded without deploying a service, so nothing running was verified.';
+    var rv = run.runtime_verification;
+    if (rv && rv.verified === true) runtime = RUNTIME_CAPTION;
+    else if (rv && rv.verified === false) runtime = rv.note || 'Runtime verification failed.';
+    else if (dep && dep.mock) runtime = 'Not applicable: the release was recorded without deploying a service, so nothing running was verified.';
     else if (dep && dep.production_verified) runtime = 'Verified: the running service reported the evidenced model hash and passed the smoke checks.';
     else if (dep && dep.failure) runtime = 'Failed at ' + dep.failure.stage + (dep.previous_revision_still_serving ? '; the previous revision is still serving.' : '.');
     steps.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('tbody', {}, [
@@ -502,7 +563,7 @@
         row('Corrected pipeline', corrected ? h('span', {}, [h('a', { href: '#/run/' + corrected.id, text: 'Pipeline ' + corrected.id }), ' · ' + OUTCOME[corrected.outcome].label + ' (a new run; the blocked result is unchanged)']) : 'No corrected pipeline yet.', !!corrected, 4),
         row('Approval record', approval || 'not recorded', !!approval, 5),
         row('Deployment', dep ? (dep.mock ? 'Release recorded, nothing deployed (receipt marked mock), by ' + (dep.executed_by || 'not recorded') : (dep.promoted_revision ? 'Revision ' + dep.promoted_revision : 'Deployment attempted')) : 'No deployment recorded.', !!(dep && !dep.mock && dep.promoted_revision), 6),
-        row('Runtime verification', release ? stageTracker(release, true) : 'Pending: no release run with a deployment is linked.', !!(release && release.release_stage === 'runtime_verified'), 7)
+        row('Runtime verification', release ? stageTracker(release, true) : 'Pending: no release run with a deployment is linked.', !!(release && (release.release_stage === 'runtime_verified' || release.release_stage === 'artifact_verified')), 7)
       ]);
     }
     el.appendChild(h('p', { class: 'sub' }, [h('a', { href: 'proof-chain.json', text: 'Machine-readable export (proof-chain.json)' }), ' · no sign-in needed; job logs and merge request notes in GitLab may need one.']));
@@ -513,9 +574,23 @@
     return el;
   }
 
+  // Which GitLab features were actually used, each linked to its real page. Listed only when a recorded run or merge request proves it.
+  function coverageStrip(data) {
+    var el = sec('GitLab coverage', 'Only stages that actually ran are listed, and each links to its real GitLab page. A feature that is configured but has not run does not appear.');
+    var items = data.coverage || [];
+    if (!items.length) { el.appendChild(h('p', { class: 'muted', text: 'No GitLab feature usage is recorded yet.' })); return el; }
+    var strip = h('div', { class: 'covstrip' });
+    items.forEach(function (i) {
+      strip.appendChild(h('a', { class: 'cov', href: i.url, target: '_blank', rel: 'noopener', title: i.evidence }, [
+        h('span', { class: 'chip ok', text: i.label }), h('span', { class: 'sub', text: i.evidence + ' \u2197' })]));
+    });
+    el.appendChild(strip);
+    return el;
+  }
+
   function overview(data) {
     var k = data.kpis;
-    var el = sec('Overview', 'Pipeline runs classified by the Witness decision, not by pipeline colour. A red pipeline that blocked for the expected reason is a correct result. Blocked runs are flagged, not deleted: they stay listed with their reason (their evidence artifacts are kept for 90 days).');
+    var el = sec('Overview', 'Pipeline runs classified by the Witness decision, not by pipeline colour. A red pipeline that blocked for the expected reason is a correct result. Blocked runs are flagged, not deleted: they stay listed with their reason (evidence artifacts of recent runs are kept without expiry; older ones expire 90 days after the run).');
     function kpi(label, value, cls) { return h('div', { class: 'kpi ' + (cls || '') }, [h('b', { text: String(value) }), h('span', { text: label })]); }
     el.appendChild(h('div', { class: 'kpis' }, [
       kpi('valid runs', k.valid_runs),
@@ -528,7 +603,7 @@
     var st = k.stages || {};
     el.appendChild(h('div', { class: 'kpis', style: 'margin-top:10px' }, [
       kpi('Eligible', st.eligible || 0), kpi('Awaiting approval', st.awaiting_approval || 0),
-      kpi('Release recorded', st.deployed_mock || 0, 'gray'), kpi('Deployed (real service)', st.deployed || 0),
+      kpi('Release recorded', st.deployed_mock || 0, 'gray'), kpi('Artifact digest verified', st.artifact_verified || 0, st.artifact_verified ? 'ok' : ''), kpi('Deployed (real service)', st.deployed || 0),
       kpi('Runtime verified', st.runtime_verified || 0, st.runtime_verified ? 'ok' : '')
     ]));
     if (k.unexpected_passes) el.appendChild(h('p', { class: 'notice warn', text: k.unexpected_passes + ' run(s) of a negative scenario passed the Witness. Investigate.' }));
@@ -541,7 +616,26 @@
     el.appendChild(matrix(data));
     el.appendChild(h('h3', { text: 'Where pipeline time goes (median of valid runs)' }));
     el.appendChild(stageBar(data));
+    el.appendChild(reverifySection(data));
     return el;
+  }
+
+  // Scheduled re-verification of the last signed release on the fixed holdout. Not production-traffic monitoring.
+  function reverifySection(data) {
+    var wrap = h('div', {});
+    wrap.appendChild(h('h3', { text: 'Scheduled re-verification' }));
+    wrap.appendChild(h('p', { class: 'sub', text: 'Scheduled re-verification on a fixed holdout \u2014 not live production-traffic monitoring. It re-checks the published model against the signed evidence and the policy; on an unchanged model and holdout the numbers cannot move.' }));
+    var rv = data.reverification || {};
+    if (!rv.latest) {
+      wrap.appendChild(h('p', { class: 'notice', text: 'No scheduled re-verification has run yet. It runs only from a pipeline schedule that sets GASKET_SCHEDULE=reverify (see docs/SETUP.md).' }));
+      return wrap;
+    }
+    var l = rv.latest, m = l.metrics || {}, b = l.signed_baseline || {};
+    wrap.appendChild(h('p', { class: 'dline' }, [h('span', { class: 'chip ' + (l.flagged ? 'danger' : 'ok'), text: l.flagged ? 'Flagged' : 'Within thresholds' }), ' ',
+      h('a', { href: l.web_url, target: '_blank', rel: 'noopener', text: 'Pipeline ' + l.run_id + ' \u2197' }), ' \u00b7 ' + fmtTime(l.created_at) + ' \u00b7 ' + rv.count + ' run' + (rv.count === 1 ? '' : 's') + ', ' + rv.flagged + ' flagged']));
+    wrap.appendChild(h('p', { class: 'sub', text: 'Accuracy ' + num(m.accuracy) + ' (signed baseline ' + num(b.accuracy) + ') \u00b7 fairness gap ' + num(m.fairness_gap) + ' (signed baseline ' + num(b.fairness_gap) + ')' }));
+    if (l.flagged) wrap.appendChild(h('ul', {}, (l.flags || []).map(function (f) { return h('li', { text: f }); })));
+    return wrap;
   }
 
   function timeline(data) {
@@ -847,6 +941,13 @@
     el.appendChild(h('p', { class: 'sub', text: d.rate_shown
       ? 'Override rate: ' + Math.round(d.override_rate * 100) + '% of ' + d.assessments + ' assessments.'
       : 'An override rate is not shown until at least 3 assessments exist; with fewer, a percentage would be misleading.' }));
+    if (!d.items.length) {
+      var ran = [];
+      ((data.work || {}).issues || []).forEach(function (i) { if (i.author && i.author.kind === 'duo') ran.push(h('li', {}, [h('a', { href: i.web_url, target: '_blank', rel: 'noopener', text: 'Investigator \u2192 issue #' + i.iid + ' \u2197' })])); });
+      ((data.work || {}).merge_requests || []).forEach(function (m) { if (m.session) ran.push(h('li', {}, [h('a', { href: m.web_url, target: '_blank', rel: 'noopener', text: 'Repair \u2192 merge request !' + m.iid + ' \u2197' }), ' (session ' + m.session + ')'])); });
+      el.appendChild(h('p', { class: 'notice', text: 'No Impact Analyst assessment has been recorded yet, so there is no Duo-versus-Witness comparison to show. The flows are wired; each starts when a person mentions its service account on an issue or merge request, and each run uses GitLab Credits. Nothing on this page is simulated.' }));
+      if (ran.length) { el.appendChild(h('p', { class: 'sub', text: 'Duo flows that have run in this project (real records):' })); el.appendChild(h('ul', {}, ran)); }
+    }
     if (d.items.length) {
       var head = h('tr', {}, ['Merge request', 'Duo scope', 'Duo risk', 'Witness scope', 'Witness risk', 'Result', 'Session'].map(function (t) { return h('th', { text: t }); }));
       var rows = d.items.map(function (i) {
@@ -868,7 +969,12 @@
   function footer(data) {
     var f = h('footer', {});
     f.appendChild(h('p', { text: (data.snapshot ? 'Static snapshot taken ' + fmtTime(data.generated_at) + ' (not live), from GitLab pipelines and job artifacts.' : 'Data as of ' + fmtTime(data.generated_at) + ', collected from GitLab pipelines and job artifacts.') }));
-    f.appendChild(h('p', { text: 'Synthetic data and a demo policy. The manifest is hash-bound, not cryptographically signed. This dashboard explains decisions; it does not make them.' }));
+    // The signing sentence is shown as fact only once a run really has a verified signature with a Rekor entry.
+    var anySigned = (data.runs || []).some(function (r) { var e = r.signature && r.signature.evidence; return !!(e && e.signed && e.rekor && e.rekor.log_index != null); });
+    f.appendChild(h('p', { text: anySigned
+      ? 'Synthetic data and a demo policy. Evidence is signed with Sigstore keyless (GitLab CI identity) and logged in Rekor. The signature proves the evidence came from this pipeline and is unaltered; it does not assert a human reviewed correctness. Runs before signing was added show "Not signed". This dashboard explains decisions; it does not make them.'
+      : 'Synthetic data and a demo policy. Evidence signing (Sigstore keyless, GitLab CI identity, logged in Rekor) is built into the pipeline, but no signed run has been recorded in this snapshot yet, so every run shows "Not signed". The evidence is hash-bound. A signature would prove origin and integrity, not that a human reviewed correctness. This dashboard explains decisions; it does not make them.' }));
+    f.appendChild(h('p', {}, [h('a', { href: data.project_url + '/-/blob/main/docs/CONTROLS.md', target: '_blank', rel: 'noopener', text: 'Standards alignment \u2197' }), ' (aligned with, not certified against, NIST AI RMF, SR 11-7, ISO/IEC 42001 and SLSA).']));
     return f;
   }
 
