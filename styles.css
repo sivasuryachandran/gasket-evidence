@@ -101,3 +101,5 @@ footer{margin-top:20px;color:var(--muted);font-size:12.5px}
 .stage.done{color:var(--pass);border-color:var(--pass);background:var(--pass-bg)}
 .stage.now{box-shadow:0 0 0 2px var(--pass-bg)}
 .notice.snapshot{background:var(--warn-bg);border:1px solid var(--warn-line)}
+.btn-deploy{display:inline-block;background:var(--pass);color:#fff;font-weight:700;font-size:13px;padding:6px 16px;border-radius:6px;text-decoration:none;border:1px solid var(--pass)}
+.btn-deploy:hover,.btn-deploy:focus-visible{filter:brightness(1.12);outline:2px solid var(--pass);outline-offset:2px}
