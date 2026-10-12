@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T22:40:01Z",
+ "generated_at": "2026-10-12T22:41:41Z",
  "outcomes": {
   "released_eligible": 15,
   "unexpected_block": 2,
@@ -22,8 +22,8 @@
   "eligible_releases": 15,
   "stages": {
    "eligible": 4,
-   "awaiting_approval": 6,
-   "deployed_mock": 5,
+   "awaiting_approval": 5,
+   "deployed_mock": 6,
    "deployed": 0,
    "runtime_verified": 0
   },
@@ -116,9 +116,9 @@
    "mr_iid": null,
    "sha": "4cc5d98f190f2d55868d09f4e7db5418435124bb",
    "created_at": "2026-10-12T22:34:04.316Z",
-   "status": "manual",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 327.3,
+   "wall_seconds": 388.7,
    "stage_seconds": {
     "package": 76.2,
     "evaluate": 37.8,
@@ -126,12 +126,19 @@
     "bind": 15.6,
     "witness": 76.7
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "success",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
-   "deployment": null,
+   "release_stage": "deployed_mock",
+   "deployment": {
+    "mock": true,
+    "mode": "mock",
+    "executed_by": "chandran.sivasurya",
+    "approval": "not recorded",
+    "candidate_verified": false,
+    "production_verified": false
+   },
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17124919974",
    "reason_codes": [],
    "checks": {
@@ -197,6 +204,14 @@
      "job_id": 17124919970,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17124919970/artifacts/raw/evidence-out/metrics.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940321064/metrics.json"
+    },
+    {
+     "key": "deployment",
+     "label": "Deployment receipt",
+     "file": "deployment.json",
+     "job_id": 17124919974,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17124919974/artifacts/raw/deployment.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940321064/deployment.json"
     }
    ]
   },
@@ -2189,7 +2204,7 @@
  },
  "snapshot": {
   "date": "2026-10-12",
-  "taken_at": "2026-10-12T22:40:01Z",
+  "taken_at": "2026-10-12T22:41:41Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
