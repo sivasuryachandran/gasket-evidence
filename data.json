@@ -1,6 +1,7 @@
 {
- "generated_at": "2026-10-12T21:09:02Z",
+ "generated_at": "2026-10-12T21:11:43Z",
  "outcomes": {
+  "running": 1,
   "released_eligible": 9,
   "unexpected_block": 2,
   "no_decision": 3,
@@ -9,11 +10,11 @@
   "expected_block": 1
  },
  "data_quality": {
-  "total_pipelines": 18,
+  "total_pipelines": 19,
   "valid_runs": 13,
   "no_decision": 3,
   "out_of_scope": 2,
-  "running": 0
+  "running": 1
  },
  "kpis": {
   "valid_runs": 13,
@@ -111,6 +112,50 @@
   "items": []
  },
  "runs": [
+  {
+   "id": 2940155590,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940155590",
+   "ref": "main",
+   "kind": "release",
+   "mr_iid": null,
+   "sha": "bceeef87ca28696d363175336293bf9f3b0ad2e5",
+   "created_at": "2026-10-12T21:10:10.437Z",
+   "status": "running",
+   "scenario": "d",
+   "wall_seconds": 60.1,
+   "stage_seconds": {
+    "package": 31.9,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": "created",
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "deployment": null,
+   "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17123734052",
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791772535",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
   {
    "id": 2940122722,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940122722",
@@ -1701,7 +1746,7 @@
  },
  "snapshot": {
   "date": "2026-10-12",
-  "taken_at": "2026-10-12T21:09:02Z",
+  "taken_at": "2026-10-12T21:11:43Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },

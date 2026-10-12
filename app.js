@@ -600,26 +600,23 @@
     });
     var limit = Number(q.n) || 25;
     var shown = rows.slice(0, limit);
-    var head = h('tr', {}, ['Pipeline', 'Time', 'Triggered by', 'Scenario', 'Ref', 'Outcome', 'Trust', 'Reason', 'Witness', 'Deploy job', 'Links'].map(function (t) { return h('th', { text: t }); }));
+    var head = h('tr', {}, ['Pipeline', 'Time (UTC)', 'By', 'Ref', 'Outcome', 'Trust', 'Reason', 'Deploy', 'Links'].map(function (t) { return h('th', { text: t }); }));
     var body = shown.map(function (r) {
       var links = h('span', {});
       if (r.has_decision) links.appendChild(h('a', { href: 'runs/' + r.id + '/', text: 'Evidence' }));
-      else links.appendChild(h('span', { class: 'muted', text: 'No evidence recorded' }));
+      else links.appendChild(h('span', { class: 'muted', text: 'No evidence' }));
       links.appendChild(document.createTextNode(' · '));
-      links.appendChild(h('a', { href: r.web_url, target: '_blank', rel: 'noopener', text: 'Pipeline ↗' }));
+      links.appendChild(h('a', { href: r.web_url, target: '_blank', rel: 'noopener', text: 'GitLab ↗' }));
       var human = r.actor && !r.actor.kind && (data.people || []).some(function (p) { return p.profile.username === r.actor.username; });
       var triggered = h('td', { class: 'nw' }, [who(r.actor, false)]);
-      if (human) triggered.appendChild(h('a', { class: 'rel', href: hashFor('people/' + r.actor.username), text: 'related work' }));
       return h('tr', {}, [
         h('td', { class: 'nw' }, [h('a', { href: '#/run/' + r.id, text: '#' + r.id })]),
-        h('td', { class: 'nw', text: fmtTime(r.created_at) }),
+        h('td', { class: 'nw', title: fmtTime(r.created_at), text: r.created_at ? r.created_at.slice(5, 16).replace('T', ' ') : NOT_RECORDED }),
         triggered,
-        h('td', { text: SCENARIO[r.scenario] || r.scenario || NOT_RECORDED }),
         h('td', { class: 'nw' }, [h('code', { text: r.mr_iid ? 'MR !' + r.mr_iid : r.ref })]),
         h('td', {}, [chip(r.outcome)]),
         h('td', {}, [trustChip(r)]),
         h('td', {}, [h('code', { text: (r.reason_codes && r.reason_codes.length) ? r.reason_codes.join(', ') : (r.has_decision ? 'none' : NOT_RECORDED) })]),
-        h('td', { text: fmtSec(r.stage_seconds.witness) }),
         h('td', { text: r.deploy_job_state || NOT_RECORDED }),
         h('td', {}, [links])
       ]);
