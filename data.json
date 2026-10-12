@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T23:45:41Z",
+ "generated_at": "2026-10-12T23:47:18Z",
  "outcomes": {
   "running": 1,
   "no_decision": 4,
@@ -126,13 +126,13 @@
    "created_at": "2026-10-12T23:43:53.311Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 63.2,
+   "wall_seconds": 186.4,
    "stage_seconds": {
-    "package": 43.6,
-    "evaluate": null,
-    "secure": null,
-    "bind": null,
-    "witness": null
+    "package": 62.8,
+    "evaluate": 36.3,
+    "secure": 39.7,
+    "bind": 16.1,
+    "witness": 17.1
    },
    "deploy_job_state": "created",
    "outcome": "running",
@@ -148,8 +148,12 @@
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
     "gemnasium-python-dependency_scanning",
+    "package-image",
     "secret_detection",
+    "security-scan",
     "train-models",
     "unit-tests"
    ],
@@ -167,12 +171,29 @@
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
-   "metrics": null,
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
    "thresholds": null,
    "impact": null,
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17125779491,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17125779491/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940449299/metrics.json"
+    }
+   ]
   },
   {
    "id": 2940445762,
@@ -2720,7 +2741,7 @@
  },
  "snapshot": {
   "date": "2026-10-12",
-  "taken_at": "2026-10-12T23:45:41Z",
+  "taken_at": "2026-10-12T23:47:18Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
