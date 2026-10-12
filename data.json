@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T22:34:15Z",
+ "generated_at": "2026-10-12T22:35:44Z",
  "outcomes": {
   "running": 1,
   "released_eligible": 14,
@@ -119,9 +119,9 @@
    "created_at": "2026-10-12T22:34:04.316Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": null,
+   "wall_seconds": 52.8,
    "stage_seconds": {
-    "package": null,
+    "package": 45.7,
     "evaluate": null,
     "secure": null,
     "bind": null,
@@ -2142,7 +2142,7 @@
  },
  "snapshot": {
   "date": "2026-10-12",
-  "taken_at": "2026-10-12T22:34:15Z",
+  "taken_at": "2026-10-12T22:35:44Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
