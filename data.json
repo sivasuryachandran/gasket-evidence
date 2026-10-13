@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T02:39:12Z",
+ "generated_at": "2026-10-13T02:42:28Z",
  "outcomes": {
   "released_eligible": 30,
   "out_of_scope": 7,
@@ -30,7 +30,7 @@
    "runtime_verified": 0
   },
   "median_witness_seconds": 79.2,
-  "median_pipeline_seconds": 381.4
+  "median_pipeline_seconds": 414.6
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 3,
@@ -235,9 +235,9 @@
    "mr_iid": null,
    "sha": "1a594c7247bbaa9069943d2061ee58c77fbcdb88",
    "created_at": "2026-10-13T02:33:34.730Z",
-   "status": "running",
+   "status": "manual",
    "scenario": "d",
-   "wall_seconds": 336.0,
+   "wall_seconds": 453.0,
    "stage_seconds": {
     "package": 64.4,
     "evaluate": 38.6,
@@ -403,6 +403,8 @@
     "evaluate-model",
     "gasket-witness",
     "package-image",
+    "pages",
+    "publish-public-dashboard",
     "secret_detection",
     "security-scan",
     "sign-evidence",
@@ -7584,7 +7586,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T02:39:12Z",
+  "taken_at": "2026-10-13T02:42:28Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },

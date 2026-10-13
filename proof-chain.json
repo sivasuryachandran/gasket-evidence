@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T02:39:12Z",
+ "generated_at": "2026-10-13T02:42:28Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
