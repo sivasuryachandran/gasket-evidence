@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T00:41:44Z",
+ "generated_at": "2026-10-13T00:44:36Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -220,7 +220,7 @@
     "policy_identity": "passed",
     "security": "passed"
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246171"
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255"
   }
  }
 }

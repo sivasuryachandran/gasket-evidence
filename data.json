@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T00:41:44Z",
+ "generated_at": "2026-10-13T00:44:36Z",
  "outcomes": {
   "out_of_scope": 6,
   "unexpected_block": 3,
@@ -29,8 +29,8 @@
    "deployed": 0,
    "runtime_verified": 0
   },
-  "median_witness_seconds": 76.8,
-  "median_pipeline_seconds": 325.4
+  "median_witness_seconds": 77.0,
+  "median_pipeline_seconds": 351.0
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 3,
@@ -110,12 +110,55 @@
   }
  ],
  "duo": {
-  "assessments": 0,
-  "agreed": 0,
-  "overridden": 0,
-  "rate_shown": false,
-  "override_rate": null,
-  "items": []
+  "assessments": 3,
+  "agreed": 1,
+  "overridden": 2,
+  "rate_shown": true,
+  "override_rate": 0.667,
+  "items": [
+   {
+    "mr_iid": 3,
+    "pipeline_id": 2940511465,
+    "duo_scope": [
+     "documentation-only"
+    ],
+    "duo_risk": "low",
+    "witness_scope": [
+     "documentation-only"
+    ],
+    "witness_risk": "low",
+    "overridden": false,
+    "session": "not recorded"
+   },
+   {
+    "mr_iid": 4,
+    "pipeline_id": 2940522134,
+    "duo_scope": [
+     "model"
+    ],
+    "duo_risk": "high",
+    "witness_scope": [
+     "model"
+    ],
+    "witness_risk": "high",
+    "overridden": true,
+    "session": "not recorded"
+   },
+   {
+    "mr_iid": 5,
+    "pipeline_id": 2940522124,
+    "duo_scope": [
+     "model"
+    ],
+    "duo_risk": "medium",
+    "witness_scope": [
+     "model"
+    ],
+    "witness_risk": "high",
+    "overridden": true,
+    "session": "not recorded"
+   }
+  ]
  },
  "runs": [
   {
@@ -346,15 +389,15 @@
    "mr_iid": 4,
    "sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
    "created_at": "2026-10-13T00:22:19.642Z",
-   "status": "running",
+   "status": "failed",
    "scenario": "d",
-   "wall_seconds": 342.7,
+   "wall_seconds": 1281.9,
    "stage_seconds": {
     "package": 68.5,
     "evaluate": 38.6,
     "secure": 34.2,
     "bind": 17.1,
-    "witness": 73.2
+    "witness": 79.9
    },
    "deploy_job_state": null,
    "outcome": "unexpected_block",
@@ -373,6 +416,7 @@
     "bind-evidence",
     "evaluate-model",
     "gasket-witness",
+    "impact-check",
     "package-image",
     "security-scan",
     "train-models",
@@ -403,7 +447,7 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246171",
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255",
    "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
    "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
    "metrics": {
@@ -419,7 +463,39 @@
     "maximum_fairness_gap": 0.05,
     "minimum_accuracy": 0.72
    },
-   "impact": null,
+   "impact": {
+    "agent_session": "not recorded",
+    "changed_paths": [
+     "demo-model/train.py"
+    ],
+    "commit_sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
+    "duo_available": true,
+    "duo_reason": "Training code in build_variant_d drops the equal-opportunity calibration and uses one global 0.5 threshold for both groups, which changes the model artifact and is likely to regress fairness. Fresh fairness and accuracy evidence plus artifact identity are required.",
+    "duo_required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "data_identity",
+     "fairness"
+    ],
+    "duo_risk_level": "high",
+    "duo_scope": [
+     "model"
+    ],
+    "overridden": true,
+    "reason": "Deterministic analysis of the changed paths classified this as scope model (risk high), requiring evidence: accuracy, artifact_identity, fairness, security. Duo proposed scope model, risk high, evidence: accuracy, artifact_identity, data_identity, fairness. The stricter, deterministic requirement wins.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "data_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "model"
+    ],
+    "unsupported_duo_evidence": []
+   },
    "has_decision": true,
    "has_manifest": true,
    "evidence_links": [
@@ -427,16 +503,16 @@
      "key": "decision",
      "label": "Witness decision",
      "file": "witness-decision.json",
-     "job_id": 17126246171,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246171/artifacts/raw/witness-decision.json",
+     "job_id": 17126474255,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255/artifacts/raw/witness-decision.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522134/witness-decision.json"
     },
     {
      "key": "manifest",
      "label": "Evidence manifest",
      "file": "evidence-out/manifest.json",
-     "job_id": 17126246171,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246171/artifacts/raw/evidence-out/manifest.json",
+     "job_id": 17126474255,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255/artifacts/raw/evidence-out/manifest.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522134/manifest.json"
     },
     {
@@ -446,6 +522,14 @@
      "job_id": 17126246168,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246168/artifacts/raw/evidence-out/metrics.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522134/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17126469420,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126469420/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522134/impact-final.json"
     }
    ]
   },
@@ -459,13 +543,13 @@
    "created_at": "2026-10-13T00:22:19.243Z",
    "status": "success",
    "scenario": "d",
-   "wall_seconds": 290.6,
+   "wall_seconds": 1294.1,
    "stage_seconds": {
     "package": 69.6,
     "evaluate": 38.9,
     "secure": 37.4,
     "bind": 17.0,
-    "witness": 81.1
+    "witness": 84.1
    },
    "deploy_job_state": null,
    "outcome": "released_eligible",
@@ -484,6 +568,7 @@
     "bind-evidence",
     "evaluate-model",
     "gasket-witness",
+    "impact-check",
     "package-image",
     "security-scan",
     "train-models",
@@ -513,7 +598,7 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246092",
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126475993",
    "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "metrics": {
@@ -529,7 +614,39 @@
     "maximum_fairness_gap": 0.05,
     "minimum_accuracy": 0.72
    },
-   "impact": null,
+   "impact": {
+    "agent_session": "not recorded",
+    "changed_paths": [
+     "demo-model/train.py"
+    ],
+    "commit_sha": "24b612db747a34b3855a353ee672296d867926eb",
+    "duo_available": true,
+    "duo_reason": "Training code for variant D changes from a single global threshold to per-group equal-opportunity thresholds, which changes the model artifact and its fairness and accuracy behaviour. No data, serving, dependency or policy files changed.",
+    "duo_required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "data_identity",
+     "fairness"
+    ],
+    "duo_risk_level": "medium",
+    "duo_scope": [
+     "model"
+    ],
+    "overridden": true,
+    "reason": "Deterministic analysis of the changed paths classified this as scope model (risk high), requiring evidence: accuracy, artifact_identity, fairness, security. Duo proposed scope model, risk medium, evidence: accuracy, artifact_identity, data_identity, fairness. The stricter, deterministic requirement wins.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "data_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "model"
+    ],
+    "unsupported_duo_evidence": []
+   },
    "has_decision": true,
    "has_manifest": true,
    "evidence_links": [
@@ -537,16 +654,16 @@
      "key": "decision",
      "label": "Witness decision",
      "file": "witness-decision.json",
-     "job_id": 17126246092,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246092/artifacts/raw/witness-decision.json",
+     "job_id": 17126475993,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126475993/artifacts/raw/witness-decision.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522124/witness-decision.json"
     },
     {
      "key": "manifest",
      "label": "Evidence manifest",
      "file": "evidence-out/manifest.json",
-     "job_id": 17126246092,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246092/artifacts/raw/evidence-out/manifest.json",
+     "job_id": 17126475993,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126475993/artifacts/raw/evidence-out/manifest.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522124/manifest.json"
     },
     {
@@ -556,6 +673,14 @@
      "job_id": 17126246089,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246089/artifacts/raw/evidence-out/metrics.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522124/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17126469920,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126469920/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522124/impact-final.json"
     }
    ]
   },
@@ -1124,15 +1249,15 @@
    "mr_iid": 3,
    "sha": "8957539405059715c6c4745953fddaafcc98c0e9",
    "created_at": "2026-10-13T00:15:56.379Z",
-   "status": "running",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 284.1,
+   "wall_seconds": 1659.7,
    "stage_seconds": {
     "package": 68.5,
     "evaluate": 39.7,
     "secure": 36.3,
     "bind": 16.9,
-    "witness": 77.0
+    "witness": 84.4
    },
    "deploy_job_state": null,
    "outcome": "released_eligible",
@@ -1151,6 +1276,7 @@
     "bind-evidence",
     "evaluate-model",
     "gasket-witness",
+    "impact-check",
     "package-image",
     "security-scan",
     "train-models",
@@ -1180,7 +1306,7 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126172307",
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126473043",
    "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "metrics": {
@@ -1196,7 +1322,28 @@
     "maximum_fairness_gap": 0.05,
     "minimum_accuracy": 0.72
    },
-   "impact": null,
+   "impact": {
+    "agent_session": "not recorded",
+    "changed_paths": [
+     "docs/DEMO_MR_A.md"
+    ],
+    "commit_sha": "8957539405059715c6c4745953fddaafcc98c0e9",
+    "duo_available": true,
+    "duo_reason": "The MR only adds a new Markdown file under docs/. It touches no model, data, serving, policy, or dependency paths.",
+    "duo_required_evidence": [],
+    "duo_risk_level": "low",
+    "duo_scope": [
+     "documentation-only"
+    ],
+    "overridden": false,
+    "reason": "Duo's assessment matched the deterministic diff analysis.",
+    "required_evidence": [],
+    "risk_level": "low",
+    "scope": [
+     "documentation-only"
+    ],
+    "unsupported_duo_evidence": []
+   },
    "has_decision": true,
    "has_manifest": true,
    "evidence_links": [
@@ -1204,16 +1351,16 @@
      "key": "decision",
      "label": "Witness decision",
      "file": "witness-decision.json",
-     "job_id": 17126172307,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126172307/artifacts/raw/witness-decision.json",
+     "job_id": 17126473043,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126473043/artifacts/raw/witness-decision.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511465/witness-decision.json"
     },
     {
      "key": "manifest",
      "label": "Evidence manifest",
      "file": "evidence-out/manifest.json",
-     "job_id": 17126172307,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126172307/artifacts/raw/evidence-out/manifest.json",
+     "job_id": 17126473043,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126473043/artifacts/raw/evidence-out/manifest.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511465/manifest.json"
     },
     {
@@ -1223,6 +1370,14 @@
      "job_id": 17126172304,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126172304/artifacts/raw/evidence-out/metrics.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511465/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17126467986,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126467986/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511465/impact-final.json"
     }
    ]
   },
@@ -4908,7 +5063,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:41:44Z",
+  "taken_at": "2026-10-13T00:44:36Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
