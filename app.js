@@ -936,11 +936,14 @@
   function duo(data) {
     var d = data.duo;
     var el = sec('Duo vs Witness', 'Duo drafts an advisory assessment of each merge request. The Witness recomputes it from the changed paths and keeps the stricter result.');
-    var summary = d.assessments + ' assessment' + (d.assessments === 1 ? '' : 's') + ' recorded. Agreed: ' + d.agreed + '. Overridden by the Witness: ' + d.overridden + '.';
-    el.appendChild(h('p', {}, [h('b', { text: summary })]));
-    el.appendChild(h('p', { class: 'sub', text: d.rate_shown
-      ? 'Override rate: ' + Math.round(d.override_rate * 100) + '% of ' + d.assessments + ' assessments.'
-      : 'An override rate is not shown until at least 3 assessments exist; with fewer, a percentage would be misleading.' }));
+    el.appendChild(h('p', {}, [h('b', { text: d.assessments + ' assessment' + (d.assessments === 1 ? '' : 's') + ' recorded.' })]));
+    if (d.items.length) {
+      var of = function (k) { return k + ' of ' + d.assessments + (d.percentages_shown ? ' (' + Math.round(100 * k / d.assessments) + '%)' : ''); };
+      var cats = Object.keys(d.evidence.categories || {}).map(function (c) { return c + ' \u00d7' + d.evidence.categories[c]; }).join(', ');
+      el.appendChild(h('p', { class: 'duo-metric' }, [h('b', { text: 'Risk level: ' }), 'agreed ' + of(d.risk.agreed) + ' \u00b7 Witness stricter ' + of(d.risk.witness_stricter) + ' \u00b7 Witness looser ' + of(d.risk.witness_looser)]));
+      el.appendChild(h('p', { class: 'duo-metric' }, [h('b', { text: 'Required evidence: ' }), 'agreed ' + of(d.evidence.agreed) + ' \u00b7 Witness added categories in ' + of(d.evidence.witness_added) + (cats ? ' (' + cats + ')' : '')]));
+      el.appendChild(h('p', { class: 'sub', text: 'Why security is added for a model change: the Witness requires accuracy, fairness, artifact identity and security evidence for any change to model code (REQUIRED_EVIDENCE_BY_SCOPE in gasket/impact.py), matching the release policy\u2019s required security check. Duo\u2019s prompt does not state that mapping. Percentages appear only from 10 assessments.' }));
+    }
     if (!d.items.length) {
       var ran = [];
       ((data.work || {}).issues || []).forEach(function (i) { if (i.author && i.author.kind === 'duo') ran.push(h('li', {}, [h('a', { href: i.web_url, target: '_blank', rel: 'noopener', text: 'Investigator \u2192 issue #' + i.iid + ' \u2197' })])); });
@@ -949,19 +952,38 @@
       if (ran.length) { el.appendChild(h('p', { class: 'sub', text: 'Duo flows that have run in this project (real records):' })); el.appendChild(h('ul', {}, ran)); }
     }
     if (d.items.length) {
-      var head = h('tr', {}, ['Merge request', 'Duo scope', 'Duo risk', 'Witness scope', 'Witness risk', 'Result', 'Session'].map(function (t) { return h('th', { text: t }); }));
+      var riskText = function (i) {
+        if (i.risk_result === 'agreed') return 'risk: agreed (' + i.witness_risk + ')';
+        if (i.risk_result === 'witness_stricter') return 'risk: Witness stricter (Duo ' + (i.duo_risk || 'unstated') + ', Witness ' + i.witness_risk + ')';
+        return 'risk: Witness looser (Duo ' + i.duo_risk + ', Witness ' + i.witness_risk + '; the merged result keeps Duo\u2019s)';
+      };
+      var evidenceText = function (i) {
+        var t = i.evidence_witness_added.length ? 'Witness added ' + i.evidence_witness_added.join(', ') : 'agreed';
+        return t + (i.evidence_duo_only.length ? '; Duo also listed ' + i.evidence_duo_only.join(', ') : '');
+      };
+      var scopeText = function (i) { return (i.witness_scope || []).join(', ') || NOT_RECORDED; };
+      var mrLink = function (i) { return h('a', { href: data.project_url + '/-/merge_requests/' + i.mr_iid, text: '!' + i.mr_iid }); };
+      var chip = function (ok, text) { return h('span', { class: 'chip ' + (ok ? 'ok' : 'amber'), text: text }); };
+      var head = h('tr', {}, ['Merge request', 'Scope', 'Risk level', 'Required evidence', 'Session'].map(function (t) { return h('th', { text: t }); }));
       var rows = d.items.map(function (i) {
         return h('tr', {}, [
-          h('td', {}, [h('a', { href: data.project_url + '/-/merge_requests/' + i.mr_iid, text: '!' + i.mr_iid })]),
-          h('td', { text: (i.duo_scope || []).join(', ') || NOT_RECORDED }),
-          h('td', {}, [h('span', { class: 'chip gray', text: (i.duo_risk || NOT_RECORDED).toUpperCase() })]),
-          h('td', { text: (i.witness_scope || []).join(', ') || NOT_RECORDED }),
-          h('td', {}, [h('span', { class: 'chip ' + (i.witness_risk === 'high' ? 'blocked' : 'gray'), text: (i.witness_risk || NOT_RECORDED).toUpperCase() })]),
-          h('td', {}, [h('span', { class: 'chip ' + (i.overridden ? 'amber' : 'ok'), text: i.overridden ? 'Witness overrode Duo' : 'Agreed' })].concat((i.override_reasons || []).map(function (r) { return h('div', { class: 'sub', text: r }); }))),
+          h('td', {}, [mrLink(i)]),
+          h('td', { text: scopeText(i) + (i.scope_differs ? ' (Duo: ' + (i.duo_scope || []).join(', ') + ')' : '') }),
+          h('td', {}, [chip(i.risk_result === 'agreed', i.risk_result === 'agreed' ? 'Agreed' : i.risk_result === 'witness_stricter' ? 'Witness stricter' : 'Witness looser'), h('div', { class: 'sub', text: 'Duo ' + (i.duo_risk || 'unstated') + ' \u00b7 Witness ' + i.witness_risk })]),
+          h('td', {}, [chip(!i.evidence_witness_added.length, i.evidence_witness_added.length ? 'Witness added' : 'Agreed'), h('div', { class: 'sub', text: evidenceText(i) })]),
           h('td', {}, [sessionCell(i.session_url, i.session)])
         ]);
       });
-      el.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]));
+      el.appendChild(h('div', { class: 'tablewrap duo-table' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]));
+      // Below ~640px the same records are stacked cards, so nothing needs sideways scrolling.
+      el.appendChild(h('div', { class: 'duo-cards' }, d.items.map(function (i) {
+        return h('div', { class: 'duo-card' }, [
+          h('div', { class: 'duo-card-head' }, [mrLink(i), ' \u2014 ' + scopeText(i)]),
+          h('p', {}, [h('b', { text: 'Risk: ' }), chip(i.risk_result === 'agreed', riskText(i).replace(/^risk: /, ''))]),
+          h('p', {}, [h('b', { text: 'Evidence: ' }), chip(!i.evidence_witness_added.length, evidenceText(i))]),
+          h('p', {}, [h('b', { text: 'Session: ' }), sessionCell(i.session_url, i.session)])
+        ]);
+      })));
     }
     return el;
   }
