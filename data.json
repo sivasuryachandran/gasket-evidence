@@ -1,29 +1,28 @@
 {
- "generated_at": "2026-10-13T00:21:12Z",
+ "generated_at": "2026-10-13T00:21:57Z",
  "outcomes": {
-  "released_eligible": 19,
+  "released_eligible": 20,
   "no_decision": 5,
-  "running": 1,
   "unexpected_block": 2,
   "out_of_scope": 2,
   "expected_block": 1
  },
  "data_quality": {
   "total_pipelines": 30,
-  "valid_runs": 22,
+  "valid_runs": 23,
   "no_decision": 5,
   "out_of_scope": 2,
-  "running": 1
+  "running": 0
  },
  "kpis": {
-  "valid_runs": 22,
+  "valid_runs": 23,
   "correct_blocks": 1,
   "unexpected_blocks": 2,
   "unexpected_passes": 0,
-  "eligible_releases": 19,
+  "eligible_releases": 20,
   "stages": {
    "eligible": 6,
-   "awaiting_approval": 5,
+   "awaiting_approval": 6,
    "deployed_mock": 6,
    "artifact_verified": 2,
    "runtime_verify_failed": 0,
@@ -31,7 +30,7 @@
    "runtime_verified": 0
   },
   "median_witness_seconds": 76.7,
-  "median_pipeline_seconds": 321.9
+  "median_pipeline_seconds": 322.0
  },
  "reason_codes": {
   "METRICS_UNVERIFIABLE": 1,
@@ -39,7 +38,7 @@
  },
  "scenario_matrix": {
   "d": {
-   "released_eligible": 19,
+   "released_eligible": 20,
    "unexpected_block": 2
   },
   "regression": {
@@ -50,7 +49,7 @@
   "a": null,
   "b-stale": null,
   "c": null,
-  "d": 2940468142,
+  "d": 2940511358,
   "regression": 2936306584
  },
  "reverification": {
@@ -70,9 +69,9 @@
    "variants": [
     "D"
    ],
-   "runs": 20,
-   "evidenced_in": 20,
-   "observed_in": 20,
+   "runs": 21,
+   "evidenced_in": 21,
+   "observed_in": 21,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -481,21 +480,159 @@
    "created_at": "2026-10-13T00:15:54.506Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 254.6,
+   "wall_seconds": 355.8,
    "stage_seconds": {
     "package": 93.3,
     "evaluate": 40.8,
     "secure": 36.0,
     "bind": 18.3,
-    "witness": 67.2
+    "witness": 78.4
    },
-   "deploy_job_state": "created",
-   "outcome": "running",
-   "trust": null,
-   "trust_label": null,
-   "release_stage": null,
-   "signature": null,
-   "provenance": null,
+   "deploy_job_state": "manual",
+   "outcome": "released_eligible",
+   "trust": "trusted",
+   "trust_label": "Trusted / Verified",
+   "release_stage": "awaiting_approval",
+   "signature": {
+    "evidence": {
+     "blob": "evidence_bundle.json",
+     "bundle": "evidence.cosign.bundle",
+     "blob_sha256": "e7f91c6236aa7507985cb2c0c0b43c4b6b7c1d3602dfe7c614edb57f5581aa69",
+     "signed": true,
+     "verified_in_job": true,
+     "rekor": {
+      "integrated_time": 1791850905,
+      "log_index": 3237818122,
+      "url": "https://search.sigstore.dev/?logIndex=3237818122"
+     },
+     "verify_command": "cosign verify-blob evidence_bundle.json --bundle evidence.cosign.bundle --certificate-identity \"https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main\" --certificate-oidc-issuer \"https://gitlab.com\""
+    },
+    "provenance": {
+     "blob": "provenance.json",
+     "bundle": "provenance.cosign.bundle",
+     "blob_sha256": "25304c93263aa800d7d03547afdcb865901999f30d393fc5e2cc0c91273ea9e8",
+     "signed": true,
+     "verified_in_job": true,
+     "rekor": {
+      "integrated_time": 1791850906,
+      "log_index": 3237818246,
+      "url": "https://search.sigstore.dev/?logIndex=3237818246"
+     },
+     "verify_command": "cosign verify-blob provenance.json --bundle provenance.cosign.bundle --certificate-identity \"https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main\" --certificate-oidc-issuer \"https://gitlab.com\""
+    },
+    "certificate_identity": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main",
+    "oidc_issuer": "https://gitlab.com"
+   },
+   "provenance": {
+    "_type": "https://in-toto.io/Statement/v0.1",
+    "gasket_note": "SLSA-style provenance, signed. Self-generated; not a GitLab-native SLSA Level 3 attestation.",
+    "predicate": {
+     "buildConfig": {
+      "steps": [
+       {
+        "step": "verify",
+        "what": "unit tests; train models A-D"
+       },
+       {
+        "step": "package",
+        "what": "build the release image and push it, extract the model by digest"
+       },
+       {
+        "step": "evaluate",
+        "what": "evaluate the model taken from that image on the evaluation data"
+       },
+       {
+        "step": "secure",
+        "what": "Trivy scan and SBOM of the release image"
+       },
+       {
+        "step": "bind",
+        "what": "write the evidence manifest binding hashes to metrics"
+       },
+       {
+        "step": "release",
+        "what": "the Witness re-derives identity, recomputes metrics and decides"
+       },
+       {
+        "step": "attest",
+        "what": "sign the evidence bundle and this provenance (Sigstore keyless)"
+       }
+      ]
+     },
+     "buildType": "https://gitlab.com/gasket/ci-pipeline/v1",
+     "builder": {
+      "id": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines (GitLab CI, gitlab-hosted runner)"
+     },
+     "invocation": {
+      "configSource": {
+       "digest": {
+        "sha1": "543dcc476408e4ca5b7a5748fc4fce0949c5c82c"
+       },
+       "entryPoint": ".gitlab-ci.yml",
+       "uri": "git+https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket@refs/heads/main"
+      },
+      "environment": {
+       "commit": "543dcc476408e4ca5b7a5748fc4fce0949c5c82c",
+       "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511358"
+      },
+      "parameters": {
+       "pipeline_id": "2940511358",
+       "ref": "main",
+       "source": "push"
+      }
+     },
+     "materials": [
+      {
+       "digest": {
+        "sha1": "543dcc476408e4ca5b7a5748fc4fce0949c5c82c"
+       },
+       "uri": "git+https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket"
+      },
+      {
+       "digest": {
+        "sha256": "bb9fd32de35231837283918f10bb7030f41476c39a381cde46405fb0f3615998"
+       },
+       "uri": "data/evaluation.csv"
+      },
+      {
+       "digest": {
+        "sha256": "ae1fd5794425eb329c478489cd13ca7d74268abd303c9308008e01ed0d0325e3"
+       },
+       "uri": "policy:credit-demo-v1"
+      },
+      {
+       "digest": {
+        "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
+       },
+       "uri": "model.pkl"
+      }
+     ],
+     "metadata": {
+      "buildInvocationId": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511358",
+      "completeness": {
+       "environment": false,
+       "materials": true,
+       "parameters": true
+      },
+      "reproducible": false
+     }
+    },
+    "predicateType": "https://slsa.dev/provenance/v0.2",
+    "subject": [
+     {
+      "digest": {
+       "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
+      },
+      "name": "model.pkl"
+     },
+     {
+      "digest": {
+       "sha256": "732f50a3fed2689aca68ae68f0e1f9d0e8b8a6132f853bc01c9fe72bfabf1eb2"
+      },
+      "name": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:543dcc47-d-p2940511358"
+     }
+    ]
+   },
    "runtime_verification": null,
    "reverification": null,
    "model_registration": null,
@@ -505,17 +642,31 @@
    "jobs_ran": [
     "bind-evidence",
     "evaluate-model",
+    "gasket-witness",
     "gemnasium-python-dependency_scanning",
     "package-image",
     "secret_detection",
     "security-scan",
+    "sign-evidence",
     "train-models",
     "unit-tests"
    ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171768",
-   "reason_codes": null,
-   "checks": null,
+   "reason_codes": [],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
    "actor": {
     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
     "name": "siva surya",
@@ -523,9 +674,9 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": null,
-   "evidenced_model_sha256": null,
-   "observed_model_sha256": null,
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171766",
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -535,11 +686,30 @@
      "1": 0.8383
     }
    },
-   "thresholds": null,
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
    "impact": null,
-   "has_decision": false,
-   "has_manifest": false,
+   "has_decision": true,
+   "has_manifest": true,
    "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17126171766,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171766/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17126171766,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171766/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/manifest.json"
+    },
     {
      "key": "metrics",
      "label": "Metrics",
@@ -547,6 +717,46 @@
      "job_id": 17126171763,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171763/artifacts/raw/evidence-out/metrics.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/metrics.json"
+    },
+    {
+     "key": "signature",
+     "label": "Signature record",
+     "file": "evidence-signature.json",
+     "job_id": 17126171767,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171767/artifacts/raw/evidence-signature.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/evidence-signature.json"
+    },
+    {
+     "key": "bundle",
+     "label": "Signed evidence bundle",
+     "file": "evidence_bundle.json",
+     "job_id": 17126171767,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171767/artifacts/raw/evidence_bundle.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/evidence_bundle.json"
+    },
+    {
+     "key": "evidence_cosign",
+     "label": "Evidence signature + Rekor entry",
+     "file": "evidence.cosign.bundle",
+     "job_id": 17126171767,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171767/artifacts/raw/evidence.cosign.bundle",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/evidence.cosign.bundle"
+    },
+    {
+     "key": "provenance",
+     "label": "Signed provenance",
+     "file": "provenance.json",
+     "job_id": 17126171767,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171767/artifacts/raw/provenance.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/provenance.json"
+    },
+    {
+     "key": "provenance_cosign",
+     "label": "Provenance signature + Rekor entry",
+     "file": "provenance.cosign.bundle",
+     "job_id": 17126171767,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171767/artifacts/raw/provenance.cosign.bundle",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/provenance.cosign.bundle"
     }
    ]
   },
@@ -3755,7 +3965,7 @@
     },
     "created_at": "2026-10-13T00:15:59.392Z",
     "draft": false,
-    "head_sha": "6dca5069d2533b6cc5b72a8e6642729ef2640617",
+    "head_sha": "24b612db747a34b3855a353ee672296d867926eb",
     "iid": 5,
     "merge_commit_sha": null,
     "repairs_issue": null,
@@ -3786,7 +3996,7 @@
     },
     "created_at": "2026-10-13T00:15:57.194Z",
     "draft": false,
-    "head_sha": "7bbaacac3850028c3058df33d674caeacad90e9f",
+    "head_sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
     "iid": 4,
     "merge_commit_sha": null,
     "repairs_issue": null,
@@ -3879,7 +4089,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:21:12Z",
+  "taken_at": "2026-10-13T00:21:57Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -3972,8 +4182,8 @@
   {
    "key": "signing",
    "label": "Sigstore signing + Rekor log",
-   "url": "https://search.sigstore.dev/?logIndex=3237604821",
-   "evidence": "signed in pipeline 2940468142"
+   "url": "https://search.sigstore.dev/?logIndex=3237818122",
+   "evidence": "signed in pipeline 2940511358"
   },
   {
    "key": "package_registry",
