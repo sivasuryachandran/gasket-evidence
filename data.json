@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-10-13T00:29:21Z",
+ "generated_at": "2026-10-13T00:36:06Z",
  "outcomes": {
+  "out_of_scope": 3,
   "unexpected_block": 3,
   "released_eligible": 22,
   "no_decision": 5,
-  "out_of_scope": 2,
   "expected_block": 1
  },
  "data_quality": {
-  "total_pipelines": 33,
+  "total_pipelines": 34,
   "valid_runs": 26,
   "no_decision": 5,
-  "out_of_scope": 2,
+  "out_of_scope": 3,
   "running": 0
  },
  "kpis": {
@@ -118,6 +118,59 @@
   "items": []
  },
  "runs": [
+  {
+   "id": 2940543981,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940543981",
+   "ref": "refs/workloads/3b7335bd471",
+   "kind": "duo_workload",
+   "mr_iid": null,
+   "sha": "8957539405059715c6c4745953fddaafcc98c0e9",
+   "created_at": "2026-10-13T00:35:55.445Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "out_of_scope",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43303860/custom-flow-2.png?v=1791851705",
+    "name": "Gasket Artifact Impact Analyst",
+    "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "kind": "duo"
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
   {
    "id": 2940522134,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940522134",
@@ -401,9 +454,9 @@
    "mr_iid": null,
    "sha": "22d34e809b71d919b8e923b721d3b4feeb62ee9b",
    "created_at": "2026-10-13T00:22:16.503Z",
-   "status": "running",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 422.4,
+   "wall_seconds": 439.1,
    "stage_seconds": {
     "package": 67.4,
     "evaluate": 36.2,
@@ -568,7 +621,11 @@
    },
    "reverification": null,
    "model_registration": null,
-   "release": null,
+   "release": {
+    "pipeline": "2940522083",
+    "sign_job_id": "17126245745",
+    "tag": "release-p2940522083"
+   },
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
@@ -580,6 +637,7 @@
     "package-image",
     "pages",
     "publish-public-dashboard",
+    "release-evidence",
     "runtime-verify",
     "secret_detection",
     "security-scan",
@@ -4742,7 +4800,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:29:21Z",
+  "taken_at": "2026-10-13T00:36:06Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -4855,8 +4913,8 @@
   {
    "key": "releases",
    "label": "Releases",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2940511358",
-   "evidence": "release release-p2940511358"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2940522083",
+   "evidence": "release release-p2940522083"
   }
  ],
  "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket"
