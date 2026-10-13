@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T01:11:44Z",
+ "generated_at": "2026-10-13T01:13:17Z",
  "outcomes": {
   "released_eligible": 24,
   "out_of_scope": 6,
@@ -22,7 +22,7 @@
   "eligible_releases": 24,
   "stages": {
    "eligible": 7,
-   "awaiting_approval": 7,
+   "awaiting_approval": 6,
    "deployed_mock": 6,
    "artifact_verified": 4,
    "runtime_verify_failed": 0,
@@ -202,7 +202,7 @@
    "mr_iid": null,
    "sha": "d9cc17192bc23a2d9bf8506ee5850619ec032c5d",
    "created_at": "2026-10-13T01:04:15.548Z",
-   "status": "manual",
+   "status": "running",
    "scenario": "d",
    "wall_seconds": 410.2,
    "stage_seconds": {
@@ -212,11 +212,11 @@
     "bind": 17.7,
     "witness": 89.6
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "running",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
+   "release_stage": "deploying",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -5680,7 +5680,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T01:11:44Z",
+  "taken_at": "2026-10-13T01:13:17Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
