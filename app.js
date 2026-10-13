@@ -942,7 +942,7 @@
       var cats = Object.keys(d.evidence.categories || {}).map(function (c) { return c + ' \u00d7' + d.evidence.categories[c]; }).join(', ');
       el.appendChild(h('p', { class: 'duo-metric' }, [h('b', { text: 'Risk level: ' }), 'agreed ' + of(d.risk.agreed) + ' \u00b7 Witness stricter ' + of(d.risk.witness_stricter) + ' \u00b7 Witness looser ' + of(d.risk.witness_looser)]));
       el.appendChild(h('p', { class: 'duo-metric' }, [h('b', { text: 'Required evidence: ' }), 'agreed ' + of(d.evidence.agreed) + ' \u00b7 Witness added categories in ' + of(d.evidence.witness_added) + (cats ? ' (' + cats + ')' : '')]));
-      el.appendChild(h('p', { class: 'sub', text: 'Why security is added for a model change: the Witness requires accuracy, fairness, artifact identity and security evidence for any change to model code (REQUIRED_EVIDENCE_BY_SCOPE in gasket/impact.py), matching the release policy\u2019s required security check. Duo\u2019s prompt does not state that mapping. Percentages appear only from 10 assessments.' }));
+      el.appendChild(h('p', { class: 'sub', text: 'Why security and SBOM are added for a model change: the Witness requires accuracy, fairness, artifact identity, security and SBOM evidence for any change to model code (REQUIRED_EVIDENCE_BY_SCOPE in gasket/impact.py), matching the release policy\u2019s required security and SBOM checks. Duo\u2019s prompt does not state that mapping. Percentages appear only from 10 assessments.' }));
     }
     if (!d.items.length) {
       var ran = [];
