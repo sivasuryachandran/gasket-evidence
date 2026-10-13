@@ -1,18 +1,19 @@
 {
- "generated_at": "2026-10-13T02:03:53Z",
+ "generated_at": "2026-10-13T02:07:33Z",
  "outcomes": {
+  "out_of_scope": 7,
+  "running": 1,
   "released_eligible": 27,
-  "out_of_scope": 6,
   "expected_block": 2,
   "no_decision": 5,
   "unexpected_block": 2
  },
  "data_quality": {
-  "total_pipelines": 42,
+  "total_pipelines": 44,
   "valid_runs": 31,
   "no_decision": 5,
-  "out_of_scope": 6,
-  "running": 0
+  "out_of_scope": 7,
+  "running": 1
  },
  "kpis": {
   "valid_runs": 31,
@@ -197,6 +198,112 @@
   ]
  },
  "runs": [
+  {
+   "id": 2940692127,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940692127",
+   "ref": "refs/workloads/9c7f82da0d9",
+   "kind": "duo_workload",
+   "mr_iid": null,
+   "sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
+   "created_at": "2026-10-13T02:07:06.586Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "out_of_scope",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43303860/custom-flow-2.png?v=1791851705",
+    "name": "Gasket Artifact Impact Analyst",
+    "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "kind": "duo"
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
+  {
+   "id": 2940692086,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940692086",
+   "ref": "refs/merge-requests/6/head",
+   "kind": "merge_request",
+   "mr_iid": 6,
+   "sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
+   "created_at": "2026-10-13T02:07:04.829Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
   {
    "id": 2940665402,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940665402",
@@ -6610,6 +6717,37 @@
      "username": "chandran.sivasurya",
      "web_url": "https://gitlab.com/chandran.sivasurya"
     },
+    "created_at": "2026-10-13T02:07:03.251Z",
+    "draft": false,
+    "head_sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
+    "iid": 6,
+    "merge_commit_sha": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "chore/license-holder",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "main",
+    "title": "chore: copyright holder is Siva Surya Chandran",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/6"
+   },
+   {
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
     "created_at": "2026-10-13T00:15:59.392Z",
     "draft": false,
     "head_sha": "24b612db747a34b3855a353ee672296d867926eb",
@@ -6736,7 +6874,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T02:03:53Z",
+  "taken_at": "2026-10-13T02:07:33Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -6754,10 +6892,12 @@
     2,
     3,
     4,
-    5
+    5,
+    6
    ],
    "issues": [],
    "run_ids": [
+    2940692086,
     2940522134,
     2940522124,
     2940511602,
@@ -6833,13 +6973,13 @@
    "key": "pipelines",
    "label": "CI/CD pipelines",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines",
-   "evidence": "36 release pipelines recorded"
+   "evidence": "37 release pipelines recorded"
   },
   {
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "5 merge requests, 2 merged"
+   "evidence": "6 merge requests, 2 merged"
   },
   {
    "key": "duo_flows",
