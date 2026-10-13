@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T00:23:24Z",
+ "generated_at": "2026-10-13T00:25:40Z",
  "outcomes": {
   "running": 3,
   "released_eligible": 20,
@@ -23,8 +23,8 @@
   "eligible_releases": 20,
   "stages": {
    "eligible": 6,
-   "awaiting_approval": 6,
-   "deployed_mock": 6,
+   "awaiting_approval": 5,
+   "deployed_mock": 7,
    "artifact_verified": 2,
    "runtime_verify_failed": 0,
    "deployed": 0,
@@ -128,9 +128,9 @@
    "created_at": "2026-10-13T00:22:19.642Z",
    "status": "running",
    "scenario": null,
-   "wall_seconds": 38.9,
+   "wall_seconds": 139.2,
    "stage_seconds": {
-    "package": null,
+    "package": 59.7,
     "evaluate": null,
     "secure": null,
     "bind": null,
@@ -151,7 +151,8 @@
    "requirements_reported": false,
    "jobs_ran": [
     "impact-check",
-    "train-models"
+    "train-models",
+    "unit-tests"
    ],
    "deployment": null,
    "deploy_job_url": null,
@@ -210,13 +211,13 @@
    "sha": "24b612db747a34b3855a353ee672296d867926eb",
    "created_at": "2026-10-13T00:22:19.243Z",
    "status": "running",
-   "scenario": null,
-   "wall_seconds": 39.0,
+   "scenario": "d",
+   "wall_seconds": 189.0,
    "stage_seconds": {
-    "package": null,
-    "evaluate": null,
-    "secure": null,
-    "bind": null,
+    "package": 69.6,
+    "evaluate": 38.9,
+    "secure": 37.4,
+    "bind": 11.0,
     "witness": null
    },
    "deploy_job_state": null,
@@ -233,8 +234,12 @@
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
+    "evaluate-model",
     "impact-check",
-    "train-models"
+    "package-image",
+    "security-scan",
+    "train-models",
+    "unit-tests"
    ],
    "deployment": null,
    "deploy_job_url": null,
@@ -250,7 +255,15 @@
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
-   "metrics": null,
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
    "thresholds": null,
    "impact": {
     "changed_paths": [
@@ -275,6 +288,14 @@
    "has_manifest": false,
    "evidence_links": [
     {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17126246089,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126246089/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522124/metrics.json"
+    },
+    {
      "key": "impact",
      "label": "Impact analysis",
      "file": "impact-final.json",
@@ -294,13 +315,13 @@
    "created_at": "2026-10-13T00:22:16.503Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 39.5,
+   "wall_seconds": 199.7,
    "stage_seconds": {
-    "package": null,
-    "evaluate": null,
-    "secure": null,
-    "bind": null,
-    "witness": null
+    "package": 67.4,
+    "evaluate": 36.2,
+    "secure": 35.5,
+    "bind": 15.2,
+    "witness": 4.8
    },
    "deploy_job_state": "created",
    "outcome": "running",
@@ -316,9 +337,14 @@
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
     "gemnasium-python-dependency_scanning",
+    "package-image",
     "secret_detection",
-    "train-models"
+    "security-scan",
+    "train-models",
+    "unit-tests"
    ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126245746",
@@ -334,12 +360,29 @@
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
-   "metrics": null,
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
    "thresholds": null,
    "impact": null,
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17126245741,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126245741/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522083/metrics.json"
+    }
+   ]
   },
   {
    "id": 2940511602,
@@ -704,7 +747,7 @@
    "created_at": "2026-10-13T00:15:54.506Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 421.3,
+   "wall_seconds": 582.9,
    "stage_seconds": {
     "package": 93.3,
     "evaluate": 40.8,
@@ -712,11 +755,11 @@
     "bind": 18.3,
     "witness": 78.4
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "success",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
+   "release_stage": "deployed_mock",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -865,6 +908,7 @@
    "requirements_reported": false,
    "jobs_ran": [
     "bind-evidence",
+    "deploy-production",
     "evaluate-model",
     "gasket-witness",
     "gemnasium-python-dependency_scanning",
@@ -877,7 +921,19 @@
     "train-models",
     "unit-tests"
    ],
-   "deployment": null,
+   "deployment": {
+    "mock": true,
+    "mode": "mock",
+    "executed_by": "chandran.sivasurya",
+    "approval": "not recorded",
+    "published_artifact": {
+     "bytes": 1052,
+     "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+     "url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2940511358/model.pkl"
+    },
+    "candidate_verified": false,
+    "production_verified": false
+   },
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171768",
    "reason_codes": [],
    "checks": {
@@ -943,6 +999,14 @@
      "job_id": 17126171763,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171763/artifacts/raw/evidence-out/metrics.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/metrics.json"
+    },
+    {
+     "key": "deployment",
+     "label": "Deployment receipt",
+     "file": "deployment.json",
+     "job_id": 17126171768,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171768/artifacts/raw/deployment.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511358/deployment.json"
     },
     {
      "key": "signature",
@@ -4315,7 +4379,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:23:24Z",
+  "taken_at": "2026-10-13T00:25:40Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -4417,13 +4481,13 @@
    "key": "package_registry",
    "label": "Package registry",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/packages",
-   "evidence": "model artifact published by pipeline 2940468142"
+   "evidence": "model artifact published by pipeline 2940511358"
   },
   {
    "key": "environments",
    "label": "Environments and deployments",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/environments",
-   "evidence": "deploy job succeeded in pipeline 2940468142"
+   "evidence": "deploy job succeeded in pipeline 2940511358"
   },
   {
    "key": "releases",
