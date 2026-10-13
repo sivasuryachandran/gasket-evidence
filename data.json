@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T02:07:33Z",
+ "generated_at": "2026-10-13T02:11:05Z",
  "outcomes": {
   "out_of_scope": 7,
   "running": 1,
@@ -111,21 +111,24 @@
   }
  ],
  "duo": {
-  "assessments": 3,
+  "assessments": 4,
   "risk": {
    "agreed": 2,
-   "witness_stricter": 1,
+   "witness_stricter": 2,
    "witness_looser": 0
   },
   "evidence": {
    "agreed": 1,
-   "witness_added": 2,
+   "witness_added": 3,
    "categories": {
-    "sbom": 2,
-    "security": 2
+    "accuracy": 1,
+    "artifact_identity": 1,
+    "fairness": 1,
+    "sbom": 3,
+    "security": 3
    }
   },
-  "scope_differs": 0,
+  "scope_differs": 1,
   "percentages_shown": false,
   "items": [
    {
@@ -194,6 +197,32 @@
     "session": "not recorded",
     "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9355040",
     "session_flow": "Impact Analyst"
+   },
+   {
+    "mr_iid": 6,
+    "pipeline_id": 2940692086,
+    "duo_scope": [
+     "ambiguous",
+     "documentation-only"
+    ],
+    "witness_scope": [
+     "ambiguous"
+    ],
+    "duo_risk": "low",
+    "witness_risk": "high",
+    "risk_result": "witness_stricter",
+    "evidence_witness_added": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "sbom",
+     "security"
+    ],
+    "evidence_duo_only": [],
+    "scope_differs": true,
+    "session": "not recorded",
+    "session_url": null,
+    "session_flow": "Impact Analyst"
    }
   ]
  },
@@ -206,9 +235,9 @@
    "mr_iid": null,
    "sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
    "created_at": "2026-10-13T02:07:06.586Z",
-   "status": "running",
+   "status": "success",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 52.7,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -229,7 +258,9 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "workload"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "reason_codes": null,
@@ -260,13 +291,13 @@
    "sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
    "created_at": "2026-10-13T02:07:04.829Z",
    "status": "running",
-   "scenario": null,
-   "wall_seconds": null,
+   "scenario": "d",
+   "wall_seconds": 226.8,
    "stage_seconds": {
-    "package": null,
-    "evaluate": null,
-    "secure": null,
-    "bind": null,
+    "package": 71.9,
+    "evaluate": 39.1,
+    "secure": 39.1,
+    "bind": 12.4,
     "witness": null
    },
    "deploy_job_state": null,
@@ -282,7 +313,15 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "dependency-scanning:python-resolution",
+    "evaluate-model",
+    "impact-check",
+    "package-image",
+    "security-scan",
+    "train-models",
+    "unit-tests"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "reason_codes": null,
@@ -297,12 +336,65 @@
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
-   "metrics": null,
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
    "thresholds": null,
-   "impact": null,
+   "impact": {
+    "agent_session": "not recorded",
+    "changed_paths": [
+     "LICENSE"
+    ],
+    "commit_sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
+    "duo_available": true,
+    "duo_reason": "Only the copyright holder line in LICENSE changed; the MIT license is unchanged and no model, data, evaluation, serving, security or policy files are touched. The attribution change should be confirmed by a human owner.",
+    "duo_required_evidence": [],
+    "duo_risk_level": "low",
+    "duo_scope": [
+     "ambiguous",
+     "documentation-only"
+    ],
+    "overridden": true,
+    "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, documentation-only, risk low, evidence: none. The stricter, deterministic requirement wins.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "sbom",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "ambiguous"
+    ],
+    "unsupported_duo_evidence": []
+   },
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17127320759,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17127320759/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940692086/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17127320755,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17127320755/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940692086/impact-final.json"
+    }
+   ]
   },
   {
    "id": 2940665402,
@@ -6874,7 +6966,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T02:07:33Z",
+  "taken_at": "2026-10-13T02:11:05Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
