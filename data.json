@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T02:42:28Z",
+ "generated_at": "2026-10-13T02:45:08Z",
  "outcomes": {
   "released_eligible": 30,
   "out_of_scope": 7,
@@ -22,7 +22,7 @@
   "eligible_releases": 30,
   "stages": {
    "eligible": 8,
-   "awaiting_approval": 8,
+   "awaiting_approval": 6,
    "deployed_mock": 6,
    "artifact_verified": 8,
    "runtime_verify_failed": 0,
@@ -235,7 +235,7 @@
    "mr_iid": null,
    "sha": "1a594c7247bbaa9069943d2061ee58c77fbcdb88",
    "created_at": "2026-10-13T02:33:34.730Z",
-   "status": "manual",
+   "status": "waiting_for_resource",
    "scenario": "d",
    "wall_seconds": 453.0,
    "stage_seconds": {
@@ -245,11 +245,11 @@
     "bind": 17.4,
     "witness": 82.2
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "waiting_for_resource",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
+   "release_stage": "deploying",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -528,7 +528,7 @@
    "mr_iid": null,
    "sha": "58ad604af1fcac8bce2c5d917703f328ece9c213",
    "created_at": "2026-10-13T02:30:35.692Z",
-   "status": "manual",
+   "status": "running",
    "scenario": "d",
    "wall_seconds": 463.8,
    "stage_seconds": {
@@ -538,11 +538,11 @@
     "bind": 18.0,
     "witness": 82.6
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "running",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
+   "release_stage": "deploying",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -7562,7 +7562,7 @@
    {
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791772535",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -7586,7 +7586,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T02:42:28Z",
+  "taken_at": "2026-10-13T02:45:08Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
