@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T01:18:32Z",
+ "generated_at": "2026-10-13T01:21:18Z",
  "outcomes": {
   "running": 1,
   "released_eligible": 24,
@@ -205,11 +205,11 @@
    "created_at": "2026-10-13T01:18:22.044Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": null,
+   "wall_seconds": 147.1,
    "stage_seconds": {
-    "package": null,
-    "evaluate": null,
-    "secure": null,
+    "package": 70.9,
+    "evaluate": 27.5,
+    "secure": 27.3,
     "bind": null,
     "witness": null
    },
@@ -226,7 +226,13 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "gemnasium-python-dependency_scanning",
+    "package-image",
+    "secret_detection",
+    "train-models",
+    "unit-tests"
+   ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126870632",
    "reason_codes": null,
@@ -5778,7 +5784,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T01:18:32Z",
+  "taken_at": "2026-10-13T01:21:18Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -5889,8 +5895,8 @@
   {
    "key": "security_scans",
    "label": "Secret / dependency scanning",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940587483",
-   "evidence": "ran in pipeline 2940587483"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940618743",
+   "evidence": "ran in pipeline 2940618743"
   },
   {
    "key": "signing",
