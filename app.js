@@ -433,10 +433,16 @@
     if (run.mr_iid) links.appendChild(h('a', { href: data.project_url + '/-/merge_requests/' + run.mr_iid, target: '_blank', rel: 'noopener', text: 'Merge request !' + run.mr_iid + ' \u2197' }));
     panel.appendChild(links);
     if (run.evidence_links && run.evidence_links.length) {
-      var src = h('div', { class: 'links' });
+      var src = h('div', { class: 'vgrid' }, [
+        h('div', { class: 'vhead', text: 'File' }), h('div', { class: 'vhead', text: 'Saved copy' }), h('div', { class: 'vhead', text: 'Live GitLab artifact' })
+      ]);
       run.evidence_links.forEach(function (l) {
-        if (l.view_url) src.appendChild(h('a', { href: l.view_url, target: '_blank', rel: 'noopener', title: 'Saved copy of ' + l.file + ' in the repository (opens in the browser)', text: 'View ' + l.file + ' \u2192' }));
-        src.appendChild(h('a', { href: l.url, target: '_blank', rel: 'noopener', title: 'Live GitLab artifact, job ' + l.job_id + ' (downloads the file)', text: 'Download raw ' + l.file + ' \u2193' }));
+        var name = h('div', { class: 'vname' }, [h('b', { text: l.label }), h('span', { class: 'sub', text: l.file })]);
+        var view = l.view_url
+          ? h('a', { class: 'vbtn', href: l.view_url, target: '_blank', rel: 'noopener', title: 'Saved copy of ' + l.file + ' in the repository (opens in the browser)', text: 'View \u2192' })
+          : h('span', { class: 'vbtn off', text: 'No saved copy' });
+        var dl = h('a', { class: 'vbtn dl', href: l.url, target: '_blank', rel: 'noopener', title: 'Live GitLab artifact, job ' + l.job_id + ' (downloads the file)', text: 'Download \u2193' });
+        src.appendChild(h('div', { class: 'vrow' }, [name, h('div', { class: 'vcell', 'data-label': 'Saved copy' }, [view]), h('div', { class: 'vcell', 'data-label': 'Live artifact' }, [dl])]));
       });
       panel.appendChild(h('details', { class: 'verify' }, [h('summary', { text: 'Verify at source' }), src]));
     }
