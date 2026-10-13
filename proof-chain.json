@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T00:49:05Z",
+ "generated_at": "2026-10-13T00:50:49Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -8,7 +8,8 @@
     "title": "Gasket investigation: pipeline 2940522134 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
     "state": "opened",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/3",
-    "session": null
+    "session": null,
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9355054"
    },
    "blocked_run": 2940522134,
    "blocked_reasons": [
@@ -27,7 +28,8 @@
     "title": "Gasket investigation: pipeline 2936306584 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
     "state": "opened",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/2",
-    "session": null
+    "session": null,
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9299324"
    },
    "blocked_run": 2936306584,
    "blocked_reasons": [
@@ -39,7 +41,8 @@
     "state": "merged",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/1",
     "draft": false,
-    "session": "9299455"
+    "session": "9299455",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9299455"
    },
    "corrected_run": 2936331370,
    "corrected_outcome": "released_eligible",
@@ -186,7 +189,7 @@
    "ref": "refs/merge-requests/4/head",
    "sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
    "created_at": "2026-10-13T00:22:19.642Z",
-   "outcome": "unexpected_block",
+   "outcome": "expected_block",
    "reason_codes": [
     "FAIRNESS_GAP_EXCEEDED"
    ],

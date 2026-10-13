@@ -558,8 +558,8 @@
         ? dep.approval.approvals.map(function (a) { return '@' + a.username + ' (' + a.status + ')'; }).join(', ') : null;
       return h('ol', { class: 'vtl' }, [
         row('Blocked pipeline', blocked ? h('span', {}, [h('a', { href: '#/run/' + blocked.id, text: 'Pipeline ' + blocked.id }), ' · ' + (c.blocked_reasons || []).join(', ')]) : 'No blocked pipeline linked yet.', !!blocked, 1),
-        row('Duo investigation', c ? h('span', {}, [link(c.issue.web_url, '#' + c.issue.iid + ' ' + c.issue.title), ' · session ' + (c.issue.session || 'not recorded')]) : 'No investigation issue recorded.', !!c, 2),
-        row('Repair merge request', c && c.repair_mr ? h('span', {}, [link(c.repair_mr.web_url, '!' + c.repair_mr.iid + ' ' + c.repair_mr.title + (c.repair_mr.draft ? ' (draft)' : '')), ' · session ' + (c.repair_mr.session || 'not recorded')]) : 'No repair merge request recorded.', !!(c && c.repair_mr), 3),
+        row('Duo investigation', c ? h('span', {}, [link(c.issue.web_url, '#' + c.issue.iid + ' ' + c.issue.title), ' · ', sessionCell(c.issue.session_url, c.issue.session)]) : 'No investigation issue recorded.', !!c, 2),
+        row('Repair merge request', c && c.repair_mr ? h('span', {}, [link(c.repair_mr.web_url, '!' + c.repair_mr.iid + ' ' + c.repair_mr.title + (c.repair_mr.draft ? ' (draft)' : '')), ' · ', sessionCell(c.repair_mr.session_url, c.repair_mr.session)]) : 'No repair merge request recorded.', !!(c && c.repair_mr), 3),
         row('Corrected pipeline', corrected ? h('span', {}, [h('a', { href: '#/run/' + corrected.id, text: 'Pipeline ' + corrected.id }), ' · ' + OUTCOME[corrected.outcome].label + ' (a new run; the blocked result is unchanged)']) : 'No corrected pipeline yet.', !!corrected, 4),
         row('Approval record', approval || 'not recorded', !!approval, 5),
         row('Deployment', dep ? (dep.mock ? 'Release recorded, nothing deployed (receipt marked mock), by ' + (dep.executed_by || 'not recorded') : (dep.promoted_revision ? 'Revision ' + dep.promoted_revision : 'Deployment attempted')) : 'No deployment recorded.', !!(dep && !dep.mock && dep.promoted_revision), 6),
@@ -957,13 +957,19 @@
           h('td', {}, [h('span', { class: 'chip gray', text: (i.duo_risk || NOT_RECORDED).toUpperCase() })]),
           h('td', { text: (i.witness_scope || []).join(', ') || NOT_RECORDED }),
           h('td', {}, [h('span', { class: 'chip ' + (i.witness_risk === 'high' ? 'blocked' : 'gray'), text: (i.witness_risk || NOT_RECORDED).toUpperCase() })]),
-          h('td', {}, [h('span', { class: 'chip ' + (i.overridden ? 'amber' : 'ok'), text: i.overridden ? 'Witness overrode Duo' : 'Agreed' })]),
-          h('td', { text: i.session || NOT_RECORDED })
+          h('td', {}, [h('span', { class: 'chip ' + (i.overridden ? 'amber' : 'ok'), text: i.overridden ? 'Witness overrode Duo' : 'Agreed' })].concat((i.override_reasons || []).map(function (r) { return h('div', { class: 'sub', text: r }); }))),
+          h('td', {}, [sessionCell(i.session_url, i.session)])
         ]);
       });
       el.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]));
     }
     return el;
+  }
+
+  // A session link recorded by hand from the project's Sessions page, else the id the flow wrote, else "not recorded".
+  function sessionCell(url, written) {
+    if (url) return h('a', { href: url, target: '_blank', rel: 'noopener', text: 'session ' + url.split('/').pop() + ' \u2197' });
+    return document.createTextNode(written ? 'session ' + written : NOT_RECORDED);
   }
 
   function footer(data) {
