@@ -1,6 +1,7 @@
 {
- "generated_at": "2026-10-13T00:04:57Z",
+ "generated_at": "2026-10-13T00:16:04Z",
  "outcomes": {
+  "running": 4,
   "released_eligible": 17,
   "no_decision": 4,
   "unexpected_block": 2,
@@ -8,11 +9,11 @@
   "expected_block": 1
  },
  "data_quality": {
-  "total_pipelines": 26,
+  "total_pipelines": 30,
   "valid_runs": 20,
   "no_decision": 4,
   "out_of_scope": 2,
-  "running": 0
+  "running": 4
  },
  "kpis": {
   "valid_runs": 20,
@@ -115,6 +116,218 @@
   "items": []
  },
  "runs": [
+  {
+   "id": 2940511602,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511602",
+   "ref": "refs/merge-requests/5/head",
+   "kind": "merge_request",
+   "mr_iid": 5,
+   "sha": "6dca5069d2533b6cc5b72a8e6642729ef2640617",
+   "created_at": "2026-10-13T00:16:01.036Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
+  {
+   "id": 2940511532,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511532",
+   "ref": "refs/merge-requests/4/head",
+   "kind": "merge_request",
+   "mr_iid": 4,
+   "sha": "7bbaacac3850028c3058df33d674caeacad90e9f",
+   "created_at": "2026-10-13T00:15:58.653Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
+  {
+   "id": 2940511465,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511465",
+   "ref": "refs/merge-requests/3/head",
+   "kind": "merge_request",
+   "mr_iid": 3,
+   "sha": "8957539405059715c6c4745953fddaafcc98c0e9",
+   "created_at": "2026-10-13T00:15:56.379Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
+  {
+   "id": 2940511358,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511358",
+   "ref": "main",
+   "kind": "release",
+   "mr_iid": null,
+   "sha": "543dcc476408e4ca5b7a5748fc4fce0949c5c82c",
+   "created_at": "2026-10-13T00:15:54.506Z",
+   "status": "running",
+   "scenario": "d",
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": "created",
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171768",
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
   {
    "id": 2940468142,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940468142",
@@ -3302,6 +3515,99 @@
   ],
   "merge_requests": [
    {
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "created_at": "2026-10-13T00:15:59.392Z",
+    "draft": false,
+    "head_sha": "6dca5069d2533b6cc5b72a8e6642729ef2640617",
+    "iid": 5,
+    "merge_commit_sha": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/c-fix-fairness-regression",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "duo-demo/b-fairness-regression",
+    "title": "demo: fix fairness regression",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/5"
+   },
+   {
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "created_at": "2026-10-13T00:15:57.194Z",
+    "draft": false,
+    "head_sha": "7bbaacac3850028c3058df33d674caeacad90e9f",
+    "iid": 4,
+    "merge_commit_sha": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/b-fairness-regression",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "main",
+    "title": "demo: fairness regression",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/4"
+   },
+   {
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "created_at": "2026-10-13T00:15:54.871Z",
+    "draft": false,
+    "head_sha": "8957539405059715c6c4745953fddaafcc98c0e9",
+    "iid": 3,
+    "merge_commit_sha": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/a-clean-change",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "main",
+    "title": "demo: clean change",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/3"
+   },
+   {
     "assignees": [],
     "author": {
      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791772535",
@@ -3351,14 +3657,14 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:04:57Z",
+  "taken_at": "2026-10-13T00:16:04Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
  "people": [
   {
    "profile": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791772535",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
     "kind": null,
     "name": "siva surya",
     "username": "chandran.sivasurya",
@@ -3366,10 +3672,16 @@
    },
    "mrs": [
     1,
-    2
+    2,
+    3,
+    4,
+    5
    ],
    "issues": [],
    "run_ids": [
+    2940511602,
+    2940511532,
+    2940511465,
     2939832270,
     2936331370
    ]
@@ -3415,13 +3727,13 @@
    "key": "pipelines",
    "label": "CI/CD pipelines",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines",
-   "evidence": "24 release pipelines recorded"
+   "evidence": "28 release pipelines recorded"
   },
   {
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "2 merge requests, 2 merged"
+   "evidence": "5 merge requests, 2 merged"
   },
   {
    "key": "duo_flows",

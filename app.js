@@ -627,7 +627,7 @@
     wrap.appendChild(h('p', { class: 'sub', text: 'Scheduled re-verification on a fixed holdout \u2014 not live production-traffic monitoring. It re-checks the published model against the signed evidence and the policy; on an unchanged model and holdout the numbers cannot move.' }));
     var rv = data.reverification || {};
     if (!rv.latest) {
-      wrap.appendChild(h('p', { class: 'notice', text: 'No scheduled re-verification has run yet. It runs only from a pipeline schedule that sets GASKET_SCHEDULE=reverify (see docs/SETUP.md).' }));
+      wrap.appendChild(h('p', { class: 'notice', text: 'No scheduled re-verification has run yet. It runs only from a pipeline schedule on main (see docs/SETUP.md).' }));
       return wrap;
     }
     var l = rv.latest, m = l.metrics || {}, b = l.signed_baseline || {};
