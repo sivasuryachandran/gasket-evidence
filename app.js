@@ -558,8 +558,8 @@
         ? dep.approval.approvals.map(function (a) { return '@' + a.username + ' (' + a.status + ')'; }).join(', ') : null;
       return h('ol', { class: 'vtl' }, [
         row('Blocked pipeline', blocked ? h('span', {}, [h('a', { href: '#/run/' + blocked.id, text: 'Pipeline ' + blocked.id }), ' · ' + (c.blocked_reasons || []).join(', ')]) : 'No blocked pipeline linked yet.', !!blocked, 1),
-        row('Duo investigation', c ? h('span', {}, [link(c.issue.web_url, '#' + c.issue.iid + ' ' + c.issue.title), ' · ', sessionCell(c.issue.session_url, c.issue.session)]) : 'No investigation issue recorded.', !!c, 2),
-        row('Repair merge request', c && c.repair_mr ? h('span', {}, [link(c.repair_mr.web_url, '!' + c.repair_mr.iid + ' ' + c.repair_mr.title + (c.repair_mr.draft ? ' (draft)' : '')), ' · ', sessionCell(c.repair_mr.session_url, c.repair_mr.session)]) : 'No repair merge request recorded.', !!(c && c.repair_mr), 3),
+        row('Duo investigation', c ? h('span', {}, [link(c.issue.web_url, '#' + c.issue.iid + ' ' + c.issue.title), ' · ', sessionCell(c.issue.session_url, c.issue.session, c.issue.session_flow)]) : 'No investigation issue recorded.', !!c, 2),
+        row('Repair merge request', c && c.repair_mr ? h('span', {}, [link(c.repair_mr.web_url, '!' + c.repair_mr.iid + ' ' + c.repair_mr.title + (c.repair_mr.draft ? ' (draft)' : '')), ' · ', sessionCell(c.repair_mr.session_url, c.repair_mr.session, c.repair_mr.session_flow)]) : 'No repair merge request recorded.', !!(c && c.repair_mr), 3),
         row('Corrected pipeline', corrected ? h('span', {}, [h('a', { href: '#/run/' + corrected.id, text: 'Pipeline ' + corrected.id }), ' · ' + OUTCOME[corrected.outcome].label + ' (a new run; the blocked result is unchanged)']) : 'No corrected pipeline yet.', !!corrected, 4),
         row('Approval record', approval || 'not recorded', !!approval, 5),
         row('Deployment', dep ? (dep.mock ? 'Release recorded, nothing deployed (receipt marked mock), by ' + (dep.executed_by || 'not recorded') : (dep.promoted_revision ? 'Revision ' + dep.promoted_revision : 'Deployment attempted')) : 'No deployment recorded.', !!(dep && !dep.mock && dep.promoted_revision), 6),
@@ -971,7 +971,7 @@
           h('td', { text: scopeText(i) + (i.scope_differs ? ' (Duo: ' + (i.duo_scope || []).join(', ') + ')' : '') }),
           h('td', {}, [chip(i.risk_result === 'agreed', i.risk_result === 'agreed' ? 'Agreed' : i.risk_result === 'witness_stricter' ? 'Witness stricter' : 'Witness looser'), h('div', { class: 'sub', text: 'Duo ' + (i.duo_risk || 'unstated') + ' \u00b7 Witness ' + i.witness_risk })]),
           h('td', {}, [chip(!i.evidence_witness_added.length, i.evidence_witness_added.length ? 'Witness added' : 'Agreed'), h('div', { class: 'sub', text: evidenceText(i) })]),
-          h('td', {}, [sessionCell(i.session_url, i.session)])
+          h('td', {}, [sessionCell(i.session_url, i.session, i.session_flow)])
         ]);
       });
       el.appendChild(h('div', { class: 'tablewrap duo-table' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]));
@@ -981,7 +981,7 @@
           h('div', { class: 'duo-card-head' }, [mrLink(i), ' \u2014 ' + scopeText(i)]),
           h('p', {}, [h('b', { text: 'Risk: ' }), chip(i.risk_result === 'agreed', riskText(i).replace(/^risk: /, ''))]),
           h('p', {}, [h('b', { text: 'Evidence: ' }), chip(!i.evidence_witness_added.length, evidenceText(i))]),
-          h('p', {}, [h('b', { text: 'Session: ' }), sessionCell(i.session_url, i.session)])
+          h('p', {}, [h('b', { text: 'Session: ' }), sessionCell(i.session_url, i.session, i.session_flow)])
         ]);
       })));
     }
@@ -989,9 +989,10 @@
   }
 
   // A session link recorded by hand from the project's Sessions page, else the id the flow wrote, else "not recorded".
-  function sessionCell(url, written) {
-    if (url) return h('a', { href: url, target: '_blank', rel: 'noopener', text: 'session ' + url.split('/').pop() + ' \u2197' });
-    return document.createTextNode(written ? 'session ' + written : NOT_RECORDED);
+  function sessionCell(url, written, flow) {
+    var prefix = flow ? flow + ' \u00b7 ' : '';
+    if (url) return h('a', { href: url, target: '_blank', rel: 'noopener', text: prefix + 'session ' + url.split('/').pop() + ' \u2197' });
+    return document.createTextNode(written ? prefix + 'session ' + written : NOT_RECORDED);
   }
 
   function footer(data) {

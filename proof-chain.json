@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T01:28:12Z",
+ "generated_at": "2026-10-13T01:30:10Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -9,7 +9,8 @@
     "state": "opened",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/3",
     "session": null,
-    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9355054"
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9355054",
+    "session_flow": "Release Investigator"
    },
    "blocked_run": 2940522134,
    "blocked_reasons": [
@@ -29,7 +30,8 @@
     "state": "opened",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/2",
     "session": null,
-    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9299324"
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9299324",
+    "session_flow": "Release Investigator"
    },
    "blocked_run": 2936306584,
    "blocked_reasons": [
@@ -42,7 +44,8 @@
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/1",
     "draft": false,
     "session": "9299455",
-    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9299455"
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9299455",
+    "session_flow": "Release Repair"
    },
    "corrected_run": 2936331370,
    "corrected_outcome": "released_eligible",
