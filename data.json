@@ -1,56 +1,55 @@
 {
- "generated_at": "2026-10-13T00:53:45Z",
+ "generated_at": "2026-10-13T00:55:36Z",
  "outcomes": {
-  "running": 1,
+  "released_eligible": 23,
   "out_of_scope": 6,
   "expected_block": 2,
-  "released_eligible": 22,
   "no_decision": 5,
   "unexpected_block": 2
  },
  "data_quality": {
   "total_pipelines": 38,
-  "valid_runs": 26,
+  "valid_runs": 27,
   "no_decision": 5,
   "out_of_scope": 6,
-  "running": 1
+  "running": 0
  },
  "kpis": {
-  "valid_runs": 26,
+  "valid_runs": 27,
   "correct_blocks": 2,
   "unexpected_blocks": 2,
   "unexpected_passes": 0,
-  "eligible_releases": 22,
+  "eligible_releases": 23,
   "stages": {
    "eligible": 7,
-   "awaiting_approval": 5,
+   "awaiting_approval": 6,
    "deployed_mock": 6,
    "artifact_verified": 4,
    "runtime_verify_failed": 0,
    "deployed": 0,
    "runtime_verified": 0
   },
-  "median_witness_seconds": 77.0,
-  "median_pipeline_seconds": 351.0
+  "median_witness_seconds": 76.9,
+  "median_pipeline_seconds": 334.8
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 3,
   "METRICS_UNVERIFIABLE": 1
  },
  "scenario_matrix": {
+  "d": {
+   "released_eligible": 23,
+   "unexpected_block": 2
+  },
   "regression": {
    "expected_block": 2
-  },
-  "d": {
-   "released_eligible": 22,
-   "unexpected_block": 2
   }
  },
  "latest_by_scenario": {
   "a": null,
   "b-stale": null,
   "c": null,
-  "d": 2940522083,
+  "d": 2940566787,
   "regression": 2936306584
  },
  "reverification": {
@@ -71,9 +70,9 @@
    "variants": [
     "D"
    ],
-   "runs": 23,
-   "evidenced_in": 23,
-   "observed_in": 23,
+   "runs": 24,
+   "evidenced_in": 24,
+   "observed_in": 24,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -183,19 +182,19 @@
    "created_at": "2026-10-13T00:50:39.033Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 181.5,
+   "wall_seconds": 274.9,
    "stage_seconds": {
     "package": 64.0,
     "evaluate": 43.2,
     "secure": 32.1,
-    "bind": 3.1,
-    "witness": null
+    "bind": 17.5,
+    "witness": 72.8
    },
-   "deploy_job_state": "created",
-   "outcome": "running",
-   "trust": null,
-   "trust_label": null,
-   "release_stage": null,
+   "deploy_job_state": "manual",
+   "outcome": "released_eligible",
+   "trust": "trusted",
+   "trust_label": "Trusted / Verified",
+   "release_stage": "awaiting_approval",
    "signature": null,
    "provenance": null,
    "runtime_verification": null,
@@ -205,7 +204,9 @@
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
+    "bind-evidence",
     "evaluate-model",
+    "gasket-witness",
     "gemnasium-python-dependency_scanning",
     "package-image",
     "secret_detection",
@@ -215,8 +216,20 @@
    ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126552493",
-   "reason_codes": null,
-   "checks": null,
+   "reason_codes": [],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
    "actor": {
     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
     "name": "siva surya",
@@ -224,9 +237,9 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": null,
-   "evidenced_model_sha256": null,
-   "observed_model_sha256": null,
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126552491",
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -236,11 +249,30 @@
      "1": 0.8383
     }
    },
-   "thresholds": null,
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
    "impact": null,
-   "has_decision": false,
-   "has_manifest": false,
+   "has_decision": true,
+   "has_manifest": true,
    "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17126552491,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126552491/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940566787/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17126552491,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126552491/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940566787/manifest.json"
+    },
     {
      "key": "metrics",
      "label": "Metrics",
@@ -5153,7 +5185,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:53:45Z",
+  "taken_at": "2026-10-13T00:55:36Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
