@@ -1,8 +1,7 @@
 {
- "generated_at": "2026-10-13T01:30:10Z",
+ "generated_at": "2026-10-13T01:33:02Z",
  "outcomes": {
-  "running": 1,
-  "released_eligible": 25,
+  "released_eligible": 26,
   "out_of_scope": 6,
   "expected_block": 2,
   "no_decision": 5,
@@ -10,20 +9,20 @@
  },
  "data_quality": {
   "total_pipelines": 41,
-  "valid_runs": 29,
+  "valid_runs": 30,
   "no_decision": 5,
   "out_of_scope": 6,
-  "running": 1
+  "running": 0
  },
  "kpis": {
-  "valid_runs": 29,
+  "valid_runs": 30,
   "correct_blocks": 2,
   "unexpected_blocks": 2,
   "unexpected_passes": 0,
-  "eligible_releases": 25,
+  "eligible_releases": 26,
   "stages": {
    "eligible": 7,
-   "awaiting_approval": 6,
+   "awaiting_approval": 7,
    "deployed_mock": 6,
    "artifact_verified": 6,
    "runtime_verify_failed": 0,
@@ -31,7 +30,7 @@
    "runtime_verified": 0
   },
   "median_witness_seconds": 77.0,
-  "median_pipeline_seconds": 374.2
+  "median_pipeline_seconds": 370.6
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 3,
@@ -39,7 +38,7 @@
  },
  "scenario_matrix": {
   "d": {
-   "released_eligible": 25,
+   "released_eligible": 26,
    "unexpected_block": 2
   },
   "regression": {
@@ -50,7 +49,7 @@
   "a": null,
   "b-stale": null,
   "c": null,
-  "d": 2940618743,
+  "d": 2940632855,
   "regression": 2936306584
  },
  "reverification": {
@@ -71,9 +70,9 @@
    "variants": [
     "D"
    ],
-   "runs": 26,
-   "evidenced_in": 26,
-   "observed_in": 26,
+   "runs": 27,
+   "evidenced_in": 27,
+   "observed_in": 27,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -208,19 +207,19 @@
    "created_at": "2026-10-13T01:27:39.421Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": 148.7,
+   "wall_seconds": 298.9,
    "stage_seconds": {
     "package": 70.3,
-    "evaluate": 0.5,
-    "secure": 0.4,
-    "bind": null,
-    "witness": null
+    "evaluate": 39.1,
+    "secure": 33.8,
+    "bind": 18.5,
+    "witness": 87.8
    },
-   "deploy_job_state": "created",
-   "outcome": "running",
-   "trust": null,
-   "trust_label": null,
-   "release_stage": null,
+   "deploy_job_state": "manual",
+   "outcome": "released_eligible",
+   "trust": "trusted",
+   "trust_label": "Trusted / Verified",
+   "release_stage": "awaiting_approval",
    "signature": null,
    "provenance": null,
    "runtime_verification": null,
@@ -230,16 +229,32 @@
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
+    "gasket-witness",
     "gemnasium-python-dependency_scanning",
     "package-image",
     "secret_detection",
+    "security-scan",
     "train-models",
     "unit-tests"
    ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126960572",
-   "reason_codes": null,
-   "checks": null,
+   "reason_codes": [],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
    "actor": {
     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1791849613",
     "name": "siva surya",
@@ -247,15 +262,51 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": null,
-   "evidenced_model_sha256": null,
-   "observed_model_sha256": null,
-   "metrics": null,
-   "thresholds": null,
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126960570",
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
    "impact": null,
-   "has_decision": false,
-   "has_manifest": false,
-   "evidence_links": []
+   "has_decision": true,
+   "has_manifest": true,
+   "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17126960570,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126960570/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940632855/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17126960570,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126960570/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940632855/manifest.json"
+    },
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17126960567,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126960567/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940632855/metrics.json"
+    }
+   ]
   },
   {
    "id": 2940618743,
@@ -6123,7 +6174,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T01:30:10Z",
+  "taken_at": "2026-10-13T01:33:02Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
