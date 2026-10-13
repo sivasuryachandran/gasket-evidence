@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T02:00:07Z",
+ "generated_at": "2026-10-13T02:02:13Z",
  "outcomes": {
   "released_eligible": 27,
   "out_of_scope": 6,
@@ -22,9 +22,9 @@
   "eligible_releases": 27,
   "stages": {
    "eligible": 7,
-   "awaiting_approval": 7,
+   "awaiting_approval": 6,
    "deployed_mock": 6,
-   "artifact_verified": 7,
+   "artifact_verified": 8,
    "runtime_verify_failed": 0,
    "deployed": 0,
    "runtime_verified": 0
@@ -205,9 +205,9 @@
    "mr_iid": null,
    "sha": "ca737649034f14e491ea74c9a22e720415ee7a14",
    "created_at": "2026-10-13T01:51:04.726Z",
-   "status": "manual",
+   "status": "running",
    "scenario": "d",
-   "wall_seconds": 482.2,
+   "wall_seconds": 630.2,
    "stage_seconds": {
     "package": 72.0,
     "evaluate": 41.3,
@@ -215,11 +215,11 @@
     "bind": 17.3,
     "witness": 115.4
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "success",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
+   "release_stage": "artifact_verified",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -360,28 +360,55 @@
      }
     ]
    },
-   "runtime_verification": null,
+   "runtime_verification": {
+    "kind": "artifact_integrity",
+    "verified": true,
+    "failure": null,
+    "expected_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "observed_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "signature_verified": true,
+    "artifact_url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2940665402/model.pkl",
+    "note": "Runtime verified: the deployed artifact's digest matches the signed evidence. (Artifact-integrity check, not a live-inference test; deploy is still mock.)"
+   },
    "reverification": null,
    "model_registration": null,
-   "release": null,
+   "release": {
+    "pipeline": "2940665402",
+    "sign_job_id": "17127162465",
+    "tag": "release-p2940665402"
+   },
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
     "bind-evidence",
     "dependency-scanning",
     "dependency-scanning:python-resolution",
+    "deploy-production",
     "evaluate-model",
     "gasket-witness",
     "package-image",
     "pages",
-    "publish-public-dashboard",
+    "release-evidence",
+    "runtime-verify",
     "secret_detection",
     "security-scan",
     "sign-evidence",
     "train-models",
     "unit-tests"
    ],
-   "deployment": null,
+   "deployment": {
+    "mock": true,
+    "mode": "mock",
+    "executed_by": "chandran.sivasurya",
+    "approval": "not recorded",
+    "published_artifact": {
+     "bytes": 1052,
+     "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+     "url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2940665402/model.pkl"
+    },
+    "candidate_verified": false,
+    "production_verified": false
+   },
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17127162466",
    "reason_codes": [],
    "checks": {
@@ -449,6 +476,14 @@
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940665402/metrics.json"
     },
     {
+     "key": "deployment",
+     "label": "Deployment receipt",
+     "file": "deployment.json",
+     "job_id": 17127162466,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17127162466/artifacts/raw/deployment.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940665402/deployment.json"
+    },
+    {
      "key": "signature",
      "label": "Signature record",
      "file": "evidence-signature.json",
@@ -487,6 +522,14 @@
      "job_id": 17127162465,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17127162465/artifacts/raw/provenance.cosign.bundle",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940665402/provenance.cosign.bundle"
+    },
+    {
+     "key": "runtime",
+     "label": "Runtime verification",
+     "file": "runtime-verification.json",
+     "job_id": 17127162467,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17127162467/artifacts/raw/runtime-verification.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940665402/runtime-verification.json"
     }
    ]
   },
@@ -6692,7 +6735,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T02:00:07Z",
+  "taken_at": "2026-10-13T02:02:13Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -6819,19 +6862,19 @@
    "key": "package_registry",
    "label": "Package registry",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/packages",
-   "evidence": "model artifact published by pipeline 2940632855"
+   "evidence": "model artifact published by pipeline 2940665402"
   },
   {
    "key": "environments",
    "label": "Environments and deployments",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/environments",
-   "evidence": "deploy job succeeded in pipeline 2940632855"
+   "evidence": "deploy job succeeded in pipeline 2940665402"
   },
   {
    "key": "releases",
    "label": "Releases",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2940632855",
-   "evidence": "release release-p2940632855"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2940665402",
+   "evidence": "release release-p2940665402"
   }
  ],
  "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket"
