@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T00:01:57Z",
+ "generated_at": "2026-10-13T00:03:03Z",
  "outcomes": {
   "released_eligible": 17,
   "no_decision": 4,
@@ -123,9 +123,9 @@
    "mr_iid": null,
    "sha": "09ca32dffbcc1dd7e2633f5fb4301da4d0f08768",
    "created_at": "2026-10-12T23:56:19.058Z",
-   "status": "running",
+   "status": "manual",
    "scenario": "d",
-   "wall_seconds": 329.6,
+   "wall_seconds": 391.3,
    "stage_seconds": {
     "package": 85.1,
     "evaluate": 42.1,
@@ -290,6 +290,8 @@
     "gasket-witness",
     "gemnasium-python-dependency_scanning",
     "package-image",
+    "pages",
+    "publish-public-dashboard",
     "secret_detection",
     "security-scan",
     "sign-evidence",
@@ -3296,7 +3298,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:01:57Z",
+  "taken_at": "2026-10-13T00:03:03Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
