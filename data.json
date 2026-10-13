@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T00:16:04Z",
+ "generated_at": "2026-10-13T00:16:59Z",
  "outcomes": {
   "running": 4,
   "released_eligible": 17,
@@ -126,7 +126,7 @@
    "created_at": "2026-10-13T00:16:01.036Z",
    "status": "running",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 45.6,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -147,7 +147,10 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "impact-check",
+    "train-models"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "reason_codes": null,
@@ -164,10 +167,37 @@
    "observed_model_sha256": null,
    "metrics": null,
    "thresholds": null,
-   "impact": null,
+   "impact": {
+    "changed_paths": [
+     "demo-model/train.py"
+    ],
+    "commit_sha": "6dca5069d2533b6cc5b72a8e6642729ef2640617",
+    "duo_available": false,
+    "overridden": false,
+    "reason": "No Duo opinion was available; deterministic analysis alone was used.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "model"
+    ]
+   },
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17126173387,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126173387/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511602/impact-final.json"
+    }
+   ]
   },
   {
    "id": 2940511532,
@@ -179,7 +209,7 @@
    "created_at": "2026-10-13T00:15:58.653Z",
    "status": "running",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 40.9,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -200,7 +230,10 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "impact-check",
+    "train-models"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "reason_codes": null,
@@ -217,10 +250,37 @@
    "observed_model_sha256": null,
    "metrics": null,
    "thresholds": null,
-   "impact": null,
+   "impact": {
+    "changed_paths": [
+     "demo-model/train.py"
+    ],
+    "commit_sha": "7bbaacac3850028c3058df33d674caeacad90e9f",
+    "duo_available": false,
+    "overridden": false,
+    "reason": "No Duo opinion was available; deterministic analysis alone was used.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "model"
+    ]
+   },
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17126172916,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126172916/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511532/impact-final.json"
+    }
+   ]
   },
   {
    "id": 2940511465,
@@ -232,7 +292,7 @@
    "created_at": "2026-10-13T00:15:56.379Z",
    "status": "running",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 39.7,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -253,7 +313,10 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "impact-check",
+    "train-models"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "reason_codes": null,
@@ -270,10 +333,32 @@
    "observed_model_sha256": null,
    "metrics": null,
    "thresholds": null,
-   "impact": null,
+   "impact": {
+    "changed_paths": [
+     "docs/DEMO_MR_A.md"
+    ],
+    "commit_sha": "8957539405059715c6c4745953fddaafcc98c0e9",
+    "duo_available": false,
+    "overridden": false,
+    "reason": "No Duo opinion was available; deterministic analysis alone was used.",
+    "required_evidence": [],
+    "risk_level": "low",
+    "scope": [
+     "documentation-only"
+    ]
+   },
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17126172300,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126172300/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940511465/impact-final.json"
+    }
+   ]
   },
   {
    "id": 2940511358,
@@ -285,7 +370,7 @@
    "created_at": "2026-10-13T00:15:54.506Z",
    "status": "running",
    "scenario": "d",
-   "wall_seconds": null,
+   "wall_seconds": 41.9,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -306,7 +391,11 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "gemnasium-python-dependency_scanning",
+    "secret_detection",
+    "train-models"
+   ],
    "deployment": null,
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126171768",
    "reason_codes": null,
@@ -3657,7 +3746,7 @@
  },
  "snapshot": {
   "date": "2026-10-13",
-  "taken_at": "2026-10-13T00:16:04Z",
+  "taken_at": "2026-10-13T00:16:59Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -3744,8 +3833,8 @@
   {
    "key": "security_scans",
    "label": "Secret / dependency scanning",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940468142",
-   "evidence": "ran in pipeline 2940468142"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940511358",
+   "evidence": "ran in pipeline 2940511358"
   },
   {
    "key": "signing",
