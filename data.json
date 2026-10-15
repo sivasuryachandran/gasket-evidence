@@ -1,18 +1,19 @@
 {
- "generated_at": "2026-10-15T15:07:13Z",
+ "generated_at": "2026-10-15T17:14:48Z",
  "outcomes": {
+  "out_of_scope": 11,
+  "running": 1,
   "released_eligible": 34,
-  "out_of_scope": 10,
   "no_decision": 6,
   "expected_block": 4,
   "unexpected_block": 1
  },
  "data_quality": {
-  "total_pipelines": 55,
+  "total_pipelines": 57,
   "valid_runs": 39,
   "no_decision": 6,
-  "out_of_scope": 10,
-  "running": 0
+  "out_of_scope": 11,
+  "running": 1
  },
  "kpis": {
   "valid_runs": 39,
@@ -255,6 +256,158 @@
   ]
  },
  "runs": [
+  {
+   "id": 2952086738,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952086738",
+   "ref": "refs/workloads/08b2328ae82",
+   "kind": "duo_workload",
+   "mr_iid": null,
+   "sha": "cb5bbc28bc6c3fa8ccee9aa2b978119d8d96cc13",
+   "created_at": "2026-10-15T17:14:45.298Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "out_of_scope",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": null,
+    "image_digest": null,
+    "image_digest_observed": null,
+    "data_sha256": null,
+    "policy_id": null,
+    "policy_sha256": null,
+    "commit_sha": null,
+    "release_id": null
+   },
+   "job_count": 1,
+   "failed_jobs": [],
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43303860/custom-flow-2.png?v=1791851705",
+    "name": "Gasket Artifact Impact Analyst",
+    "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "kind": "duo"
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [],
+   "commit_title": "Daily dashboard refresh: refresh-public-dashboard runs only in a schedule that sets GASKET_SCHEDULE=refresh; a snapshot it takes is labelled Refreshed daily",
+   "mr": {
+    "kind": "mr",
+    "iid": 9,
+    "how": "the head commit of this merge request"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "seal": null
+  },
+  {
+   "id": 2952086342,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952086342",
+   "ref": "refs/merge-requests/9/head",
+   "kind": "merge_request",
+   "mr_iid": 9,
+   "sha": "cb5bbc28bc6c3fa8ccee9aa2b978119d8d96cc13",
+   "created_at": "2026-10-15T17:14:36.081Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": null,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": null,
+    "image_digest": null,
+    "image_digest_observed": null,
+    "data_sha256": null,
+    "policy_id": null,
+    "policy_sha256": null,
+    "commit_sha": null,
+    "release_id": null
+   },
+   "job_count": 9,
+   "failed_jobs": [],
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [],
+   "commit_title": "Daily dashboard refresh: refresh-public-dashboard runs only in a schedule that sets GASKET_SCHEDULE=refresh; a snapshot it takes is labelled Refreshed daily",
+   "mr": {
+    "kind": "mr",
+    "iid": 9,
+    "how": "a merge request pipeline"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "seal": null
+  },
   {
    "id": 2949103483,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949103483",
@@ -21977,6 +22130,16 @@
      "merge_requests": [],
      "title": "Test: the Verify at source buttons keep download and view labelled separately"
     },
+    "cb5bbc28bc6c3fa8ccee9aa2b978119d8d96cc13": {
+     "merge_requests": [
+      {
+       "iid": 9,
+       "merge_commit_sha": null,
+       "state": "opened"
+      }
+     ],
+     "title": "Daily dashboard refresh: refresh-public-dashboard runs only in a schedule that sets GASKET_SCHEDULE=refresh; a snapshot it takes is labelled Refreshed daily"
+    },
     "d9cc17192bc23a2d9bf8506ee5850619ec032c5d": {
      "merge_requests": [],
      "title": "Impact analysis: model and ambiguous scopes also require SBOM evidence (matches the release policy); replay of 16 recorded decisions shows no outcome changes"
@@ -22022,31 +22185,6 @@
     }
    },
    "recent": [
-    {
-     "message": "Publish MR evidence page with Duo vs Witness; document Duo, disclosures, limits\n\nPages job now also runs on merge-request pipelines under mr-<IID>, includes\nthe impact-check result, and links the exact Witness job and merge request.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "ec41b3e24da96022b76cec7a14837a91a6a34732",
-     "title": "Publish MR evidence page with Duo vs Witness; document Duo, disclosures, limits"
-    },
-    {
-     "message": "Redesign the public evidence page as an audit-style report\n\nVerdict banner, expected-vs-observed hash card, pipeline stepper, checks grid,\nDuo-vs-Witness comparison and policy meters. Layout informed by a Stitch\ndesign; all values come from the manifest and decision, and the unsupported\nattestation/signing wording from the mock-up is not used. Self-contained page\nwith no scripts or external assets. Override reasons now read as plain text.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "c0510914e250f7c5aa9cafcce8fdc5d5e527b7d4",
-     "title": "Redesign the public evidence page as an audit-style report"
-    },
-    {
-     "message": "Apply Gasket logo and its navy/teal/blue palette to the evidence page and README\n\nMark and favicon are embedded as base64 so the page stays self-contained. The\npage theme now uses the logo's colours (navy ink, teal pass, blue accent) in\nlight and dark mode, with no black.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "5ad501bd6f9a4b8ad7c9e7e9e899df2fa6cea9c9",
-     "title": "Apply Gasket logo and its navy/teal/blue palette to the evidence page and README"
-    },
-    {
-     "message": "Add CI-built dashboard on a single combined Pages deployment\n\nA collector reads pipelines, jobs and single-file evidence artifacts via\nCI_JOB_TOKEN; runs are classified by the Witness decision (expected block,\nunexpected block, no decision, ...) rather than pipeline colour. The site has\na release-result hero, overview charts, run history, model/metrics analysis\nand Duo-vs-Witness counts, plus an evidence page for every run and stable\nlatest/<scenario>/ and mr/<iid>/ pages.\n\nOne pages job now publishes everything (main pushes and schedule only).\nBuild jobs are guarded against scheduled pipelines, and evidence artifacts get\na 90-day expiry. Theme variables move to brand.py so the dashboard and\nevidence pages share one palette.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "1b1e60f6ba9e02579769850e024d56cc1eec604b",
-     "title": "Add CI-built dashboard on a single combined Pages deployment"
-    },
-    {
-     "message": "Document the live dashboard and its data caveats in the README\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "743423f352792292c7b0b43b28cd5137404eb0c4",
-     "title": "Document the live dashboard and its data caveats in the README"
-    },
     {
      "message": "Stamp dashboard 'data as of' before collection starts\n\nThe timestamp was taken after collection, so pipelines created mid-build were\nmissing while the page claimed a later snapshot time.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
      "sha": "d6a98fb31db28e812c9051936dc9e1175abe02c1",
@@ -22503,11 +22641,6 @@
      "title": "Restore equal-opportunity calibration in build_variant_d"
     },
     {
-     "message": "Merge branch 'repair/issue-3' into 'main'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
-     "sha": "254e3554cba41da52cba622db6aad18d3bde1270",
-     "title": "Merge branch 'repair/issue-3' into 'main'"
-    },
-    {
      "message": "Merge branch 'feat/dashboard-v3' into 'main'\n\nDashboard v3: product redesign, records-based linking, LICENSE as documentation\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!8",
      "sha": "4f32fee8c31aaade196e4c1d166c31cae15f45c4",
      "title": "Merge branch 'feat/dashboard-v3' into 'main'"
@@ -22521,6 +22654,36 @@
      "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
      "sha": "d1c96a188f8aa31a506d4e21d19a76e89b022967",
      "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
+    },
+    {
+     "message": "Pre-freeze: chain counts the recorded block as step 1, ledger Scope column with model-affecting default, guard-failure labels, attention items for repair MRs, unrepaired blocks and failed guards, Policy guard status, collector retries read timeouts\n",
+     "sha": "e99e810fd09cec2c2bbf4e6af6d6d3e91f07ef90",
+     "title": "Pre-freeze: chain counts the recorded block as step 1, ledger Scope column with model-affecting default, guard-failure labels, attention items for repair MRs, unrepaired blocks and failed guards, Policy guard status, collector retries read timeouts"
+    },
+    {
+     "message": "Enterprise additions: live inference check, SBOM and scan summary on the Release, model cards, signed snapshot data, CSV and JSON exports, separation-of-duties flag\n",
+     "sha": "bb5930b25869222ebcc4e20c6d176e9ad66fc8d4",
+     "title": "Enterprise additions: live inference check, SBOM and scan summary on the Release, model cards, signed snapshot data, CSV and JSON exports, separation-of-duties flag"
+    },
+    {
+     "message": "Daily dashboard refresh: refresh-public-dashboard runs only in a schedule that sets GASKET_SCHEDULE=refresh; a snapshot it takes is labelled Refreshed daily\n",
+     "sha": "cb5bbc28bc6c3fa8ccee9aa2b978119d8d96cc13",
+     "title": "Daily dashboard refresh: refresh-public-dashboard runs only in a schedule that sets GASKET_SCHEDULE=refresh; a snapshot it takes is labelled Refreshed daily"
+    },
+    {
+     "message": "Release gate as a CI/CD component: package-image, evaluate-model, security-scan, bind-evidence and gasket-witness move to templates/release-gate; the pipeline uses it through its own commit; tests prove the resolved pipeline is unchanged\n",
+     "sha": "8d919b5766478686a1f4199104abfb5a8813b24f",
+     "title": "Release gate as a CI/CD component: package-image, evaluate-model, security-scan, bind-evidence and gasket-witness move to templates/release-gate; the pipeline uses it through its own commit; tests prove the resolved pipeline is unchanged"
+    },
+    {
+     "message": "Merge branch 'repair/issue-3' into 'main'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
+     "sha": "fec2e4dd9b9a5e741bef25e7c8e9bebf6dd0fe98",
+     "title": "Merge branch 'repair/issue-3' into 'main'"
+    },
+    {
+     "message": "Merge branch 'fix/pre-freeze' into 'main'\n\nPre-freeze: chain counts the recorded block as step 1, ledger Scope column...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!9",
+     "sha": "7881d19d1494ebf2f6ee04c8d2cc20e7342ccfbe",
+     "title": "Merge branch 'fix/pre-freeze' into 'main'"
     }
    ]
   },
@@ -22578,6 +22741,41 @@
    }
   ],
   "merge_requests": [
+   {
+    "approvals": {
+     "approved": false,
+     "approved_by": [],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "created_at": "2026-10-15T17:14:34.003Z",
+    "draft": false,
+    "head_sha": "cb5bbc28bc6c3fa8ccee9aa2b978119d8d96cc13",
+    "iid": 9,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/pre-freeze",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "main",
+    "title": "Pre-freeze: chain counts the recorded block as step 1, ledger Scope column...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/9"
+   },
    {
     "approvals": {
      "approved": true,
@@ -22962,7 +23160,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T15:07:13Z",
+  "taken_at": "2026-10-15T17:14:48Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -22983,10 +23181,12 @@
     5,
     6,
     7,
-    8
+    8,
+    9
    ],
    "issues": [],
    "run_ids": [
+    2952086342,
     2949092670,
     2949089257,
     2940692086,
@@ -23210,13 +23410,13 @@
    "key": "pipelines",
    "label": "CI/CD pipelines",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines",
-   "evidence": "45 release pipelines recorded"
+   "evidence": "46 release pipelines recorded"
   },
   {
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "8 merge requests, 4 merged"
+   "evidence": "9 merge requests, 4 merged"
   },
   {
    "key": "duo_flows",
