@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T18:40:49Z",
+ "generated_at": "2026-10-15T20:23:59Z",
  "outcomes": {
   "released_eligible": 36,
   "out_of_scope": 12,
@@ -264,9 +264,9 @@
    "mr_iid": null,
    "sha": "46b712f6f256857d27afbeb7be9740b7c66ce5c2",
    "created_at": "2026-10-15T17:58:06.840Z",
-   "status": "success",
+   "status": "running",
    "scenario": "d",
-   "wall_seconds": 2091.8,
+   "wall_seconds": 1841.3,
    "stage_seconds": {
     "package": 71.3,
     "evaluate": 29.2,
@@ -479,7 +479,6 @@
     "gasket-witness",
     "package-image",
     "pages",
-    "publish-public-dashboard",
     "release-evidence",
     "runtime-verify",
     "secret_detection",
@@ -15770,11 +15769,11 @@
    "has_decision": false,
    "has_manifest": false,
    "evidence_links": [],
-   "commit_title": "GitLab coverage strip (only stages with proof), docs for each integration and what it needs",
+   "commit_title": null,
    "mr": {
-    "kind": "direct",
+    "kind": "undetermined",
     "iid": null,
-    "how": "GitLab lists no merge request for this commit"
+    "how": "GitLab's merge request list for this commit could not be read"
    },
    "fixture": false,
    "cause": null,
@@ -15783,11 +15782,7 @@
     "job": null,
     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940445762"
    },
-   "change_scope": [
-    "pipeline",
-    "dashboard",
-    "docs"
-   ],
+   "change_scope": null,
    "seal": null,
    "model_card": null
   },
@@ -24952,22 +24947,6 @@
      ],
      "title": "Duo page: say why the Witness overrode Duo (evidence not listed, risk raised, scope differs)"
     },
-    "8f0a18ab708cb9c21121106c369aa1964063b584": {
-     "merge_requests": [],
-     "paths": [
-      "README.md",
-      "dashboard/app.js",
-      "dashboard/styles.css",
-      "docs/SETUP.md",
-      "gasket/analyze.py",
-      "gasket/collect.py",
-      "gasket/coverage.py",
-      "gasket/dashboard.py",
-      "gasket/snapshot.py",
-      "tests/test_govern.py"
-     ],
-     "title": "GitLab coverage strip (only stages with proof), docs for each integration and what it needs"
-    },
     "914bc4be8a42f6abbff1bc5dcdea98e1b85b6d3d": {
      "merge_requests": [],
      "paths": [
@@ -25140,18 +25119,7 @@
      "title": "Impact analysis: model and ambiguous scopes also require SBOM evidence (matches the release policy); replay of 16 recorded decisions shows no outcome changes"
     },
     "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a": {
-     "merge_requests": [
-      {
-       "iid": 2,
-       "merge_commit_sha": "ee44173914e68e02e1490234849721e23fc3ebf6",
-       "state": "merged"
-      },
-      {
-       "iid": 1,
-       "merge_commit_sha": "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a",
-       "state": "merged"
-      }
-     ],
+     "merge_requests": null,
      "paths": [
       "demo-model/train.py"
      ],
@@ -26188,7 +26156,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T18:40:49Z",
+  "taken_at": "2026-10-15T20:23:59Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null
@@ -27355,9 +27323,9 @@
     "created_at": "2026-10-12T23:41:33.201Z",
     "ref": "main",
     "commit": "8f0a18ab708c",
-    "commit_title": "GitLab coverage strip (only stages with proof), docs for each integration and what it needs",
-    "scope": "pipeline, dashboard, docs",
-    "merge_request": "direct to main",
+    "commit_title": "",
+    "scope": "not recorded",
+    "merge_request": "not determined",
     "decision": "No decision",
     "reason_codes": "",
     "signed": "no",
