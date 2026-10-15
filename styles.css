@@ -240,3 +240,7 @@ table.t.ledger td:nth-child(2){max-width:200px}
 .ev{font-size:12.5px;padding:6px}
 @media (max-width:900px){.ev.none{display:none}}
 @media (max-width:640px){.tabs{flex-wrap:wrap;overflow-x:visible}}
+
+.exports{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:4px 0 12px}
+.exports .btn{padding:5px 12px;font-size:13px}
+.exports .sub{margin-right:4px}
