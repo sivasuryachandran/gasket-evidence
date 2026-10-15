@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T02:35:22Z",
+ "generated_at": "2026-10-15T02:40:02Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -26,8 +26,8 @@
     "session_url": null,
     "session_flow": "Release Repair"
    },
-   "corrected_run": 2949089257,
-   "corrected_outcome": "running",
+   "corrected_run": 2949088932,
+   "corrected_outcome": "released_eligible",
    "release_run": null,
    "release_stage": null,
    "deployment": null
@@ -237,22 +237,45 @@
    },
    "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255"
   },
-  "2949089257": {
-   "id": 2949089257,
-   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949089257",
-   "ref": "refs/merge-requests/7/head",
+  "2949088932": {
+   "id": 2949088932,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949088932",
+   "ref": "repair/issue-3",
    "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
-   "created_at": "2026-10-15T02:35:11.505Z",
-   "outcome": "running",
-   "reason_codes": null,
-   "release_stage": null,
+   "created_at": "2026-10-15T02:35:03.737Z",
+   "outcome": "released_eligible",
+   "reason_codes": [],
+   "release_stage": "eligible",
    "deployment": null,
-   "evidenced_model_sha256": null,
-   "observed_model_sha256": null,
-   "metrics": null,
-   "thresholds": null,
-   "checks": null,
-   "witness_job_url": null
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188512830"
   }
  }
 }

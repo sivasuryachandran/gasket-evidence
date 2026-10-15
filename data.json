@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-10-15T02:35:22Z",
+ "generated_at": "2026-10-15T02:40:02Z",
  "outcomes": {
-  "running": 3,
-  "out_of_scope": 9,
-  "released_eligible": 31,
-  "expected_block": 2,
-  "no_decision": 5,
-  "unexpected_block": 2
+  "out_of_scope": 10,
+  "running": 1,
+  "no_decision": 6,
+  "released_eligible": 32,
+  "unexpected_block": 3,
+  "expected_block": 2
  },
  "data_quality": {
-  "total_pipelines": 52,
-  "valid_runs": 35,
-  "no_decision": 5,
-  "out_of_scope": 9,
-  "running": 3
+  "total_pipelines": 54,
+  "valid_runs": 37,
+  "no_decision": 6,
+  "out_of_scope": 10,
+  "running": 1
  },
  "kpis": {
-  "valid_runs": 35,
+  "valid_runs": 37,
   "correct_blocks": 2,
-  "unexpected_blocks": 2,
+  "unexpected_blocks": 3,
   "unexpected_passes": 0,
-  "eligible_releases": 31,
+  "eligible_releases": 32,
   "stages": {
-   "eligible": 8,
+   "eligible": 9,
    "awaiting_approval": 6,
    "deployed_mock": 6,
    "artifact_verified": 11,
@@ -31,16 +31,16 @@
    "runtime_verified": 0
   },
   "median_witness_seconds": 79.9,
-  "median_pipeline_seconds": 440.6
+  "median_pipeline_seconds": 388.7
  },
  "reason_codes": {
-  "FAIRNESS_GAP_EXCEEDED": 3,
+  "FAIRNESS_GAP_EXCEEDED": 4,
   "METRICS_UNVERIFIABLE": 1
  },
  "scenario_matrix": {
   "d": {
-   "released_eligible": 31,
-   "unexpected_block": 2
+   "released_eligible": 32,
+   "unexpected_block": 3
   },
   "regression": {
    "expected_block": 2
@@ -50,7 +50,7 @@
   "a": null,
   "b-stale": null,
   "c": null,
-  "d": 2948963094,
+  "d": 2949088932,
   "regression": 2936306584
  },
  "reverification": {
@@ -72,9 +72,9 @@
    "variants": [
     "D"
    ],
-   "runs": 32,
-   "evidenced_in": 32,
-   "observed_in": 32,
+   "runs": 33,
+   "evidenced_in": 33,
+   "observed_in": 33,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -93,9 +93,9 @@
    "variants": [
     "D"
    ],
-   "runs": 3,
-   "evidenced_in": 3,
-   "observed_in": 3,
+   "runs": 4,
+   "evidenced_in": 4,
+   "observed_in": 4,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7842,
@@ -112,24 +112,24 @@
   }
  ],
  "duo": {
-  "assessments": 4,
+  "assessments": 5,
   "risk": {
    "agreed": 2,
-   "witness_stricter": 2,
+   "witness_stricter": 3,
    "witness_looser": 0
   },
   "evidence": {
    "agreed": 1,
-   "witness_added": 3,
+   "witness_added": 4,
    "categories": {
-    "accuracy": 1,
+    "accuracy": 2,
     "artifact_identity": 1,
-    "fairness": 1,
-    "sbom": 3,
+    "fairness": 2,
+    "sbom": 4,
     "security": 3
    }
   },
-  "scope_differs": 1,
+  "scope_differs": 2,
   "percentages_shown": false,
   "items": [
    {
@@ -224,25 +224,108 @@
     "session": "not recorded",
     "session_url": null,
     "session_flow": "Impact Analyst"
+   },
+   {
+    "mr_iid": 8,
+    "pipeline_id": 2949092670,
+    "duo_scope": [
+     "ambiguous",
+     "policy",
+     "serving"
+    ],
+    "witness_scope": [
+     "ambiguous",
+     "documentation-only"
+    ],
+    "duo_risk": "medium",
+    "witness_risk": "high",
+    "risk_result": "witness_stricter",
+    "evidence_witness_added": [
+     "accuracy",
+     "fairness",
+     "sbom"
+    ],
+    "evidence_duo_only": [
+     "policy_identity"
+    ],
+    "scope_differs": true,
+    "session": "9504680",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9504680",
+    "session_flow": "Impact Analyst"
    }
   ]
  },
  "runs": [
   {
-   "id": 2949089257,
-   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949089257",
-   "ref": "refs/merge-requests/7/head",
-   "kind": "merge_request",
-   "mr_iid": 7,
-   "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
-   "created_at": "2026-10-15T02:35:11.505Z",
-   "status": "running",
+   "id": 2949092728,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949092728",
+   "ref": "refs/workloads/c2964f9f6ef",
+   "kind": "duo_workload",
+   "mr_iid": null,
+   "sha": "213409317011644a9e571a0fc56377107ec6c2cf",
+   "created_at": "2026-10-15T02:36:47.692Z",
+   "status": "success",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 66.1,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
     "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "out_of_scope",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "workload"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43303860/custom-flow-2.png?v=1791851705",
+    "name": "Gasket Artifact Impact Analyst",
+    "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "kind": "duo"
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": []
+  },
+  {
+   "id": 2949092670,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949092670",
+   "ref": "refs/merge-requests/8/head",
+   "kind": "merge_request",
+   "mr_iid": 8,
+   "sha": "213409317011644a9e571a0fc56377107ec6c2cf",
+   "created_at": "2026-10-15T02:36:44.675Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": 184.2,
+   "stage_seconds": {
+    "package": 71.7,
+    "evaluate": 12.2,
+    "secure": 12.1,
     "bind": null,
     "witness": null
    },
@@ -259,7 +342,153 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "dependency-scanning:python-resolution",
+    "impact-check",
+    "package-image",
+    "train-models",
+    "unit-tests"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": {
+    "agent_session": "9504680",
+    "agent_session_source": "GitLab system note: started session",
+    "changed_paths": [
+     "README.md",
+     "dashboard/app.js",
+     "dashboard/fonts/LICENSE.txt",
+     "dashboard/fonts/inter-latin-400-normal.woff2",
+     "dashboard/fonts/inter-latin-500-normal.woff2",
+     "dashboard/fonts/inter-latin-600-normal.woff2",
+     "dashboard/fonts/inter-latin-700-normal.woff2",
+     "dashboard/fonts/public-sans-latin-400-normal.woff2",
+     "dashboard/fonts/public-sans-latin-600-normal.woff2",
+     "dashboard/index.html",
+     "dashboard/styles.css",
+     "docs/AGENTS.md",
+     "gasket/agents.py",
+     "gasket/analyze.py",
+     "gasket/attention.py",
+     "gasket/brand.py",
+     "gasket/chain.py",
+     "gasket/collect.py",
+     "gasket/controls.py",
+     "gasket/coverage.py",
+     "gasket/dashboard.py",
+     "gasket/impact.py",
+     "gasket/people.py",
+     "gasket/policyview.py",
+     "gasket/records.py",
+     "gasket/seal.py",
+     "gasket/snapshot.py",
+     "tests/test_chain.py",
+     "tests/test_design_rules.py",
+     "tests/test_export.py",
+     "tests/test_impact.py",
+     "tests/test_records.py",
+     "tests/test_theme.py",
+     "tests/test_views.py"
+    ],
+    "commit_sha": "213409317011644a9e571a0fc56377107ec6c2cf",
+    "duo_available": true,
+    "duo_reason": "The diff was truncated, so only 6 of 34 changed files were visible. The MR also changes how LICENSE is classified for scope, which is policy-adjacent and could not be verified. Scope is marked ambiguous rather than guessed lower.",
+    "duo_required_evidence": [
+     "artifact_identity",
+     "policy_identity",
+     "security"
+    ],
+    "duo_risk_level": "medium",
+    "duo_scope": [
+     "ambiguous",
+     "policy",
+     "serving"
+    ],
+    "overridden": true,
+    "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous, documentation-only (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, policy, serving, risk medium, evidence: artifact_identity, policy_identity, security. The stricter, deterministic requirement wins.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "policy_identity",
+     "sbom",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "ambiguous",
+     "documentation-only"
+    ],
+    "unsupported_duo_evidence": []
+   },
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17188534739,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188534739/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949092670/impact-final.json"
+    }
+   ]
+  },
+  {
+   "id": 2949089257,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949089257",
+   "ref": "refs/merge-requests/7/head",
+   "kind": "merge_request",
+   "mr_iid": 7,
+   "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
+   "created_at": "2026-10-15T02:35:11.505Z",
+   "status": "failed",
+   "scenario": "d",
+   "wall_seconds": 211.0,
+   "stage_seconds": {
+    "package": 72.1,
+    "evaluate": 40.4,
+    "secure": 37.9,
+    "bind": 17.9,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "no_decision",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
+    "impact-check",
+    "package-image",
+    "repair-scope",
+    "security-scan",
+    "train-models",
+    "unit-tests"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "reason_codes": null,
@@ -274,12 +503,53 @@
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
-   "metrics": null,
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
    "thresholds": null,
-   "impact": null,
+   "impact": {
+    "changed_paths": [],
+    "commit_sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
+    "duo_available": false,
+    "overridden": false,
+    "reason": "No Duo opinion was available; deterministic analysis alone was used.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "ambiguous"
+    ]
+   },
    "has_decision": false,
    "has_manifest": false,
-   "evidence_links": []
+   "evidence_links": [
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17188514494,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188514494/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949089257/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17188514489,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188514489/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949089257/impact-final.json"
+    }
+   ]
   },
   {
    "id": 2949088932,
@@ -290,20 +560,20 @@
    "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
    "created_at": "2026-10-15T02:35:03.737Z",
    "status": "running",
-   "scenario": null,
-   "wall_seconds": null,
+   "scenario": "d",
+   "wall_seconds": 299.4,
    "stage_seconds": {
-    "package": null,
-    "evaluate": null,
-    "secure": null,
-    "bind": null,
-    "witness": null
+    "package": 72.0,
+    "evaluate": 39.2,
+    "secure": 40.4,
+    "bind": 18.1,
+    "witness": 85.8
    },
    "deploy_job_state": null,
-   "outcome": "running",
-   "trust": null,
-   "trust_label": null,
-   "release_stage": null,
+   "outcome": "released_eligible",
+   "trust": "trusted",
+   "trust_label": "Trusted / Verified",
+   "release_stage": "eligible",
    "signature": null,
    "provenance": null,
    "runtime_verification": null,
@@ -312,11 +582,31 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
+    "gasket-witness",
+    "package-image",
+    "security-scan",
+    "train-models",
+    "unit-tests"
+   ],
    "deployment": null,
    "deploy_job_url": null,
-   "reason_codes": null,
-   "checks": null,
+   "reason_codes": [],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
    "actor": {
     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43260982/custom-flow-6.png?v=1792031695",
     "name": "Gasket Release Repair",
@@ -324,15 +614,51 @@
     "web_url": "https://gitlab.com/ai-gasket-release-repair-gitlab-ai-hackathon",
     "kind": "duo"
    },
-   "witness_job_url": null,
-   "evidenced_model_sha256": null,
-   "observed_model_sha256": null,
-   "metrics": null,
-   "thresholds": null,
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188512830",
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
    "impact": null,
-   "has_decision": false,
-   "has_manifest": false,
-   "evidence_links": []
+   "has_decision": true,
+   "has_manifest": true,
+   "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17188512830,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188512830/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949088932/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17188512830,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188512830/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949088932/manifest.json"
+    },
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17188512827,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188512827/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949088932/metrics.json"
+    }
+   ]
   },
   {
    "id": 2949088649,
@@ -342,20 +668,20 @@
    "mr_iid": null,
    "sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
    "created_at": "2026-10-15T02:34:56.520Z",
-   "status": "running",
-   "scenario": null,
-   "wall_seconds": null,
+   "status": "failed",
+   "scenario": "d",
+   "wall_seconds": 298.6,
    "stage_seconds": {
-    "package": null,
-    "evaluate": null,
-    "secure": null,
-    "bind": null,
-    "witness": null
+    "package": 76.1,
+    "evaluate": 39.0,
+    "secure": 36.5,
+    "bind": 17.8,
+    "witness": 82.0
    },
    "deploy_job_state": null,
-   "outcome": "running",
-   "trust": null,
-   "trust_label": null,
+   "outcome": "unexpected_block",
+   "trust": "policy_not_met",
+   "trust_label": "Policy not met",
    "release_stage": null,
    "signature": null,
    "provenance": null,
@@ -365,11 +691,33 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
+    "gasket-witness",
+    "package-image",
+    "security-scan",
+    "train-models",
+    "unit-tests"
+   ],
    "deployment": null,
    "deploy_job_url": null,
-   "reason_codes": null,
-   "checks": null,
+   "reason_codes": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "failed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
    "actor": {
     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43260982/custom-flow-6.png?v=1792031695",
     "name": "Gasket Release Repair",
@@ -377,15 +725,51 @@
     "web_url": "https://gitlab.com/ai-gasket-release-repair-gitlab-ai-hackathon",
     "kind": "duo"
    },
-   "witness_job_url": null,
-   "evidenced_model_sha256": null,
-   "observed_model_sha256": null,
-   "metrics": null,
-   "thresholds": null,
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188511358",
+   "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7842,
+    "fairness_gap": 0.1421,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.9888
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
    "impact": null,
-   "has_decision": false,
-   "has_manifest": false,
-   "evidence_links": []
+   "has_decision": true,
+   "has_manifest": true,
+   "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17188511358,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188511358/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949088649/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17188511358,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188511358/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949088649/manifest.json"
+    },
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17188511355,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188511355/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949088649/metrics.json"
+    }
+   ]
   },
   {
    "id": 2949085847,
@@ -395,7 +779,7 @@
    "mr_iid": null,
    "sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
    "created_at": "2026-10-15T02:33:41.411Z",
-   "status": "running",
+   "status": "success",
    "scenario": null,
    "wall_seconds": 100.4,
    "stage_seconds": {
@@ -8333,7 +8717,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T02:35:22Z",
+  "taken_at": "2026-10-15T02:40:02Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -8358,6 +8742,7 @@
    ],
    "issues": [],
    "run_ids": [
+    2949092670,
     2949089257,
     2940692086,
     2940522134,
@@ -8395,8 +8780,8 @@
     "session_url": null,
     "session_flow": "Release Repair"
    },
-   "corrected_run": 2949089257,
-   "corrected_outcome": "running",
+   "corrected_run": 2949088932,
+   "corrected_outcome": "released_eligible",
    "release_run": null,
    "release_stage": null,
    "deployment": null
@@ -8444,7 +8829,7 @@
    "key": "pipelines",
    "label": "CI/CD pipelines",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines",
-   "evidence": "43 release pipelines recorded"
+   "evidence": "44 release pipelines recorded"
   },
   {
    "key": "merge_requests",
