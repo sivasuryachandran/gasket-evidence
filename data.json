@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T20:23:59Z",
+ "generated_at": "2026-10-15T20:34:58Z",
  "outcomes": {
   "released_eligible": 36,
   "out_of_scope": 12,
@@ -264,9 +264,9 @@
    "mr_iid": null,
    "sha": "46b712f6f256857d27afbeb7be9740b7c66ce5c2",
    "created_at": "2026-10-15T17:58:06.840Z",
-   "status": "running",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 1841.3,
+   "wall_seconds": 9185.6,
    "stage_seconds": {
     "package": 71.3,
     "evaluate": 29.2,
@@ -479,6 +479,7 @@
     "gasket-witness",
     "package-image",
     "pages",
+    "publish-public-dashboard",
     "release-evidence",
     "runtime-verify",
     "secret_detection",
@@ -15769,11 +15770,11 @@
    "has_decision": false,
    "has_manifest": false,
    "evidence_links": [],
-   "commit_title": null,
+   "commit_title": "GitLab coverage strip (only stages with proof), docs for each integration and what it needs",
    "mr": {
-    "kind": "undetermined",
+    "kind": "direct",
     "iid": null,
-    "how": "GitLab's merge request list for this commit could not be read"
+    "how": "GitLab lists no merge request for this commit"
    },
    "fixture": false,
    "cause": null,
@@ -15782,7 +15783,11 @@
     "job": null,
     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2940445762"
    },
-   "change_scope": null,
+   "change_scope": [
+    "pipeline",
+    "dashboard",
+    "docs"
+   ],
    "seal": null,
    "model_card": null
   },
@@ -24947,6 +24952,22 @@
      ],
      "title": "Duo page: say why the Witness overrode Duo (evidence not listed, risk raised, scope differs)"
     },
+    "8f0a18ab708cb9c21121106c369aa1964063b584": {
+     "merge_requests": [],
+     "paths": [
+      "README.md",
+      "dashboard/app.js",
+      "dashboard/styles.css",
+      "docs/SETUP.md",
+      "gasket/analyze.py",
+      "gasket/collect.py",
+      "gasket/coverage.py",
+      "gasket/dashboard.py",
+      "gasket/snapshot.py",
+      "tests/test_govern.py"
+     ],
+     "title": "GitLab coverage strip (only stages with proof), docs for each integration and what it needs"
+    },
     "914bc4be8a42f6abbff1bc5dcdea98e1b85b6d3d": {
      "merge_requests": [],
      "paths": [
@@ -25119,7 +25140,18 @@
      "title": "Impact analysis: model and ambiguous scopes also require SBOM evidence (matches the release policy); replay of 16 recorded decisions shows no outcome changes"
     },
     "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a": {
-     "merge_requests": null,
+     "merge_requests": [
+      {
+       "iid": 2,
+       "merge_commit_sha": "ee44173914e68e02e1490234849721e23fc3ebf6",
+       "state": "merged"
+      },
+      {
+       "iid": 1,
+       "merge_commit_sha": "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a",
+       "state": "merged"
+      }
+     ],
      "paths": [
       "demo-model/train.py"
      ],
@@ -25161,11 +25193,6 @@
     }
    },
    "recent": [
-    {
-     "message": "Dashboard: single 'Release proof' header, GitLab palette, triggerer profile chips\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "f3d4cc9905516bb36bb3f15a1c7930f327944908",
-     "title": "Dashboard: single 'Release proof' header, GitLab palette, triggerer profile chips"
-    },
     {
      "message": "Witness enforces impact requirements; reject fractional group counts; label bot actors\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
      "sha": "dc3608e5ab5676d9f1491b3df0625d93a4b30c1b",
@@ -25660,6 +25687,11 @@
      "message": "Merge branch 'duo-demo/a-clean-change' into 'main'\n\ndemo: clean change\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!3",
      "sha": "fc22174157d4a1e34c6f8dfdf2106c2dac030e61",
      "title": "Merge branch 'duo-demo/a-clean-change' into 'main'"
+    },
+    {
+     "message": "Merge branch 'feat/release-gate-component' into 'main'\n\nRelease gate as a CI/CD component: package-image, evaluate-model,...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!10",
+     "sha": "0c6ebdf3b235abc99caf5df98593ef6e5dfe5144",
+     "title": "Merge branch 'feat/release-gate-component' into 'main'"
     }
    ]
   },
@@ -25717,6 +25749,42 @@
    }
   ],
   "merge_requests": [
+   {
+    "approvals": {
+     "approved": false,
+     "approved_by": [],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 14,
+    "created_at": "2026-10-15T20:35:32.920Z",
+    "draft": false,
+    "head_sha": "f6cf651232e532ecef3b28d2240dd75b6e19c36f",
+    "iid": 10,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "feat/release-gate-component",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "main",
+    "title": "Release gate as a CI/CD component: package-image, evaluate-model,...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/10"
+   },
    {
     "approvals": {
      "approved": true,
@@ -26156,7 +26224,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T20:23:59Z",
+  "taken_at": "2026-10-15T20:34:58Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null
@@ -26179,7 +26247,8 @@
     6,
     7,
     8,
-    9
+    9,
+    10
    ],
    "issues": [],
    "run_ids": [
@@ -26414,7 +26483,7 @@
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "9 merge requests, 5 merged"
+   "evidence": "10 merge requests, 5 merged"
   },
   {
    "key": "duo_flows",
@@ -27323,9 +27392,9 @@
     "created_at": "2026-10-12T23:41:33.201Z",
     "ref": "main",
     "commit": "8f0a18ab708c",
-    "commit_title": "",
-    "scope": "not recorded",
-    "merge_request": "not determined",
+    "commit_title": "GitLab coverage strip (only stages with proof), docs for each integration and what it needs",
+    "scope": "pipeline, dashboard, docs",
+    "merge_request": "direct to main",
     "decision": "No decision",
     "reason_codes": "",
     "signed": "no",
