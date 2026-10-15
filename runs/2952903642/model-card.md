@@ -34,14 +34,15 @@ The Witness decision was **pass**.
 
 ## Signer and release
 
-- Evidence signed: no or not recorded
-- Signer identity: not recorded
-- Verify: `not recorded`
+- Evidence signed: yes (https://search.sigstore.dev/?logIndex=3269728926)
+- Signer identity: https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main
+- Verify: `cosign verify-blob evidence_bundle.json --bundle evidence.cosign.bundle --certificate-identity "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main" --certificate-oidc-issuer "https://gitlab.com"`
 - Approved by: @chandran.sivasurya
-- Release job started by: not recorded
+- Release job started by: @chandran.sivasurya (the release is recorded only; no service was deployed)
 
 ## Known limits
 
 - The data is synthetic and the thresholds are this project's own demonstration rule, not a legal or regulatory standard.
 - Fairness is measured with one metric (equal opportunity difference) between two groups; it says nothing about other groups or measures.
 - The signature proves the evidence came from this pipeline and is unaltered. It does not assert that a person reviewed its correctness.
+- The deployment for this release is a labelled demonstration: a receipt was recorded and no service was deployed.
