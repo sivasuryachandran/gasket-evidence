@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T01:40:44Z",
+ "generated_at": "2026-10-15T02:33:16Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -16,7 +16,16 @@
    "blocked_reasons": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
-   "repair_mr": null,
+   "repair_mr": {
+    "iid": 7,
+    "title": "Draft: Restore equal-opportunity calibration in build_variant_d",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/7",
+    "draft": true,
+    "session": null,
+    "session_url": null,
+    "session_flow": "Release Repair"
+   },
    "corrected_run": null,
    "corrected_outcome": null,
    "release_run": null,
