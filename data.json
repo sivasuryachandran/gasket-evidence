@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T02:50:33Z",
+ "generated_at": "2026-10-15T02:54:24Z",
  "outcomes": {
   "released_eligible": 34,
   "out_of_scope": 10,
@@ -22,15 +22,15 @@
   "eligible_releases": 34,
   "stages": {
    "eligible": 10,
-   "awaiting_approval": 7,
+   "awaiting_approval": 6,
    "deployed_mock": 6,
-   "artifact_verified": 11,
+   "artifact_verified": 12,
    "runtime_verify_failed": 0,
    "deployed": 0,
    "runtime_verified": 0
   },
   "median_witness_seconds": 79.9,
-  "median_pipeline_seconds": 377.2
+  "median_pipeline_seconds": 388.7
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 4,
@@ -263,9 +263,9 @@
    "mr_iid": null,
    "sha": "b53322311ed6e3f9466ed7f958c54a01c35b7c4b",
    "created_at": "2026-10-15T02:44:12.330Z",
-   "status": "running",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 377.2,
+   "wall_seconds": 585.8,
    "stage_seconds": {
     "package": 97.3,
     "evaluate": 36.4,
@@ -273,11 +273,11 @@
     "bind": 21.4,
     "witness": 79.3
    },
-   "deploy_job_state": "manual",
+   "deploy_job_state": "success",
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "awaiting_approval",
+   "release_stage": "artifact_verified",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -418,28 +418,58 @@
      }
     ]
    },
-   "runtime_verification": null,
+   "runtime_verification": {
+    "kind": "artifact_integrity",
+    "verified": true,
+    "failure": null,
+    "expected_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "observed_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "signature_verified": true,
+    "artifact_url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2949103483/model.pkl",
+    "note": "Runtime verified: the deployed artifact's digest matches the signed evidence. (Artifact-integrity check, not a live-inference test; deploy is still mock.)"
+   },
    "reverification": null,
    "model_registration": null,
-   "release": null,
+   "release": {
+    "pipeline": "2949103483",
+    "sign_job_id": "17188603810",
+    "tag": "release-p2949103483"
+   },
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
     "bind-evidence",
     "dependency-scanning",
     "dependency-scanning:python-resolution",
+    "deploy-production",
     "evaluate-model",
     "gasket-witness",
     "package-image",
+    "pages",
+    "publish-public-dashboard",
+    "release-evidence",
+    "runtime-verify",
     "secret_detection",
     "security-scan",
     "sign-evidence",
     "train-models",
     "unit-tests"
    ],
-   "deployment": null,
+   "deployment": {
+    "mock": true,
+    "mode": "mock",
+    "executed_by": "chandran.sivasurya",
+    "approval": "not recorded",
+    "published_artifact": {
+     "bytes": 1052,
+     "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+     "url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2949103483/model.pkl"
+    },
+    "candidate_verified": false,
+    "production_verified": false
+   },
    "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188603811",
-   "deploy_job_user": null,
+   "deploy_job_user": "chandran.sivasurya",
    "identity": {
     "image_reference": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:b5332231-d-p2949103483",
     "image_digest": "sha256:89c00775bc314ad56bf2209830db535983d56d4c4336f67e91551c3bfa732faa",
@@ -518,6 +548,14 @@
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949103483/metrics.json"
     },
     {
+     "key": "deployment",
+     "label": "Deployment receipt",
+     "file": "deployment.json",
+     "job_id": 17188603811,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188603811/artifacts/raw/deployment.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949103483/deployment.json"
+    },
+    {
      "key": "signature",
      "label": "Signature record",
      "file": "evidence-signature.json",
@@ -556,6 +594,14 @@
      "job_id": 17188603810,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188603810/artifacts/raw/provenance.cosign.bundle",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949103483/provenance.cosign.bundle"
+    },
+    {
+     "key": "runtime",
+     "label": "Runtime verification",
+     "file": "runtime-verification.json",
+     "job_id": 17188603812,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188603812/artifacts/raw/runtime-verification.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2949103483/runtime-verification.json"
     }
    ],
    "commit_title": "Merge branch 'feat/dashboard-v3' into 'main'",
@@ -22452,11 +22498,6 @@
      "title": "Review fixes: seal first on Overview, Releases table fits, custody lanes and tabs readable at 390px, one-line status spacing, neutral trigger marker; classify LICENSE as documentation (with test and Policy page note); controls themes in sentence case"
     },
     {
-     "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
-     "sha": "d388300269d7f7fd4c8b368b7a8dbf4ef1f563b8",
-     "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
-    },
-    {
      "message": "Restore equal-opportunity calibration in build_variant_d\n\nbuild_variant_d in demo-model/train.py hard-coded group_thresholds={0: 0.5, 1: 0.5}\n(a single global threshold), unlike build_variant_a and build_variant_b, which\nderive per-group thresholds with _equal_opportunity_thresholds. The Witness\nmeasured fairness_gap 0.1421 against a limit of 0.05 (FAIRNESS_GAP_EXCEEDED).\n\nCompute the base model's training-set probabilities and derive per-group\nthresholds with _equal_opportunity_thresholds from data/train.csv labels and\ngroups, as variants A and B do. No evaluation data is read. No threshold,\npolicy or Witness change.\n\nRefs investigation issue #3, pipeline 2940522134.",
      "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
      "title": "Restore equal-opportunity calibration in build_variant_d"
@@ -22475,6 +22516,11 @@
      "message": "Merge branch 'feat/dashboard-v3' into 'main'\n\nDashboard v3: product redesign, records-based linking, LICENSE as documentation\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!8",
      "sha": "b53322311ed6e3f9466ed7f958c54a01c35b7c4b",
      "title": "Merge branch 'feat/dashboard-v3' into 'main'"
+    },
+    {
+     "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
+     "sha": "d1c96a188f8aa31a506d4e21d19a76e89b022967",
+     "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
     }
    ]
   },
@@ -22916,7 +22962,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T02:50:33Z",
+  "taken_at": "2026-10-15T02:54:24Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live."
  },
@@ -23194,32 +23240,22 @@
    "key": "package_registry",
    "label": "Package registry",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/packages",
-   "evidence": "model artifact published by pipeline 2948963094"
+   "evidence": "model artifact published by pipeline 2949103483"
   },
   {
    "key": "environments",
    "label": "Environments and deployments",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/environments",
-   "evidence": "deploy job succeeded in pipeline 2948963094"
+   "evidence": "deploy job succeeded in pipeline 2949103483"
   },
   {
    "key": "releases",
    "label": "Releases",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2948963094",
-   "evidence": "release release-p2948963094"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2949103483",
+   "evidence": "release release-p2949103483"
   }
  ],
  "attention": [
-  {
-   "kind": "waiting_for_person",
-   "run": 2949103483,
-   "text": "Release candidate 2949103483 passed the Witness and is waiting for a person to start the release job.",
-   "fix": {
-    "label": "Open the pipeline in GitLab",
-    "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949103483",
-    "external": true
-   }
-  },
   {
    "kind": "no_reverification",
    "run": null,
@@ -23584,10 +23620,10 @@
     "iso": "Operation",
     "slsa": "Deployed artifact matches the attested subject digest",
     "status": "Operating",
-    "status_detail": "11 runs with the artifact digest verified",
+    "status_detail": "12 runs with the artifact digest verified",
     "evidence": {
-     "label": "Release case file 2948963094",
-     "href": "#/releases/2948963094/evidence",
+     "label": "Release case file 2949103483",
+     "href": "#/releases/2949103483/evidence",
      "external": false
     }
    },
