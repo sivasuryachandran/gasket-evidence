@@ -9,7 +9,7 @@
   "merge_request": "!10",
   "decision": "Eligible",
   "reason_codes": "",
-  "signed": "no",
+  "signed": "yes",
   "release_started_by": "",
   "runtime_check": "not checked",
   "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952764422"
