@@ -260,3 +260,25 @@ details.verify .vgrid{padding:0 14px 14px;display:grid;grid-template-columns:min
   .vrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;grid-column:1/-1;padding:10px 0;border-bottom:1px solid var(--line)}
   .vrow>*{padding:0;border:0}.vcell{padding-left:0}.vname{grid-column:1/-1}
 }
+
+/* Overview: slim notice, hero row, proof tiles, compact coverage, folded details */
+.notice.slim{padding:0}.notice.slim>summary{cursor:pointer;list-style:none;padding:8px 14px;font-size:13px}.notice.slim>summary::-webkit-details-marker{display:none}
+.notice.slim .more{text-decoration:underline;opacity:.75}.notice.slim>.sub{padding:0 14px 10px}.notice.slim .sub p{margin:6px 0}
+.herorow{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:16px;margin:6px 0 18px;align-items:stretch}
+.hero{border:1px solid var(--line);border-left:4px solid var(--pass);border-radius:var(--r);background:var(--card);padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.hero.blocked{border-left-color:var(--fail)}
+.hero-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.hero .lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.hero .vt{margin:0;font-size:24px;font-weight:700}.hero .vt.small{font-size:17px}.hero .dline{margin:0}
+.ptiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ptile{border:1px solid var(--line);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;background:var(--bg,transparent)}
+.ptile.ok{border-color:var(--pass)}.ptile.bad{border-color:var(--fail)}
+.ptile b{display:flex;align-items:center;gap:6px;font-size:14px}.ptile .sub{font-size:12px;overflow-wrap:anywhere}
+.hero .links{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.kpis.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.more-details{margin-top:14px;border:1px solid var(--line);border-radius:var(--r);padding:0 14px 12px;background:var(--card)}
+.more-details>summary{cursor:pointer;padding:10px 0;font-weight:600;font-size:14px}
+.covpills{display:flex;flex-wrap:wrap;gap:8px}
+.covpill{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;text-decoration:none;background:var(--card);color:var(--accent)}.covpill:hover{background:var(--info)}
+@media (max-width:900px){.herorow{grid-template-columns:1fr}.ptiles{grid-template-columns:repeat(2,minmax(0,1fr))}.kpis.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ptile svg{width:15px;height:15px;flex:none}
