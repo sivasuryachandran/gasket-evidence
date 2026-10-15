@@ -103,7 +103,16 @@
       default: return { tone: 'pending', label: 'Not a release run' };
     }
   }
-  function decisionStatus(run) { var d = decision(run); return st(d.tone, d.label); }
+  function policyChange(run) { var pc = run.policy_change; return pc && (pc.status === 'hold' || pc.status === 'approved') ? pc : null; }
+  function holdStatus(pc) {
+    return pc.status === 'hold' ? st('attn', 'Held: policy change needs review', 'Changed: ' + (pc.changed_paths || []).join(', ') + '. A person must start the manual job approve-policy-change.')
+      : st('pass', 'Policy change approved by @' + pc.approved_by, 'Approved ' + (pc.approved_at || 'at a time not recorded') + (pc.self_approval ? '. Self-approval: recorded as a separation-of-duties gap.' : ''));
+  }
+  function decisionStatus(run) {
+    var d = decision(run), pc = policyChange(run);
+    if (pc && pc.status === 'hold') return holdStatus(pc);
+    return st(d.tone, d.label);
+  }
   function isSigned(run) { var e = run.signature && run.signature.evidence; return !!(e && e.signed && e.rekor && e.rekor.log_index != null); }
   function signedStatus(run) {
     if (isSigned(run)) return st('pass', 'Signed');
@@ -194,13 +203,15 @@
       step('Evaluate the model', ran('evaluate-model') || ran('replay-stale-evidence') ? 'pass' : 'pending', 'Metrics from the model in the image'),
       step('Bind the evidence', ran('bind-evidence') ? 'pass' : 'pending', 'Hashes tied to the metrics'),
       step('Witness decision', decided ? (blocked ? 'fail' : 'pass') : 'pending', decided ? (blocked ? 'Blocked: ' + ((run.reason_codes || [])[0] || 'no code') : 'Eligible') : 'No decision recorded'),
+      policyChange(run) ? step('Policy change review', policyChange(run).status === 'approved' ? 'pass' : 'attn', policyChange(run).status === 'approved' ? 'Approved by @' + policyChange(run).approved_by + (policyChange(run).self_approval ? ' (self-approval)' : '') : 'Held: policy change needs review') : null,
       step('Sign the evidence', isSigned(run) ? 'pass' : 'pending', blocked ? (isSigned(run) ? 'Signed' : after) : (isSigned(run) ? 'Signed (Sigstore, Rekor)' : 'Not signed')),
       step('Release by a person', blocked ? 'pending' : (run.deploy_job_user ? (mock ? 'mock' : 'pass') : 'pending'),
         blocked ? after : (run.deploy_job_user ? ('Started by @' + run.deploy_job_user + (mock ? '; recorded only, no service deployed' : '')) : 'Waiting for a person')),
       step('Runtime digest check', run.release_stage === 'artifact_verified' || run.release_stage === 'runtime_verified' ? 'pass' : (run.release_stage === 'runtime_verify_failed' ? 'fail' : 'pending'),
         blocked ? after : (run.release_stage === 'artifact_verified' ? 'Published model matches the evidence' : run.release_stage === 'runtime_verified' ? 'Service reported the evidenced hash' : 'Not checked'))
     ];
-    return h('ol', { class: 'rail', 'aria-label': 'Release gate steps' }, steps.map(function (x) {
+    steps = steps.filter(Boolean);
+    return h('ol', { class: 'rail', style: '--cols:' + steps.length, 'aria-label': 'Release gate steps' }, steps.map(function (x) {
       return h('li', { class: x.tone }, [h('span', { class: 'dot', 'aria-hidden': 'true' }), h('b', { text: x.name }), h('span', { text: x.detail })]);
     }));
   }
@@ -272,7 +283,7 @@
     if (!items.length) attention.appendChild(h('p', { class: 'muted', text: 'Nothing needs attention. Every open item the records can show is closed.' }));
     else attention.appendChild(h('ul', { class: 'attn-list' }, items.map(function (i) {
       var fix = i.fix.external ? ext(i.fix.href, i.fix.label) : link(i.fix.href, i.fix.label);
-      return h('li', {}, [st('attn', i.kind === 'waiting_for_person' ? 'Waiting for a person' : i.kind === 'repair_review' ? 'Repair awaiting review' : i.kind === 'block_awaiting_repair' ? 'Block awaiting repair' : i.kind === 'guard_failed' ? 'Guard check failed' : i.kind === 'separation_of_duties' ? 'Separation of duties' : i.kind === 'block_without_cause' ? 'Cause not recorded' : i.kind === 'no_reverification' ? 'Re-verification not run' : 'Unsigned run'), h('p', { text: i.text }), h('p', { class: 'sub' }, ['Fix it here: ', fix])]);
+      return h('li', {}, [st('attn', i.kind === 'waiting_for_person' ? 'Waiting for a person' : i.kind === 'repair_review' ? 'Repair awaiting review' : i.kind === 'block_awaiting_repair' ? 'Block awaiting repair' : i.kind === 'guard_failed' ? 'Guard check failed' : i.kind === 'separation_of_duties' ? 'Separation of duties' : i.kind === 'policy_change_held' ? 'Held: policy change needs review' : i.kind === 'guard_missing' ? 'Guard missing' : i.kind === 'block_without_cause' ? 'Cause not recorded' : i.kind === 'no_reverification' ? 'Re-verification not run' : 'Unsigned run'), h('p', { text: i.text }), h('p', { class: 'sub' }, ['Fix it here: ', fix])]);
     })));
     cols.appendChild(attention);
 
@@ -490,6 +501,15 @@
       el.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Check' }), h('th', { text: 'Result' })])]),
         h('tbody', {}, names.map(function (n) { var ok = checks[n] === 'passed'; return h('tr', {}, [h('td', { text: CHECK_LABEL[n] || n }), h('td', {}, [st(ok ? 'pass' : (String(checks[n]).indexOf('failed') === 0 ? 'fail' : 'pending'), ok ? 'Passed' : String(checks[n]).split(':')[0])])]); }))])]));
     }
+    var pcx = policyChange(run);
+    if (pcx) {
+      el.appendChild(h('h3', { text: 'Policy change' }));
+      el.appendChild(h('p', {}, [holdStatus(pcx), ' ', pcx.status === 'hold' ? 'The release jobs wait until a person starts approve-policy-change. The Witness decision above is unchanged.' : 'A person approved this change before the release jobs could run.']));
+      var rowsPc = [['Reason code', h('span', { class: 'reason', text: 'POLICY_CHANGE_REQUIRES_REVIEW' })], ['Protected paths changed', h('span', {}, (pcx.changed_paths || []).map(function (x, i) { return h('span', {}, [i ? ', ' : '', mono(x)]); }))], ['Diff (SHA-256)', monoCopy(pcx.diff_sha256 || 'not recorded', 'diff hash')]];
+      if (pcx.status === 'approved') { rowsPc.push(['Approved by', userLink(pcx.approved_by)], ['Approved at', pcx.approved_at ? fmtTime(pcx.approved_at) : 'not recorded'], ['Separation of duties', pcx.self_approval ? 'Gap: the approver wrote the change (single-member project)' : (pcx.separation_of_duties || 'not recorded')]); }
+      if (pcx.approve_job_url) rowsPc.push(['Approval job', ext(pcx.approve_job_url, 'Open approve-policy-change in GitLab')]);
+      el.appendChild(kv(rowsPc));
+    }
     if (run.release_stage) {
       var mock = run.deployment && run.deployment.mock;
       el.appendChild(h('h3', { text: 'Release' }));
@@ -626,6 +646,7 @@
       ev('People', 5, c.repair_mr && c.repair_mr.merged_by ? 'pass' : 'pending', c.repair_mr && c.repair_mr.merged_by ? 'Merged by @' + c.repair_mr.merged_by : 'Not merged', c.promotion_mr ? 'Promoted by !' + c.promotion_mr.iid : '');
       ev('Pipeline', 6, co ? 'pass' : 'pending', co ? 'Corrected pipeline ' + co.id : 'No corrected pipeline', co ? fmtTime(co.created_at) : '', co ? '#/releases/' + co.id : null);
       ev('Witness', 6, co && co.outcome === 'released_eligible' ? 'pass' : 'pending', co ? decision(co).label : 'Not decided', '', co ? '#/releases/' + co.id : null);
+      if (rl && policyChange(rl)) ev('People', 6, policyChange(rl).status === 'approved' ? 'pass' : 'attn', policyChange(rl).status === 'approved' ? 'Policy change approved by @' + policyChange(rl).approved_by : 'Held: policy change needs review', (policyChange(rl).changed_paths || []).join(', '), policyChange(rl).approve_job_url, true);
       ev('Pipeline', 7, c.signed ? 'pass' : 'pending', c.signed ? 'Evidence signed (Rekor)' : 'Not signed', rl ? 'Pipeline ' + rl.id : '', rl ? '#/releases/' + rl.id + '/signature' : null);
       var mock = !!(c.deployment && c.deployment.mock);
       ev('People', 7, c.release_started_by ? (mock ? 'mock' : 'pass') : 'pending', c.release_started_by ? 'Release started by @' + c.release_started_by : 'Release not started', c.release_started_by && mock ? 'Recorded only: no service was deployed' : '');
@@ -633,6 +654,7 @@
     } else {
       ev('Pipeline', 1, 'pass', 'Pipeline ' + run.id + ' ran', fmtTime(run.created_at), run.web_url, true);
       ev('Witness', 2, decision(run).tone === 'pending' ? 'pending' : (blocked ? 'fail' : 'pass'), run.has_decision ? decision(run).label : 'No decision', (run.reason_codes || []).join(', '));
+      if (policyChange(run)) ev('People', 3, policyChange(run).status === 'approved' ? 'pass' : 'attn', policyChange(run).status === 'approved' ? 'Policy change approved by @' + policyChange(run).approved_by : 'Held: policy change needs review', (policyChange(run).changed_paths || []).join(', '), policyChange(run).approve_job_url, true);
       ev('Pipeline', 3, isSigned(run) ? 'pass' : 'pending', isSigned(run) ? 'Evidence signed (Rekor)' : 'Not signed', '');
       var m2 = !!(run.deployment && run.deployment.mock);
       ev('People', 4, run.deploy_job_user ? (m2 ? 'mock' : 'pass') : 'pending', run.deploy_job_user ? 'Release started by @' + run.deploy_job_user : (run.outcome === 'released_eligible' ? 'Release not started' : 'No release'), run.deploy_job_user && m2 ? 'Recorded only: no service was deployed' : '');
@@ -766,11 +788,27 @@
       ['Where changes happen', 'The policy is a file in the repository, so a change is a commit. Changes reach main through merge requests.'],
       ['Approval on merge requests', rv.approvals_required ? 'The merge requests in the records require ' + rv.approvals_required + ' approval' + (rv.approvals_required > 1 ? 's' : '') + (rv.rules.length ? ' (rule: ' + rv.rules.join(', ') + ')' : '') + '. The project has one member, so approvals are self-approvals.' : 'No approval rule is recorded.'],
       ['What the Witness enforces', 'A release is blocked with ' + rv.witness_blocks_a_changed_policy + ' when the evidence was produced under a different policy than the one the Witness reads.'],
-      ['What it does not enforce', 'The Witness does not require a review of a policy change, and no POLICY_CHANGE_REQUIRES_REVIEW code exists. Review depends on the merge request approval rule above.']])]));
+      ['What the Witness does not do', 'The Witness has no review check of its own and its decisions are unchanged. A change to the gate\'s own rules is held by a separate CI job instead (below).'],
+      ['Preventive limit', P.guard_limit || 'not recorded']])]));
+    if ((P.protected_paths || []).length) {
+      main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Protected paths' }),
+        h('p', { class: 'sub', text: 'A change to any of these is held with POLICY_CHANGE_REQUIRES_REVIEW until a person starts the manual job approve-policy-change. An AI agent cannot be that person. The list is policy/protected-paths.yml, itself on the list. Docs, the dashboard and tests are not on it.' }),
+        h('ul', { class: 'plain' }, P.protected_paths.map(function (x) { return h('li', {}, [mono(x)]); }))]));
+    }
+    var pcs = h('div', { class: 'panel' }, [h('h2', { text: 'Policy changes held and approved' })]);
+    if (!(P.policy_changes || []).length) pcs.appendChild(empty('No policy change has been recorded yet.', 'A pipeline that changes a protected path appears here with who approved it.'));
+    else pcs.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Pipeline' }), h('th', { text: 'Changed' }), h('th', { text: 'Status' }), h('th', { text: 'Diff (SHA-256)' })])]),
+      h('tbody', {}, P.policy_changes.map(function (c) {
+        return h('tr', {}, [h('td', { 'data-label': 'Pipeline' }, [link('#/releases/' + c.run, 'Pipeline ' + c.run), c.mr_iid ? h('div', { class: 'sub', text: '!' + c.mr_iid }) : null]),
+          h('td', { 'data-label': 'Changed' }, [(c.paths || []).join(', ')]),
+          h('td', { 'data-label': 'Status' }, [c.status === 'approved' ? st('pass', 'Approved by @' + c.approved_by, c.self_approval ? 'Self-approval: a separation-of-duties gap' : false) : st('attn', 'Held'), c.self_approval ? h('div', { class: 'sub', text: 'Self-approval' }) : null]),
+          h('td', { 'data-label': 'Diff (SHA-256)' }, [mono((c.diff_sha256 || 'not recorded').slice(0, 16))])]);
+      }))])]));
+    main.appendChild(pcs);
     if ((P.guards || []).length) {
       main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Guard status' }), h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [
         h('thead', {}, [h('tr', {}, [h('th', { text: 'Guard' }), h('th', { text: 'Enforced' }), h('th', { text: 'Evidence' })])]),
-        h('tbody', {}, P.guards.map(function (g) { return h('tr', {}, [h('td', { 'data-label': 'Guard', text: g.name }), h('td', { 'data-label': 'Enforced' }, [st(g.enforced ? 'pass' : 'fail', g.enforced ? 'Yes' : 'No')]), h('td', { 'data-label': 'Evidence', text: g.evidence })]); }))])])]));
+        h('tbody', {}, P.guards.map(function (g) { return h('tr', {}, [h('td', { 'data-label': 'Guard', text: g.name }), h('td', { 'data-label': 'Enforced' }, [g.preventive ? h('span', {}, [st('pass', 'Enforced (preventive)'), h('div', {}, [st('pass', 'Audited (detective)')])]) : st(g.enforced ? 'pass' : 'fail', g.enforced ? 'Yes' : 'No')]), h('td', { 'data-label': 'Evidence', text: g.evidence })]); }))])])]));
     }
     var hist = h('div', { class: 'panel' }, [h('h2', { text: 'Change history' })]);
     if (!(P.history || []).length) hist.appendChild(empty('History is not available in this snapshot.', 'It is read from GitLab\'s commit records for the policy file when the snapshot is taken.'));

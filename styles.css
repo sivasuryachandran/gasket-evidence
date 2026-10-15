@@ -100,11 +100,13 @@ table.t td.num{text-align:right}
 .attn-list .st{margin-bottom:2px}
 
 /* gate rail */
-ol.rail{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0}
+ol.rail{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--cols,7),minmax(0,1fr));gap:0}
 ol.rail li{position:relative;padding-top:30px;padding-right:10px;font-size:13px}
 ol.rail li::before{content:"";position:absolute;top:8px;left:0;right:0;border-top:2px solid var(--pass)}
 ol.rail li.mock::before,ol.rail li.pending::before{border-top:2px dashed var(--mock)}
 ol.rail li.fail::before{border-top:2px solid var(--fail)}
+ol.rail li.attn::before{border-top:2px solid var(--attn)}
+ol.rail li.attn .dot{background:var(--attn-fill);border-color:var(--attn)}
 ol.rail li:first-child::before{left:9px}ol.rail li:last-child::before{right:calc(100% - 9px)}
 ol.rail li .dot{position:absolute;top:0;left:0;width:18px;height:18px;border-radius:50%;background:var(--pass);border:2px solid var(--card)}
 ol.rail li.fail .dot{background:var(--fail)}
@@ -164,6 +166,8 @@ details.mrg .body{padding:4px 16px 12px}
 .lane .evs{display:grid;grid-template-columns:repeat(var(--n,1),minmax(0,1fr));gap:8px}
 .ev{border:2px solid var(--pass);border-radius:var(--r);padding:7px 8px;background:var(--card);font-size:13px;min-height:58px;overflow-wrap:anywhere;min-width:0}
 .ev.fail{border-color:var(--fail)}
+.ev.attn{border-color:var(--attn)}
+ul.plain{margin:0;padding-left:18px}
 .ev.mock,.ev.pending{border:2px dashed var(--mock)}
 .ev b{display:block;color:var(--head)}.ev .sub{display:block}
 .ev.none{border:0;background:transparent;min-height:0;padding:0}

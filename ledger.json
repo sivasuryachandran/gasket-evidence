@@ -1,5 +1,20 @@
 [
  {
+  "pipeline_id": 2952903642,
+  "created_at": "2026-10-15T21:52:06.554Z",
+  "ref": "main",
+  "commit": "95ecf1200264",
+  "commit_title": "Merge branch 'feat/policy-change-guard' into 'main'",
+  "scope": "pipeline, dashboard, docs",
+  "merge_request": "!11",
+  "decision": "Eligible",
+  "reason_codes": "",
+  "signed": "no",
+  "release_started_by": "",
+  "runtime_check": "not checked",
+  "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952903642"
+ },
+ {
   "pipeline_id": 2952882554,
   "created_at": "2026-10-15T21:43:34.185Z",
   "ref": "refs/merge-requests/11/head",
@@ -7,11 +22,11 @@
   "commit_title": "Policy-change guard: evaluate.py and the evaluation data are protected like the thresholds; the unit-tests job installs git so the guard's git tests run in CI",
   "scope": "pipeline",
   "merge_request": "!11",
-  "decision": "running",
+  "decision": "Eligible",
   "reason_codes": "",
   "signed": "no",
   "release_started_by": "",
-  "runtime_check": "not applicable",
+  "runtime_check": "not checked",
   "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952882554"
  },
  {
@@ -215,7 +230,7 @@
   "ref": "refs/merge-requests/6/head",
   "commit": "24291b108004",
   "commit_title": "LICENSE: copyright holder is Siva Surya Chandran",
-  "scope": "not recorded",
+  "scope": "docs",
   "merge_request": "!6",
   "decision": "Eligible",
   "reason_codes": "",
@@ -246,7 +261,7 @@
   "commit": "6379ea8ee0a7",
   "commit_title": "Dependency scanning: ask for Python 3.12 (the pinned numpy needs it) and debug logging",
   "scope": "pipeline",
-  "merge_request": "not determined",
+  "merge_request": "direct to main",
   "decision": "Eligible",
   "reason_codes": "",
   "signed": "yes",
