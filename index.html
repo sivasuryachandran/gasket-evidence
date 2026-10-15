@@ -12,23 +12,20 @@
 </script>
 </head>
 <body>
+<a class="skip" href="#app">Skip to content</a>
 <header class="top">
-  <button class="iconbtn" id="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
-  <img class="logo" src="logo.png" alt="Gasket logo">
-  <div class="brandblock">
-    <span class="brand">Gaske<b>t</b></span>
-    <span class="tag">Release proof &mdash; evidence locked to the artifact</span>
-  </div>
+  <button class="iconbtn" id="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+  <img class="logo" src="logo.png" alt="">
+  <span class="brand">Gasket</span>
+  <span class="crumb" id="crumb"><b>credit-scoring-model</b> / main</span>
   <span class="sp"></span>
-  <span class="pill env">synthetic credit-scoring demo</span>
-  <span class="pill" id="snap-time" hidden></span>
-  <a class="pill link" id="gitlab-link" href="#" target="_blank" rel="noopener">Open project in GitLab <span aria-hidden="true">&#8599;</span></a>
-  <button class="iconbtn" id="theme-toggle" type="button" aria-label="Switch between light and dark theme" title="Switch theme">&#9680;</button>
+  <details class="snap" id="snap"></details>
+  <button class="iconbtn" id="theme-toggle" type="button" aria-label="Switch between light and dark theme" title="Switch theme">Theme</button>
 </header>
 <div class="shell">
-  <aside id="side"></aside>
-  <main id="app">
-    <p class="muted">Loading release data&hellip;</p>
+  <aside id="side" aria-label="Sections"></aside>
+  <main id="app" tabindex="-1">
+    <p class="muted">Loading release data</p>
     <noscript><p>This dashboard needs JavaScript. Every run also has a static evidence page under <code>runs/</code>.</p></noscript>
   </main>
 </div>

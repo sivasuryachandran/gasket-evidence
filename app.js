@@ -1,16 +1,16 @@
 (function () {
   'use strict';
 
-  // All dynamic text goes through textContent / setAttribute, never innerHTML:
-  // the data comes from GitLab and must not be able to inject markup.
+  // ---------------------------------------------------------------- helpers
+  // All dynamic text goes through textContent / setAttribute, never innerHTML: the data comes from GitLab.
   function h(tag, attrs, kids) {
     var el = document.createElement(tag);
     Object.keys(attrs || {}).forEach(function (k) {
       if (k === 'text') el.textContent = attrs[k];
       else if (k === 'class') el.className = attrs[k];
-      else el.setAttribute(k, attrs[k]);
+      else if (attrs[k] !== null && attrs[k] !== undefined && attrs[k] !== false) el.setAttribute(k, attrs[k] === true ? '' : attrs[k]);
     });
-    (kids || []).forEach(function (c) { if (c) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    (kids || []).forEach(function (c) { if (c !== null && c !== undefined && c !== false) el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
     return el;
   }
   var SVGNS = 'http://www.w3.org/2000/svg';
@@ -20,1046 +20,787 @@
     (kids || []).forEach(function (c) { if (c) el.appendChild(c); });
     return el;
   }
-
-  // GitLab profile chip: avatar (https only, initial as fallback) + @username.
-  function who(actor, large) {
-    if (!actor || !actor.username) return h('span', { class: 'muted', text: 'not recorded' });
-    var cls = 'av' + (large ? ' lg' : '');
-    var avatar;
-    if (!STATIC_SNAPSHOT && actor.avatar_url && /^https:\/\//.test(actor.avatar_url)) {
-      avatar = h('img', { class: cls, src: actor.avatar_url, alt: '', loading: 'lazy', referrerpolicy: 'no-referrer' });
-      avatar.addEventListener('error', function () { avatar.replaceWith(h('span', { class: cls, text: actor.username.charAt(0).toUpperCase() })); });
-    } else {
-      avatar = h('span', { class: cls, text: actor.username.charAt(0).toUpperCase() });
-    }
-    var kinds = { ci: 'CI automation', duo: 'Duo agent' };
-    var bot = !!kinds[actor.kind];
-    var label = bot ? h('span', {}, [kinds[actor.kind]]) : h('span', {}, ['@' + actor.username]);
-    var attrs = { class: 'who', title: (bot ? 'Automation account: @' : (actor.name || actor.username) + ' · @') + actor.username };
-    if (actor.web_url && /^https:\/\/gitlab\.com\//.test(actor.web_url)) { attrs.href = actor.web_url; attrs.target = '_blank'; attrs.rel = 'noopener'; }
-    return h(attrs.href ? 'a' : 'span', attrs, [avatar, label]);
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function fmtTime(iso) {
+    if (!iso) return 'not recorded';
+    var d = new Date(iso);
+    if (isNaN(d)) return 'not recorded';
+    return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear() + ', ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ' UTC';
   }
-
-  var OUTCOME = {
-    released_eligible: { label: 'Release eligible', cls: 'ok' },
-    expected_block: { label: 'Blocked (expected)', cls: 'blocked' },
-    unexpected_block: { label: 'Blocked (unexpected)', cls: 'danger' },
-    unexpected_pass: { label: 'Passed (unexpected)', cls: 'danger' },
-    no_decision: { label: 'No decision recorded', cls: 'gray' },
-    running: { label: 'Running', cls: 'info' },
-    out_of_scope: { label: 'Not a release run', cls: 'gray' }
-  };
-  var SCENARIO = { a: 'A healthy', 'b-stale': 'B stale evidence', c: 'C fairness regression', d: 'D repaired', regression: 'Injected regression (demo)' };
-  var STAGE = { eligible: 'Eligible', awaiting_approval: 'Awaiting approval', deploying: 'Deploying', deployed_mock: 'Release recorded', deployed: 'Deployed', runtime_verified: 'Runtime verified', artifact_verified: 'Runtime verified', runtime_verify_failed: 'Runtime verification failed', deploy_failed: 'Deploy failed', deploy_canceled: 'Deploy canceled' };
-  var RUNTIME_CAPTION = 'Runtime verified: the deployed artifact\'s digest matches the signed evidence. (Artifact-integrity check, not a live-inference test; deploy is still mock.)';
-  var STEPS = ['eligible', 'awaiting_approval', 'deployed', 'runtime_verified'];
-
-  // Eligible > Awaiting approval > Deployed > Runtime verified. A recorded (mock) release never reaches the last two.
-  function stageTracker(run, compact) {
-    var stage = run.release_stage;
-    var reached = { eligible: 1, awaiting_approval: 2, deploying: 2, deployed_mock: 3, artifact_verified: 4, runtime_verify_failed: 3, deploy_failed: 2, deploy_canceled: 2, deployed: 3, runtime_verified: 4 }[stage] || 0;
-    var el = h('div', { class: 'stages' });
-    STEPS.forEach(function (key, i) {
-      // A recorded release (the mock job) turns this step green but dashed and labelled "Release recorded": the
-      // release was recorded, but no service was deployed, so Runtime verified never follows it.
-      var mock = key === 'deployed' && (stage === 'deployed_mock' || stage === 'artifact_verified' || stage === 'runtime_verify_failed');
-      // Runtime verified after a mock deploy is an artifact-integrity check: lit, but dashed and captioned as such.
-      var artifact = key === 'runtime_verified' && stage === 'artifact_verified';
-      var attrs = { class: 'stage ' + (i < reached ? 'done' : 'todo') + (mock || artifact ? ' mock' : '') + (i === reached - 1 ? ' now' : ''),
-        text: mock ? 'Release recorded' : STAGE[key] };
-      if (mock) attrs.title = 'The release was recorded (receipt marked mock). No service was deployed.';
-      if (artifact) attrs.title = RUNTIME_CAPTION;
-      el.appendChild(h('span', attrs));
-    });
-    var note = stage === 'awaiting_approval' ? 'The deploy job has not run. Whether anyone approved is read from GitLab\'s approval record, never inferred from the job being manual.'
-      : stage === 'deployed_mock' ? 'Release recorded: no service was deployed or verified (the receipt is marked mock).'
-      : stage === 'deploy_failed' ? 'Deployment failed' + (run.deployment && run.deployment.failure ? ' at ' + run.deployment.failure.stage + '; ' + (run.deployment.previous_revision_still_serving ? 'the previous revision is still serving.' : 'check the receipt.') : '.')
-      : stage === 'artifact_verified' ? RUNTIME_CAPTION
-      : stage === 'runtime_verify_failed' ? ((run.runtime_verification && run.runtime_verification.note) || 'Runtime verification failed.')
-      : stage === 'runtime_verified' ? 'The running service reported the evidenced model hash and passed the smoke checks.'
-      : '';
-    // The deploy is started in GitLab, in the real release pipeline. This page holds no token and starts nothing;
-    // it only links to the place where a person does it.
-    var door = null;
-    var BAR = {
-      deploying: ['run', 'Deployment running\u2026'],
-      deployed_mock: ['done', 'Release recorded'],
-      artifact_verified: ['done', 'Release recorded \u00b7 artifact digest verified'],
-      runtime_verify_failed: ['bad', 'Runtime verification failed'],
-      deployed: ['done', 'Deployed'],
-      runtime_verified: ['done', 'Deployed and runtime verified'],
-      deploy_failed: ['bad', 'Deployment failed'],
-      deploy_canceled: ['bad', 'Deployment canceled']
-    };
-    if (stage === 'awaiting_approval' && run.web_url && /^https:\/\/gitlab\.com\//.test(run.web_url)) {
-      door = h('p', { class: 'sub' }, [
-        h('a', { class: 'btn-deploy', href: run.web_url, target: '_blank', rel: 'noopener',
-          title: 'Review and start the deploy in GitLab \u2192 (open the pipeline and start the deploy job)', text: 'Deploy \u2197' })
-      ]);
-    } else if (BAR[stage]) {
-      // Reflects the last synced state of the deploy job in GitLab; it is not a live feed.
-      var mockNote = (stage === 'deployed_mock' || stage === 'artifact_verified') ? ' No service was deployed (the receipt is marked mock).' : '';
-      door = h('p', { class: 'sub' }, [
-        h('span', { class: 'deploybar ' + BAR[stage][0], role: 'status', title: 'Last synced state of the deploy job in GitLab.' + mockNote, text: BAR[stage][1] })
-      ]);
-    }
-    return h('div', {}, [el, note ? h('p', { class: 'sub', text: note }) : null, compact ? null : door]);
+  function fmtShort(iso) { if (!iso) return 'not recorded'; var d = new Date(iso); return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ', ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()); }
+  function fmtDay(iso) { return iso ? fmtTime(iso).split(',')[0] : 'not recorded'; }
+  function num(v, d) { return v === null || v === undefined ? 'not recorded' : Number(v).toFixed(d === undefined ? 4 : d); }
+  function ext(href, text, extra) {
+    return h('a', { href: href, target: '_blank', rel: 'noopener', class: 'ext' + (extra ? ' ' + extra : ''), text: text });
   }
-  var NOT_RECORDED = 'not recorded';
+  function link(href, text) { return h('a', { href: href, text: text }); }
+  function safeUrl(u) { return typeof u === 'string' && /^https:\/\//.test(u) ? u : null; }
 
-  function fmtSec(v) { return v === null || v === undefined ? NOT_RECORDED : (v >= 60 ? Math.floor(v / 60) + 'm ' + Math.round(v % 60) + 's' : v.toFixed(0) + 's'); }
-  function fmtTime(iso) { return iso ? iso.replace('T', ' ').replace(/:\d\dZ$/, ' UTC').replace(/\.\d+Z$/, ' UTC') : NOT_RECORDED; }
-  function num(v, d) { return v === null || v === undefined ? NOT_RECORDED : Number(v).toFixed(d === undefined ? 4 : d); }
-  function median(vals) {
-    var v = vals.filter(function (x) { return x !== null && x !== undefined; }).sort(function (a, b) { return a - b; });
-    if (!v.length) return null;
-    var m = Math.floor(v.length / 2);
-    return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
-  }
-  function diffCount(a, b) {
-    var n = 0, len = Math.max(a.length, b.length);
-    for (var i = 0; i < len; i++) if (a[i] !== b[i]) n++;
-    return n;
-  }
-  function chip(outcome) {
-    var o = OUTCOME[outcome] || { label: outcome, cls: 'gray' };
-    return h('span', { class: 'chip ' + o.cls, text: o.label });
-  }
-  function sec(title, sub) {
-    var el = h('section', {}, [h('h2', { text: title })]);
-    if (sub) el.appendChild(h('p', { class: 'sub', text: sub }));
-    return el;
-  }
-
-  var DEPLOY = {
-    manual: 'Not started. A person starts the deploy job in GitLab.',
-    skipped: 'Skipped because the release was blocked.',
-    success: 'Deployment job succeeded.',
-    failed: 'Deployment job failed.',
-    running: 'Deployment job running.',
-    pending: 'Deployment job pending.',
-    created: 'Deployment job created.',
-    canceled: 'Deployment job canceled.'
-  };
-
-  // Display names only; the machine codes underneath never change. Mirrors gasket/vocab.py.
+  var DATA = null, RUNS = [], BYID = {}, MRS = {}, CHAINS = [], FIRST_SEAL = true;
   var REASON_TITLE = {
-    MODEL_HASH_MISMATCH: 'Stale evidence: model differs from the evaluated model',
-    IMAGE_DIGEST_MISMATCH: 'Stale evidence: image differs from the evaluated image',
-    DATA_HASH_MISMATCH: 'Stale evidence: evaluation data differs',
-    POLICY_HASH_MISMATCH: 'Stale evidence: policy changed after evaluation',
+    MODEL_HASH_MISMATCH: 'Stale evidence: the model differs from the evaluated model',
+    IMAGE_DIGEST_MISMATCH: 'Stale evidence: the image differs from the evaluated image',
+    DATA_HASH_MISMATCH: 'Stale evidence: the evaluation data differs',
+    POLICY_HASH_MISMATCH: 'Stale evidence: the policy changed after evaluation',
     COMMIT_MISMATCH: 'Stale evidence: different commit',
     PIPELINE_IDENTITY_MISMATCH: 'Stale evidence: different pipeline',
-    ACCURACY_BELOW_THRESHOLD: 'Policy not met: accuracy below minimum',
-    FAIRNESS_GAP_EXCEEDED: 'Policy not met: fairness gap over maximum',
+    ACCURACY_BELOW_THRESHOLD: 'Policy not met: accuracy below the minimum',
+    FAIRNESS_GAP_EXCEEDED: 'Policy not met: fairness gap over the maximum',
     FAIRNESS_NOT_EVALUABLE: 'Unverifiable: fairness could not be measured',
     SECURITY_EVIDENCE_MISSING: 'Unverifiable: security evidence missing',
     EVIDENCE_MISSING: 'Unverifiable: evidence missing',
-    EVIDENCE_INVALID: 'Unverifiable: evidence value not trusted',
+    EVIDENCE_INVALID: 'Unverifiable: an evidence value is not trusted',
     METRICS_MISMATCH: 'Disputed: claimed metrics differ from the recomputed metrics',
     METRICS_UNVERIFIABLE: 'Unverifiable: the Witness could not recompute the metrics'
   };
-  var TRUST = {
-    trusted: { cls: 'ok', text: 'Trusted / Verified', hint: 'Evidence matches the build and the policy checks passed.' },
-    stale: { cls: 'blocked', text: 'Stale / Untrusted', hint: 'Evidence no longer matches the build; it is not proof for this artifact.' },
-    unverifiable: { cls: 'gray', text: 'Unverifiable', hint: 'Evidence is missing, invalid or not measurable.' },
-    policy_not_met: { cls: 'amber', text: 'Policy not met', hint: 'Evidence matches the build, but a policy threshold was not met.' },
-    disputed: { cls: 'danger', text: 'Disputed', hint: 'The numbers the evidence claims do not match what the Witness recomputed from the exact model.' }
-  };
-  function trustChip(run) {
-    var t = TRUST[run.trust];
-    if (!t) return h('span', { class: 'chip gray', text: 'No decision recorded' });
-    return h('span', { class: 'chip ' + t.cls, text: t.text, title: t.hint });
+  var SCENARIO = { a: 'Healthy model', 'b-stale': 'Stale evidence', c: 'Fairness regression', d: 'Baseline model', regression: 'Fairness regression (demo)' };
+  var CHECK_LABEL = { accuracy: 'Accuracy', commit: 'Commit identity', data_identity: 'Evaluation data identity', fairness: 'Fairness', image_identity: 'Image identity',
+    metrics_match: 'Claimed metrics match', metrics_recomputed: 'Metrics recomputed from the model', model_identity: 'Model identity', pipeline_identity: 'Pipeline identity',
+    policy_identity: 'Policy identity', security: 'Security evidence', impact: 'Impact analysis' };
+
+  // ---------------------------------------------------------------- small components
+  function st(tone, label, title) {   // one status per item; solid marker = real event, dashed ring = recorded only, mock or pending
+    return h('span', { class: 'st ' + tone, title: title || false }, [h('i', { 'aria-hidden': 'true' }), label]);
   }
-
-
-  var ROUTES = [
-    { key: 'overview', label: 'Overview' },
-    { key: 'runs', label: 'Release runs' },
-    { key: 'people', label: 'Contributors' },
-    { key: 'models', label: 'Models' },
-    { key: 'duo', label: 'Duo assessments' }
-  ];
-
-  function ext(href, label) {
-    return h('a', { href: href, target: '_blank', rel: 'noopener', class: 'nav ext' }, [label, h('span', { class: 'xi', 'aria-hidden': 'true', text: '↗' })]);
-  }
-
-  // Routes look like #/runs?outcome=expected_block&n=50 so a filtered view can be shared.
-  function parseRoute() {
-    var raw = (location.hash || '#/overview').replace(/^#\/?/, '');
-    var split = raw.split('?');
-    var parts = split[0].split('/');
-    var query = {};
-    (split[1] || '').split('&').forEach(function (pair) {
-      if (!pair) return;
-      var kv = pair.split('=');
-      query[decodeURIComponent(kv[0])] = decodeURIComponent((kv[1] || '').replace(/\+/g, ' '));
+  function copyBtn(value, what) {
+    var b = h('button', { class: 'copy noprint', type: 'button', 'aria-label': 'Copy ' + what, text: 'Copy' });
+    b.addEventListener('click', function () {
+      function done() { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(value).then(done, fallback); else fallback();
+      function fallback() {
+        var t = h('textarea', { 'aria-hidden': 'true', style: 'position:fixed;left:-999px' }); t.value = value; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) { b.textContent = 'Select and copy manually'; } t.remove();
+      }
     });
-    var arg = parts[1] ? decodeURIComponent(parts[1]) : null;
-    return { name: parts[0] || 'overview', arg: arg, id: arg && /^\d+$/.test(arg) ? Number(arg) : null, query: query };
+    return b;
+  }
+  function mono(text) { return h('span', { class: 'mono', text: text }); }
+  function monoCopy(value, what) { return h('span', {}, [mono(value), copyBtn(value, what)]); }
+  function kv(rows) {
+    var dl = h('dl', { class: 'kv' });
+    rows.forEach(function (r) { if (!r) return; dl.appendChild(h('dt', { text: r[0] })); dl.appendChild(h('dd', {}, [r[1]])); });
+    return dl;
+  }
+  function empty(title, how) { return h('div', { class: 'empty' }, [h('b', { text: title }), how ? ' ' + how : '']); }
+  function section(title, sub) {
+    var el = h('section', { class: 'block' }, [h('h2', { text: title })]);
+    if (sub) el.appendChild(h('p', { class: 'sub', text: sub }));
+    return el;
+  }
+  function pagehead(title, sub) { return h('div', { class: 'pagehead' }, [h('h1', { text: title }), sub ? h('p', { class: 'muted', text: sub }) : null]); }
+  function userLink(username) { return h('a', { href: 'https://gitlab.com/' + encodeURIComponent(username), target: '_blank', rel: 'noopener', class: 'ext', text: '@' + username }); }
+
+  // ---------------------------------------------------------------- run helpers
+  function decision(run) {
+    switch (run.outcome) {
+      case 'released_eligible': return { tone: 'pass', label: 'Eligible' };
+      case 'expected_block': return { tone: 'fail', label: 'Blocked' };
+      case 'unexpected_block': return { tone: 'fail', label: 'Blocked (unexpected)' };
+      case 'unexpected_pass': return { tone: 'attn', label: 'Passed (unexpected)' };
+      case 'running': return { tone: 'pending', label: 'Running' };
+      case 'no_decision': return { tone: 'pending', label: 'No decision' };
+      default: return { tone: 'pending', label: 'Not a release run' };
+    }
+  }
+  function decisionStatus(run) { var d = decision(run); return st(d.tone, d.label); }
+  function isSigned(run) { var e = run.signature && run.signature.evidence; return !!(e && e.signed && e.rekor && e.rekor.log_index != null); }
+  function signedStatus(run) {
+    if (isSigned(run)) return st('pass', 'Signed');
+    return st('pending', 'Not signed', 'Signing runs on main-branch pipelines; earlier runs and non-main runs have no signature.');
+  }
+  function releasedBy(run) {
+    if (run.outcome !== 'released_eligible') return h('span', { class: 'muted', text: 'Not applicable' });
+    if (!run.deploy_job_user) return st('pending', 'Not started');
+    var mock = !!(run.deployment && run.deployment.mock);
+    return h('span', {}, [st(mock ? 'mock' : 'pass', '@' + run.deploy_job_user, mock ? 'The release job was started by this person; the release is recorded only, no service was deployed (mock).' : 'Release job started by this person.')]);
+  }
+  function runtimeStatus(run) {
+    var stage = run.release_stage;
+    if (run.outcome !== 'released_eligible') return h('span', { class: 'muted', text: 'Not applicable' });
+    if (stage === 'runtime_verified') return st('pass', 'Runtime verified');
+    if (stage === 'artifact_verified') return st('pass', 'Digest verified', 'The published model matches the signed evidence. An artifact-integrity check, not a live-inference test.');
+    if (stage === 'runtime_verify_failed') return st('fail', 'Check failed');
+    return st('pending', 'Not checked');
+  }
+  function mrInfo(run) {
+    var m = run.mr || { kind: 'undetermined', how: 'not recorded' };
+    if (m.kind === 'mr') { var rec = MRS[m.iid]; return { key: String(m.iid), iid: m.iid, title: rec ? rec.title : null, url: rec ? rec.web_url : (DATA.project_url + '/-/merge_requests/' + m.iid) }; }
+    if (m.kind === 'direct') return { key: 'direct', title: 'Direct to main', how: 'GitLab lists no merge request for these commits.' };
+    return { key: 'undetermined', title: 'MR not determined', how: 'The records do not tie these commits to one merge request (' + m.how + ').' };
+  }
+  function mrCell(run) {
+    var m = mrInfo(run);
+    if (m.iid) return ext(m.url, '!' + m.iid + (m.title ? ' ' + m.title : ''));
+    return h('span', { class: 'muted', title: m.how || false, text: m.title });
+  }
+  function changeText(run) {
+    var t = run.commit_title || ('Commit ' + (run.sha || '').slice(0, 8));
+    return run.fixture ? t + ' (labelled demo fixture)' : t;
+  }
+  function approvalText(mr) {
+    var by = ((mr.approvals || {}).approved_by || []).map(function (a) { return a.username; });
+    if (!by.length) return null;
+    var self = mr.author && by.indexOf(mr.author.username) >= 0;
+    return 'Approved by ' + by.map(function (u) { return '@' + u; }).join(', ') + (self ? ' (self-approval: single-member demo project)' : '');
+  }
+  function newest(list) { return list.slice().sort(function (a, b) { return a.created_at < b.created_at ? 1 : -1; })[0]; }
+  function sortDesc(list) { return list.slice().sort(function (a, b) { return a.created_at < b.created_at ? 1 : -1; }); }
+  function releaseRuns() { return RUNS.filter(function (r) { return r.kind === 'release' || r.kind === 'merge_request'; }); }
+  function chainFor(run) { return CHAINS.filter(function (c) { return c.blocked_run === run.id || c.corrected_run === run.id || c.release_run === run.id; })[0] || null; }
+  function runLink(run, text) { return link('#/releases/' + run.id, text || String(run.id)); }
+
+  // ---------------------------------------------------------------- THE SEAL
+  function sealPanel(run, opts) {
+    var seal = run.seal;
+    if (!seal) return empty('No seal for this run.', 'The evidence or the image hash was not recorded, so there is nothing to compare.');
+    var ok = seal.identical;
+    var wrap = h('div', { class: 'seal', role: 'group', 'aria-label': 'Comparison of the evidenced and the recomputed model hash' });
+    function hashRow(label, groups, full, what) {
+      return h('div', { class: 'row' }, [
+        h('span', { class: 'lbl', text: label }),
+        h('span', { class: 'hash', 'aria-label': what + ' ' + full }, groups.map(function (g) {
+          var chars = g.text.split('').map(function (c, i) { return g.diff[i] ? h('span', { class: 'd', text: c }) : document.createTextNode(c); });
+          return h('span', { class: 'g' }, chars);
+        })),
+        copyBtn(full, what)
+      ]);
+    }
+    wrap.appendChild(hashRow('Evaluated (evidence)', seal.evidenced, seal.evidenced_full, 'evidenced model hash'));
+    // the seal line draws closed once, on the first load of the page; a mismatch is a visibly broken line
+    var draw = ok && FIRST_SEAL && !(opts && opts.static); if (ok) FIRST_SEAL = false;
+    var line = ok ? h('div', { class: 'sealline' + (draw ? ' draw' : ''), 'aria-hidden': 'true' }, [h('i', { class: 'bar' })])
+      : h('div', { class: 'sealline broken', 'aria-hidden': 'true' }, [h('i', { class: 'bar a' }), h('i', { class: 'cut', text: 'x' }), h('i', { class: 'bar b' })]);
+    wrap.appendChild(h('div', { class: 'row' }, [h('span'), line, h('span')]));
+    wrap.appendChild(h('div', { class: 'row' }, [h('span'), h('p', { class: 'verdict ' + (ok ? 'ok' : 'bad'),
+      text: ok ? 'Identical: the model in the release image is the model the evidence describes.' : 'Does not match: ' + seal.differing + ' of 64 characters differ. The model in the release image is not the evaluated model.' }), h('span')]));
+    wrap.appendChild(hashRow('Recomputed from the image', seal.observed, seal.observed_full, 'recomputed model hash'));
+    return wrap;
   }
 
-  function hashFor(name, query) {
-    var pairs = Object.keys(query || {}).filter(function (k) { return query[k]; })
-      .map(function (k) { return encodeURIComponent(k) + '=' + encodeURIComponent(query[k]); });
-    return '#/' + name + (pairs.length ? '?' + pairs.join('&') : '');
+  // ---------------------------------------------------------------- gate rail
+  function rail(run) {
+    var jobs = run.jobs_ran || [], ran = function (n) { return jobs.indexOf(n) >= 0; };
+    var blocked = run.outcome === 'expected_block' || run.outcome === 'unexpected_block';
+    var decided = !!run.has_decision;
+    var mock = !!(run.deployment && run.deployment.mock);
+    function step(name, tone, detail) { return { name: name, tone: tone, detail: detail }; }
+    var after = blocked ? 'Not reached: blocked' : null;
+    var steps = [
+      step('Build the image', ran('package-image') ? 'pass' : 'pending', ran('package-image') ? 'Image built and pushed' : 'No record'),
+      step('Evaluate the model', ran('evaluate-model') || ran('replay-stale-evidence') ? 'pass' : 'pending', 'Metrics from the model in the image'),
+      step('Bind the evidence', ran('bind-evidence') ? 'pass' : 'pending', 'Hashes tied to the metrics'),
+      step('Witness decision', decided ? (blocked ? 'fail' : 'pass') : 'pending', decided ? (blocked ? 'Blocked: ' + ((run.reason_codes || [])[0] || 'no code') : 'Eligible') : 'No decision recorded'),
+      step('Sign the evidence', isSigned(run) ? 'pass' : 'pending', blocked ? (isSigned(run) ? 'Signed' : after) : (isSigned(run) ? 'Signed (Sigstore, Rekor)' : 'Not signed')),
+      step('Release by a person', blocked ? 'pending' : (run.deploy_job_user ? (mock ? 'mock' : 'pass') : 'pending'),
+        blocked ? after : (run.deploy_job_user ? ('Started by @' + run.deploy_job_user + (mock ? '; recorded only, no service deployed' : '')) : 'Waiting for a person')),
+      step('Runtime digest check', run.release_stage === 'artifact_verified' || run.release_stage === 'runtime_verified' ? 'pass' : (run.release_stage === 'runtime_verify_failed' ? 'fail' : 'pending'),
+        blocked ? after : (run.release_stage === 'artifact_verified' ? 'Published model matches the evidence' : run.release_stage === 'runtime_verified' ? 'Service reported the evidenced hash' : 'Not checked'))
+    ];
+    return h('ol', { class: 'rail', 'aria-label': 'Release gate steps' }, steps.map(function (x) {
+      return h('li', { class: x.tone }, [h('span', { class: 'dot', 'aria-hidden': 'true' }), h('b', { text: x.name }), h('span', { text: x.detail })]);
+    }));
   }
 
-  var lastRunsHash = '#/runs';
-  var SNAPSHOT = '';
-  var STATIC_SNAPSHOT = !!(window.GASKET_DATA && window.GASKET_DATA.snapshot);   // a snapshot makes no network calls
+  // ---------------------------------------------------------------- ledger
+  var COLS = [['Time', 'Time'], ['Change', 'Change'], ['MR', 'Merge request'], ['Decision', 'Decision'], ['Reason', 'Reason code'], ['Signed', 'Signed'], ['Released', 'Released by'], ['Runtime', 'Runtime']];
+  function ledgerRow(run) {
+    var codes = run.reason_codes || [];
+    var tr = h('tr', { class: 'row' });
+    function td(label, kid, cls) { tr.appendChild(h('td', { 'data-label': label, class: cls || false }, [kid])); }
+    td('Time', h('a', { href: '#/releases/' + run.id, text: fmtShort(run.created_at), title: fmtTime(run.created_at) }), 'nowrap');
+    td('Change', h('span', {}, [changeText(run), run.cause ? h('div', { class: 'sub', text: run.cause.text }) : null, run.stopped_at ? h('div', { class: 'sub' }, [run.stopped_at.text + ' ', run.stopped_at.url ? ext(run.stopped_at.url, 'Open') : null]) : null]));
+    td('Merge request', mrCell(run));
+    td('Decision', decisionStatus(run));
+    td('Reason code', codes.length ? h('span', { class: 'reason', text: codes.join(', ') }) : h('span', { class: 'muted', text: 'None' }));
+    td('Signed', run.outcome === 'released_eligible' || isSigned(run) ? signedStatus(run) : h('span', { class: 'muted', text: 'Not applicable' }));
+    td('Released by', releasedBy(run));
+    td('Runtime', runtimeStatus(run));
+    tr.addEventListener('click', function (e) { if (e.target.closest('a,button')) return; location.hash = '#/releases/' + run.id; });
+    return tr;
+  }
+  function ledgerTable(runs) {
+    if (!runs.length) return empty('No runs match.', 'Clear a filter to see more.');
+    var head = h('tr', {}, COLS.map(function (c) { return h('th', { scope: 'col', text: c[1] }); }));
+    return h('div', { class: 'tablewrap' }, [h('table', { class: 't stack ledger' }, [h('thead', {}, [head]), h('tbody', {}, runs.map(ledgerRow))])]);
+  }
 
+  // ---------------------------------------------------------------- overview
+  function overview() {
+    var main = h('div', {});
+    var releases = sortDesc(RUNS.filter(function (r) { return r.kind === 'release' && r.ref === 'main' && r.has_decision; }));
+    var latest = releases[0];
+    var sentence = !latest ? 'No release candidate has been recorded yet.'
+      : latest.outcome === 'released_eligible'
+        ? 'The latest release candidate, pipeline ' + latest.id + ', passed the Witness' + (latest.deploy_job_user ? '.' : ' and is waiting for a person to release it.')
+        : 'The latest release candidate, pipeline ' + latest.id + ', was blocked by the Witness.';
+    main.appendChild(pagehead('Overview', sentence));
+
+    if (latest) {
+      var sealSection = section('The seal', 'Both hashes are the full SHA-256 of the model file, in groups of four. The Witness hashes the model it extracts from the release image and compares it with the model the evidence was produced for.');
+      sealSection.appendChild(h('div', { class: 'panel' }, [sealPanel(latest)]));
+      sealSection.appendChild(h('p', { style: 'margin-top:12px' }, [link('#/releases/' + latest.id, 'Open the case file for this release')]));
+      main.appendChild(sealSection);
+      var gate = section('Release gate', 'Pipeline ' + latest.id + ', ' + fmtTime(latest.created_at) + '. The gate checks the model in the release image against the evidence it was evaluated with.');
+      gate.appendChild(h('div', { class: 'panel' }, [rail(latest)]));
+      main.appendChild(gate);
+    } else main.appendChild(empty('No release gate to show.', 'A main-branch pipeline with a Witness decision appears here.'));
+
+    // needs attention + last policy block
+    var cols = h('div', { class: 'cols block' });
+    var attention = h('div', { class: 'panel' }, [h('h2', { text: 'Needs attention' })]);
+    var items = DATA.attention || [];
+    if (!items.length) attention.appendChild(h('p', { class: 'muted', text: 'Nothing needs attention. Every open item the records can show is closed.' }));
+    else attention.appendChild(h('ul', { class: 'attn-list' }, items.map(function (i) {
+      var fix = i.fix.external ? ext(i.fix.href, i.fix.label) : link(i.fix.href, i.fix.label);
+      return h('li', {}, [st('attn', i.kind === 'waiting_for_person' ? 'Waiting for a person' : i.kind === 'block_without_cause' ? 'Cause not recorded' : i.kind === 'no_reverification' ? 'Re-verification not run' : 'Unsigned run'), h('p', { text: i.text }), h('p', { class: 'sub' }, ['Fix it here: ', fix])]);
+    })));
+    cols.appendChild(attention);
+
+    var blocks = sortDesc(RUNS.filter(function (r) { return r.has_decision && (r.outcome === 'expected_block' || r.outcome === 'unexpected_block'); }));
+    var last = blocks[0];
+    var lastPanel = h('div', { class: 'panel' }, [h('h2', { text: 'Last policy block' })]);
+    if (!last) lastPanel.appendChild(h('p', { class: 'muted', text: 'No release has been blocked.' }));
+    else {
+      var code = (last.reason_codes || [])[0], m = last.metrics || {}, th = last.thresholds || {}, ch = chainFor(last);
+      var observed = code === 'FAIRNESS_GAP_EXCEEDED' ? 'Fairness gap ' + num(m.fairness_gap) + ' against a maximum of ' + th.maximum_fairness_gap
+        : code === 'ACCURACY_BELOW_THRESHOLD' ? 'Accuracy ' + num(m.accuracy) + ' against a minimum of ' + th.minimum_accuracy : (REASON_TITLE[code] || 'Blocked');
+      lastPanel.appendChild(kv([
+        ['Pipeline', h('span', {}, [runLink(last), ' ', decisionStatus(last)])],
+        ['When', fmtTime(last.created_at)],
+        ['Reason', h('span', {}, [h('span', { class: 'reason', text: code || 'none' }), h('div', { class: 'sub', text: REASON_TITLE[code] || '' })])],
+        ['Measured', observed],
+        ['Cause', last.cause ? h('span', {}, [last.cause.text, last.cause.fixed_in ? h('span', {}, [' Fixed in ', ext(DATA.project_url + '/-/commit/' + last.cause.fixed_in.sha, last.cause.fixed_in.sha.slice(0, 8))]) : ' No fixing commit is recorded.'])
+          : last.fixture ? 'A labelled demo fixture commit that injects a fairness regression, so this block is the expected result.' : 'Not determined from the records.'],
+        ['Investigation', ch && ch.issue ? ext(ch.issue.web_url, 'Issue #' + ch.issue.iid) : 'No investigation issue recorded'],
+        ch ? ['Chain of custody', link('#/releases/' + last.id + '/custody', ch.steps_done + ' of ' + ch.steps_total + ' steps recorded')] : null
+      ]));
+    }
+    cols.appendChild(lastPanel);
+    main.appendChild(cols);
+
+    var led = section('Release ledger', 'The latest 10 runs, newest first.');
+    led.appendChild(ledgerTable(sortDesc(releaseRuns()).slice(0, 10)));
+    led.appendChild(h('p', { style: 'margin-top:12px' }, [link('#/releases', 'See all releases')]));
+    main.appendChild(led);
+    return main;
+  }
+
+  // ---------------------------------------------------------------- releases: ledger and merge request view
+  var Q_KEYS = ['group', 'mr', 'decision', 'reason', 'signed', 'from', 'to', 'q'];
+  function queryString(q) {
+    var p = []; Q_KEYS.forEach(function (k) { if (q[k]) p.push(k + '=' + encodeURIComponent(q[k])); }); return p.length ? '?' + p.join('&') : '';
+  }
+  function applyFilters(runs, q) {
+    var needle = (q.q || '').trim().toLowerCase().replace(/^!/, '');
+    return runs.filter(function (r) {
+      var d = r.outcome;
+      if (q.decision === 'eligible' && d !== 'released_eligible') return false;
+      if (q.decision === 'blocked' && d !== 'expected_block' && d !== 'unexpected_block') return false;
+      if (q.decision === 'none' && d !== 'no_decision') return false;
+      if (q.reason && (r.reason_codes || []).indexOf(q.reason) < 0) return false;
+      if (q.signed === 'yes' && !isSigned(r)) return false;
+      if (q.signed === 'no' && isSigned(r)) return false;
+      var day = (r.created_at || '').slice(0, 10);
+      if (q.from && day < q.from) return false;
+      if (q.to && day > q.to) return false;
+      if (q.mr && mrInfo(r).key !== q.mr) return false;
+      if (needle) {
+        var m = mrInfo(r), hay = [String(r.id), r.sha || '', r.commit_title || '', m.iid ? String(m.iid) : '', m.title || ''].join(' ').toLowerCase();
+        if (hay.indexOf(needle) < 0) return false;
+      }
+      return true;
+    });
+  }
+  function releasesPage(q) {
+    var main = h('div', {});
+    main.appendChild(pagehead('Releases', 'Every release candidate and merge request pipeline, newest first. Open a row for its case file.'));
+    var all = sortDesc(releaseRuns());
+    var reasons = {}; all.forEach(function (r) { (r.reason_codes || []).forEach(function (c) { reasons[c] = true; }); });
+    var mrOptions = {}; all.forEach(function (r) { var m = mrInfo(r); if (m.iid) mrOptions[m.key] = m; });
+    var form = h('form', { class: 'filters', role: 'search', 'aria-label': 'Filter releases' });
+    function field(label, control) { return h('label', {}, [label, control]); }
+    function select(name, options, value) {
+      var el = h('select', { name: name }, options.map(function (o) { var opt = h('option', { value: o[0], text: o[1] }); if (o[0] === (value || '')) opt.selected = true; return opt; })); return el;
+    }
+    var ctl = {
+      mr: select('mr', [['', 'All']].concat([['direct', 'Direct to main'], ['undetermined', 'MR not determined']]).concat(Object.keys(mrOptions).sort(function (a, b) { return b - a; }).map(function (k) { return [k, '!' + k + (mrOptions[k].title ? ' ' + mrOptions[k].title : '')]; })), q.mr),
+      decision: select('decision', [['', 'All'], ['eligible', 'Eligible'], ['blocked', 'Blocked'], ['none', 'No decision']], q.decision),
+      reason: select('reason', [['', 'All']].concat(Object.keys(reasons).sort().map(function (c) { return [c, c]; })), q.reason),
+      signed: select('signed', [['', 'All'], ['yes', 'Signed'], ['no', 'Not signed']], q.signed),
+      from: h('input', { type: 'date', name: 'from', value: q.from || false }),
+      to: h('input', { type: 'date', name: 'to', value: q.to || false }),
+      q: h('input', { type: 'search', name: 'q', value: q.q || false, placeholder: 'Run ID, commit or MR', 'aria-label': 'Search by run ID, commit or merge request' })
+    };
+    form.appendChild(field('Search', ctl.q)); form.appendChild(field('Merge request', ctl.mr)); form.appendChild(field('Decision', ctl.decision));
+    form.appendChild(field('Reason code', ctl.reason)); form.appendChild(field('Signed', ctl.signed)); form.appendChild(field('From', ctl.from)); form.appendChild(field('To', ctl.to));
+    var grouping = h('div', { class: 'seg', role: 'group', 'aria-label': 'Group by' }, [
+      h('a', { href: '#/releases' + queryString(Object.assign({}, q, { group: '' })), 'aria-pressed': q.group === 'mr' ? 'false' : 'true', text: 'Run' }),
+      h('a', { href: '#/releases' + queryString(Object.assign({}, q, { group: 'mr' })), 'aria-pressed': q.group === 'mr' ? 'true' : 'false', text: 'Merge request' })]);
+    form.appendChild(h('label', {}, ['Group by', grouping]));
+    var results = h('div', { 'aria-live': 'polite' });
+    function current() { var next = { group: q.group }; Object.keys(ctl).forEach(function (k) { next[k] = ctl[k].value; }); return next; }
+    function refresh() {
+      var next = current();
+      try { history.replaceState(null, '', '#/releases' + queryString(next)); } catch (e) { /* the page still works without a shareable URL */ }
+      q = next; draw(); }
+    function draw() {
+      results.textContent = '';
+      var rows = applyFilters(all, q);
+      results.appendChild(h('p', { class: 'sub', text: rows.length + ' of ' + all.length + ' runs' }));
+      results.appendChild(q.group === 'mr' ? mrGroups(rows, q) : ledgerTable(rows));
+      // keep the group toggle links in step with the filters
+      grouping.querySelectorAll('a')[0].setAttribute('href', '#/releases' + queryString(Object.assign({}, q, { group: '' })));
+      grouping.querySelectorAll('a')[1].setAttribute('href', '#/releases' + queryString(Object.assign({}, q, { group: 'mr' })));
+    }
+    form.addEventListener('submit', function (e) { e.preventDefault(); refresh(); });
+    Object.keys(ctl).forEach(function (k) { ctl[k].addEventListener(k === 'q' ? 'input' : 'change', refresh); });
+    main.appendChild(form); main.appendChild(results); draw();
+    return main;
+  }
+  function duoLine(iid) {
+    var item = ((DATA.duo || {}).items || []).filter(function (i) { return i.mr_iid === iid; })[0];
+    if (!item) return 'No Duo assessment recorded';
+    var risk = item.risk_result === 'agreed' ? 'risk agreed' : item.risk_result === 'witness_stricter' ? 'risk: Witness stricter' : 'risk: Witness looser';
+    return 'Duo against Witness: ' + risk + '; ' + (item.evidence_witness_added.length ? 'evidence added by the Witness: ' + item.evidence_witness_added.join(', ') : 'evidence agreed');
+  }
+  function mrGroups(runs, q) {
+    var groups = {};
+    runs.forEach(function (r) { var m = mrInfo(r); (groups[m.key] = groups[m.key] || { info: m, runs: [] }).runs.push(r); });
+    var list = Object.keys(groups).map(function (k) { var g = groups[k]; g.runs = sortDesc(g.runs); g.latest = g.runs[0]; return g; })
+      .sort(function (a, b) { return a.latest.created_at < b.latest.created_at ? 1 : -1; });
+    if (!list.length) return empty('No runs match.', 'Clear a filter to see more.');
+    var wrap = h('div', {});
+    list.forEach(function (g) {
+      var m = g.info, rec = m.iid ? MRS[m.iid] : null;
+      var title = m.iid ? h('span', { class: 'mrtitle' }, [ext(m.url, '!' + m.iid + (m.title ? ' ' + m.title : ''))]) : h('span', { class: 'mrtitle', text: m.title });
+      var who = [];
+      if (rec && rec.merged_by) who.push('Merged by @' + rec.merged_by.username);
+      var starter = g.runs.filter(function (r) { return r.deploy_job_user; })[0];
+      if (starter) who.push('Release started by @' + starter.deploy_job_user);
+      if (rec) { var a = approvalText(rec); if (a) who.push(a); }
+      var d = h('details', { class: 'mrg' }, [h('summary', {}, [
+        h('div', {}, [title, h('div', { class: 'sub', text: g.runs.length + (g.runs.length === 1 ? ' run' : ' runs') + (m.how ? '. ' + m.how.charAt(0).toUpperCase() + m.how.slice(1) : '') })]),
+        h('div', {}, [decisionStatus(g.latest), h('div', { class: 'sub', text: 'Latest: ' + fmtTime(g.latest.created_at) })]),
+        h('div', {}, [m.iid ? h('div', { class: 'sub', text: duoLine(m.iid) }) : null, h('div', { class: 'sub', text: who.length ? who.join('. ') : 'No merge or release record' })])
+      ])]);
+      if (q.mr && q.mr === m.key) d.setAttribute('open', '');
+      var body = h('div', { class: 'body' }, [ledgerTable(g.runs)]);
+      d.appendChild(body); wrap.appendChild(d);
+    });
+    return wrap;
+  }
+
+  // ---------------------------------------------------------------- release case file
+  var TABS = [['decision', 'Decision'], ['evidence', 'Evidence'], ['signature', 'Signature and provenance'], ['agents', 'Agents'], ['custody', 'Chain of custody'], ['files', 'Files']];
+  function meter(label, value, limit, kind, unit) {
+    var over = kind === 'max' ? value > limit : value < limit;
+    var scale = kind === 'max' ? limit * 2 : 1;
+    var pct = Math.max(0, Math.min(100, (value / scale) * 100)), at = Math.max(0, Math.min(100, (limit / scale) * 100));
+    var fill = h('i'); fill.style.width = pct + '%';
+    var mark = h('em'); mark.style.left = at + '%';
+    return h('div', { class: 'meter' }, [
+      h('div', { class: 'top2' }, [h('b', { text: label }), h('span', {}, [st(over ? 'fail' : 'pass', over ? 'Policy not met' : 'Within policy'), ' ', mono(num(value))])]),
+      h('div', { class: 'track' + (over ? ' over' : ''), role: 'img', 'aria-label': label + ' ' + num(value) + ', limit ' + limit }, [fill, mark]),
+      h('div', { class: 'cap', text: (kind === 'max' ? 'Maximum allowed ' : 'Minimum required ') + limit + (unit || '') + '. The vertical marker is the limit.' })]);
+  }
+  function decisionTab(run) {
+    var el = h('div', {}), m = run.metrics || {}, th = run.thresholds || {}, codes = run.reason_codes || [];
+    var d = decision(run);
+    var statement = run.outcome === 'released_eligible' ? 'The Witness found the model hash identical to the evidence and every policy check passed. A person still has to release it.'
+      : (run.outcome === 'expected_block' || run.outcome === 'unexpected_block') ? (REASON_TITLE[codes[0]] || 'The Witness blocked this release.') + '. Deployment was skipped; the run stays listed with its reason.'
+      : run.stopped_at ? run.stopped_at.text : 'No Witness decision was retained for this run.';
+    el.appendChild(h('p', { class: 'lead' }, [decisionStatus(run), statement]));
+    if (run.cause) el.appendChild(h('p', {}, [h('b', { text: 'Cause. ' }), run.cause.text, run.cause.fixed_in ? h('span', {}, [' Fixed in ', ext(DATA.project_url + '/-/commit/' + run.cause.fixed_in.sha, run.cause.fixed_in.sha.slice(0, 8)), ': ' + run.cause.fixed_in.title + '.']) : ' No fixing commit is recorded.']));
+    if (run.stopped_at && run.stopped_at.url) el.appendChild(h('p', {}, [ext(run.stopped_at.url, 'Open the job in GitLab')]));
+    if (codes.length) el.appendChild(kv([['Reason code', h('span', { class: 'reason', text: codes.join(', ') })]]));
+    if (m.accuracy != null && th.minimum_accuracy != null) el.appendChild(meter('Accuracy', m.accuracy, th.minimum_accuracy, 'min'));
+    if (m.fairness_gap != null && th.maximum_fairness_gap != null) el.appendChild(meter('Fairness gap', m.fairness_gap, th.maximum_fairness_gap, 'max'));
+    var checks = run.checks || {}, names = Object.keys(checks).filter(function (k) { return k.indexOf('_detail') < 0; });
+    if (names.length) {
+      el.appendChild(h('h3', { text: 'Policy checks' }));
+      el.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Check' }), h('th', { text: 'Result' })])]),
+        h('tbody', {}, names.map(function (n) { var ok = checks[n] === 'passed'; return h('tr', {}, [h('td', { text: CHECK_LABEL[n] || n }), h('td', {}, [st(ok ? 'pass' : (String(checks[n]).indexOf('failed') === 0 ? 'fail' : 'pending'), ok ? 'Passed' : String(checks[n]).split(':')[0])])]); }))])]));
+    }
+    if (run.release_stage) {
+      var mock = run.deployment && run.deployment.mock;
+      el.appendChild(h('h3', { text: 'Release' }));
+      el.appendChild(h('p', { text: mock ? 'The release is recorded, but no service was deployed (the receipt is marked mock). The runtime check compares the published model digest with the signed evidence; it is an artifact-integrity check, not a live-inference test.' : 'Release stage: ' + run.release_stage + '.' }));
+    }
+    el.appendChild(h('details', { class: 'more' }, [h('summary', { text: 'Raw identifiers' }), kv([['Scenario', (SCENARIO[run.scenario] || 'Not a scenario run') + (run.scenario ? ' (key ' + run.scenario + ')' : '')], ['Outcome key', mono(run.outcome)], ['Run kind', mono(run.kind)], ['Ref', mono(run.ref)]])]));
+    return el;
+  }
+  function evidenceTab(run) {
+    var el = h('div', {}), id = run.identity || {};
+    el.appendChild(h('div', { class: 'panel' }, [h('h3', { text: 'The seal' }), sealPanel(run, { static: true })]));
+    var rows = [];
+    function add(label, value) { if (value) rows.push([label, monoCopy(value, label.toLowerCase())]); }
+    add('Evaluated model hash', run.evidenced_model_sha256); add('Recomputed model hash', run.observed_model_sha256);
+    add('Image digest (evidence)', id.image_digest); add('Image digest (observed)', id.image_digest_observed);
+    add('Evaluation data hash', id.data_sha256); add('Policy hash', id.policy_sha256); add('Commit', id.commit_sha || run.sha); add('Release ID', id.release_id);
+    if (id.policy_id) rows.push(['Policy', h('span', {}, [id.policy_id, ' ', link('#/policy', 'Open the policy')])]);
+    el.appendChild(h('div', { class: 'panel' }, [h('h3', { text: 'Identity in the evidence manifest' }), rows.length ? kv(rows) : empty('No manifest recorded for this run.', 'The Witness could not read the evidence manifest.')]));
+    return el;
+  }
+  function signatureTab(run) {
+    var el = h('div', {}), sig = run.signature && run.signature.evidence;
+    if (!isSigned(run)) {
+      el.appendChild(empty('Not signed.', 'Signing runs on main-branch pipelines. Runs from before signing was added, and runs on other refs, have no signature. The evidence is still hash-bound to the artifact.'));
+      return el;
+    }
+    var prov = run.signature.provenance;
+    el.appendChild(h('p', { text: 'The evidence bundle is signed with Sigstore keyless signing using this pipeline\'s GitLab CI identity, and the signature is recorded in the public Rekor log. The signature proves the evidence came from this pipeline and is unaltered. It does not assert that a person reviewed the result.' }));
+    el.appendChild(kv([
+      ['Rekor log entry', ext(sig.rekor.url, '#' + sig.rekor.log_index)],
+      ['Signed by identity', monoCopy(run.signature.certificate_identity, 'certificate identity')],
+      ['Identity provider', mono(run.signature.oidc_issuer)],
+      ['Evidence bundle hash', monoCopy(sig.blob_sha256, 'evidence bundle hash')]
+    ]));
+    el.appendChild(h('h3', { text: 'Verify it yourself' }));
+    el.appendChild(h('p', { class: 'sub', text: 'Download the evidence bundle and its signature bundle from the Files tab into one folder, install cosign, then run:' }));
+    el.appendChild(h('p', {}, [mono(sig.verify_command), copyBtn(sig.verify_command, 'verify command')]));
+    el.appendChild(h('p', { class: 'sub' }, ['Expected output: ', mono('Verified OK'), '. Any other result means the file or the signature does not match.']));
+    var st2 = run.provenance;
+    el.appendChild(h('h3', { text: 'Provenance statement' }));
+    if (st2 && st2.predicate) {
+      var pr = st2.predicate, subj = (st2.subject || [])[0] || {};
+      el.appendChild(h('p', { class: 'sub', text: 'A SLSA-style statement, signed, generated by this pipeline itself. It is not a GitLab-native SLSA Level 3 attestation and no SLSA level is claimed.' }));
+      el.appendChild(kv([
+        ['Statement type', mono(st2._type || 'not recorded')], ['Predicate type', mono(st2.predicateType || 'not recorded')],
+        ['Subject', subj.name ? mono(subj.name) : 'not recorded'], ['Subject digest', subj.digest && subj.digest.sha256 ? monoCopy(subj.digest.sha256, 'subject digest') : 'not recorded'],
+        ['Build type', mono(pr.buildType || 'not recorded')], ['Builder', (pr.builder && pr.builder.id) ? mono(pr.builder.id) : 'not recorded'],
+        ['Source commit', pr.invocation && pr.invocation.environment ? mono(pr.invocation.environment.commit || 'not recorded') : 'not recorded'],
+        ['Signature', run.signature.provenance && run.signature.provenance.rekor ? ext(run.signature.provenance.rekor.url, 'Rekor #' + run.signature.provenance.rekor.log_index) : 'not recorded']]));
+    } else el.appendChild(empty('No provenance statement recorded for this run.'));
+    return el;
+  }
+  function agentsTab(run) {
+    var el = h('div', {}), m = run.mr && run.mr.kind === 'mr' ? run.mr.iid : null;
+    var item = m ? ((DATA.duo || {}).items || []).filter(function (i) { return i.mr_iid === m; })[0] : null;
+    if (!item) {
+      el.appendChild(empty('No agent assessment for this run.', m ? 'The Impact Analyst has not assessed !' + m + ' in the records. It runs automatically when a merge request is created; open an MR without mentioning anyone to produce one.' : 'Impact Analyst assessments are made for merge requests. This run is not on a merge request.'));
+      return el;
+    }
+    el.appendChild(h('p', { class: 'sub', text: 'Agents advise, the Witness decides, people release. The Witness recomputes scope, risk and required evidence from the changed paths and keeps the stricter result.' }));
+    el.appendChild(kv([
+      ['Merge request', ext(DATA.project_url + '/-/merge_requests/' + m, '!' + m)],
+      ['Scope', (item.witness_scope || []).join(', ') + (item.scope_differs ? ' (Duo said ' + (item.duo_scope || []).join(', ') + ')' : ' (Duo and the Witness agree)')],
+      ['Risk', 'Duo said ' + (item.duo_risk || 'nothing') + '; the Witness says ' + item.witness_risk + (item.risk_result === 'agreed' ? ' (agreed)' : item.risk_result === 'witness_stricter' ? ' (the Witness is stricter)' : ' (Duo was higher; the higher rating is kept)')],
+      ['Required evidence', item.evidence_witness_added.length ? 'The Witness added ' + item.evidence_witness_added.join(', ') : 'Agreed'],
+      ['Session', item.session_url ? ext(item.session_url, (item.session_flow || 'Impact Analyst') + ' session ' + item.session_url.split('/').pop()) : 'not recorded']
+    ]));
+    return el;
+  }
+  function filesTab(run) {
+    var el = h('div', {}), links = run.evidence_links || [];
+    var evidencePage = run.has_decision ? h('p', {}, [link('runs/' + run.id + '/', 'Open the static evidence page for this run'), ' (it works without this dashboard).']) : null;
+    el.appendChild(evidencePage);
+    if (!links.length) { el.appendChild(empty('No evidence files were retained for this run.')); return el; }
+    el.appendChild(h('p', { class: 'sub', text: 'Each file has a saved copy in the repository that opens in the browser, and the live GitLab artifact that downloads. Compare them to check the numbers above.' }));
+    el.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [
+      h('thead', {}, [h('tr', {}, [h('th', { text: 'File' }), h('th', { text: 'Saved copy' }), h('th', { text: 'Live GitLab artifact' })])]),
+      h('tbody', {}, links.map(function (l) {
+        return h('tr', {}, [
+          h('td', { 'data-label': 'File' }, [h('b', { text: l.label }), h('div', { class: 'sub mono', text: l.file })]),
+          h('td', { 'data-label': 'Saved copy' }, [l.view_url ? h('a', { class: 'btn', href: l.view_url, target: '_blank', rel: 'noopener', text: 'View' }) : h('span', { class: 'muted', text: 'No saved copy' })]),
+          h('td', { 'data-label': 'Live artifact' }, [h('a', { class: 'btn primary', href: l.url, target: '_blank', rel: 'noopener', title: 'Live GitLab artifact, job ' + l.job_id + '. It downloads the file.', text: 'Download' })])]);
+      }))])]));
+    return el;
+  }
+
+  // chain of custody as lanes: solid = happened, dashed = recorded only (mock) or not yet recorded
+  function custodyTab(run) {
+    var el = h('div', {}), c = chainFor(run);
+    el.appendChild(h('div', { class: 'legend' }, [h('span', {}, [h('i'), 'Happened']), h('span', {}, [h('i', { class: 'd' }), 'Recorded only, or not yet recorded'])]));
+    var N = c ? 8 : 5, events = [];
+    function ev(lane, col, tone, title, sub, href, external) { events.push({ lane: lane, col: col, tone: tone, title: title, sub: sub, href: href, external: external }); }
+    var blocked = c ? BYID[c.blocked_run] : (run.outcome === 'expected_block' || run.outcome === 'unexpected_block' ? run : null);
+    if (c) {
+      var b = BYID[c.blocked_run], co = c.corrected_run ? BYID[c.corrected_run] : null, rl = c.release_run ? BYID[c.release_run] : null;
+      ev('Pipeline', 1, 'pass', 'Pipeline ' + b.id + ' ran', fmtTime(b.created_at), '#/releases/' + b.id);
+      ev('Witness', 1, 'fail', 'Blocked: ' + ((c.blocked_reasons || [])[0] || 'no code'), c.blocked_cause ? c.blocked_cause.text : '', '#/releases/' + b.id);
+      ev('Duo agents', 2, c.issue ? 'pass' : 'pending', c.issue ? 'Investigation issue #' + c.issue.iid : 'No investigation recorded', c.issue && c.issue.session_url ? 'Release Investigator session ' + c.issue.session_url.split('/').pop() : '', c.issue ? c.issue.web_url : null, true);
+      ev('Duo agents', 3, c.repair_mr ? 'pass' : 'pending', c.repair_mr ? 'Repair merge request !' + c.repair_mr.iid : 'No repair merge request', c.repair_mr && c.repair_mr.session_url ? 'Release Repair session ' + c.repair_mr.session_url.split('/').pop() : '', c.repair_mr ? c.repair_mr.web_url : null, true);
+      var appr = c.repair_mr && c.repair_mr.approved_by && c.repair_mr.approved_by.length ? c.repair_mr.approved_by : null;
+      ev('People', 4, appr ? 'pass' : 'pending', appr ? 'Approved by @' + appr.join(', @') : 'No approval record', appr && c.repair_mr.approved_by.indexOf((MRS[c.repair_mr.iid] && MRS[c.repair_mr.iid].author || {}).username) >= 0 ? 'Self-approval: single-member demo project' : '');
+      ev('People', 5, c.repair_mr && c.repair_mr.merged_by ? 'pass' : 'pending', c.repair_mr && c.repair_mr.merged_by ? 'Merged by @' + c.repair_mr.merged_by : 'Not merged', c.promotion_mr ? 'Promoted by !' + c.promotion_mr.iid : '');
+      ev('Pipeline', 6, co ? 'pass' : 'pending', co ? 'Corrected pipeline ' + co.id : 'No corrected pipeline', co ? fmtTime(co.created_at) : '', co ? '#/releases/' + co.id : null);
+      ev('Witness', 6, co && co.outcome === 'released_eligible' ? 'pass' : 'pending', co ? decision(co).label : 'Not decided', '', co ? '#/releases/' + co.id : null);
+      ev('Pipeline', 7, c.signed ? 'pass' : 'pending', c.signed ? 'Evidence signed (Rekor)' : 'Not signed', rl ? 'Pipeline ' + rl.id : '', rl ? '#/releases/' + rl.id + '/signature' : null);
+      var mock = !!(c.deployment && c.deployment.mock);
+      ev('People', 7, c.release_started_by ? (mock ? 'mock' : 'pass') : 'pending', c.release_started_by ? 'Release started by @' + c.release_started_by : 'Release not started', c.release_started_by && mock ? 'Recorded only: no service was deployed' : '');
+      ev('Pipeline', 8, c.release_stage === 'artifact_verified' || c.release_stage === 'runtime_verified' ? 'pass' : 'pending', c.release_stage === 'artifact_verified' || c.release_stage === 'runtime_verified' ? 'Runtime digest check passed' : 'No runtime check', c.release_stage === 'artifact_verified' ? 'Published model matches the signed evidence' : '');
+    } else {
+      ev('Pipeline', 1, 'pass', 'Pipeline ' + run.id + ' ran', fmtTime(run.created_at), run.web_url, true);
+      ev('Witness', 2, decision(run).tone === 'pending' ? 'pending' : (blocked ? 'fail' : 'pass'), run.has_decision ? decision(run).label : 'No decision', (run.reason_codes || []).join(', '));
+      ev('Pipeline', 3, isSigned(run) ? 'pass' : 'pending', isSigned(run) ? 'Evidence signed (Rekor)' : 'Not signed', '');
+      var m2 = !!(run.deployment && run.deployment.mock);
+      ev('People', 4, run.deploy_job_user ? (m2 ? 'mock' : 'pass') : 'pending', run.deploy_job_user ? 'Release started by @' + run.deploy_job_user : (run.outcome === 'released_eligible' ? 'Release not started' : 'No release'), run.deploy_job_user && m2 ? 'Recorded only: no service was deployed' : '');
+      ev('Pipeline', 5, run.release_stage === 'artifact_verified' || run.release_stage === 'runtime_verified' ? 'pass' : 'pending', run.release_stage === 'artifact_verified' || run.release_stage === 'runtime_verified' ? 'Runtime digest check passed' : 'No runtime check', '');
+    }
+    el.appendChild(h('p', { class: 'sub', text: c ? 'The chain this run belongs to, from the blocked pipeline to the release. ' + c.steps_done + ' of ' + c.steps_total + ' steps have a record' + (c.missing.length ? '; missing: ' + c.missing.join(', ').replace(/_/g, ' ') + '.' : '.') : 'This run is not part of an investigated block, so only its own events are shown.' }));
+    var lanes = h('div', { class: 'lanes' });
+    ['Witness', 'Duo agents', 'People', 'Pipeline'].forEach(function (lane) {
+      var evs = h('div', { class: 'evs', style: '--n:' + N });
+      for (var col = 1; col <= N; col++) {
+        var e = events.filter(function (x) { return x.lane === lane && x.col === col; })[0];
+        if (!e) { evs.appendChild(h('div', { class: 'ev none', 'aria-hidden': 'true' })); continue; }
+        function soft(t) { return (t || '').replace(/[._]/g, function (ch) { return ch + '\u200b'; }); }
+        var etitle = soft(e.title), esub = soft(e.sub);
+        var title = e.href ? (e.href.charAt(0) === '#' ? link(e.href, etitle) : ext(e.href, etitle)) : document.createTextNode(etitle);
+        evs.appendChild(h('div', { class: 'ev ' + e.tone }, [h('b', {}, [title]), esub ? h('span', { class: 'sub', text: esub }) : null]));
+      }
+      lanes.appendChild(h('div', { class: 'lane' }, [h('div', { class: 'ln', text: lane }), evs]));
+    });
+    el.appendChild(lanes);
+    return el;
+  }
+
+  function attestation(run) {
+    var sig = run.signature && run.signature.evidence, d = decision(run);
+    var el = h('section', { class: 'attest' }, [h('h1', { text: 'Release attestation' }),
+      h('p', { text: 'Gasket compared the model in the release image with the model the evaluation evidence was produced for. Synthetic data, demo policy.' }),
+      kv([['Pipeline', String(run.id)], ['Commit', mono(run.sha || 'not recorded')], ['Time', fmtTime(run.created_at)], ['Decision', d.label + ((run.reason_codes || []).length ? ' (' + run.reason_codes.join(', ') + ')' : '')],
+        ['Accuracy', run.metrics && run.metrics.accuracy != null ? num(run.metrics.accuracy) + ' (minimum ' + (run.thresholds || {}).minimum_accuracy + ')' : 'not recorded'],
+        ['Fairness gap', run.metrics && run.metrics.fairness_gap != null ? num(run.metrics.fairness_gap) + ' (maximum ' + (run.thresholds || {}).maximum_fairness_gap + ')' : 'not recorded'],
+        ['Signature', isSigned(run) ? 'Signed with Sigstore keyless signing, Rekor entry ' + sig.rekor.log_index + '. It proves origin and integrity, not that a person reviewed the result.' : 'Not signed'],
+        ['Release', run.deploy_job_user ? 'Release job started by @' + run.deploy_job_user + (run.deployment && run.deployment.mock ? '; recorded only, no service deployed' : '') : 'Not started']]),
+      run.seal ? sealPanel(run, { static: true }) : null,
+      isSigned(run) ? h('p', {}, ['Verify: ', mono(sig.verify_command)]) : null,
+      h('p', { class: 'sub', text: 'Snapshot ' + fmtTime(DATA.generated_at) + '. This page explains the Witness\'s decision; it does not make it.' })]);
+    return el;
+  }
+
+  function casePage(id, tab) {
+    var run = BYID[id], main = h('div', {});
+    if (!run) { main.appendChild(pagehead('Release case file', 'This run is not in the snapshot.')); main.appendChild(link('#/releases', 'Back to releases')); return main; }
+    var t = TABS.filter(function (x) { return x[0] === tab; })[0] ? tab : 'decision';
+    var head = h('div', { class: 'case-head' }, [h('p', { class: 'sub' }, [link('#/releases', 'Releases'), ' / pipeline ' + run.id]),
+      h('h1', { text: 'Release case file' }), h('p', {}, [decisionStatus(run)])]);
+    main.appendChild(head);
+    var info = mrInfo(run), rec = info.iid ? MRS[info.iid] : null;
+    main.appendChild(h('div', { class: 'panel case-head' }, [kv([
+      ['Pipeline', h('span', {}, [mono(String(run.id)), copyBtn(String(run.id), 'pipeline ID'), ' ', ext(run.web_url, 'Open in GitLab')])],
+      ['Commit', h('span', {}, [mono((run.sha || '').slice(0, 12)), copyBtn(run.sha || '', 'commit'), h('div', { class: 'sub', text: changeText(run) })])],
+      ['Merge request', mrCell(run)],
+      rec && approvalText(rec) ? ['Approval', approvalText(rec)] : null,
+      rec && rec.merged_by ? ['Merged by', '@' + rec.merged_by.username] : null,
+      run.deploy_job_user ? ['Release job started by', '@' + run.deploy_job_user] : null,
+      ['Triggered by', run.actor && run.actor.username ? '@' + run.actor.username : 'not recorded'],
+      ['Time', fmtTime(run.created_at)]
+    ])]));
+    var tabs = h('div', { class: 'tabs', role: 'tablist', 'aria-label': 'Case file sections' }, TABS.map(function (x) {
+      return h('a', { role: 'tab', href: '#/releases/' + run.id + '/' + x[0], 'aria-selected': x[0] === t ? 'true' : 'false', text: x[1], tabindex: x[0] === t ? '0' : '-1' });
+    }));
+    tabs.addEventListener('keydown', function (e) {
+      var keys = { ArrowRight: 1, ArrowLeft: -1 }; if (!keys[e.key]) return;
+      var i = TABS.map(function (x) { return x[0]; }).indexOf(t), next = TABS[(i + keys[e.key] + TABS.length) % TABS.length][0];
+      location.hash = '#/releases/' + run.id + '/' + next; e.preventDefault();
+    });
+    main.appendChild(tabs);
+    var panel = { decision: decisionTab, evidence: evidenceTab, signature: signatureTab, agents: agentsTab, custody: custodyTab, files: filesTab }[t](run);
+    main.appendChild(h('div', { class: 'tabpanel', role: 'tabpanel' }, [panel]));
+    var others = info.iid ? sortDesc(releaseRuns().filter(function (r) { return r.id !== run.id && mrInfo(r).key === info.key; })) : [];
+    if (others.length) {
+      var o = section('Other runs on this merge request', null); o.className += ' other-runs';
+      o.appendChild(h('ul', {}, others.map(function (r) { return h('li', {}, [runLink(r, 'Pipeline ' + r.id), ' ', decisionStatus(r), ' ', h('span', { class: 'sub', text: fmtTime(r.created_at) })]); })));
+      main.appendChild(o);
+    }
+    main.appendChild(attestation(run));
+    return main;
+  }
+
+  // ---------------------------------------------------------------- agents
+  var WRITE_PREFIXES = ['create_', 'update_', 'delete_', 'merge_', 'approve_'];
+  function isWrite(tool) { return WRITE_PREFIXES.some(function (p) { return tool.indexOf(p) === 0; }); }
+  function agentsPage() {
+    var A = DATA.agents || { flows: [], counts: {} }, main = h('div', {});
+    main.appendChild(pagehead('Agents', A.statement || 'Agents advise, the Witness decides, people release.'));
+    var d = DATA.duo || {}, n = d.assessments || 0;
+    if (n) {
+      var of = function (k) { return k + ' of ' + n + (d.percentages_shown ? ' (' + Math.round(100 * k / n) + '%)' : ''); };
+      var cats = Object.keys((d.evidence || {}).categories || {}).map(function (c) { return c + ' in ' + d.evidence.categories[c]; }).join(', ');
+      main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Duo against the Witness' }), kv([
+        ['Assessments recorded', String(n)],
+        ['Risk level', 'Agreed ' + of(d.risk.agreed) + '; the Witness was stricter in ' + of(d.risk.witness_stricter) + '; looser in ' + of(d.risk.witness_looser)],
+        ['Required evidence', 'Agreed ' + of(d.evidence.agreed) + '; the Witness added categories in ' + of(d.evidence.witness_added) + (cats ? ' (' + cats + ')' : '')]]),
+        h('p', { class: 'sub', style: 'margin-top:10px', text: 'Why security and SBOM are added for a model change: the Witness requires accuracy, fairness, artifact identity, security and SBOM evidence for any change to model code, matching the release policy. The Impact Analyst is not told that mapping. Percentages appear only from 10 assessments.' })]));
+    } else main.appendChild(empty('No Impact Analyst assessment is recorded yet.', 'It runs automatically when a merge request is created.'));
+    A.flows.forEach(function (f) {
+      var reads = f.tools.filter(function (t) { return !isWrite(t); }), writes = f.tools.filter(isWrite);
+      var panel = h('div', { class: 'panel' }, [h('h2', { text: f.name }),
+        kv([['Trigger', st(f.trigger === 'automatic' ? 'pass' : 'neutral', f.trigger === 'automatic' ? 'Automatic' : 'Mention only', f.why_trigger)], ['When', f.when], ['Service account', mono('@' + f.account)], ['What it does', f.does], ['Why this trigger', f.why_trigger]]),
+        h('h3', { text: 'Tool permissions (least privilege)' }),
+        kv([['Can read', reads.length ? mono(reads.join(', ')) : 'nothing'], ['Can write', writes.length ? mono(writes.join(', ')) : 'nothing'],
+          ['Cannot', 'Approve, merge, deploy or change a Witness decision. None of those tools is granted.']]),
+        h('h3', { text: 'Runs recorded (' + f.run_count + ')' })]);
+      if (!f.runs.length) panel.appendChild(h('p', { class: 'muted', text: 'No run is recorded for this flow in the snapshot.' }));
+      else panel.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Subject' }), h('th', { text: 'Session' })])]),
+        h('tbody', {}, f.runs.map(function (r) {
+          return h('tr', {}, [h('td', { 'data-label': 'Subject' }, [ext(r.href, r.subject)]),
+            h('td', { 'data-label': 'Session' }, [r.session_url ? ext(r.session_url, 'Session ' + r.session_url.split('/').pop()) : h('span', { class: 'muted', text: 'Session not recorded. Map it with scripts/import_sessions.py (docs/SETUP.md).' })])]);
+        }))])]));
+      main.appendChild(panel);
+    });
+    return main;
+  }
+
+  // ---------------------------------------------------------------- policy
+  function policyPage() {
+    var P = DATA.policy || {}, main = h('div', {});
+    main.appendChild(pagehead('Policy', 'The rule the Witness applies to every release. These thresholds are this project\'s own demo rule, not a legal or regulatory standard.'));
+    if (!P.available) { main.appendChild(empty('The policy file is not part of this snapshot.')); return main; }
+    var th = P.thresholds || {};
+    main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Current policy' }), kv([
+      ['Policy', h('span', {}, [P.policy_id, ' ', ext(P.file_url, 'Open the file')])], ['Schema', mono(P.schema_version || 'not recorded')],
+      ['File hash (SHA-256)', monoCopy(P.sha256, 'policy hash')], ['Fairness metric', mono(P.fairness_metric || 'not recorded')]])]));
+    main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Thresholds' }), h('div', { class: 'tablewrap' }, [h('table', { class: 't' }, [
+      h('thead', {}, [h('tr', {}, [h('th', { text: 'Check' }), h('th', { text: 'Limit' }), h('th', { text: 'Meaning' })])]),
+      h('tbody', {}, [
+        h('tr', {}, [h('td', { text: 'Accuracy' }), h('td', { class: 'nowrap', text: 'at least ' + th.minimum_accuracy }), h('td', { text: 'Measured on the fixed evaluation data, recomputed by the Witness.' })]),
+        h('tr', {}, [h('td', { text: 'Fairness gap' }), h('td', { class: 'nowrap', text: 'at most ' + th.maximum_fairness_gap }), h('td', { text: 'Equal opportunity difference between the two groups. Needs at least ' + ((P.fairness || {}).minimum_positives_per_group || '?') + ' positives per group to be meaningful.' })])
+      ])])]),
+      h('p', { class: 'sub', style: 'margin-top:10px', text: 'Required checks: ' + (P.required_checks || []).join(', ') + '.' })]));
+    var rv = P.review || {};
+    main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Who can change it, and how a change is held' }), kv([
+      ['Where changes happen', 'The policy is a file in the repository, so a change is a commit. Changes reach main through merge requests.'],
+      ['Approval on merge requests', rv.approvals_required ? 'The merge requests in the records require ' + rv.approvals_required + ' approval' + (rv.approvals_required > 1 ? 's' : '') + (rv.rules.length ? ' (rule: ' + rv.rules.join(', ') + ')' : '') + '. The project has one member, so approvals are self-approvals.' : 'No approval rule is recorded.'],
+      ['What the Witness enforces', 'A release is blocked with ' + rv.witness_blocks_a_changed_policy + ' when the evidence was produced under a different policy than the one the Witness reads.'],
+      ['What it does not enforce', 'The Witness does not require a review of a policy change, and no POLICY_CHANGE_REQUIRES_REVIEW code exists. Review depends on the merge request approval rule above.']])]));
+    var hist = h('div', { class: 'panel' }, [h('h2', { text: 'Change history' })]);
+    if (!(P.history || []).length) hist.appendChild(empty('History is not available in this snapshot.', 'It is read from GitLab\'s commit records for the policy file when the snapshot is taken.'));
+    else hist.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Date' }), h('th', { text: 'Change' }), h('th', { text: 'Author' })])]),
+      h('tbody', {}, P.history.map(function (c) { return h('tr', {}, [h('td', { 'data-label': 'Date' }, [fmtDay(c.date)]), h('td', { 'data-label': 'Change' }, [safeUrl(c.url) ? ext(c.url, c.title) : c.title]), h('td', { 'data-label': 'Author' }, [c.author || 'not recorded'])]); }))])]));
+    main.appendChild(hist);
+    if ((P.classification_changes || []).length) {
+      main.appendChild(h('div', { class: 'panel' }, [h('h2', { text: 'Changes to how changes are classified' }),
+        h('p', { class: 'sub', text: 'These are not policy file commits. They change which evidence a merge request needs, and are recorded in the Gasket source.' }),
+        h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Date' }), h('th', { text: 'Change' })])]),
+          h('tbody', {}, P.classification_changes.map(function (c) { return h('tr', {}, [h('td', { 'data-label': 'Date' }, [fmtDay(c.date)]), h('td', { 'data-label': 'Change' }, [c.change])]); }))])])]));
+    }
+    return main;
+  }
+
+  // ---------------------------------------------------------------- controls
+  function controlsPage() {
+    var C = DATA.controls || { items: [] }, main = h('div', {});
+    main.appendChild(pagehead('Controls', C.disclosure));
+    var rows = C.items.map(function (c) {
+      var tone = c.status === 'Operating' ? 'pass' : (c.status === 'Partly met' ? 'attn' : 'pending');
+      return h('tr', {}, [
+        h('td', { 'data-label': 'Control' }, [h('b', { text: c.name }), h('div', { class: 'sub', text: c.does })]),
+        h('td', { 'data-label': 'Status' }, [st(tone, c.status), h('div', { class: 'sub', text: c.status_detail })]),
+        h('td', { 'data-label': 'Evidence' }, [c.evidence ? (c.evidence.external ? ext(c.evidence.href, c.evidence.label) : link(c.evidence.href, c.evidence.label)) : h('span', { class: 'muted', text: 'None yet' })]),
+        h('td', { 'data-label': 'Framework themes' }, [kv([['NIST AI RMF', c.nist], ['SR 11-7', c.sr117], ['ISO/IEC 42001', c.iso], ['SLSA', c.slsa]])])]);
+    });
+    main.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, ['Control', 'Status', 'Evidence', 'Framework themes'].map(function (t) { return h('th', { text: t }); }))]), h('tbody', {}, rows)])]));
+    var cov = DATA.coverage || [];
+    if (cov.length) {
+      var sec2 = section('GitLab features used', 'Only stages that actually ran are listed; each links to its real GitLab page.');
+      sec2.appendChild(h('ul', {}, cov.map(function (i) { return h('li', {}, [ext(i.url, i.label), h('span', { class: 'sub', text: ' ' + i.evidence })]); })));
+      main.appendChild(sec2);
+    }
+    main.appendChild(h('p', { class: 'sub', style: 'margin-top:14px' }, [ext(DATA.project_url + '/-/blob/main/docs/CONTROLS.md', 'Read the mapping in docs/CONTROLS.md')]));
+    return main;
+  }
+
+  // ---------------------------------------------------------------- models
+  function modelsPage() {
+    var main = h('div', {}), models = DATA.models || [];
+    main.appendChild(pagehead('Models', 'Each model file the gate has seen, identified by its SHA-256, with its latest decision.'));
+    if (!models.length) { main.appendChild(empty('No model has been recorded.')); return main; }
+    var rows = models.map(function (m) {
+      var runs = RUNS.filter(function (r) { return r.evidenced_model_sha256 === m.sha256 && r.has_decision; }), latest = runs.length ? newest(runs) : null;
+      var pkg = RUNS.filter(function (r) { return r.deployment && r.deployment.published_artifact && r.deployment.published_artifact.sha256 === m.sha256; });
+      var mt = m.metrics || {};
+      return h('tr', {}, [
+        h('td', { 'data-label': 'Model' }, [monoCopy(m.sha256, 'model hash'), h('div', { class: 'sub', text: 'Variant ' + ((m.variants || []).join(', ') || 'not recorded') })]),
+        h('td', { 'data-label': 'Accuracy', class: 'num' }, [mt.accuracy != null ? num(mt.accuracy) : 'not evaluated']),
+        h('td', { 'data-label': 'Fairness gap', class: 'num' }, [mt.fairness_gap != null ? num(mt.fairness_gap) : 'not evaluated']),
+        h('td', { 'data-label': 'Latest decision' }, [latest ? h('span', {}, [decisionStatus(latest), h('div', { class: 'sub' }, [runLink(latest, 'Pipeline ' + latest.id)])]) : h('span', { class: 'muted', text: 'No decision' })]),
+        h('td', { 'data-label': 'Runs', class: 'num' }, [String(m.runs)]),
+        h('td', { 'data-label': 'Package' }, [pkg.length ? ext(DATA.project_url + '/-/packages', 'Package registry') : h('span', { class: 'muted', text: 'Not published' })])]);
+    });
+    main.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, ['Model', 'Accuracy', 'Fairness gap', 'Latest decision', 'Runs', 'Package'].map(function (t) { return h('th', { text: t }); }))]), h('tbody', {}, rows)])]));
+    return main;
+  }
+
+  // A stacked (mobile) table row lays each cell out as label + one content block, so a cell with several children is wrapped in one block.
+  function wrapCells(root) {
+    root.querySelectorAll('table.stack td').forEach(function (td) {
+      if (td.childNodes.length > 1) { var d = document.createElement('div'); while (td.firstChild) d.appendChild(td.firstChild); td.appendChild(d); }
+    });
+  }
+
+  // ---------------------------------------------------------------- shell: header, navigation, routes
+  var ROUTES = [['overview', 'Overview'], ['releases', 'Releases'], ['agents', 'Agents'], ['policy', 'Policy'], ['controls', 'Controls'], ['models', 'Models']];
+  function parseRoute() {
+    var raw = (location.hash || '#/overview').replace(/^#\/?/, ''), qs = '';
+    if (raw.indexOf('?') >= 0) { qs = raw.slice(raw.indexOf('?') + 1); raw = raw.slice(0, raw.indexOf('?')); }
+    var parts = raw.split('/'), q = {};
+    qs.split('&').forEach(function (p) { if (!p) return; var kv2 = p.split('='); q[decodeURIComponent(kv2[0])] = decodeURIComponent((kv2[1] || '').replace(/\+/g, ' ')); });
+    var name = parts[0] || 'overview';
+    // older links keep working
+    if (name === 'runs') name = 'releases';
+    if (name === 'run') { name = 'releases'; }
+    if (name === 'duo') name = 'agents';
+    if (name === 'people') name = 'overview';
+    return { name: name, id: parts[1] ? Number(parts[1]) : null, tab: parts[2] || null, q: q };
+  }
+  function drawSnapshot() {
+    var el = document.getElementById('snap'); if (!el) return; el.textContent = '';
+    var q = DATA.data_quality || {};
+    el.appendChild(h('summary', { text: (DATA.snapshot ? 'Snapshot ' : 'Data as of ') + fmtTime(DATA.generated_at) }));
+    el.appendChild(h('div', { class: 'pop' }, [
+      h('p', { text: DATA.snapshot ? 'A static snapshot, not live data. Every value comes from evidence files saved at this time from the GitLab project. Each run has links to the saved copy and to the live artifact so you can compare.' : 'Collected from GitLab pipelines and job artifacts.' }),
+      DATA.snapshot ? h('p', {}, [ext(DATA.snapshot.project_url, 'Open the GitLab project')]) : null,
+      h('p', { class: 'sub', text: (q.valid_runs || 0) + ' runs with a decision are analysed. ' + (q.no_decision || 0) + ' have no retained Witness artifact; ' + (q.out_of_scope || 0) + ' pipelines are not release runs (Duo flows, dashboard refreshes, test probes). Counts are pipeline runs, so repeats are included. Synthetic data.' })]));
+  }
   function render(data) {
-    var byId = {};
-    data.runs.forEach(function (r) { byId[r.id] = r; });
-    document.getElementById('gitlab-link').setAttribute('href', data.project_url);
-    SNAPSHOT = data.generated_at ? 'Snapshot ' + fmtTime(data.generated_at) : '';
-    var st = document.getElementById('snap-time');
-    if (st && SNAPSHOT) { st.textContent = SNAPSHOT; st.hidden = false; }
+    DATA = data; RUNS = data.runs || []; CHAINS = data.chains || [];
+    RUNS.forEach(function (r) { BYID[r.id] = r; });
+    ((data.work || {}).merge_requests || []).forEach(function (m) { MRS[m.iid] = m; });
     var tt = document.getElementById('theme-toggle');
     if (tt) tt.addEventListener('click', function () {
-      var root = document.documentElement;
-      var dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      var next = dark ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      try { localStorage.setItem('gasket-theme', next); } catch (e) {}
+      var root = document.documentElement, cur = root.getAttribute('data-theme');
+      var dark = cur === 'dark' || (!cur && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches), next = dark ? 'light' : 'dark';
+      root.setAttribute('data-theme', next); try { localStorage.setItem('gasket-theme', next); } catch (e) { /* the theme still switches for this visit */ }
     });
     var nt = document.getElementById('nav-toggle');
     if (nt) nt.addEventListener('click', function () { var open = document.body.classList.toggle('nav-open'); nt.setAttribute('aria-expanded', open ? 'true' : 'false'); });
-    var side = document.getElementById('side');
-    var app = document.getElementById('app');
-
+    drawSnapshot();
+    var side = document.getElementById('side'), app = document.getElementById('app'), first = true;
     function draw() {
       var route = parseRoute();
-      var active = route.name === 'run' ? 'runs' : route.name;
-      if (route.name === 'runs') lastRunsHash = location.hash || '#/runs';
       side.textContent = '';
       var nav = h('nav', { 'aria-label': 'Gasket sections' });
-      ROUTES.forEach(function (r) {
-        nav.appendChild(h('a', { href: '#/' + r.key, class: 'nav' + (r.key === active ? ' active' : ''), 'aria-current': r.key === active ? 'page' : 'false', text: r.label }));
-      });
-      side.appendChild(nav);
-      side.appendChild(h('div', { class: 'sidehead', text: 'In GitLab' }));
+      ROUTES.forEach(function (r) { nav.appendChild(h('a', { href: '#/' + r[0], class: 'nav' + (r[0] === route.name ? ' active' : ''), 'aria-current': r[0] === route.name ? 'page' : false, text: r[1] })); });
+      side.appendChild(nav); side.appendChild(h('div', { class: 'sidehead', text: 'In GitLab' }));
       side.appendChild(h('nav', { 'aria-label': 'GitLab links' }, [
-        ext(data.project_url, 'Repository'),
-        ext(data.project_url + '/-/pipelines', 'Pipelines'),
-        ext(data.project_url + '/-/merge_requests', 'Merge requests'),
-        ext(data.project_url + '/-/environments', 'Environments')
-      ]));
-      side.appendChild(h('p', { class: 'sidenote', text: 'Gasket is read-only. Starting pipelines and approving deployments happen in GitLab.' }));
-
-      app.textContent = '';
-      document.body.classList.remove('nav-open');
-      app.appendChild(qualityBanner(data));
-      if (route.name === 'runs' || route.name === 'run') {
-        if (route.id && byId[route.id]) app.appendChild(runDetail(byId[route.id], data));
-        else { app.appendChild(title('Release runs', 'Every pipeline, newest first. Select a row to inspect that run.')); app.appendChild(runsTable(data)); }
-      } else if (route.name === 'people') {
-        app.appendChild(route.arg ? personView(route.arg, data, byId) : peopleView(data));
-      } else if (route.name === 'models') {
-        app.appendChild(title('Models and metrics', 'Each model file the gate has seen, identified by SHA-256.')); app.appendChild(models(data));
-      } else if (route.name === 'duo') {
-        app.appendChild(title('Duo assessments', 'Recorded advisory assessments next to the Witness result.')); app.appendChild(duo(data));
-      } else {
-        app.appendChild(title('Release proof', 'Does the model in the release image match the model the evidence was produced for?'));
-        app.appendChild(heroRow(data, byId));
-        app.appendChild(proofChain(data, byId));
-        app.appendChild(overview(data));
-        app.appendChild(coverageStrip(data));
-      }
-      app.appendChild(footer(data));
-      window.scrollTo(0, 0);
+        ext(DATA.project_url, 'Repository', 'nav'), ext(DATA.project_url + '/-/pipelines', 'Pipelines', 'nav'),
+        ext(DATA.project_url + '/-/merge_requests', 'Merge requests', 'nav'), ext(DATA.project_url + '/-/environments', 'Environments', 'nav')]));
+      side.appendChild(h('p', { class: 'sidenote', text: 'This dashboard is read-only. Starting pipelines and releasing happen in GitLab.' }));
+      app.textContent = ''; document.body.classList.remove('nav-open');
+      var page;
+      if (route.name === 'releases') page = route.id ? casePage(route.id, route.tab) : releasesPage(route.q);
+      else if (route.name === 'agents') page = agentsPage();
+      else if (route.name === 'policy') page = policyPage();
+      else if (route.name === 'controls') page = controlsPage();
+      else if (route.name === 'models') page = modelsPage();
+      else page = overview();
+      app.appendChild(page);
+      wrapCells(app);
+      app.appendChild(h('footer', {}, [h('p', { text: 'Synthetic data and a demo policy. This dashboard explains the Witness\'s decisions; it does not make them.' })]));
+      document.title = 'Gasket release proof: ' + (ROUTES.filter(function (r) { return r[0] === route.name; })[0] || ROUTES[0])[1];
+      if (!first) { window.scrollTo(0, 0); app.focus({ preventScroll: true }); }
+      first = false;
     }
     window.addEventListener('hashchange', draw);
     draw();
   }
 
-  function title(text, sub) {
-    return h('div', { class: 'pagehead' }, [h('h1', { text: text }), sub ? h('p', { class: 'muted', text: sub }) : null,
-      SNAPSHOT ? h('p', { class: 'snap', text: SNAPSHOT }) : null]);
-  }
-
-  // One slim line instead of two paragraphs; the full explanation is one click away.
-  function qualityBanner(data) {
-    var q = data.data_quality;
-    var issues = q.no_decision > 0 || q.running > 0;
-    var bits = [q.valid_runs + ' valid runs'];
-    if (q.no_decision) bits.push(q.no_decision + ' without a retained Witness artifact (excluded)');
-    if (q.out_of_scope) bits.push(q.out_of_scope + ' non-release pipelines not counted');
-    if (q.running) bits.push(q.running + ' still running');
-    var lead = data.snapshot ? 'Static snapshot, taken ' + fmtTime(data.generated_at) + '. ' : 'Data: ';
-    var more = h('div', { class: 'sub' }, [
-      data.snapshot ? h('p', {}, ['Not live data: every value comes from evidence files saved on that date from ',
-        h('a', { href: data.snapshot.project_url, target: '_blank', rel: 'noopener', text: 'the GitLab project \u2197' }),
-        '. Each run has "Verify at source" links: a saved copy you can view, and the live GitLab artifact to download and compare.']) : null,
-      h('p', { text: q.valid_runs + ' valid runs analysed. ' + q.no_decision + ' without a retained Witness artifact' + (q.no_decision ? ' (excluded from analysis)' : '') + '. ' +
-        q.out_of_scope + ' non-release pipelines (Duo flow, scheduled dashboard refreshes, test probes) are not counted. ' + (q.running ? q.running + ' still running. ' : '') +
-        'Counts are pipeline runs, so repeats of one scenario are included.' })
-    ]);
-    return h('div', { class: 'notices' }, [h('details', { class: 'notice slim' + (issues ? ' warn' : ''), role: 'note' }, [
-      h('summary', {}, [h('b', { text: lead }), bits.join(' \u00b7 '), h('span', { class: 'more', text: ' \u00b7 details' })]), more])]);
-  }
-
-  // ---- Compact decision panel --------------------------------------------
-  function decisionLine(run) {
-    var th = run.thresholds || {}, m = run.metrics || {}, codes = run.reason_codes || [];
-    if (run.outcome === 'released_eligible' || run.outcome === 'unexpected_pass') {
-      var parts = ['Model hash matches the evidence'];
-      if (m.accuracy != null && th.minimum_accuracy != null) parts.push('accuracy ' + num(m.accuracy) + ' ≥ ' + th.minimum_accuracy);
-      if (m.fairness_gap != null && th.maximum_fairness_gap != null) parts.push('fairness gap ' + num(m.fairness_gap) + ' ≤ ' + th.maximum_fairness_gap);
-      return parts.join(' · ') + '. A person must still approve production.';
-    }
-    var c = codes[0];
-    if (c === 'FAIRNESS_GAP_EXCEEDED') return num(m.fairness_gap) + ' observed > ' + (th.maximum_fairness_gap != null ? th.maximum_fairness_gap : '?') + ' allowed (equal opportunity difference). Deployment was skipped.';
-    if (c === 'ACCURACY_BELOW_THRESHOLD') return num(m.accuracy) + ' observed < ' + (th.minimum_accuracy != null ? th.minimum_accuracy : '?') + ' required. Deployment was skipped.';
-    if (c === 'MODEL_HASH_MISMATCH') return 'The evaluated model and the release-image model are different. Deployment was skipped.';
-    if (c === 'IMAGE_DIGEST_MISMATCH') return 'The release image is not the image the evidence was produced for. Deployment was skipped.';
-    if (!run.has_decision) return 'No Witness decision was retained for this run.';
-    return 'The release was blocked. Deployment was skipped.';
-  }
-
-  // A command a reader can copy and run. Clipboard access can be refused (file://, old browsers), so it falls back to selecting.
-  function copyBox(cmd, label) {
-    var code = h('code', { text: cmd });
-    var btn = h('button', { type: 'button', class: 'copy', text: 'Copy', 'aria-label': 'Copy ' + (label || 'command') });
-    btn.addEventListener('click', function () {
-      function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); }
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(cmd).then(done, function () { selectText(code); });
-      else selectText(code);
-    });
-    function selectText(node) { var r = document.createRange(); r.selectNodeContents(node); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
-    return h('div', { class: 'cmd' }, [code, btn]);
-  }
-
-  // Signed row: green only when the pipeline verified its own signature and a Rekor log entry exists.
-  function signedRow(run) {
-    var sig = run.signature && run.signature.evidence;
-    var ok = !!(sig && sig.signed && sig.rekor && sig.rekor.log_index != null);
-    var head = h('div', { class: 'srow' }, [h('span', { class: 'lbl', text: 'Signature' }),
-      h('span', { class: 'chip ' + (ok ? 'ok' : (sig ? 'amber' : 'gray')), text: ok ? 'Signed' : (sig ? 'Signature not verified' : 'Not signed') })]);
-    var kids = [head];
-    if (ok) {
-      kids.push(h('p', { class: 'sub' }, ['Sigstore keyless, GitLab CI identity, logged in Rekor: ',
-        h('a', { href: sig.rekor.url, target: '_blank', rel: 'noopener', text: 'log entry #' + sig.rekor.log_index + ' \u2197' }),
-        '. The signature proves the evidence came from this pipeline and is unaltered; it does not assert a human reviewed correctness.']));
-      kids.push(copyBox(sig.verify_command, 'verify command'));
-      kids.push(h('p', { class: 'sub', text: 'Download the two files under Verify at source (the evidence bundle and its signature) into one folder, then run the command.' }));
-    } else if (sig) {
-      kids.push(h('p', { class: 'sub', text: 'A signature was produced but it did not verify in the pipeline or has no Rekor entry, so it is not shown as signed.' }));
-    } else {
-      kids.push(h('p', { class: 'sub', text: 'Not signed. Signing runs on main-branch pipelines; runs from before it was added, and non-main runs, have no signature.' }));
-    }
-    return h('div', { class: 'signed' + (ok ? ' ok' : '') }, kids);
-  }
-
-  function provenanceBlock(run) {
-    if (!run.provenance) return null;
-    var psig = run.signature && run.signature.provenance;
-    var ok = !!(psig && psig.signed);
-    var body = [h('p', { class: 'sub', text: 'SLSA-style provenance, signed. Self-generated; not a GitLab-native SLSA Level 3 attestation.' })];
-    if (ok) body.push(h('p', { class: 'sub' }, ['Signed (Sigstore keyless) and logged in Rekor: ', h('a', { href: psig.rekor.url, target: '_blank', rel: 'noopener', text: 'log entry #' + psig.rekor.log_index + ' \u2197' })]));
-    else body.push(h('p', { class: 'sub', text: 'This statement is not shown as signed: no verified signature with a Rekor entry was recorded for it.' }));
-    if (ok) body.push(copyBox(psig.verify_command, 'provenance verify command'));
-    body.push(h('pre', { class: 'json', text: JSON.stringify(run.provenance, null, 2) }));
-    return h('details', { class: 'verify' }, [h('summary', { text: 'Provenance' }), h('div', { class: 'detailbody' }, body)]);
-  }
-
-  var CHECK_SVG = function (ok) {
-    return s('svg', { width: 16, height: 16, viewBox: '0 0 16 16', 'aria-hidden': 'true' },
-      [s('path', { d: ok ? 'M3 8.5l3 3 7-7' : 'M4 4l8 8M12 4l-8 8', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' })]);
-  };
-
-  // A pass-meter: where the observed value sits against the policy limit (tick). Same numbers as the line above it.
-  function meter(label, value, limit, kind) {
-    var pass = kind === 'min' ? value >= limit : value <= limit;
-    var top = kind === 'min' ? 1 : Math.max(limit * 3, value * 1.2);
-    var fill = h('i', { class: pass ? '' : 'over' }); fill.style.width = Math.min(100, value / top * 100) + '%';
-    var tick = h('u', {}); tick.style.left = (limit / top * 100) + '%';
-    var note = kind === 'min' ? (pass ? '\u2265 ' : '< ') + limit + ' required' : (pass ? '\u2264 ' : '> ') + limit + ' allowed';
-    return h('div', { class: 'meter' }, [
-      h('div', { class: 'mhead' }, [h('b', { text: label }), h('span', { class: 'mval', text: num(value) })]),
-      h('div', { class: 'mtrack', role: 'img', 'aria-label': label + ' ' + num(value) + ', limit ' + limit }, [fill, tick]),
-      h('div', { class: 'mnote' }, [h('span', { class: pass ? 'okt' : 'badt', text: (pass ? '\u2713 ' : '\u2717 ') + note })])
-    ]);
-  }
-
-  function decisionPanel(run, data) {
-    var blocked = run.outcome === 'expected_block' || run.outcome === 'unexpected_block';
-    var unexpected = run.outcome === 'unexpected_block' || run.outcome === 'unexpected_pass';
-    var codes = run.reason_codes || [];
-    var head = run.outcome === 'released_eligible' || run.outcome === 'unexpected_pass'
-      ? 'Release eligible'
-      : (blocked ? 'Release blocked' + (codes[0] ? ' \u00b7 ' + (REASON_TITLE[codes[0]] || codes[0]) : '') : (OUTCOME[run.outcome] || {}).label || run.outcome);
-    var panel = h('section', { class: 'decision' + (blocked ? ' blocked' : '') + (unexpected ? ' unexpected' : '') });
-    var top = h('div', { class: 'dtop' }, [h('p', { class: 'vt', text: head }), chip(run.outcome), trustChip(run)]);
-    codes.forEach(function (c) { top.appendChild(h('span', { class: 'chip blocked code', text: c })); });
-    panel.appendChild(top);
-    panel.appendChild(h('p', { class: 'dline', text: decisionLine(run) }));
-    if (run.trust && run.trust !== 'trusted') panel.appendChild(h('p', { class: 'sub', text: TRUST[run.trust].hint + ' Flagged, not deleted: it stays listed with its reason.' }));
-    if (run.trust === 'trusted') panel.appendChild(h('p', { class: 'sub', text: TRUST.trusted.hint + ' A person must still approve production.' }));
-
-    var ev = run.evidenced_model_sha256, ob = run.observed_model_sha256;
-    if (ev && ob) {
-      var differ = diffCount(ev, ob);
-      var row = function (label, val, bad) {
-        var code = h('code', {});
-        code.appendChild(h(bad ? 'mark' : 'span', { text: val.slice(0, 12) }));
-        code.appendChild(document.createTextNode(val.slice(12)));
-        return h('div', { class: 'hashrow' }, [h('span', { class: 'lbl', text: label }), code]);
-      };
-      panel.appendChild(h('div', { class: 'verified' }, [
-        h('div', { class: 'vhead' + (differ === 0 ? '' : ' bad') }, [CHECK_SVG(differ === 0), differ === 0 ? 'Verified' : 'Mismatch']),
-        row('Evaluated (evidence)', ev, differ > 0),
-        row('Recomputed from image', ob, differ > 0),
-        h('span', { class: 'sub', text: differ === 0 ? 'Identical.' : 'Differ in ' + differ + ' of ' + Math.max(ev.length, ob.length) + ' characters.' })
-      ]));
-    }
-    panel.appendChild(signedRow(run));
-    var th = run.thresholds || {}, m = run.metrics || {};
-    var meters = [];
-    if (m.accuracy != null && th.minimum_accuracy != null) meters.push(meter('Accuracy', m.accuracy, th.minimum_accuracy, 'min'));
-    if (m.fairness_gap != null && th.maximum_fairness_gap != null) meters.push(meter('Fairness gap', m.fairness_gap, th.maximum_fairness_gap, 'max'));
-    if (meters.length) panel.appendChild(h('div', { class: 'meters' }, meters));
-
-    panel.appendChild(h('p', { class: 'dmeta' }, [h('span', {}, [h('b', { text: 'Triggered by: ' }), who(run.actor, false)]),
-      h('span', { text: 'on ' + fmtTime(run.created_at) + ' \u00b7 commit ' + (run.sha || '').slice(0, 8) })]));
-    if (run.release_stage) panel.appendChild(stageTracker(run));
-    panel.appendChild(h('p', { class: 'dline' }, [h('b', { text: 'Deployment: ' }), run.deploy_job_state ? (DEPLOY[run.deploy_job_state] || run.deploy_job_state) : 'No deploy job recorded.']));
-    var links = h('div', { class: 'links' });
-    if (run.has_decision) links.appendChild(h('a', { href: 'runs/' + run.id + '/', text: 'Evidence page' }));
-    if (run.witness_job_url) links.appendChild(h('a', { href: run.witness_job_url, target: '_blank', rel: 'noopener', text: 'Witness log in GitLab \u2197' }));
-    links.appendChild(h('a', { href: run.web_url, target: '_blank', rel: 'noopener', text: 'Pipeline in GitLab \u2197' }));
-    if (run.mr_iid) links.appendChild(h('a', { href: data.project_url + '/-/merge_requests/' + run.mr_iid, target: '_blank', rel: 'noopener', text: 'Merge request !' + run.mr_iid + ' \u2197' }));
-    panel.appendChild(links);
-    if (run.evidence_links && run.evidence_links.length) {
-      var src = h('div', { class: 'vgrid' }, [
-        h('div', { class: 'vhead', text: 'File' }), h('div', { class: 'vhead', text: 'Saved copy' }), h('div', { class: 'vhead', text: 'Live GitLab artifact' })
-      ]);
-      run.evidence_links.forEach(function (l) {
-        var name = h('div', { class: 'vname' }, [h('b', { text: l.label }), h('span', { class: 'sub', text: l.file })]);
-        var view = l.view_url
-          ? h('a', { class: 'vbtn', href: l.view_url, target: '_blank', rel: 'noopener', title: 'Saved copy of ' + l.file + ' in the repository (opens in the browser)', text: 'View \u2192' })
-          : h('span', { class: 'vbtn off', text: 'No saved copy' });
-        var dl = h('a', { class: 'vbtn dl', href: l.url, target: '_blank', rel: 'noopener', title: 'Live GitLab artifact, job ' + l.job_id + ' (downloads the file)', text: 'Download \u2193' });
-        src.appendChild(h('div', { class: 'vrow' }, [name, h('div', { class: 'vcell', 'data-label': 'Saved copy' }, [view]), h('div', { class: 'vcell', 'data-label': 'Live artifact' }, [dl])]));
-      });
-      panel.appendChild(h('details', { class: 'verify' }, [h('summary', { text: 'Verify at source' }), src]));
-    }
-    var prov = provenanceBlock(run);
-    if (prov) panel.appendChild(prov);
-    return panel;
-  }
-
-  // The most recent run of each scenario, selectable.
-  // The newest release on main, as four proofs side by side; the last blocked release beside it. Replaces the scenario tabs.
-  var STAGE_TEXT = { eligible: 'Eligible \u00b7 a person must approve', awaiting_approval: 'Awaiting approval', deploying: 'Deploying\u2026', deployed_mock: 'Release recorded',
-    artifact_verified: 'Release recorded \u00b7 digest verified', runtime_verify_failed: 'Runtime check failed', deployed: 'Deployed', runtime_verified: 'Deployed \u00b7 runtime verified',
-    deploy_failed: 'Deployment failed', deploy_canceled: 'Deployment canceled' };
-
-  function newest(runs) { return runs.slice().sort(function (a, b) { return a.created_at < b.created_at ? 1 : -1; })[0]; }
-
-  function proofTile(label, ok, headline, detail) {
-    return h('div', { class: 'ptile' + (ok === false ? ' bad' : ok ? ' ok' : '') }, [
-      h('span', { class: 'lbl', text: label }), h('b', {}, [ok === true ? CHECK_SVG(true) : null, headline]), detail ? h('span', { class: 'sub' }, [detail]) : null]);
-  }
-
-  function heroCard(run) {
-    var m = run.metrics || {}, th = run.thresholds || {}, checks = run.checks || {};
-    var names = Object.keys(checks), passed = names.filter(function (n) { return checks[n] === 'passed'; }).length;
-    var ev = run.evidenced_model_sha256, ob = run.observed_model_sha256, same = !!(ev && ob && diffCount(ev, ob) === 0);
-    var sig = run.signature && run.signature.evidence, signed = !!(sig && sig.signed && sig.rekor && sig.rekor.log_index != null);
-    var blocked = run.outcome === 'expected_block' || run.outcome === 'unexpected_block';
-    var head = blocked ? 'Release blocked' : 'Release eligible';
-    var card = h('section', { class: 'hero' + (blocked ? ' blocked' : '') });
-    card.appendChild(h('div', { class: 'hero-top' }, [h('span', { class: 'lbl', text: 'Latest release on main' }),
-      h('span', { class: 'sub', text: fmtTime(run.created_at) + ' \u00b7 commit ' + (run.sha || '').slice(0, 8) })]));
-    card.appendChild(h('div', { class: 'dtop' }, [h('p', { class: 'vt', text: head }), chip(run.outcome), trustChip(run)]));
-    card.appendChild(h('p', { class: 'dline', text: decisionLine(run) }));
-    card.appendChild(h('div', { class: 'ptiles' }, [
-      proofTile('Model identity', ev && ob ? same : null, ev && ob ? (same ? 'Evidence = image' : 'Mismatch') : NOT_RECORDED,
-        ev ? ev.slice(0, 12) + '\u2026' : null),
-      proofTile('Policy checks', names.length ? passed === names.length : null, names.length ? passed + ' of ' + names.length + ' passed' : NOT_RECORDED,
-        m.accuracy != null ? 'accuracy ' + num(m.accuracy) + ' \u00b7 gap ' + num(m.fairness_gap) : null),
-      proofTile('Signature', signed ? true : null, signed ? 'Signed (Sigstore)' : 'Not signed',
-        signed ? h('a', { href: sig.rekor.url, target: '_blank', rel: 'noopener', text: 'Rekor #' + sig.rekor.log_index + ' \u2197' }) : null),
-      proofTile('Release', run.release_stage ? (run.release_stage.indexOf('failed') < 0 ? true : false) : null, STAGE_TEXT[run.release_stage] || NOT_RECORDED, 'A person must approve production')
-    ]));
-    var links = h('div', { class: 'links' }, [h('a', { href: '#/run/' + run.id, text: 'Open full run \u2192' })]);
-    if (run.has_decision) links.appendChild(h('a', { href: 'runs/' + run.id + '/', text: 'Evidence page' }));
-    links.appendChild(h('a', { href: run.web_url, target: '_blank', rel: 'noopener', text: 'Pipeline in GitLab \u2197' }));
-    card.appendChild(links);
-    return card;
-  }
-
-  function blockedCard(run, data) {
-    var codes = run.reason_codes || [], chain = (data.chains || []).filter(function (c) { return c.blocked_run === run.id; })[0];
-    var card = h('section', { class: 'hero blocked' });
-    card.appendChild(h('div', { class: 'hero-top' }, [h('span', { class: 'lbl', text: 'Last blocked release' }), h('span', { class: 'sub', text: fmtTime(run.created_at) })]));
-    card.appendChild(h('p', { class: 'vt small', text: codes[0] ? (REASON_TITLE[codes[0]] || codes[0]) : 'Blocked' }));
-    card.appendChild(h('p', { class: 'dline', text: decisionLine(run) }));
-    card.appendChild(h('p', { class: 'sub' }, [chain ? 'Investigated by Duo: ' : 'No Duo investigation recorded. ',
-      chain ? h('a', { href: chain.issue.web_url, target: '_blank', rel: 'noopener', text: 'issue #' + chain.issue.iid + ' \u2197' }) : null]));
-    card.appendChild(h('div', { class: 'links' }, [h('a', { href: '#/run/' + run.id, text: 'Open run \u2192' })]));
-    return card;
-  }
-
-  function heroRow(data, byId) {
-    var releases = data.runs.filter(function (r) { return r.kind === 'release' && r.has_decision && r.ref === 'main'; });
-    var latest = releases.length ? newest(releases) : null;
-    var blocked = data.runs.filter(function (r) { return r.has_decision && (r.outcome === 'expected_block' || r.outcome === 'unexpected_block'); });
-    var lastBlock = blocked.length ? newest(blocked) : null;
-    if (!latest) return h('p', { class: 'muted', text: 'No release run recorded yet.' });
-    return h('div', { class: 'herorow' }, [heroCard(latest), lastBlock && lastBlock.id !== latest.id ? blockedCard(lastBlock, data) : null]);
-  }
-
-  // ---- One run: decision, explanation, checks, identity, sources ---------
-  function runDetail(run, data) {
-    var el = h('div', {});
-    el.appendChild(h('p', { class: 'crumb' }, [h('a', { href: lastRunsHash, text: 'Release runs' }), ' / pipeline ' + run.id]));
-    el.appendChild(title('Pipeline ' + run.id, (SCENARIO[run.scenario] || run.scenario || 'Merge request') + ' · ' + fmtTime(run.created_at)));
-    el.appendChild(decisionPanel(run, data));
-
-    var checks = run.checks || {};
-    var keys = Object.keys(checks);
-    var cs = sec('Policy checks', keys.length ? 'Each check is recomputed by the Witness.' : 'No Witness decision was retained, so no checks are available.');
-    if (keys.length) {
-      var grid = h('div', { class: 'checks' });
-      keys.forEach(function (k) {
-        var ok = checks[k] === 'passed';
-        grid.appendChild(h('div', { class: 'check' + (ok ? '' : ' fail') }, [h('b', { text: k.replace(/_/g, ' ') }), h('span', { class: 'chip ' + (ok ? 'ok' : 'block'), text: ok ? 'PASS' : (checks[k] === 'skipped' ? 'SKIPPED' : 'FAIL') })]));
-      });
-      cs.appendChild(grid);
-    }
-    el.appendChild(cs);
-
-    var th = run.thresholds || {}, m = run.metrics || {};
-    var ms = sec('Metrics against policy');
-    ms.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [
-      h('thead', {}, [h('tr', {}, ['Metric', 'Observed', 'Policy'].map(function (t) { return h('th', { text: t }); }))]),
-      h('tbody', {}, [
-        h('tr', {}, [h('td', { text: 'Accuracy' }), h('td', { text: num(m.accuracy) }), h('td', { text: th.minimum_accuracy != null ? 'at least ' + th.minimum_accuracy : NOT_RECORDED })]),
-        h('tr', {}, [h('td', { text: 'Fairness gap' }), h('td', { text: num(m.fairness_gap) }), h('td', { text: th.maximum_fairness_gap != null ? 'at most ' + th.maximum_fairness_gap : NOT_RECORDED })])
-      ])])]));
-    el.appendChild(ms);
-
-    var id = sec('Artifact identity');
-    id.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('tbody', {}, [
-      h('tr', {}, [h('td', { text: 'Commit' }), h('td', {}, [h('code', { text: run.sha || NOT_RECORDED })])]),
-      h('tr', {}, [h('td', { text: 'Evaluated model hash' }), h('td', {}, [h('code', { text: run.evidenced_model_sha256 || NOT_RECORDED })])]),
-      h('tr', {}, [h('td', { text: 'Recomputed from image' }), h('td', {}, [h('code', { text: run.observed_model_sha256 || NOT_RECORDED })])])
-    ])])]));
-    el.appendChild(id);
-
-    var issues = ((data.work || {}).issues || []).filter(function (i) { return i.pipeline_id === run.id; });
-    var steps = sec('Investigation, approval and deployment', 'Steps that have not happened stay visibly pending.');
-    var inv = issues.length ? h('a', { href: issues[0].web_url, target: '_blank', rel: 'noopener', text: '#' + issues[0].iid + ' ' + issues[0].title + ' ↗' }) : 'Pending: no investigation issue is linked to this pipeline.';
-    var dep = run.deployment;
-    var approval = 'Pending: not recorded.';
-    if (dep && dep.approval && typeof dep.approval === 'object' && dep.approval.approvals && dep.approval.approvals.length) {
-      approval = dep.approval.approvals.map(function (a) { return '@' + a.username + ' ' + a.status; }).join(', ') + ' (from GitLab\'s approval record)';
-    } else if (dep) approval = 'not recorded' + (dep.executed_by ? '. The job was executed by @' + dep.executed_by + ', which is not an approval.' : '.');
-    var runtime = 'Pending: no deployment has been verified for this run.';
-    var rv = run.runtime_verification;
-    if (rv && rv.verified === true) runtime = RUNTIME_CAPTION;
-    else if (rv && rv.verified === false) runtime = rv.note || 'Runtime verification failed.';
-    else if (dep && dep.mock) runtime = 'Not applicable: the release was recorded without deploying a service, so nothing running was verified.';
-    else if (dep && dep.production_verified) runtime = 'Verified: the running service reported the evidenced model hash and passed the smoke checks.';
-    else if (dep && dep.failure) runtime = 'Failed at ' + dep.failure.stage + (dep.previous_revision_still_serving ? '; the previous revision is still serving.' : '.');
-    steps.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('tbody', {}, [
-      h('tr', {}, [h('td', { text: 'Duo investigation' }), h('td', {}, [inv])]),
-      h('tr', {}, [h('td', { text: 'Human approval' }), h('td', { text: approval })]),
-      h('tr', {}, [h('td', { text: 'Runtime verification' }), h('td', { text: runtime })])
-    ])])]));
-    el.appendChild(steps);
-    return el;
-  }
-
-  // ---- Overview ----------------------------------------------------------
-  // One case from blocked pipeline to verified runtime. Missing links stay pending; nothing is inferred.
-  function proofChain(data, byId) {
-    var el = sec('From a block to a release', 'One blocked pipeline followed through Duo\u2019s investigation, the repair, the corrected run, approval, deployment and runtime check, from real GitLab records.');
-    var chains = data.chains || [];
-    function link(href, text) { return h('a', { href: href, target: '_blank', rel: 'noopener', text: text + ' ↗' }); }
-    function row(label, content, done, n) {
-      return h('li', { class: done ? 'done' : '' }, [
-        h('span', { class: 'node', 'aria-hidden': 'true' }, [done ? CHECK_SVG(true) : String(n)]),
-        h('div', {}, [h('div', { class: 'st', text: label }), h('div', { class: 'sd' }, [content])]),
-        h('span', { class: 'chip ' + (done ? 'ok' : 'gray'), text: done ? 'RECORDED' : 'PENDING' })
-      ]);
-    }
-    function table(c) {
-      var blocked = c ? byId[c.blocked_run] : null, corrected = c && c.corrected_run ? byId[c.corrected_run] : null;
-      var release = c && c.release_run ? byId[c.release_run] : null;
-      var dep = release && release.deployment;
-      var approval = dep && dep.approval && typeof dep.approval === 'object' && dep.approval.approvals && dep.approval.approvals.length
-        ? dep.approval.approvals.map(function (a) { return '@' + a.username + ' (' + a.status + ')'; }).join(', ') : null;
-      return h('ol', { class: 'vtl' }, [
-        row('Blocked pipeline', blocked ? h('span', {}, [h('a', { href: '#/run/' + blocked.id, text: 'Pipeline ' + blocked.id }), ' · ' + (c.blocked_reasons || []).join(', ')]) : 'No blocked pipeline linked yet.', !!blocked, 1),
-        row('Duo investigation', c ? h('span', {}, [link(c.issue.web_url, '#' + c.issue.iid + ' ' + c.issue.title), ' · ', sessionCell(c.issue.session_url, c.issue.session, c.issue.session_flow)]) : 'No investigation issue recorded.', !!c, 2),
-        row('Repair merge request', c && c.repair_mr ? h('span', {}, [link(c.repair_mr.web_url, '!' + c.repair_mr.iid + ' ' + c.repair_mr.title + (c.repair_mr.draft ? ' (draft)' : '')), ' · ', sessionCell(c.repair_mr.session_url, c.repair_mr.session, c.repair_mr.session_flow)]) : 'No repair merge request recorded.', !!(c && c.repair_mr), 3),
-        row('Corrected pipeline', corrected ? h('span', {}, [h('a', { href: '#/run/' + corrected.id, text: 'Pipeline ' + corrected.id }), ' · ' + OUTCOME[corrected.outcome].label + ' (a new run; the blocked result is unchanged)']) : 'No corrected pipeline yet.', !!corrected, 4),
-        row('Approval record', approval || 'not recorded', !!approval, 5),
-        row('Deployment', dep ? (dep.mock ? 'Release recorded, nothing deployed (receipt marked mock), by ' + (dep.executed_by || 'not recorded') : (dep.promoted_revision ? 'Revision ' + dep.promoted_revision : 'Deployment attempted')) : 'No deployment recorded.', !!(dep && !dep.mock && dep.promoted_revision), 6),
-        row('Runtime verification', release ? stageTracker(release, true) : 'Pending: no release run with a deployment is linked.', !!(release && (release.release_stage === 'runtime_verified' || release.release_stage === 'artifact_verified')), 7)
-      ]);
-    }
-    el.appendChild(h('p', { class: 'sub' }, [h('a', { href: 'proof-chain.json', text: 'Machine-readable export (proof-chain.json)' }), ' · no sign-in needed; job logs and merge request notes in GitLab may need one.']));
-    if (!chains.length) {
-      el.appendChild(h('p', { class: 'muted', text: 'No investigation has been recorded yet, so every step below is pending.' }));
-      el.appendChild(table(null));
-    } else {
-      // The newest chain that ran all the way to a corrected release first; earlier or unfinished ones are one click away.
-      var ordered = chains.slice().sort(function (a, b) { return (b.corrected_run ? 1 : 0) - (a.corrected_run ? 1 : 0) || b.blocked_run - a.blocked_run; });
-      el.appendChild(table(ordered[0]));
-      if (ordered.length > 1) el.appendChild(h('details', { class: 'more-details' }, [
-        h('summary', { text: 'Other investigations (' + (ordered.length - 1) + ')' })].concat(ordered.slice(1).map(table))));
-    }
-    return el;
-  }
-
-  // Which GitLab features were actually used, each linked to its real page. Listed only when a recorded run or merge request proves it.
-  function coverageStrip(data) {
-    var el = sec('GitLab features used', 'Only stages that actually ran are listed; each links to its real GitLab page.');
-    var items = data.coverage || [];
-    if (!items.length) { el.appendChild(h('p', { class: 'muted', text: 'No GitLab feature usage is recorded yet.' })); return el; }
-    var strip = h('div', { class: 'covpills' });
-    items.forEach(function (i) {
-      strip.appendChild(h('a', { class: 'covpill', href: i.url, target: '_blank', rel: 'noopener', title: i.evidence, text: i.label + ' \u2197' }));
-    });
-    el.appendChild(strip);
-    return el;
-  }
-
-  function overview(data) {
-    var k = data.kpis;
-    var el = sec('Release record', 'Runs classified by the Witness decision, not by pipeline colour: a red pipeline that blocked for the expected reason is a correct result. Blocked runs are flagged, not deleted (evidence artifacts of recent runs are kept without expiry; older ones expire 90 days after the run).');
-    function kpi(label, value, cls, hint) { return h('div', { class: 'kpi ' + (cls || ''), title: hint || '' }, [h('b', { text: String(value) }), h('span', { text: label })]); }
-    el.appendChild(h('div', { class: 'kpis four' }, [
-      kpi('valid runs', k.valid_runs),
-      kpi('eligible releases', k.eligible_releases, 'ok'),
-      kpi('correct blocks', k.correct_blocks, 'blocked', 'Blocked for the reason the scenario expected'),
-      kpi('unexpected blocks', k.unexpected_blocks, k.unexpected_blocks ? 'danger' : '', 'Blocked for a reason the scenario did not expect')
-    ]));
-    if (k.unexpected_passes) el.appendChild(h('p', { class: 'notice warn', text: k.unexpected_passes + ' run(s) of a negative scenario passed the Witness. Investigate.' }));
-    el.appendChild(h('h3', { text: 'Every run, oldest to newest' }));
-    el.appendChild(timeline(data));
-    var st = k.stages || {};
-    var more = h('details', { class: 'more-details' }, [h('summary', { text: 'More statistics' })]);
-    more.appendChild(h('div', { class: 'kpis', style: 'margin-top:10px' }, [
-      kpi('median Witness time', fmtSec(k.median_witness_seconds)), kpi('median pipeline time', fmtSec(k.median_pipeline_seconds)),
-      kpi('Awaiting approval', st.awaiting_approval || 0), kpi('Release recorded', st.deployed_mock || 0, 'gray'),
-      kpi('Artifact digest verified', st.artifact_verified || 0, st.artifact_verified ? 'ok' : ''), kpi('Deployed (real service)', st.deployed || 0)
-    ]));
-    more.appendChild(h('h3', { text: 'Reason codes across valid runs' }));
-    more.appendChild(reasonBars(data));
-    more.appendChild(h('h3', { text: 'Scenario by outcome' }));
-    more.appendChild(matrix(data));
-    more.appendChild(h('h3', { text: 'Where pipeline time goes (median of valid runs)' }));
-    more.appendChild(stageBar(data));
-    more.appendChild(reverifySection(data));
-    el.appendChild(more);
-    return el;
-  }
-
-  // Scheduled re-verification of the last signed release on the fixed holdout. Not production-traffic monitoring.
-  function reverifySection(data) {
-    var wrap = h('div', {});
-    wrap.appendChild(h('h3', { text: 'Scheduled re-verification' }));
-    wrap.appendChild(h('p', { class: 'sub', text: 'Scheduled re-verification on a fixed holdout \u2014 not live production-traffic monitoring. It re-checks the published model against the signed evidence and the policy; on an unchanged model and holdout the numbers cannot move.' }));
-    var rv = data.reverification || {};
-    if (!rv.latest) {
-      wrap.appendChild(h('p', { class: 'notice', text: 'No scheduled re-verification has run yet. It runs only from a pipeline schedule on main (see docs/SETUP.md).' }));
-      return wrap;
-    }
-    var l = rv.latest, m = l.metrics || {}, b = l.signed_baseline || {};
-    wrap.appendChild(h('p', { class: 'dline' }, [h('span', { class: 'chip ' + (l.flagged ? 'danger' : 'ok'), text: l.flagged ? 'Flagged' : 'Within thresholds' }), ' ',
-      h('a', { href: l.web_url, target: '_blank', rel: 'noopener', text: 'Pipeline ' + l.run_id + ' \u2197' }), ' \u00b7 ' + fmtTime(l.created_at) + ' \u00b7 ' + rv.count + ' run' + (rv.count === 1 ? '' : 's') + ', ' + rv.flagged + ' flagged']));
-    wrap.appendChild(h('p', { class: 'sub', text: 'Accuracy ' + num(m.accuracy) + ' (signed baseline ' + num(b.accuracy) + ') \u00b7 fairness gap ' + num(m.fairness_gap) + ' (signed baseline ' + num(b.fairness_gap) + ')' }));
-    if (l.flagged) wrap.appendChild(h('ul', {}, (l.flags || []).map(function (f) { return h('li', { text: f }); })));
-    return wrap;
-  }
-
-  function timeline(data) {
-    var runs = data.runs.filter(function (r) { return OUTCOME[r.outcome] && r.outcome !== 'out_of_scope'; }).slice().reverse();
-    var cell = 15, gap = 3, w = runs.length * (cell + gap) + gap;
-    var svg = s('svg', { viewBox: '0 0 ' + Math.max(w, 40) + ' 30', width: Math.max(w, 40), height: 30, role: 'img', 'aria-label': 'Outcome of each run, oldest to newest' });
-    runs.forEach(function (r, i) {
-      var cls = 's-' + OUTCOME[r.outcome].cls;
-      var rect = s('rect', { x: gap + i * (cell + gap), y: 3, width: cell, height: 24, rx: 2, class: cls });
-      rect.appendChild(s('title', {})).textContent = fmtTime(r.created_at) + ' | ' + (SCENARIO[r.scenario] || r.scenario || 'merge request') + ' | ' + OUTCOME[r.outcome].label;
-      var a = s('a', { href: r.has_decision ? 'runs/' + r.id + '/' : r.web_url }, [rect]);
-      svg.appendChild(a);
-    });
-    var legend = h('div', { class: 'legend' });
-    [['ok', 'Release eligible'], ['blocked', 'Blocked (expected)'], ['danger', 'Unexpected'], ['gray', 'No decision']].forEach(function (p) {
-      var sw = h('i', {}); sw.style.background = { ok: 'var(--pass)', blocked: 'var(--fail)', danger: 'var(--danger)', gray: 'var(--line)' }[p[0]];
-      legend.appendChild(h('span', {}, [sw, p[1]]));
-    });
-    return h('div', { class: 'tablewrap' }, [svg, legend]);
-  }
-
-  function reasonBars(data) {
-    var codes = Object.keys(data.reason_codes).sort(function (a, b) { return data.reason_codes[b] - data.reason_codes[a]; });
-    if (!codes.length) return h('p', { class: 'muted', text: 'No blocked runs recorded.' });
-    var max = data.reason_codes[codes[0]];
-    var grid = h('div', { class: 'bars' });
-    codes.forEach(function (c) {
-      var fill = h('i', {}); fill.style.width = (data.reason_codes[c] / max * 100) + '%';
-      grid.appendChild(h('code', { text: c }));
-      grid.appendChild(h('div', { class: 'track' }, [fill]));
-      grid.appendChild(h('span', { text: String(data.reason_codes[c]) }));
-    });
-    return grid;
-  }
-
-  function matrix(data) {
-    var cols = ['released_eligible', 'expected_block', 'unexpected_block', 'unexpected_pass'];
-    var head = h('tr', {}, [h('th', { text: 'Scenario' })].concat(cols.map(function (c) { return h('th', { text: OUTCOME[c].label }); })));
-    var rows = ['a', 'b-stale', 'c', 'd', 'regression'].filter(function (sc) { return data.scenario_matrix[sc]; }).map(function (sc) {
-      var row = data.scenario_matrix[sc];
-      var cells = [h('td', { text: SCENARIO[sc] })];
-      if (!row) { cells.push(h('td', { colspan: String(cols.length), class: 'muted', text: 'No CI runs recorded for this scenario' })); }
-      else cols.forEach(function (c) { cells.push(h('td', { text: row[c] ? String(row[c]) : '-' })); });
-      return h('tr', {}, cells);
-    });
-    return h('div', { class: 'tablewrap' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]);
-  }
-
-  function stageBar(data) {
-    var stages = [['package', 'Package'], ['evaluate', 'Evaluate'], ['secure', 'Security scan'], ['bind', 'Bind'], ['witness', 'Witness']];
-    var colors = ['#0c365d', '#0d6b66', '#7aa5ff', '#e3b341', '#1b65fb'];   // navy, teal, light blue, amber, blue
-    var valid = data.runs.filter(function (r) { return r.has_decision; });
-    var med = stages.map(function (st) { return median(valid.map(function (r) { return r.stage_seconds[st[0]]; })); });
-    var total = med.reduce(function (a, v) { return a + (v || 0); }, 0);
-    if (!total) return h('p', { class: 'muted', text: 'Stage durations: ' + NOT_RECORDED + '.' });
-    var stack = h('div', { class: 'stack', role: 'img', 'aria-label': 'Median stage durations' });
-    var legend = h('div', { class: 'legend' });
-    stages.forEach(function (st, i) {
-      if (!med[i]) return;
-      var seg = h('span', { title: st[1] + ': ' + fmtSec(med[i]) }); seg.style.width = (med[i] / total * 100) + '%'; seg.style.background = colors[i];
-      stack.appendChild(seg);
-      var sw = h('i', {}); sw.style.background = colors[i];
-      legend.appendChild(h('span', {}, [sw, st[1] + ' ' + fmtSec(med[i])]));
-    });
-    return h('div', {}, [stack, legend]);
-  }
-
-  // ---- Runs table --------------------------------------------------------
-  function runsTable(data, fixedRuns, fixedQuery) {
-    var el = sec('Runs', 'Every pipeline, newest first. Filters are kept in the address, so a view can be shared.');
-    var q = fixedQuery || parseRoute().query;
-    var pool = fixedRuns || data.runs;
-    var people = (data.people || []).map(function (p) { return p.profile; });
-    var holder = h('div', { class: 'tablewrap' });
-    var more = h('button', { class: 'more', type: 'button', text: 'Show more' });
-    var count = h('span', { class: 'sub' });
-
-    function go(next) { if (!fixedQuery) location.hash = hashFor('runs', next); }
-    function select(label, key, options) {
-      var sel = h('select', { 'aria-label': label }, [h('option', { value: '', text: label })].concat(
-        options.map(function (o) { return h('option', { value: o[0], text: o[1] }); })));
-      sel.value = q[key] || '';
-      sel.addEventListener('change', function () { var next = Object.assign({}, q); next[key] = sel.value; delete next.n; go(next); });
-      return sel;
-    }
-    var filters = h('div', { class: 'filters' });
-    var search = h('input', { type: 'search', placeholder: 'Search pipeline, ref, commit, reason', 'aria-label': 'Search runs', class: 'search' });
-    search.value = q.q || '';
-    search.addEventListener('change', function () { var next = Object.assign({}, q); next.q = search.value.trim(); delete next.n; go(next); });
-    filters.appendChild(search);
-    filters.appendChild(select('All outcomes', 'outcome', Object.keys(OUTCOME).filter(function (k) { return k !== 'out_of_scope'; }).map(function (k) { return [k, OUTCOME[k].label]; })));
-    filters.appendChild(select('All scenarios', 'scenario', Object.keys(SCENARIO).map(function (k) { return [k, SCENARIO[k]]; })));
-    if (people.length && !fixedQuery) filters.appendChild(select('All contributors', 'who', people.map(function (u) { return [u.username, '@' + u.username]; })));
-    var clear = h('a', { href: '#/runs', text: 'Clear filters' });
-    var active = ['q', 'outcome', 'scenario', 'who'].some(function (k) { return q[k]; });
-    if (active && !fixedQuery) filters.appendChild(clear);
-    filters.appendChild(count);
-    el.appendChild(filters);
-    el.appendChild(holder);
-    el.appendChild(more);
-
-    var owned = null;
-    if (q.who) {
-      var person = (data.people || []).filter(function (p) { return p.profile.username === q.who; })[0];
-      owned = person ? person.run_ids : [];
-    }
-    var needle = (q.q || '').toLowerCase();
-    var rows = pool.filter(function (r) {
-      if (r.outcome === 'out_of_scope') return false;
-      if (q.scenario && r.scenario !== q.scenario) return false;
-      if (q.outcome && r.outcome !== q.outcome) return false;
-      if (owned && owned.indexOf(r.id) < 0) return false;
-      if (needle) {
-        var hay = [String(r.id), r.ref, r.sha, (r.reason_codes || []).join(' '), r.mr_iid ? 'mr !' + r.mr_iid : ''].join(' ').toLowerCase();
-        if (hay.indexOf(needle) < 0) return false;
-      }
-      return true;
-    });
-    var limit = Number(q.n) || 25;
-    var shown = rows.slice(0, limit);
-    var head = h('tr', {}, ['Pipeline', 'Time (UTC)', 'By', 'Ref', 'Outcome', 'Trust', 'Reason', 'Deploy', 'Links'].map(function (t) { return h('th', { text: t }); }));
-    var body = shown.map(function (r) {
-      var links = h('span', {});
-      if (r.has_decision) links.appendChild(h('a', { href: 'runs/' + r.id + '/', text: 'Evidence' }));
-      else links.appendChild(h('span', { class: 'muted', text: 'No evidence' }));
-      links.appendChild(document.createTextNode(' · '));
-      links.appendChild(h('a', { href: r.web_url, target: '_blank', rel: 'noopener', text: 'GitLab ↗' }));
-      var human = r.actor && !r.actor.kind && (data.people || []).some(function (p) { return p.profile.username === r.actor.username; });
-      var triggered = h('td', { class: 'nw' }, [who(r.actor, false)]);
-      return h('tr', {}, [
-        h('td', { class: 'nw' }, [h('a', { class: 'mono', href: '#/run/' + r.id, text: '#' + r.id })]),
-        h('td', { class: 'nw', title: fmtTime(r.created_at), text: r.created_at ? r.created_at.slice(5, 16).replace('T', ' ') : NOT_RECORDED }),
-        triggered,
-        h('td', { class: 'nw' }, [h('code', { text: r.mr_iid ? 'MR !' + r.mr_iid : r.ref })]),
-        h('td', {}, [chip(r.outcome)]),
-        h('td', {}, [trustChip(r)]),
-        h('td', {}, [h('code', { text: (r.reason_codes && r.reason_codes.length) ? r.reason_codes.join(', ') : (r.has_decision ? 'none' : NOT_RECORDED) })]),
-        h('td', { text: r.deploy_job_state || NOT_RECORDED }),
-        h('td', {}, [links])
-      ]);
-    });
-    holder.appendChild(h('table', {}, [h('thead', {}, [head]), h('tbody', {}, body)]));
-    if (!rows.length) holder.appendChild(h('p', { class: 'muted', text: 'No runs match these filters.' }));
-    count.textContent = rows.length + ' matching run' + (rows.length === 1 ? '' : 's') + (shown.length < rows.length ? ', showing ' + shown.length : '');
-    more.style.display = shown.length < rows.length ? '' : 'none';
-    more.addEventListener('click', function () { var next = Object.assign({}, q); next.n = String(limit + 25); go(next); });
-    return el;
-  }
-
-  // ---- Contributors: ownership (MR author/assignee, issue assignee), not pipeline triggerer ----
-  function peopleView(data) {
-    var el = h('div', {});
-    el.appendChild(title('Contributors', 'People who own merge requests or investigations. Pipeline triggerer is shown separately in Release runs.'));
-    var people = data.people || [];
-    var s1 = sec('People with linked work');
-    if (!people.length) {
-      s1.appendChild(h('p', { class: 'muted', text: 'No human-owned work is recorded yet. Every merge request so far was authored by an automation account, and no investigation issue has been assigned to a person. Contributors appear here when work is owned by a person.' }));
-    } else {
-      var rows = people.map(function (p) {
-        return h('tr', {}, [
-          h('td', {}, [who(p.profile, false)]),
-          h('td', { text: String(p.mrs.length) }), h('td', { text: String(p.issues.length) }), h('td', { text: String(p.run_ids.length) }),
-          h('td', {}, [h('a', { href: hashFor('people/' + p.profile.username), text: 'View related work' })])
-        ]);
-      });
-      s1.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [
-        h('thead', {}, [h('tr', {}, ['Person', 'Merge requests', 'Investigations', 'Linked runs', ''].map(function (t) { return h('th', { text: t }); }))]),
-        h('tbody', {}, rows)])]));
-    }
-    el.appendChild(s1);
-    return el;
-  }
-
-  function personView(username, data, byId) {
-    var el = h('div', {});
-    var person = (data.people || []).filter(function (p) { return p.profile.username === username; })[0];
-    el.appendChild(h('p', { class: 'crumb' }, [h('a', { href: '#/people', text: 'Contributors' }), ' / @' + username]));
-    el.appendChild(title('Work related to @' + username, 'A public view of work this person owns. It is not a private dashboard.'));
-    if (!person) { el.appendChild(sec('No linked work', 'No merge request or investigation owned by @' + username + ' is recorded.')); return el; }
-    var runs = person.run_ids.map(function (id) { return byId[id]; }).filter(Boolean);
-    var blocked = runs.filter(function (r) { return r.outcome === 'expected_block' || r.outcome === 'unexpected_block'; }).length;
-    var eligible = runs.filter(function (r) { return r.outcome === 'released_eligible'; }).length;
-    var kp = h('div', { class: 'kpis' });
-    [['Linked runs', runs.length], ['Blocked', blocked], ['Release eligible', eligible], ['Merge requests', person.mrs.length], ['Investigations', person.issues.length]].forEach(function (k) {
-      kp.appendChild(h('div', { class: 'kpi' }, [h('b', { text: String(k[1]) }), h('span', { text: k[0] })]));
-    });
-    var s1 = sec('Counts for this person only', 'Computed from the runs linked to their work. Project-wide totals are on Overview.');
-    s1.appendChild(kp);
-    el.appendChild(s1);
-    var own = (data.work.merge_requests.filter(function (m) { return person.mrs.indexOf(m.iid) >= 0; }));
-    var s2 = sec('Merge requests');
-    if (!own.length) s2.appendChild(h('p', { class: 'muted', text: 'None.' }));
-    own.forEach(function (m) { s2.appendChild(h('p', {}, [h('a', { href: m.web_url, target: '_blank', rel: 'noopener', text: '!' + m.iid + ' ' + m.title + ' ↗' })])); });
-    el.appendChild(s2);
-    var ownIssues = data.work.issues.filter(function (i) { return person.issues.indexOf(i.iid) >= 0; });
-    var s3 = sec('Investigations');
-    if (!ownIssues.length) s3.appendChild(h('p', { class: 'muted', text: 'None.' }));
-    ownIssues.forEach(function (i) { s3.appendChild(h('p', {}, [h('a', { href: i.web_url, target: '_blank', rel: 'noopener', text: '#' + i.iid + ' ' + i.title + ' ↗' })])); });
-    el.appendChild(s3);
-    el.appendChild(runsTable(data, runs, { fixed: '1' }));
-    return el;
-  }
-
-  // ---- Models ------------------------------------------------------------
-  function models(data) {
-    var el = sec('Models and metrics', 'Each distinct model file the gate has seen, identified by its SHA-256. Metrics come from the evaluation job that produced the evidence.');
-    var thresholds = null;
-    data.runs.some(function (r) { if (r.thresholds) { thresholds = r.thresholds; return true; } return false; });
-    var evaluated = data.models.filter(function (m) { return m.metrics && m.metrics.accuracy !== null; });
-    var observedOnly = data.models.filter(function (m) { return !m.metrics; });
-
-    var head = h('tr', {}, ['Variant', 'Model hash', 'Accuracy', 'Fairness gap', 'Evidenced in', 'Observed in'].map(function (t) { return h('th', { text: t }); }));
-    var rows = data.models.map(function (m) {
-      var variant = m.variants.length ? m.variants.join(', ') : 'observed only';
-      var accBad = thresholds && m.metrics && m.metrics.accuracy < thresholds.minimum_accuracy;
-      var gapBad = thresholds && m.metrics && m.metrics.fairness_gap > thresholds.maximum_fairness_gap;
-      return h('tr', {}, [
-        h('td', { text: variant }),
-        h('td', {}, [h('code', { text: m.sha256.slice(0, 16) + '…', title: m.sha256 })]),
-        h('td', {}, [h('span', { class: accBad ? 'chip block' : '', text: m.metrics ? num(m.metrics.accuracy) : 'not evaluated in CI' })]),
-        h('td', {}, [h('span', { class: gapBad ? 'chip block' : '', text: m.metrics ? num(m.metrics.fairness_gap) : 'not evaluated in CI' })]),
-        h('td', { text: m.evidenced_in + ' runs' }),
-        h('td', { text: m.observed_in + ' runs' })
-      ]);
-    });
-    el.appendChild(h('div', { class: 'tablewrap' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]));
-    if (observedOnly.length) {
-      el.appendChild(h('p', { class: 'sub', style: 'margin-top:8px', text: observedOnly.length + ' model hash(es) were only ever observed inside a release image and never evaluated in CI, so no metrics exist for them here. That is the stale-evidence case: the evidence describes a different model.' }));
-    }
-
-    if (evaluated.length && thresholds) {
-      el.appendChild(h('h3', { text: 'Accuracy vs fairness gap, against the policy' }));
-      el.appendChild(scatter(evaluated, thresholds));
-      el.appendChild(h('h3', { text: 'True-positive rate by group (equal opportunity)' }));
-      el.appendChild(groupBars(evaluated, thresholds));
-      el.appendChild(h('p', { class: 'sub', text: 'Equal opportunity compares the true-positive rate between groups. Red bars belong to a model whose gap exceeds the policy limit.' }));
-    }
-    el.appendChild(h('p', { class: 'sub', style: 'margin-top:12px', text: 'The fairness threshold is this project\'s own demo rule, not a legal requirement. Data is synthetic.' }));
-    return el;
-  }
-
-  function scatter(items, th) {
-    var W = 560, H = 280, L = 56, R = 16, T = 12, B = 40;
-    var maxGap = Math.max(th.maximum_fairness_gap * 2.4, Math.max.apply(null, items.map(function (m) { return m.metrics.fairness_gap; })) * 1.15);
-    var accs = items.map(function (m) { return m.metrics.accuracy; });
-    var minAcc = Math.min(th.minimum_accuracy - 0.05, Math.min.apply(null, accs) - 0.03);
-    var maxAcc = Math.max(0.9, Math.max.apply(null, accs) + 0.03);
-    function X(v) { return L + v / maxGap * (W - L - R); }
-    function Y(v) { return T + (maxAcc - v) / (maxAcc - minAcc) * (H - T - B); }
-    var svg = s('svg', { viewBox: '0 0 ' + W + ' ' + H, width: W, role: 'img', 'aria-label': 'Accuracy against fairness gap for each model, with the policy-safe region shaded' });
-    svg.appendChild(s('rect', { x: X(0), y: Y(maxAcc), width: X(th.maximum_fairness_gap) - X(0), height: Y(th.minimum_accuracy) - Y(maxAcc), class: 'safe' }));
-    svg.appendChild(s('line', { x1: L, y1: H - B, x2: W - R, y2: H - B, class: 'axis' }));
-    svg.appendChild(s('line', { x1: L, y1: T, x2: L, y2: H - B, class: 'axis' }));
-    svg.appendChild(s('line', { x1: X(th.maximum_fairness_gap), y1: T, x2: X(th.maximum_fairness_gap), y2: H - B, class: 'limit' }));
-    svg.appendChild(s('line', { x1: L, y1: Y(th.minimum_accuracy), x2: W - R, y2: Y(th.minimum_accuracy), class: 'limit' }));
-    function label(x, y, text, anchor, extra) { var t = s('text', { x: x, y: y, class: 'txt ' + (extra || ''), 'text-anchor': anchor || 'start' }); t.textContent = text; svg.appendChild(t); }
-    label(W / 2, H - 8, 'Fairness gap (lower is better)', 'middle', 'm');
-    label(12, H / 2, 'Accuracy', 'middle', 'm');
-    svg.lastChild.setAttribute('transform', 'rotate(-90 12 ' + (H / 2) + ')');
-    label(X(th.maximum_fairness_gap) + 4, T + 12, 'max gap ' + th.maximum_fairness_gap, 'start', 'm');
-    label(W - R, Y(th.minimum_accuracy) - 5, 'min accuracy ' + th.minimum_accuracy, 'end', 'm');
-    [0, th.maximum_fairness_gap, maxGap].forEach(function (v) { label(X(v), H - B + 14, v.toFixed(2), 'middle', 'm'); });
-    [0.7, 0.75, 0.8, 0.85, 0.9].forEach(function (v) {
-      if (v > minAcc && v < maxAcc) { svg.appendChild(s('line', { x1: L, y1: Y(v), x2: W - R, y2: Y(v), class: 'grid' })); label(L - 6, Y(v) + 4, v.toFixed(2), 'end', 'm'); }
-    });
-    var groups = {};
-    items.forEach(function (m) {
-      var key = m.metrics.fairness_gap + '|' + m.metrics.accuracy;
-      (groups[key] = groups[key] || { m: m, names: [] }).names.push(m.variants.join(', ') || '?');
-    });
-    Object.keys(groups).forEach(function (key) {
-      var g = groups[key], m = g.m;
-      var bad = m.metrics.fairness_gap > th.maximum_fairness_gap || m.metrics.accuracy < th.minimum_accuracy;
-      var c = s('circle', { cx: X(m.metrics.fairness_gap), cy: Y(m.metrics.accuracy), r: 7, class: 'pt' + (bad ? ' fail' : '') });
-      c.appendChild(s('title', {})).textContent = 'Model ' + g.names.join(' and ') + ': accuracy ' + num(m.metrics.accuracy) + ', gap ' + num(m.metrics.fairness_gap) + (g.names.length > 1 ? ' (identical metrics)' : '');
-      svg.appendChild(c);
-      label(X(m.metrics.fairness_gap) + 11, Y(m.metrics.accuracy) + 4, g.names.join(', '), 'start');
-    });
-    return h('div', { class: 'tablewrap' }, [svg, h('p', { class: 'sub', text: 'The shaded region meets both policy limits. Each dot is one model.' })]);
-  }
-
-  function groupBars(items, th) {
-    var grid = h('div', { class: 'bars' });
-    items.forEach(function (m) {
-      var tpr = m.metrics.per_group_true_positive_rate;
-      if (!tpr) return;
-      Object.keys(tpr).sort().forEach(function (g) {
-        var fill = h('i', { class: m.metrics.fairness_gap > th.maximum_fairness_gap ? 'over' : '' }); fill.style.width = (tpr[g] * 100) + '%';
-        grid.appendChild(h('span', { text: 'Model ' + (m.variants.join(', ') || '?') + ', group ' + g }));
-        grid.appendChild(h('div', { class: 'track' }, [fill]));
-        grid.appendChild(h('span', { text: num(tpr[g], 2) }));
-      });
-    });
-    return grid;
-  }
-
-  // ---- Duo vs Witness ----------------------------------------------------
-  function duo(data) {
-    var d = data.duo;
-    var el = sec('Duo vs Witness', 'Duo drafts an advisory assessment of each merge request. The Witness recomputes it from the changed paths and keeps the stricter result.');
-    el.appendChild(h('p', {}, [h('b', { text: d.assessments + ' assessment' + (d.assessments === 1 ? '' : 's') + ' recorded.' })]));
-    if (d.items.length) {
-      var of = function (k) { return k + ' of ' + d.assessments + (d.percentages_shown ? ' (' + Math.round(100 * k / d.assessments) + '%)' : ''); };
-      var cats = Object.keys(d.evidence.categories || {}).map(function (c) { return c + ' \u00d7' + d.evidence.categories[c]; }).join(', ');
-      el.appendChild(h('p', { class: 'duo-metric' }, [h('b', { text: 'Risk level: ' }), 'agreed ' + of(d.risk.agreed) + ' \u00b7 Witness stricter ' + of(d.risk.witness_stricter) + ' \u00b7 Witness looser ' + of(d.risk.witness_looser)]));
-      el.appendChild(h('p', { class: 'duo-metric' }, [h('b', { text: 'Required evidence: ' }), 'agreed ' + of(d.evidence.agreed) + ' \u00b7 Witness added categories in ' + of(d.evidence.witness_added) + (cats ? ' (' + cats + ')' : '')]));
-      el.appendChild(h('p', { class: 'sub', text: 'Why security and SBOM are added for a model change: the Witness requires accuracy, fairness, artifact identity, security and SBOM evidence for any change to model code (REQUIRED_EVIDENCE_BY_SCOPE in gasket/impact.py), matching the release policy\u2019s required security and SBOM checks. Duo\u2019s prompt does not state that mapping. Percentages appear only from 10 assessments.' }));
-    }
-    if (!d.items.length) {
-      var ran = [];
-      ((data.work || {}).issues || []).forEach(function (i) { if (i.author && i.author.kind === 'duo') ran.push(h('li', {}, [h('a', { href: i.web_url, target: '_blank', rel: 'noopener', text: 'Investigator \u2192 issue #' + i.iid + ' \u2197' })])); });
-      ((data.work || {}).merge_requests || []).forEach(function (m) { if (m.session) ran.push(h('li', {}, [h('a', { href: m.web_url, target: '_blank', rel: 'noopener', text: 'Repair \u2192 merge request !' + m.iid + ' \u2197' }), ' (session ' + m.session + ')'])); });
-      el.appendChild(h('p', { class: 'notice', text: 'No Impact Analyst assessment has been recorded yet, so there is no Duo-versus-Witness comparison to show. The flows are wired; each starts when a person mentions its service account on an issue or merge request, and each run uses GitLab Credits. Nothing on this page is simulated.' }));
-      if (ran.length) { el.appendChild(h('p', { class: 'sub', text: 'Duo flows that have run in this project (real records):' })); el.appendChild(h('ul', {}, ran)); }
-    }
-    if (d.items.length) {
-      var riskText = function (i) {
-        if (i.risk_result === 'agreed') return 'risk: agreed (' + i.witness_risk + ')';
-        if (i.risk_result === 'witness_stricter') return 'risk: Witness stricter (Duo ' + (i.duo_risk || 'unstated') + ', Witness ' + i.witness_risk + ')';
-        return 'risk: Witness looser (Duo ' + i.duo_risk + ', Witness ' + i.witness_risk + '; the merged result keeps Duo\u2019s)';
-      };
-      var evidenceText = function (i) {
-        var t = i.evidence_witness_added.length ? 'Witness added ' + i.evidence_witness_added.join(', ') : 'agreed';
-        return t + (i.evidence_duo_only.length ? '; Duo also listed ' + i.evidence_duo_only.join(', ') : '');
-      };
-      var scopeText = function (i) { return (i.witness_scope || []).join(', ') || NOT_RECORDED; };
-      var mrLink = function (i) { return h('a', { href: data.project_url + '/-/merge_requests/' + i.mr_iid, text: '!' + i.mr_iid }); };
-      var chip = function (ok, text) { return h('span', { class: 'chip ' + (ok ? 'ok' : 'amber'), text: text }); };
-      var head = h('tr', {}, ['Merge request', 'Scope', 'Risk level', 'Required evidence', 'Session'].map(function (t) { return h('th', { text: t }); }));
-      var rows = d.items.map(function (i) {
-        return h('tr', {}, [
-          h('td', {}, [mrLink(i)]),
-          h('td', { text: scopeText(i) + (i.scope_differs ? ' (Duo: ' + (i.duo_scope || []).join(', ') + ')' : '') }),
-          h('td', {}, [chip(i.risk_result === 'agreed', i.risk_result === 'agreed' ? 'Agreed' : i.risk_result === 'witness_stricter' ? 'Witness stricter' : 'Witness looser'), h('div', { class: 'sub', text: 'Duo ' + (i.duo_risk || 'unstated') + ' \u00b7 Witness ' + i.witness_risk })]),
-          h('td', {}, [chip(!i.evidence_witness_added.length, i.evidence_witness_added.length ? 'Witness added' : 'Agreed'), h('div', { class: 'sub', text: evidenceText(i) })]),
-          h('td', {}, [sessionCell(i.session_url, i.session, i.session_flow)])
-        ]);
-      });
-      el.appendChild(h('div', { class: 'tablewrap duo-table' }, [h('table', {}, [h('thead', {}, [head]), h('tbody', {}, rows)])]));
-      // Below ~640px the same records are stacked cards, so nothing needs sideways scrolling.
-      el.appendChild(h('div', { class: 'duo-cards' }, d.items.map(function (i) {
-        return h('div', { class: 'duo-card' }, [
-          h('div', { class: 'duo-card-head' }, [mrLink(i), ' \u2014 ' + scopeText(i)]),
-          h('p', {}, [h('b', { text: 'Risk: ' }), chip(i.risk_result === 'agreed', riskText(i).replace(/^risk: /, ''))]),
-          h('p', {}, [h('b', { text: 'Evidence: ' }), chip(!i.evidence_witness_added.length, evidenceText(i))]),
-          h('p', {}, [h('b', { text: 'Session: ' }), sessionCell(i.session_url, i.session, i.session_flow)])
-        ]);
-      })));
-    }
-    return el;
-  }
-
-  // A session link recorded by hand from the project's Sessions page, else the id the flow wrote, else "not recorded".
-  function sessionCell(url, written, flow) {
-    var prefix = flow ? flow + ' \u00b7 ' : '';
-    if (url) return h('a', { href: url, target: '_blank', rel: 'noopener', text: prefix + 'session ' + url.split('/').pop() + ' \u2197' });
-    return document.createTextNode(written ? prefix + 'session ' + written : NOT_RECORDED);
-  }
-
-  function footer(data) {
-    var f = h('footer', {});
-    f.appendChild(h('p', { text: (data.snapshot ? 'Static snapshot taken ' + fmtTime(data.generated_at) + ' (not live), from GitLab pipelines and job artifacts.' : 'Data as of ' + fmtTime(data.generated_at) + ', collected from GitLab pipelines and job artifacts.') }));
-    // The signing sentence is shown as fact only once a run really has a verified signature with a Rekor entry.
-    var anySigned = (data.runs || []).some(function (r) { var e = r.signature && r.signature.evidence; return !!(e && e.signed && e.rekor && e.rekor.log_index != null); });
-    f.appendChild(h('p', { text: anySigned
-      ? 'Synthetic data and a demo policy. Evidence is signed with Sigstore keyless (GitLab CI identity) and logged in Rekor. The signature proves the evidence came from this pipeline and is unaltered; it does not assert a human reviewed correctness. Runs before signing was added show "Not signed". This dashboard explains decisions; it does not make them.'
-      : 'Synthetic data and a demo policy. Evidence signing (Sigstore keyless, GitLab CI identity, logged in Rekor) is built into the pipeline, but no signed run has been recorded in this snapshot yet, so every run shows "Not signed". The evidence is hash-bound. A signature would prove origin and integrity, not that a human reviewed correctness. This dashboard explains decisions; it does not make them.' }));
-    f.appendChild(h('p', {}, [h('a', { href: data.project_url + '/-/blob/main/docs/CONTROLS.md', target: '_blank', rel: 'noopener', text: 'Standards alignment \u2197' }), ' (aligned with, not certified against, NIST AI RMF, SR 11-7, ISO/IEC 42001 and SLSA).']));
-    return f;
-  }
-
   // Data baked into the page (data.js) needs no request, so it also works from disk or any static host.
-  if (window.GASKET_DATA) {
-    render(window.GASKET_DATA);
-  } else {
-    fetch('data.json', { cache: 'no-cache' })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(render)
-      .catch(function (err) {
-        var app = document.getElementById('app');
-        app.textContent = '';
-        app.appendChild(h('div', { class: 'notice warn', text: 'Could not load data.json (' + err.message + '). The per-run evidence pages under runs/ are still available.' }));
-      });
-  }
+  if (window.GASKET_DATA) render(window.GASKET_DATA);
+  else fetch('data.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(render)
+    .catch(function (err) { var app = document.getElementById('app'); app.textContent = ''; app.appendChild(empty('Could not load data.json (' + err.message + ').', 'The per-run evidence pages under runs/ are still available.')); });
 })();

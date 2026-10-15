@@ -1,3 +1,7 @@
+Public Sans (public-sans-latin-400/600-normal.woff2): Copyright 2015 Impallari Type (Libre Franklin); modifications by the U.S. General Services
+Administration (CC0). The font software is licensed under the SIL Open Font License, Version 1.1, whose text is copied below (it applies to Public Sans
+as it does to the other fonts here). IBM Plex Mono: Copyright IBM Corp., SIL Open Font License 1.1. Source: https://github.com/uswds/public-sans
+
 Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter) Inter-Italic[opsz,wght].ttf: Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
