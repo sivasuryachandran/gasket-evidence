@@ -11,7 +11,7 @@
   "reason_codes": "",
   "signed": "yes",
   "release_started_by": "chandran.sivasurya",
-  "runtime_check": "not checked",
+  "runtime_check": "Digest verified",
   "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952903642"
  },
  {

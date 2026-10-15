@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T22:15:11Z",
+ "generated_at": "2026-10-15T22:23:29Z",
  "outcomes": {
   "released_eligible": 40,
   "out_of_scope": 14,
@@ -23,8 +23,8 @@
   "stages": {
    "eligible": 13,
    "awaiting_approval": 7,
-   "deployed_mock": 7,
-   "artifact_verified": 13,
+   "deployed_mock": 6,
+   "artifact_verified": 14,
    "runtime_verify_failed": 0,
    "deployed": 0,
    "runtime_verified": 0
@@ -342,9 +342,9 @@
    "mr_iid": null,
    "sha": "95ecf1200264010706658df60b01e7c7932f1de2",
    "created_at": "2026-10-15T21:52:06.554Z",
-   "status": "running",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 1378.0,
+   "wall_seconds": 1863.8,
    "stage_seconds": {
     "package": 75.5,
     "evaluate": 41.3,
@@ -356,7 +356,7 @@
    "outcome": "released_eligible",
    "trust": "trusted",
    "trust_label": "Trusted / Verified",
-   "release_stage": "deployed_mock",
+   "release_stage": "artifact_verified",
    "signature": {
     "evidence": {
      "blob": "evidence_bundle.json",
@@ -497,7 +497,16 @@
      }
     ]
    },
-   "runtime_verification": null,
+   "runtime_verification": {
+    "kind": "artifact_integrity",
+    "verified": true,
+    "failure": null,
+    "expected_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "observed_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "signature_verified": true,
+    "artifact_url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2952903642/model.pkl",
+    "note": "Runtime verified: the deployed artifact's digest matches the signed evidence. (Artifact-integrity check, not a live-inference test; deploy is still mock.)"
+   },
    "live_inference": null,
    "security": {
     "sbom": {
@@ -550,7 +559,12 @@
    },
    "reverification": null,
    "model_registration": null,
-   "release": null,
+   "release": {
+    "pipeline": "2952903642",
+    "security_job_id": "17216597648",
+    "sign_job_id": "17216597653",
+    "tag": "release-p2952903642"
+   },
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
@@ -564,6 +578,9 @@
     "package-image",
     "pages",
     "policy-change-check",
+    "publish-public-dashboard",
+    "release-evidence",
+    "runtime-verify",
     "secret_detection",
     "security-scan",
     "sign-evidence",
@@ -718,6 +735,15 @@
      "link_only": false,
      "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17216597653/artifacts/raw/provenance.cosign.bundle",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952903642/provenance.cosign.bundle"
+    },
+    {
+     "key": "runtime",
+     "label": "Runtime verification",
+     "file": "runtime-verification.json",
+     "job_id": 17216597655,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17216597655/artifacts/raw/runtime-verification.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952903642/runtime-verification.json"
     },
     {
      "key": "security_summary",
@@ -23443,7 +23469,13 @@
    ],
    "reason_codes": null,
    "checks": null,
-   "actor": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
    "witness_job_url": null,
    "evidenced_model_sha256": null,
    "observed_model_sha256": null,
@@ -28244,11 +28276,6 @@
    },
    "recent": [
     {
-     "message": "Investigator and Repair flows, proof chain, release stages on the dashboard\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "bfb1d23def91376d0b51bda2189dbe53f3e315c8",
-     "title": "Investigator and Repair flows, proof chain, release stages on the dashboard"
-    },
-    {
      "message": "Add regression fixture, deployment/migration/checklist docs, README status\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
      "sha": "5d24f6c80556d544a1c28e2b756c043b664a1d04",
      "title": "Add regression fixture, deployment/migration/checklist docs, README status"
@@ -28742,6 +28769,11 @@
      "message": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard\n",
      "sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
      "title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard"
+    },
+    {
+     "message": "Merge branch 'fix/collector-rate-limit' into 'main'\n\nCollector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!12",
+     "sha": "7618300bafa370fd40c0a5e1b2b47b7a42be861b",
+     "title": "Merge branch 'fix/collector-rate-limit' into 'main'"
     }
    ]
   },
@@ -28799,6 +28831,47 @@
    }
   ],
   "merge_requests": [
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 2,
+    "created_at": "2026-10-15T22:25:06.543Z",
+    "draft": false,
+    "head_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+    "iid": 12,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/collector-rate-limit",
+    "squash_commit_sha": null,
+    "state": "opened",
+    "target_branch": "main",
+    "title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/12"
+   },
    {
     "approvals": {
      "approved": true,
@@ -29332,7 +29405,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T22:15:11Z",
+  "taken_at": "2026-10-15T22:23:29Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null
@@ -29357,7 +29430,8 @@
     8,
     9,
     10,
-    11
+    11,
+    12
    ],
    "issues": [],
    "run_ids": [
@@ -29594,7 +29668,7 @@
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "11 merge requests, 7 merged"
+   "evidence": "12 merge requests, 7 merged"
   },
   {
    "key": "duo_flows",
@@ -29629,8 +29703,8 @@
   {
    "key": "releases",
    "label": "Releases",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2952214541",
-   "evidence": "release release-p2952214541"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/releases/release-p2952903642",
+   "evidence": "release release-p2952903642"
   }
  ],
  "agents": {
@@ -30112,7 +30186,7 @@
     "iso": "Leadership and operation",
     "slsa": "Two-person review is not met with one member",
     "status": "Partly met",
-    "status_detail": "7 merge requests with an approval record; 7 are self-approvals (single-member demo project)",
+    "status_detail": "8 merge requests with an approval record; 8 are self-approvals (single-member demo project)",
     "evidence": {
      "label": "Merge requests in GitLab",
      "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=merged",
@@ -30144,10 +30218,10 @@
     "iso": "Operation",
     "slsa": "Deployed artifact matches the attested subject digest",
     "status": "Operating",
-    "status_detail": "13 runs with the artifact digest verified",
+    "status_detail": "14 runs with the artifact digest verified",
     "evidence": {
-     "label": "Release case file 2952214541",
-     "href": "#/releases/2952214541/evidence",
+     "label": "Release case file 2952903642",
+     "href": "#/releases/2952903642/evidence",
      "external": false
     }
    },
@@ -30214,7 +30288,7 @@
     "reason_codes": "",
     "signed": "yes",
     "release_started_by": "chandran.sivasurya",
-    "runtime_check": "not checked",
+    "runtime_check": "Digest verified",
     "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952903642"
    },
    {
