@@ -56,12 +56,12 @@
   "merged_by": "chandran.sivasurya",
   "corrected_pipeline": 2953690147,
   "release_pipeline": 2953719107,
-  "signed": "no",
-  "release_started_by": "",
-  "runtime_check": "",
-  "steps_recorded": 6,
+  "signed": "yes",
+  "release_started_by": "chandran.sivasurya",
+  "runtime_check": "Runtime verified",
+  "steps_recorded": 9,
   "steps_total": 9,
-  "missing_steps": "signed_release, release_started, runtime_check"
+  "missing_steps": ""
  },
  {
   "blocked_pipeline": 2949088649,

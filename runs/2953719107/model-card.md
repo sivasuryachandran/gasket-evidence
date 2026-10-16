@@ -34,11 +34,11 @@ The Witness decision was **pass**.
 
 ## Signer and release
 
-- Evidence signed: no or not recorded
-- Signer identity: not recorded
-- Verify: `not recorded`
+- Evidence signed: yes (https://search.sigstore.dev/?logIndex=3273967523)
+- Signer identity: https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main
+- Verify: `cosign verify-blob evidence_bundle.json --bundle evidence.cosign.bundle --certificate-identity "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main" --certificate-oidc-issuer "https://gitlab.com"`
 - Approved by: @chandran.sivasurya
-- Release job started by: not recorded
+- Release job started by: @chandran.sivasurya
 
 ## Known limits
 
