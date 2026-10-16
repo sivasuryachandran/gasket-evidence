@@ -268,6 +268,7 @@
         ? 'The latest release candidate, pipeline ' + latest.id + ', passed the Witness' + (latest.deploy_job_user ? '.' : ' and is waiting for a person to release it.')
         : 'The latest release candidate, pipeline ' + latest.id + ', was blocked by the Witness.';
     main.appendChild(pagehead('Overview', sentence));
+    main.appendChild(h('p', { class: 'sub' }, ['New here? ', link('#/about', 'How Gasket works')]));
 
     if (latest) {
       var sealSection = section('The seal', 'Both hashes are the full SHA-256 of the model file, in groups of four. The Witness hashes the model it extracts from the release image and compares it with the model the evidence was produced for.');
@@ -772,6 +773,107 @@
     return main;
   }
 
+  // ---------------------------------------------------------------- about (generated at build time from README.md and docs/CLAIMS.md)
+  function segments(list) {
+    var out = [];
+    (list || []).forEach(function (g) {
+      if (g.t === 'link') out.push(/^https?:\/\//.test(g.href) ? ext(g.href, g.x) : link(g.href, g.x));
+      else if (g.t === 'code') out.push(h('code', { text: g.x }));
+      else if (g.t === 'bold') out.push(h('b', {}, segments(g.kids)));
+      else if (g.t === 'italic') out.push(h('em', {}, segments(g.kids)));
+      else out.push(g.x);
+    });
+    return out;
+  }
+  var CLAIM_TONE = { pass: 'pass', mock: 'mock', neutral: 'neutral', attn: 'attn' };
+  function aboutPage() {
+    var A = DATA.about || {}, main = h('div', {});
+    main.appendChild(h('img', { src: 'logo.png', alt: 'Gasket logo', width: '160', height: '160', class: 'aboutlogo' }));
+    main.appendChild(pagehead('About Gasket', 'This page is generated from ' + (A.source || 'the repository documents') + ' when the dashboard is built.'));
+    if (!A.available) { main.appendChild(empty('The documents this page is built from are not part of this snapshot.')); return main; }
+    var what = section('What Gasket is');
+    what.appendChild(h('div', { class: 'panel' }, [h('p', {}, [h('b', {}, segments(A.tagline))]), h('p', {}, segments(A.what))]));
+    main.appendChild(what);
+
+    var D = A.diagram || {};
+    if ((D.nodes || []).length) {
+      var how = section('How it works', 'Each step is a stage of the release pipeline. A line under a step says where the pipeline goes from it.');
+      var byId = {}; D.nodes.forEach(function (n) { byId[n.id] = n; });
+      var list = h('ol', { class: 'flow' }, D.nodes.map(function (n) {
+        var outs = (D.edges || []).filter(function (e) { return e.from === n.id && byId[e.to]; });
+        return h('li', {}, [h('div', { class: 'flowbox' + (n.decision ? ' decision' : '') }, [h('b', { text: n.label }),
+          outs.length ? h('ul', { class: 'plain sub' }, outs.map(function (e) {
+            return h('li', { text: (e.dotted ? 'Advises (not a gate step): ' : e.label ? 'If ' + e.label + ': ' : 'Then: ') + byId[e.to].label });
+          })) : null])]);
+      }));
+      how.appendChild(h('div', { class: 'panel' }, [list]));
+      if ((A.parts || []).length) how.appendChild(h('ul', { class: 'plain', style: 'margin-top:14px' }, A.parts.map(function (p) { return h('li', {}, segments(p)); })));
+      main.appendChild(how);
+    }
+
+    var G = A.agents || { flows: [] };
+    if (G.flows.length) {
+      var who = section('Who does what', 'The Witness decides. Duo flows advise. People approve.');
+      who.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [
+        h('thead', {}, [h('tr', {}, ['Flow', 'Starts when', 'Can read', 'Can write'].map(function (x) { return h('th', { text: x }); }))]),
+        h('tbody', {}, G.flows.map(function (f) {
+          return h('tr', {}, [h('td', { 'data-label': 'Flow' }, [h('b', { text: f.flow })]), h('td', { 'data-label': 'Starts when' }, segments(f.starts)),
+            h('td', { 'data-label': 'Can read' }, segments(f.reads)), h('td', { 'data-label': 'Can write' }, segments(f.writes))]);
+        }))])]));
+      who.appendChild(h('p', { style: 'margin-top:10px' }, segments(G.statement)));
+      who.appendChild(h('p', {}, [link('#/agents', 'Open the Agents page for the sessions and tool lists')]));
+      main.appendChild(who);
+    }
+
+    var C = A.claims || { groups: [], counts: {}, total: 0 };
+    if (C.total) {
+      var real = section('What is real and what is not', 'Every claim has a status. The full register, with the record behind each claim, is below.');
+      var counts = Object.keys(C.counts).map(function (k) { return C.counts[k] + ' ' + k; }).join(', ');
+      real.appendChild(h('p', { class: 'sub', text: C.total + ' claims: ' + counts + '.' }));
+      C.groups.forEach(function (g) {
+        var box = h('details', { class: 'panel claims' }, [h('summary', {}, [h('b', { text: g.title }), ' (' + g.rows.length + ' claims)']),
+          h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [
+            h('thead', {}, [h('tr', {}, ['#', 'Claim', 'Status', 'Record'].map(function (x) { return h('th', { text: x }); }))]),
+            h('tbody', {}, g.rows.map(function (r) {
+              return h('tr', {}, [h('td', { 'data-label': '#' }, [mono(r.id)]), h('td', { 'data-label': 'Claim' }, segments(r.claim)),
+                h('td', { 'data-label': 'Status' }, [st(CLAIM_TONE[r.tone] || 'neutral', r.status)]), h('td', { 'data-label': 'Record' }, segments(r.evidence))]);
+            }))])])]);
+        real.appendChild(box);
+      });
+      main.appendChild(real);
+    }
+
+    if ((A.tour || []).length) {
+      var tour = section('A 60-second tour');
+      tour.appendChild(h('ol', {}, A.tour.map(function (t) { return h('li', {}, segments(t.text)); })));
+      main.appendChild(tour);
+    }
+
+    var V = A.verify || {};
+    if (V.command) {
+      var ver = section('Verify it yourself');
+      var panel = h('div', { class: 'panel' }, [h('p', {}, segments(V.intro)), h('pre', {}, [h('code', { text: V.command })]), copyBtn(V.command, 'the command'), h('p', { style: 'margin-top:10px' }, segments(V.expected))]);
+      if (A.service && A.seal) {
+        panel.appendChild(h('h3', { text: 'The running service and the seal' }));
+        panel.appendChild(h('p', {}, ['Open ', ext(A.service.info, 'the live service\'s /info'), ' and compare its ', h('code', { text: 'model_sha256' }), ' with the seal hash of pipeline ' + A.seal.pipeline + ':']));
+        panel.appendChild(monoCopy(A.seal.sha256, 'seal hash'));
+        panel.appendChild(h('p', { class: 'sub', style: 'margin-top:8px', text: 'The service reports what it is running. The signed evidence is what says whether that is the approved model.' }));
+      }
+      ver.appendChild(panel);
+      main.appendChild(ver);
+    }
+
+    if ((A.links || []).length) {
+      var ln = section('Links');
+      ln.appendChild(h('ul', { class: 'plain' }, A.links.map(function (l) {
+        if (!l.href) return h('li', {}, [l.label + ': ' + l.note]);
+        return h('li', {}, [/^https?:\/\//.test(l.href) ? ext(l.href, l.label) : link(l.href, l.label)]);
+      })));
+      main.appendChild(ln);
+    }
+    return main;
+  }
+
   // ---------------------------------------------------------------- policy
   function policyPage() {
     var P = DATA.policy || {}, main = h('div', {});
@@ -881,7 +983,7 @@
   }
 
   // ---------------------------------------------------------------- shell: header, navigation, routes
-  var ROUTES = [['overview', 'Overview'], ['releases', 'Releases'], ['agents', 'Agents'], ['policy', 'Policy'], ['controls', 'Controls'], ['models', 'Models']];
+  var ROUTES = [['overview', 'Overview'], ['releases', 'Releases'], ['agents', 'Agents'], ['policy', 'Policy'], ['controls', 'Controls'], ['models', 'Models'], ['about', 'About']];
   function parseRoute() {
     var raw = (location.hash || '#/overview').replace(/^#\/?/, ''), qs = '';
     if (raw.indexOf('?') >= 0) { qs = raw.slice(raw.indexOf('?') + 1); raw = raw.slice(0, raw.indexOf('?')); }
@@ -955,10 +1057,11 @@
       else if (route.name === 'policy') page = policyPage();
       else if (route.name === 'controls') page = controlsPage();
       else if (route.name === 'models') page = modelsPage();
+      else if (route.name === 'about') page = aboutPage();
       else page = overview(route.q);
       app.appendChild(page);
       wrapCells(app);
-      app.appendChild(h('footer', {}, [h('p', { text: 'Synthetic data and a demo policy. This dashboard explains the Witness\'s decisions; it does not make them.' })]));
+      app.appendChild(h('footer', {}, [h('p', { text: 'Synthetic data and a demo policy. This dashboard explains the Witness\'s decisions; it does not make them.' }), h('p', { class: 'sub', text: DATA.copyright || '' })]));
       document.title = 'Gasket release proof: ' + (ROUTES.filter(function (r) { return r[0] === route.name; })[0] || ROUTES[0])[1];
       if (!first) { window.scrollTo(0, 0); app.focus({ preventScroll: true }); }
       first = false;
