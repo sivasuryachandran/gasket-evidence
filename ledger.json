@@ -1,5 +1,35 @@
 [
  {
+  "pipeline_id": 2954265199,
+  "created_at": "2026-10-16T08:25:49.751Z",
+  "ref": "main",
+  "commit": "7454a220e868",
+  "commit_title": "Merge branch 'docs/proof-polish' into 'main'",
+  "scope": "dashboard, docs",
+  "merge_request": "!23",
+  "decision": "Eligible",
+  "reason_codes": "",
+  "signed": "yes",
+  "release_started_by": "chandran.sivasurya",
+  "runtime_check": "not checked",
+  "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2954265199"
+ },
+ {
+  "pipeline_id": 2954244522,
+  "created_at": "2026-10-16T08:19:45.919Z",
+  "ref": "refs/merge-requests/23/head",
+  "commit": "22ab333076d1",
+  "commit_title": "Proof polish: guard, Cloud Run, approval, container scanning and repair-targeting wording; R6 and R7 proven by the scheduled runs; the video follows one chain (2940522134); cycle C noted as prepared",
+  "scope": "dashboard, docs",
+  "merge_request": "!23",
+  "decision": "Eligible",
+  "reason_codes": "",
+  "signed": "no",
+  "release_started_by": "",
+  "runtime_check": "not checked",
+  "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2954244522"
+ },
+ {
   "pipeline_id": 2954136491,
   "created_at": "2026-10-16T07:47:47.095Z",
   "ref": "main",
