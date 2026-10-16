@@ -2,7 +2,7 @@
  "meta": {
   "partial": true,
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
-  "taken_at": "2026-10-16T22:08:59Z"
+  "taken_at": "2026-10-16T22:17:19Z"
  },
  "runs": [
   {
@@ -32601,6 +32601,24 @@
      ],
      "title": "Docs: record the Google Cloud setup and the clear guard path, list what is left, recommend protecting the publish token"
     },
+    "16ad75edfe710256ed1a2e94eb034a6ca2f10ad6": {
+     "merge_requests": [
+      {
+       "iid": 31,
+       "merge_commit_sha": "df1dbd19ebc63df89920945eaf411da8d64e71d3",
+       "state": "merged"
+      },
+      {
+       "iid": 29,
+       "merge_commit_sha": "3f2796c9a6a3c4007dbfe4c62eb30ecda904e6df",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "tests/test_regression_fixture.py"
+     ],
+     "title": "Merge duo-demo/c-fairness-regression into repair/issue-9 (picks up the fixture test fix; the repair's diff is unchanged)"
+    },
     "1a594c7247bbaa9069943d2061ee58c77fbcdb88": {
      "merge_requests": [
       {
@@ -32843,6 +32861,19 @@
      ],
      "title": "CLAIMS G2 proven: pipeline 2956396432 on scenario/b-stale blocked with MODEL_HASH_MISMATCH (job 17242409580)"
     },
+    "2bfc666c3c152598202678342e3084920cb40e34": {
+     "merge_requests": [
+      {
+       "iid": 32,
+       "merge_commit_sha": "2bfc666c3c152598202678342e3084920cb40e34",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "tests/test_regression_fixture.py"
+     ],
+     "title": "Merge branch 'fix/fixture-test-drift' into 'main'"
+    },
     "2e38694838375cf2b3f6945569e6549bce6380e7": {
      "merge_requests": [
       {
@@ -32970,6 +33001,19 @@
      ],
      "title": "Snapshot with promoted main run; chain follows first passing main run after a failed merge pipeline; optional auto-publish job"
     },
+    "3f2796c9a6a3c4007dbfe4c62eb30ecda904e6df": {
+     "merge_requests": [
+      {
+       "iid": 29,
+       "merge_commit_sha": "3f2796c9a6a3c4007dbfe4c62eb30ecda904e6df",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "demo-model/train.py"
+     ],
+     "title": "Merge branch 'duo-demo/c-fairness-regression' into 'main'"
+    },
     "46b712f6f256857d27afbeb7be9740b7c66ce5c2": {
      "merge_requests": [
       {
@@ -33054,6 +33098,19 @@
      ],
      "title": "Schedule runs only scheduled-reverify, with no variables; tests that nothing else can run in a schedule"
     },
+    "5629e5daa70ec60b79e595493a79cc1963cadbc9": {
+     "merge_requests": [
+      {
+       "iid": 33,
+       "merge_commit_sha": "65ff26cb41c5313a6815af6921f02fa0990ce097",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "evidence/duo-sessions/9623558-issue9-repair-failed-workflow-lock.png"
+     ],
+     "title": "Saved copy: 9623558-issue9-repair-failed-workflow-lock"
+    },
     "58ad604af1fcac8bce2c5d917703f328ece9c213": {
      "merge_requests": [],
      "paths": [
@@ -33131,6 +33188,33 @@
       "tests/test_deploy.py"
      ],
      "title": "Cloud Run deploy: copy the image by digest without its tag (skopeo refuses a tag and a digest together) and make the test double refuse it too; pace snapshot requests so they stay under GitLab's rate limit"
+    },
+    "65ff26cb41c5313a6815af6921f02fa0990ce097": {
+     "merge_requests": [
+      {
+       "iid": 33,
+       "merge_commit_sha": "65ff26cb41c5313a6815af6921f02fa0990ce097",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "README.md",
+      "docs/AGENTS.md",
+      "docs/CLAIMS.md",
+      "docs/STATUS.md",
+      "docs/VIDEO_SCRIPT.md",
+      "evidence/duo-sessions.json",
+      "evidence/duo-sessions/9623432-pipeline2956795940-investigator.png",
+      "evidence/duo-sessions/9623558-issue9-repair-failed-workflow-lock.png",
+      "evidence/duo-sessions/9623713-issue9-repair-refused-existing-branch.png",
+      "evidence/duo-sessions/9623840-mr31-release-repair.png",
+      "evidence/duo-sessions/mr31-target-duo-demo-c.png",
+      "fixtures/injected-calibration-regression.patch",
+      "gasket/agents.py",
+      "tests/test_about.py",
+      "tests/test_regression_fixture.py"
+     ],
+     "title": "Merge branch 'docs/cycle-c' into 'main'"
     },
     "67162fd303721aeccc3f526c3962ba0b0cb4e38e": {
      "merge_requests": [
