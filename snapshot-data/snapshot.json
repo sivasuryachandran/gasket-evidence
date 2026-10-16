@@ -2,7 +2,7 @@
  "meta": {
   "partial": true,
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
-  "taken_at": "2026-10-16T19:02:22Z"
+  "taken_at": "2026-10-16T19:09:14Z"
  },
  "runs": [
   {
@@ -27235,6 +27235,24 @@
      ],
      "title": "Investigator flow: accept the pipeline ID from the Context text when a pipeline event starts it"
     },
+    "5c29afe1169e8842edbbde9eb2508260638f40f7": {
+     "merge_requests": [
+      {
+       "iid": 28,
+       "merge_commit_sha": "39844bbbed7f0f36922e3d0270777faa720849fd",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "README.md",
+      "docs/AGENTS.md",
+      "docs/CLAIMS.md",
+      "evidence/duo-sessions.json",
+      "evidence/duo-sessions/9504613-mr7-release-repair.png",
+      "gasket/agents.py"
+     ],
+     "title": "Release Repair session 9504613 that created !7, with its saved copy; it records the old targeting rule that sent !7 to main"
+    },
     "5d588592571401fc547fa27e39cc99d9ee7e5fb7": {
      "merge_requests": [
       {
@@ -27707,6 +27725,34 @@
       "demo-model/train.py"
      ],
      "title": "Restore equal-opportunity calibration in build_variant_d"
+    },
+    "a6a178b38b9c570dac018bb5d87cedbcf26a53ba": {
+     "merge_requests": [],
+     "paths": [
+      "README.md",
+      "ci/security-scans.yml",
+      "dashboard/app.js",
+      "docs/AGENTS.md",
+      "docs/CLAIMS.md",
+      "docs/CONTROLS.md",
+      "docs/DEVPOST.md",
+      "docs/ENTERPRISE.md",
+      "docs/SETUP.md",
+      "docs/STATUS.md",
+      "docs/VIDEO_SCRIPT.md",
+      "evidence/duo-sessions.json",
+      "evidence/duo-sessions/9583403-pipeline2953906287-investigator.png",
+      "evidence/security/mr25-container-scanning-report.png",
+      "gasket/agents.py",
+      "gasket/analyze.py",
+      "gasket/attention.py",
+      "gasket/collect.py",
+      "gasket/featured.py",
+      "gasket/policyview.py",
+      "tests/test_ci_jobs.py",
+      "tests/test_featured.py"
+     ],
+     "title": "Merge main into duo-demo/c-fairness-regression (bring cycle C up to date; the fixture is the only difference)"
     },
     "aff67ccba781ae6aeb2e1636b196cb9ca6f2e0c0": {
      "merge_requests": [
