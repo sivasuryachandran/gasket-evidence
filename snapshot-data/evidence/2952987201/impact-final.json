@@ -1,0 +1,32 @@
+{
+  "agent_session": "9573812",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "gasket/collect.py",
+    "tests/test_collect.py"
+  ],
+  "commit_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+  "duo_available": true,
+  "duo_reason": "Only the collector's HTTP 429 retry and backoff behaviour changed, plus tests. No model, data, serving, security or policy files are touched, but the collector's role in the evidence pipeline is unclear, so scope is marked ambiguous.",
+  "duo_required_evidence": [
+    "artifact_identity"
+  ],
+  "duo_risk_level": "low",
+  "duo_scope": [
+    "ambiguous"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, risk low, evidence: artifact_identity. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous"
+  ],
+  "unsupported_duo_evidence": []
+}
