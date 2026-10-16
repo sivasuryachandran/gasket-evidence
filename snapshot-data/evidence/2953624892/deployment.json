@@ -1,0 +1,55 @@
+{
+  "approval": {
+    "approvals": [],
+    "deployment_id": 1624577469,
+    "status": "running"
+  },
+  "approved_image_digest": "sha256:7f5fd6c64edcd59d7afe26f8c1e8e40e7bcb61fb3a051cae81fc8dfb3837080f",
+  "candidate": {
+    "revision": "gasket-model-00006-vur",
+    "url": "https://candidate-p2953624892---gasket-model-6xgh5t4mzq-uc.a.run.app"
+  },
+  "candidate_revision_digest": "sha256:7f5fd6c64edcd59d7afe26f8c1e8e40e7bcb61fb3a051cae81fc8dfb3837080f",
+  "candidate_verification": {
+    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "score_cases_checked": 8,
+    "score_cases_matched": 8
+  },
+  "executed_by": "chandran.sivasurya",
+  "expected_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+  "mock": false,
+  "mode": "cloudrun",
+  "pipeline_id": "2953624892",
+  "previous_revision_still_serving": false,
+  "previous_revisions": {
+    "gasket-model-00004-kob": 100
+  },
+  "previous_state": {
+    "production_identity": {
+      "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
+    },
+    "revisions": {
+      "gasket-model-00004-kob": {
+        "image_digest": "sha256:f87bcf5fbd355320b780a71b114b617f3675b5459adc0a0a048986087f693da4"
+      }
+    },
+    "traffic": {
+      "gasket-model-00004-kob": 100
+    }
+  },
+  "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+  "production_verification": {
+    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "score_cases_checked": 8,
+    "score_cases_matched": 8
+  },
+  "promoted_revision": "gasket-model-00006-vur",
+  "region": "us-central1",
+  "registry_digest_preserved": true,
+  "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:7f5fd6c64edcd59d7afe26f8c1e8e40e7bcb61fb3a051cae81fc8dfb3837080f",
+  "service": "gasket-model",
+  "source_image": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:5d588592-d-p2953624892",
+  "stage_reached": "verified",
+  "succeeded": true,
+  "traffic_changed": true
+}
