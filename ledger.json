@@ -1,5 +1,20 @@
 [
  {
+  "pipeline_id": 2953719107,
+  "created_at": "2026-10-16T04:56:05.556Z",
+  "ref": "main",
+  "commit": "b1506498dae1",
+  "commit_title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'",
+  "scope": "not recorded",
+  "merge_request": "!4",
+  "decision": "Eligible",
+  "reason_codes": "",
+  "signed": "no",
+  "release_started_by": "",
+  "runtime_check": "not checked",
+  "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953719107"
+ },
+ {
   "pipeline_id": 2953702652,
   "created_at": "2026-10-16T04:45:58.319Z",
   "ref": "refs/merge-requests/4/head",
@@ -7,11 +22,11 @@
   "commit_title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'",
   "scope": "model",
   "merge_request": "!4",
-  "decision": "running",
+  "decision": "Eligible",
   "reason_codes": "",
   "signed": "no",
   "release_started_by": "",
-  "runtime_check": "not applicable",
+  "runtime_check": "not checked",
   "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953702652"
  },
  {
