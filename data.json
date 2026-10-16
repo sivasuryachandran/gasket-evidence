@@ -1,27 +1,28 @@
 {
- "generated_at": "2026-10-15T22:23:29Z",
+ "generated_at": "2026-10-15T22:33:31Z",
  "outcomes": {
-  "released_eligible": 40,
-  "out_of_scope": 14,
+  "running": 1,
+  "out_of_scope": 15,
+  "released_eligible": 41,
   "no_decision": 7,
   "expected_block": 4,
   "unexpected_block": 1
  },
  "data_quality": {
-  "total_pipelines": 66,
-  "valid_runs": 45,
+  "total_pipelines": 69,
+  "valid_runs": 46,
   "no_decision": 7,
-  "out_of_scope": 14,
-  "running": 0
+  "out_of_scope": 15,
+  "running": 1
  },
  "kpis": {
-  "valid_runs": 45,
+  "valid_runs": 46,
   "correct_blocks": 4,
   "unexpected_blocks": 1,
   "unexpected_passes": 0,
-  "eligible_releases": 40,
+  "eligible_releases": 41,
   "stages": {
-   "eligible": 13,
+   "eligible": 14,
    "awaiting_approval": 7,
    "deployed_mock": 6,
    "artifact_verified": 14,
@@ -30,7 +31,7 @@
    "runtime_verified": 0
   },
   "median_witness_seconds": 80.2,
-  "median_pipeline_seconds": 497.6
+  "median_pipeline_seconds": 469.1
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 4,
@@ -38,7 +39,7 @@
  },
  "scenario_matrix": {
   "d": {
-   "released_eligible": 40,
+   "released_eligible": 41,
    "unexpected_block": 1
   },
   "regression": {
@@ -67,7 +68,8 @@
   "8": 2949092670,
   "9": 2952140351,
   "10": 2952701691,
-  "11": 2952882554
+  "11": 2952882554,
+  "12": 2952987201
  },
  "models": [
   {
@@ -75,9 +77,9 @@
    "variants": [
     "D"
    ],
-   "runs": 40,
-   "evidenced_in": 40,
-   "observed_in": 40,
+   "runs": 41,
+   "evidenced_in": 41,
+   "observed_in": 41,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -135,21 +137,21 @@
   }
  ],
  "duo": {
-  "assessments": 7,
+  "assessments": 8,
   "risk": {
    "agreed": 4,
-   "witness_stricter": 3,
+   "witness_stricter": 4,
    "witness_looser": 0
   },
   "evidence": {
    "agreed": 2,
-   "witness_added": 5,
+   "witness_added": 6,
    "categories": {
-    "accuracy": 3,
+    "accuracy": 4,
     "artifact_identity": 1,
-    "fairness": 3,
-    "sbom": 5,
-    "security": 3
+    "fairness": 4,
+    "sbom": 6,
+    "security": 4
    }
   },
   "scope_differs": 4,
@@ -330,10 +332,731 @@
     "session": "9572567",
     "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9572567",
     "session_flow": "Impact Analyst"
+   },
+   {
+    "mr_iid": 12,
+    "pipeline_id": 2952987201,
+    "duo_scope": [
+     "ambiguous"
+    ],
+    "witness_scope": [
+     "ambiguous"
+    ],
+    "duo_risk": "low",
+    "witness_risk": "high",
+    "risk_result": "witness_stricter",
+    "evidence_witness_added": [
+     "accuracy",
+     "fairness",
+     "sbom",
+     "security"
+    ],
+    "evidence_duo_only": [],
+    "scope_differs": false,
+    "session": "9573812",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9573812",
+    "session_flow": "Impact Analyst"
    }
   ]
  },
  "runs": [
+  {
+   "id": 2952999377,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952999377",
+   "ref": "main",
+   "kind": "release",
+   "mr_iid": null,
+   "sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
+   "created_at": "2026-10-15T22:31:20.051Z",
+   "status": "running",
+   "scenario": "d",
+   "wall_seconds": 127.8,
+   "stage_seconds": {
+    "package": 2.2,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": "created",
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "live_inference": null,
+   "security": null,
+   "policy_change": {
+    "status": "not_recorded"
+   },
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "dependency-scanning",
+    "dependency-scanning:python-resolution",
+    "secret_detection",
+    "train-models",
+    "unit-tests"
+   ],
+   "deployment": null,
+   "deploy_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217326928",
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": null,
+    "image_digest": null,
+    "image_digest_observed": null,
+    "data_sha256": null,
+    "policy_id": null,
+    "policy_sha256": null,
+    "commit_sha": null,
+    "release_id": null
+   },
+   "job_count": 18,
+   "failed_jobs": [],
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [],
+   "commit_title": "Merge branch 'fix/collector-rate-limit' into 'main'",
+   "mr": {
+    "kind": "mr",
+    "iid": 12,
+    "how": "the merge commit of this merge request"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "change_scope": [
+    "pipeline",
+    "dashboard"
+   ],
+   "seal": null,
+   "model_card": null
+  },
+  {
+   "id": 2952987279,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952987279",
+   "ref": "refs/workloads/c924ed1c6a3",
+   "kind": "duo_workload",
+   "mr_iid": null,
+   "sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+   "created_at": "2026-10-15T22:25:10.974Z",
+   "status": "success",
+   "scenario": null,
+   "wall_seconds": 56.9,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "out_of_scope",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "live_inference": null,
+   "security": null,
+   "policy_change": {
+    "status": "not_recorded"
+   },
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "workload"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": null,
+    "image_digest": null,
+    "image_digest_observed": null,
+    "data_sha256": null,
+    "policy_id": null,
+    "policy_sha256": null,
+    "commit_sha": null,
+    "release_id": null
+   },
+   "job_count": 1,
+   "failed_jobs": [],
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43303860/custom-flow-2.png?v=1791851705",
+    "name": "Gasket Artifact Impact Analyst",
+    "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "kind": "duo"
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [],
+   "commit_title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard",
+   "mr": {
+    "kind": "mr",
+    "iid": 12,
+    "how": "the head commit of this merge request"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "change_scope": [
+    "pipeline",
+    "dashboard"
+   ],
+   "seal": null,
+   "model_card": null
+  },
+  {
+   "id": 2952987201,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952987201",
+   "ref": "refs/merge-requests/12/head",
+   "kind": "merge_request",
+   "mr_iid": 12,
+   "sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+   "created_at": "2026-10-15T22:25:08.147Z",
+   "status": "success",
+   "scenario": "d",
+   "wall_seconds": 367.1,
+   "stage_seconds": {
+    "package": 66.4,
+    "evaluate": 40.0,
+    "secure": 39.0,
+    "bind": 19.3,
+    "witness": 89.7
+   },
+   "deploy_job_state": null,
+   "outcome": "released_eligible",
+   "trust": "trusted",
+   "trust_label": "Trusted / Verified",
+   "release_stage": "eligible",
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "live_inference": null,
+   "security": null,
+   "policy_change": {
+    "status": "clear",
+    "reason": null,
+    "changed_paths": [],
+    "diff_sha256": null,
+    "mr_iid": "12",
+    "approve_job_url": null,
+    "approve_job_state": null
+   },
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "bind-evidence",
+    "dependency-scanning:python-resolution",
+    "evaluate-model",
+    "gasket-witness",
+    "impact-check",
+    "package-image",
+    "policy-change-check",
+    "security-scan",
+    "train-models",
+    "unit-tests"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:c0fe5414-d-p2952987201",
+    "image_digest": "sha256:93a8b4bbe2053ef2d61ba5c95886806415f8b6f8c56cba78a0738c9a6d007b92",
+    "image_digest_observed": "sha256:93a8b4bbe2053ef2d61ba5c95886806415f8b6f8c56cba78a0738c9a6d007b92",
+    "data_sha256": "bb9fd32de35231837283918f10bb7030f41476c39a381cde46405fb0f3615998",
+    "policy_id": "credit-demo-v1",
+    "policy_sha256": "ae1fd5794425eb329c478489cd13ca7d74268abd303c9308008e01ed0d0325e3",
+    "commit_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+    "release_id": "candidate-2952987201"
+   },
+   "job_count": 10,
+   "failed_jobs": [],
+   "reason_codes": [],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "impact": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226991",
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "impact": {
+    "agent_session": "9573812",
+    "agent_session_source": "GitLab system note: started session",
+    "changed_paths": [
+     "gasket/collect.py",
+     "tests/test_collect.py"
+    ],
+    "commit_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+    "duo_available": true,
+    "duo_reason": "Only the collector's HTTP 429 retry and backoff behaviour changed, plus tests. No model, data, serving, security or policy files are touched, but the collector's role in the evidence pipeline is unclear, so scope is marked ambiguous.",
+    "duo_required_evidence": [
+     "artifact_identity"
+    ],
+    "duo_risk_level": "low",
+    "duo_scope": [
+     "ambiguous"
+    ],
+    "overridden": true,
+    "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, risk low, evidence: artifact_identity. The stricter, deterministic requirement wins.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "sbom",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "ambiguous"
+    ],
+    "unsupported_duo_evidence": []
+   },
+   "has_decision": true,
+   "has_manifest": true,
+   "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17217226991,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226991/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952987201/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17217226991,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226991/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952987201/manifest.json"
+    },
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17217226988,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226988/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952987201/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17217226984,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226984/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952987201/impact-final.json"
+    },
+    {
+     "key": "sbom",
+     "label": "SBOM of the release image (CycloneDX)",
+     "file": "security-out/sbom.cdx.json",
+     "job_id": 17217226989,
+     "link_only": true,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226989/artifacts/raw/security-out/sbom.cdx.json"
+    },
+    {
+     "key": "trivy",
+     "label": "Container scan (Trivy JSON)",
+     "file": "security-out/trivy.json",
+     "job_id": 17217226989,
+     "link_only": true,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226989/artifacts/raw/security-out/trivy.json"
+    },
+    {
+     "key": "policy_change",
+     "label": "Policy change check",
+     "file": "policy-change.json",
+     "job_id": 17217226992,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17217226992/artifacts/raw/policy-change.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2952987201/policy-change.json"
+    }
+   ],
+   "commit_title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard",
+   "mr": {
+    "kind": "mr",
+    "iid": 12,
+    "how": "a merge request pipeline"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "change_scope": [
+    "pipeline",
+    "dashboard"
+   ],
+   "seal": {
+    "evidenced": [
+     {
+      "text": "e0c2",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5654",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5cbd",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "e896",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "4bf9",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "674b",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9e36",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "695f",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "f32c",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bb06",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "a332",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "8490",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "c96a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9f79",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bc7a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "207d",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     }
+    ],
+    "observed": [
+     {
+      "text": "e0c2",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5654",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5cbd",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "e896",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "4bf9",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "674b",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9e36",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "695f",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "f32c",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bb06",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "a332",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "8490",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "c96a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9f79",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bc7a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "207d",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     }
+    ],
+    "identical": true,
+    "differing": 0,
+    "evidenced_full": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "observed_full": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
+   },
+   "model_card": "runs/2952987201/model-card.md"
+  },
   {
    "id": 2952903642,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952903642",
@@ -27623,6 +28346,20 @@
      ],
      "title": "Model registry: retry the job token in the other accepted header forms after a 401"
     },
+    "0a44eee85d855e5b1c006dce72da98b75e5c492a": {
+     "merge_requests": [
+      {
+       "iid": 12,
+       "merge_commit_sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "gasket/collect.py",
+      "tests/test_collect.py"
+     ],
+     "title": "Merge branch 'fix/collector-rate-limit' into 'main'"
+    },
     "1a594c7247bbaa9069943d2061ee58c77fbcdb88": {
      "merge_requests": [
       {
@@ -28127,6 +28864,20 @@
      ],
      "title": "Release runs: pipeline number is the first column"
     },
+    "c0fe5414456d09ad5e0aade75c035927d340c7e7": {
+     "merge_requests": [
+      {
+       "iid": 12,
+       "merge_commit_sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "gasket/collect.py",
+      "tests/test_collect.py"
+     ],
+     "title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard"
+    },
     "c7a813dcdfe1d01d203b8b8d940d616158b1ed66": {
      "merge_requests": [],
      "paths": [
@@ -28275,21 +29026,6 @@
     }
    },
    "recent": [
-    {
-     "message": "Add regression fixture, deployment/migration/checklist docs, README status\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "5d24f6c80556d544a1c28e2b756c043b664a1d04",
-     "title": "Add regression fixture, deployment/migration/checklist docs, README status"
-    },
-    {
-     "message": "Restrict deployments to the default branch, serialize them, trusted repair-scope rules, seed-state and rollback verification, job-context tests, bootstrap and setup docs\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "d1498ed7a5b7e0ad389ab39c7aaf572ea58afb5a",
-     "title": "Restrict deployments to the default branch, serialize them, trusted repair-scope rules, seed-state and rollback verification, job-context tests, bootstrap and setup docs"
-    },
-    {
-     "message": "Guard entry-point tests, policy-enforced scope template, rollback never overwrites newer deployments, proof export with session refs, status and setup docs\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "640daa531999bd3b4211871a97a1f26310e01378",
-     "title": "Guard entry-point tests, policy-enforced scope template, rollback never overwrites newer deployments, proof export with session refs, status and setup docs"
-    },
     {
      "message": "DEMO FIXTURE: inject a calibration regression into model D's training code\n\nLabelled injected regression for the Duo repair demonstration. Not a real change.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
      "sha": "856281c2c8076856757ed543d2c4798e45032473",
@@ -28751,21 +29487,6 @@
      "title": "Merge branch 'feat/policy-change-guard' into 'main'"
     },
     {
-     "message": "Merge branch 'repair/issue-3' into 'main'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
-     "sha": "77eacd3a14e13af65034ecb7fc5ef5046423ad57",
-     "title": "Merge branch 'repair/issue-3' into 'main'"
-    },
-    {
-     "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
-     "sha": "dae181440c77b75fd02ec7e1bb1d2967371a48f8",
-     "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
-    },
-    {
-     "message": "Merge branch 'duo-demo/a-clean-change' into 'main'\n\ndemo: clean change\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!3",
-     "sha": "8c4f33e561b921d41548c47120d1dd38900bf01b",
-     "title": "Merge branch 'duo-demo/a-clean-change' into 'main'"
-    },
-    {
      "message": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard\n",
      "sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
      "title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard"
@@ -28774,6 +29495,36 @@
      "message": "Merge branch 'fix/collector-rate-limit' into 'main'\n\nCollector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!12",
      "sha": "7618300bafa370fd40c0a5e1b2b47b7a42be861b",
      "title": "Merge branch 'fix/collector-rate-limit' into 'main'"
+    },
+    {
+     "message": "Merge branch 'fix/collector-rate-limit' into 'main'\n\nCollector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!12",
+     "sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
+     "title": "Merge branch 'fix/collector-rate-limit' into 'main'"
+    },
+    {
+     "message": "Merge branch 'repair/issue-3' into 'main'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
+     "sha": "6b921fb9d4d7e173d15ea554707b2f2715f5b1a8",
+     "title": "Merge branch 'repair/issue-3' into 'main'"
+    },
+    {
+     "message": "Final documentation set: claims register, judge-first README, architecture, Devpost text, video script, submission checklist, refreshed status; service public page (/ and /info); link checker; tests that keep the documents to the claims\n",
+     "sha": "9ffcd3d24df4009f0cc56ed6b5835d769bb94d1b",
+     "title": "Final documentation set: claims register, judge-first README, architecture, Devpost text, video script, submission checklist, refreshed status; service public page (/ and /info); link checker; tests that keep the documents to the claims"
+    },
+    {
+     "message": "Investigator wording: it starts when a merge request is created (observed on !11 and !9), triages first; marked Proven (observed) because the merge request comments are not readable through the public API\n",
+     "sha": "16cf3b0f9d71cae5e285ea2603035a291c0987d0",
+     "title": "Investigator wording: it starts when a merge request is created (observed on !11 and !9), triages first; marked Proven (observed) because the merge request comments are not readable through the public API"
+    },
+    {
+     "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
+     "sha": "b7daaa45de3bdd27bb123587f4b0386077b1b204",
+     "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
+    },
+    {
+     "message": "Merge branch 'duo-demo/a-clean-change' into 'main'\n\ndemo: clean change\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!3",
+     "sha": "b45023c6284bf286cf83c289009c09071df93a07",
+     "title": "Merge branch 'duo-demo/a-clean-change' into 'main'"
     }
    ]
   },
@@ -28861,13 +29612,19 @@
     "draft": false,
     "head_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
     "iid": 12,
-    "merge_commit_sha": null,
-    "merged_by": null,
+    "merge_commit_sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792027280",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
     "repairs_issue": null,
     "session": null,
     "source_branch": "fix/collector-rate-limit",
     "squash_commit_sha": null,
-    "state": "opened",
+    "state": "merged",
     "target_branch": "main",
     "title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90...",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/12"
@@ -29405,7 +30162,7 @@
  },
  "snapshot": {
   "date": "2026-10-15",
-  "taken_at": "2026-10-15T22:23:29Z",
+  "taken_at": "2026-10-15T22:33:31Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null
@@ -29435,6 +30192,7 @@
    ],
    "issues": [],
    "run_ids": [
+    2952987201,
     2952882554,
     2952701691,
     2952140351,
@@ -29662,13 +30420,13 @@
    "key": "pipelines",
    "label": "CI/CD pipelines",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines",
-   "evidence": "52 release pipelines recorded"
+   "evidence": "54 release pipelines recorded"
   },
   {
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "12 merge requests, 7 merged"
+   "evidence": "12 merge requests, 8 merged"
   },
   {
    "key": "duo_flows",
@@ -29679,8 +30437,8 @@
   {
    "key": "security_scans",
    "label": "Secret / dependency scanning",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952903642",
-   "evidence": "ran in pipeline 2952903642"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952999377",
+   "evidence": "ran in pipeline 2952999377"
   },
   {
    "key": "signing",
@@ -29814,9 +30572,24 @@
         "sbom"
        ]
       }
+     },
+     {
+      "subject": "Merge request !12",
+      "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/12",
+      "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9573812",
+      "session": "9573812",
+      "summary": {
+       "risk": "witness_stricter",
+       "evidence_added": [
+        "accuracy",
+        "fairness",
+        "sbom",
+        "security"
+       ]
+      }
      }
     ],
-    "run_count": 7
+    "run_count": 8
    },
    {
     "key": "release-investigator",
@@ -29900,27 +30673,27 @@
    }
   ],
   "counts": {
-   "assessments": 7,
+   "assessments": 8,
    "risk": {
     "agreed": 4,
-    "witness_stricter": 3,
+    "witness_stricter": 4,
     "witness_looser": 0
    },
    "evidence": {
     "agreed": 2,
-    "witness_added": 5,
+    "witness_added": 6,
     "categories": {
-     "accuracy": 3,
+     "accuracy": 4,
      "artifact_identity": 1,
-     "fairness": 3,
-     "sbom": 5,
-     "security": 3
+     "fairness": 4,
+     "sbom": 6,
+     "security": 4
     }
    },
    "scope_differs": 4,
    "percentages_shown": false
   },
-  "assessments": 7
+  "assessments": 8
  },
  "policy": {
   "available": true,
@@ -29975,7 +30748,7 @@
     "enforced": true,
     "preventive": true,
     "detective": true,
-    "evidence": "Enforced (preventive): the CI job policy-change-check holds the release with POLICY_CHANGE_REQUIRES_REVIEW when a protected path changed, and the release jobs wait for a person to start approve-policy-change, which refuses automation accounts. Audited (detective): every main pipeline is checked afterwards. The Witness itself has no such check and its decisions are unchanged. 2 pipeline(s) carry a policy-change record; no guard is missing on a recorded main run. Limit: removing the guard in a merge request is only caught afterwards (needs a pipeline execution policy, Owner)."
+    "evidence": "Enforced (preventive): the CI job policy-change-check holds the release with POLICY_CHANGE_REQUIRES_REVIEW when a protected path changed, and the release jobs wait for a person to start approve-policy-change, which refuses automation accounts. Audited (detective): every main pipeline is checked afterwards. The Witness itself has no such check and its decisions are unchanged. 3 pipeline(s) carry a policy-change record; no guard is missing on a recorded main run. Limit: removing the guard in a merge request is only caught afterwards (needs a pipeline execution policy, Owner)."
    },
    {
     "name": "A repair merge request may only change training code",
@@ -30090,9 +30863,10 @@
     8,
     9,
     10,
-    11
+    11,
+    12
    ],
-   "text": "Releases through !1, !2, !6, !8, !9, !10, !11 were approved by the person who wrote the change. That is a separation-of-duties gap; this project has one member, so no independent approval was possible.",
+   "text": "Releases through !1, !2, !6, !8, !9, !10, !11, !12 were approved by the person who wrote the change. That is a separation-of-duties gap; this project has one member, so no independent approval was possible.",
    "fix": {
     "label": "See these merge requests and their releases",
     "href": "#/releases?group=mr",
@@ -30122,10 +30896,10 @@
     "iso": "Operation; planning",
     "slsa": "Verification of build inputs before release (not a SLSA level)",
     "status": "Operating",
-    "status_detail": "45 Witness decisions recorded",
+    "status_detail": "46 Witness decisions recorded",
     "evidence": {
-     "label": "Release case file 2952903642",
-     "href": "#/releases/2952903642",
+     "label": "Release case file 2952987201",
+     "href": "#/releases/2952987201",
      "external": false
     }
    },
@@ -30138,10 +30912,10 @@
     "iso": "Performance evaluation",
     "slsa": "Not applicable",
     "status": "Operating",
-    "status_detail": "34 runs with recomputed metrics",
+    "status_detail": "35 runs with recomputed metrics",
     "evidence": {
-     "label": "Release case file 2952903642",
-     "href": "#/releases/2952903642",
+     "label": "Release case file 2952987201",
+     "href": "#/releases/2952987201",
      "external": false
     }
    },
@@ -30250,7 +31024,7 @@
     "iso": "Leadership",
     "slsa": "Not applicable",
     "status": "Operating",
-    "status_detail": "7 Duo assessments recorded next to the Witness result",
+    "status_detail": "8 Duo assessments recorded next to the Witness result",
     "evidence": {
      "label": "Agents",
      "href": "#/agents",
@@ -30276,6 +31050,36 @@
    "pipeline_url"
   ],
   "ledger": [
+   {
+    "pipeline_id": 2952999377,
+    "created_at": "2026-10-15T22:31:20.051Z",
+    "ref": "main",
+    "commit": "0a44eee85d85",
+    "commit_title": "Merge branch 'fix/collector-rate-limit' into 'main'",
+    "scope": "pipeline, dashboard",
+    "merge_request": "!12",
+    "decision": "running",
+    "reason_codes": "",
+    "signed": "no",
+    "release_started_by": "",
+    "runtime_check": "not applicable",
+    "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952999377"
+   },
+   {
+    "pipeline_id": 2952987201,
+    "created_at": "2026-10-15T22:25:08.147Z",
+    "ref": "refs/merge-requests/12/head",
+    "commit": "c0fe5414456d",
+    "commit_title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90 seconds) and retry a rate limit up to five times, so a snapshot survives HTTP 429 instead of failing publish-public-dashboard",
+    "scope": "pipeline, dashboard",
+    "merge_request": "!12",
+    "decision": "Eligible",
+    "reason_codes": "",
+    "signed": "no",
+    "release_started_by": "",
+    "runtime_check": "not checked",
+    "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2952987201"
+   },
    {
     "pipeline_id": 2952903642,
     "created_at": "2026-10-15T21:52:06.554Z",
