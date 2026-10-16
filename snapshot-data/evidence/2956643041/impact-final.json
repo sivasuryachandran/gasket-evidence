@@ -1,0 +1,34 @@
+{
+  "changed_paths": [
+    "README.md",
+    "dashboard/app.js",
+    "docs/AGENTS.md",
+    "docs/CLAIMS.md",
+    "docs/DEVPOST.md",
+    "docs/VIDEO_SCRIPT.md",
+    "evidence/duo-sessions.json",
+    "evidence/duo-sessions/9504613-mr7-release-repair.png",
+    "gasket/agents.py",
+    "gasket/attention.py",
+    "gasket/featured.py",
+    "tests/test_enterprise.py",
+    "tests/test_featured.py"
+  ],
+  "commit_sha": "5c29afe1169e8842edbbde9eb2508260638f40f7",
+  "duo_available": false,
+  "duo_status": "timed_out",
+  "overridden": false,
+  "reason": "Duo opinion not available (timed out); deterministic analysis alone was used.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous",
+    "documentation-only"
+  ]
+}

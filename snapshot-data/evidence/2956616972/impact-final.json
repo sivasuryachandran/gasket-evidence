@@ -1,0 +1,34 @@
+{
+  "agent_session": "9620004",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "gasket/attention.py",
+    "gasket/featured.py",
+    "tests/test_enterprise.py",
+    "tests/test_featured.py"
+  ],
+  "commit_sha": "e5d91068420cca8fc107f4c554f4f194ff5920af",
+  "duo_available": true,
+  "duo_reason": "Dashboard reporting logic changes which run is shown as live (commit plus model hash match) and hides designed scenario blocks from the repair list; no model, data, serving, policy or dependency files changed, but the scope does not map cleanly to a listed category.",
+  "duo_required_evidence": [
+    "artifact_identity"
+  ],
+  "duo_risk_level": "low",
+  "duo_scope": [
+    "ambiguous"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, risk low, evidence: artifact_identity. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous"
+  ],
+  "unsupported_duo_evidence": []
+}
