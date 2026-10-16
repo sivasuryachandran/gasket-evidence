@@ -235,11 +235,15 @@
   // ---------------------------------------------------------------- ledger
   var COLS = [['Time', 'Time'], ['Change', 'Change'], ['Scope', 'Scope'], ['MR', 'Merge request'], ['Decision', 'Decision'], ['Reason', 'Reason code'], ['Signed', 'Signed'], ['Released', 'Released by'], ['Runtime', 'Runtime']];
   var SCOPE_LABEL = { model: 'Model', pipeline: 'Pipeline', dashboard: 'Dashboard', docs: 'Docs' };
-  function scopeText(run) { return run.change_scope ? run.change_scope.map(function (x) { return SCOPE_LABEL[x] || x; }).join(', ') : 'Not recorded'; }
+  function scopeText(run) {
+    if (!run.change_scope) return 'Not recorded';
+    if (!run.change_scope.length) return 'No net file change';       // e.g. a merge that brought in a change and its revert
+    return run.change_scope.map(function (x) { return SCOPE_LABEL[x] || x; }).join(', ');
+  }
   // A run is model-affecting when its commit touched the model, data, serving, policy or security paths, when its changed files could
   // not be read (never assumed harmless), or when the Witness blocked it.
   function modelAffecting(run) {
-    return !run.change_scope || run.change_scope.indexOf('model') >= 0 || run.outcome === 'expected_block' || run.outcome === 'unexpected_block';
+    return !run.change_scope || !run.change_scope.length || run.change_scope.indexOf('model') >= 0 || run.outcome === 'expected_block' || run.outcome === 'unexpected_block';
   }
   function scopeToggle(base, q, onPick) {
     function href(v) { return base === 'releases' ? '#/releases' + queryString(Object.assign({}, q, { scope: v })) : '#/overview' + (v ? '?scope=' + v : ''); }
@@ -254,7 +258,7 @@
     td('Time', h('a', { href: '#/releases/' + run.id, text: fmtShort(run.created_at), title: fmtTime(run.created_at) }), 'nowrap');
     var full = changeText(run), line = (run.commit_title || full).split('\n')[0], short = line.length > 70 ? line.slice(0, 69).trimEnd() + '\u2026' : line;
     td('Change', h('span', { title: full }, [short, run.fixture ? h('div', { class: 'sub', text: 'Labelled demo fixture' }) : null, run.cause ? h('div', { class: 'sub', text: run.cause.text }) : null, run.stopped_at ? h('div', { class: 'sub' }, [run.stopped_at.text + ' ', run.stopped_at.url ? ext(run.stopped_at.url, 'Open') : null]) : null]));
-    td('Scope', h('span', { class: run.change_scope ? false : 'muted', text: scopeText(run) }));
+    td('Scope', h('span', { class: run.change_scope && run.change_scope.length ? false : 'muted', text: scopeText(run) }));
     td('Merge request', mrCell(run));
     td('Decision', decisionStatus(run));
     td('Reason code', codes.length ? h('span', { class: 'reason', text: codes.join(', ').replace(/_/g, '_\u200b') }) : h('span', { class: 'muted', text: 'None' }));
