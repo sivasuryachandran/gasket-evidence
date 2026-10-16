@@ -82,6 +82,9 @@
     rows.forEach(function (r) { if (!r) return; dl.appendChild(h('dt', { text: r[0] })); dl.appendChild(h('dd', {}, [r[1]])); });
     return dl;
   }
+  // A session page archives after 30 days, so a saved screenshot is kept in the repository and linked beside it.
+  function savedCopy(path) { return path && /^evidence\/duo-sessions\/[\w.-]+\.png$/.test(path) ? h('div', { class: 'sub' }, [h('a', { href: path, target: '_blank', rel: 'noopener', text: 'Saved copy of the session' })]) : null; }
+  function triggerNote(t) { return t === 'automatic' ? h('div', { class: 'sub', text: 'Started automatically, without a mention.' }) : t === 'mention' ? h('div', { class: 'sub', text: 'Started by a mention.' }) : null; }
   function empty(title, how) { return h('div', { class: 'empty' }, [h('b', { text: title }), how ? ' ' + how : '']); }
   function section(title, sub) {
     var el = h('section', { class: 'block' }, [h('h2', { text: title })]);
@@ -606,7 +609,7 @@
       ['Scope', (item.witness_scope || []).join(', ') + (item.scope_differs ? ' (Duo said ' + (item.duo_scope || []).join(', ') + ')' : ' (Duo and the Witness agree)')],
       ['Risk', 'Duo said ' + (item.duo_risk || 'nothing') + '; the Witness says ' + item.witness_risk + (item.risk_result === 'agreed' ? ' (agreed)' : item.risk_result === 'witness_stricter' ? ' (the Witness is stricter)' : ' (Duo was higher; the higher rating is kept)')],
       ['Required evidence', item.evidence_witness_added.length ? 'The Witness added ' + item.evidence_witness_added.join(', ') : 'Agreed'],
-      ['Session', item.session_url ? ext(item.session_url, (item.session_flow || 'Impact Analyst') + ' session ' + item.session_url.split('/').pop()) : 'not recorded']
+      ['Session', item.session_url ? h('span', {}, [ext(item.session_url, (item.session_flow || 'Impact Analyst') + ' session ' + item.session_url.split('/').pop()), savedCopy(item.session_copy), triggerNote(item.session_trigger)]) : 'not recorded']
     ]));
     return el;
   }
@@ -633,14 +636,14 @@
     var el = h('div', {}), c = chainFor(run);
     el.appendChild(h('div', { class: 'legend' }, [h('span', {}, [h('i'), 'Happened']), h('span', {}, [h('i', { class: 'd' }), 'Recorded only, or not yet recorded'])]));
     var N = c ? 8 : 5, events = [];
-    function ev(lane, col, tone, title, sub, href, external) { events.push({ lane: lane, col: col, tone: tone, title: title, sub: sub, href: href, external: external }); }
+    function ev(lane, col, tone, title, sub, href, external, copy) { events.push({ lane: lane, col: col, tone: tone, title: title, sub: sub, href: href, external: external, copy: copy }); }
     var blocked = c ? BYID[c.blocked_run] : (run.outcome === 'expected_block' || run.outcome === 'unexpected_block' ? run : null);
     if (c) {
       var b = BYID[c.blocked_run], co = c.corrected_run ? BYID[c.corrected_run] : null, rl = c.release_run ? BYID[c.release_run] : null;
       ev('Pipeline', 1, 'pass', 'Pipeline ' + b.id + ' ran', fmtTime(b.created_at), '#/releases/' + b.id);
       ev('Witness', 1, 'fail', 'Blocked: ' + ((c.blocked_reasons || [])[0] || 'no code'), c.blocked_cause ? c.blocked_cause.text : '', '#/releases/' + b.id);
-      ev('Duo agents', 2, c.issue ? 'pass' : 'pending', c.issue ? 'Investigation issue #' + c.issue.iid : 'No investigation recorded', c.issue && c.issue.session_url ? 'Release Investigator session ' + c.issue.session_url.split('/').pop() : '', c.issue ? c.issue.web_url : null, true);
-      ev('Duo agents', 3, c.repair_mr ? 'pass' : 'pending', c.repair_mr ? 'Repair merge request !' + c.repair_mr.iid : 'No repair merge request', c.repair_mr && c.repair_mr.session_url ? 'Release Repair session ' + c.repair_mr.session_url.split('/').pop() : '', c.repair_mr ? c.repair_mr.web_url : null, true);
+      ev('Duo agents', 2, c.issue ? 'pass' : 'pending', c.issue ? 'Investigation issue #' + c.issue.iid : 'No investigation recorded', c.issue && c.issue.session_url ? 'Release Investigator session ' + c.issue.session_url.split('/').pop() : '', c.issue ? c.issue.web_url : null, true, c.issue ? c.issue.session_copy : null);
+      ev('Duo agents', 3, c.repair_mr ? 'pass' : 'pending', c.repair_mr ? 'Repair merge request !' + c.repair_mr.iid : 'No repair merge request', c.repair_mr && c.repair_mr.session_url ? 'Release Repair session ' + c.repair_mr.session_url.split('/').pop() : '', c.repair_mr ? c.repair_mr.web_url : null, true, c.repair_mr ? c.repair_mr.session_copy : null);
       var appr = c.repair_mr && c.repair_mr.approved_by && c.repair_mr.approved_by.length ? c.repair_mr.approved_by : null;
       ev('People', 4, appr ? 'pass' : 'pending', appr ? 'Approved by @' + appr.join(', @') : 'No approval record', appr && c.repair_mr.approved_by.indexOf((MRS[c.repair_mr.iid] && MRS[c.repair_mr.iid].author || {}).username) >= 0 ? 'Self-approval: single-member demo project' : '');
       ev('People', 5, c.repair_mr && c.repair_mr.merged_by ? 'pass' : 'pending', c.repair_mr && c.repair_mr.merged_by ? 'Merged by @' + c.repair_mr.merged_by : 'Not merged', c.promotion_mr ? 'Promoted by !' + c.promotion_mr.iid : '');
@@ -653,6 +656,8 @@
       ev('Pipeline', 8, c.release_stage === 'artifact_verified' || c.release_stage === 'runtime_verified' ? 'pass' : 'pending', c.release_stage === 'artifact_verified' || c.release_stage === 'runtime_verified' ? 'Runtime digest check passed' : 'No runtime check', c.release_stage === 'artifact_verified' ? 'Published model matches the signed evidence' : '');
     } else {
       ev('Pipeline', 1, 'pass', 'Pipeline ' + run.id + ' ran', fmtTime(run.created_at), run.web_url, true);
+      var inv = (DATA.investigator_sessions || {})[String(run.id)];
+      if (inv) ev('Duo agents', 2, 'pass', 'Release Investigator session ' + inv.url.split('/').pop(), inv.trigger === 'automatic' ? 'Started automatically after this pipeline failed' : inv.trigger === 'mention' ? 'Started by a mention' : '', inv.url, true, inv.copy);
       ev('Witness', 2, decision(run).tone === 'pending' ? 'pending' : (blocked ? 'fail' : 'pass'), run.has_decision ? decision(run).label : 'No decision', (run.reason_codes || []).join(', '));
       if (policyChange(run)) ev('People', 3, policyChange(run).status === 'approved' ? 'pass' : 'attn', policyChange(run).status === 'approved' ? 'Policy change approved by @' + policyChange(run).approved_by : 'Held: policy change needs review', (policyChange(run).changed_paths || []).join(', '), policyChange(run).approve_job_url, true);
       ev('Pipeline', 3, isSigned(run) ? 'pass' : 'pending', isSigned(run) ? 'Evidence signed (Rekor)' : 'Not signed', '');
@@ -670,7 +675,7 @@
         function soft(t) { return (t || '').replace(/[._]/g, function (ch) { return ch + '\u200b'; }); }
         var etitle = soft(e.title), esub = soft(e.sub);
         var title = e.href ? (e.href.charAt(0) === '#' ? link(e.href, etitle) : ext(e.href, etitle)) : document.createTextNode(etitle);
-        evs.appendChild(h('div', { class: 'ev ' + e.tone }, [h('b', {}, [title]), esub ? h('span', { class: 'sub', text: esub }) : null]));
+        evs.appendChild(h('div', { class: 'ev ' + e.tone }, [h('b', {}, [title]), esub ? h('span', { class: 'sub', text: esub }) : null, e.copy ? savedCopy(e.copy) : null]));
       }
       lanes.appendChild(h('div', { class: 'lane' }, [h('div', { class: 'ln', text: lane }), evs]));
     });
@@ -760,7 +765,7 @@
       else panel.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [h('thead', {}, [h('tr', {}, [h('th', { text: 'Subject' }), h('th', { text: 'Session' })])]),
         h('tbody', {}, f.runs.map(function (r) {
           return h('tr', {}, [h('td', { 'data-label': 'Subject' }, [ext(r.href, r.subject)]),
-            h('td', { 'data-label': 'Session' }, [r.session_url ? ext(r.session_url, 'Session ' + r.session_url.split('/').pop()) : h('span', { class: 'muted', text: 'Session not recorded. Map it with scripts/import_sessions.py (docs/SETUP.md).' })])]);
+            h('td', { 'data-label': 'Session' }, [r.session_url ? h('span', {}, [ext(r.session_url, 'Session ' + r.session_url.split('/').pop()), savedCopy(r.session_copy), triggerNote(r.session_trigger)]) : h('span', { class: 'muted', text: 'Session not recorded. Map it with scripts/import_sessions.py (docs/SETUP.md).' })])]);
         }))])]));
       main.appendChild(panel);
     });

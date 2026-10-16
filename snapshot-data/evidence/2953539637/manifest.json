@@ -1,0 +1,52 @@
+{
+  "approval": {
+    "environment": "production",
+    "required": true,
+    "status": "pending"
+  },
+  "checks": {
+    "artifact_identity": "pending",
+    "evaluation": "passed",
+    "fairness": "passed",
+    "sbom": "present",
+    "security": "passed"
+  },
+  "commit_sha": "8eaef67b1fead0bd4441cf2918cef3ef88ee3267",
+  "evaluation_data": {
+    "path": "data/evaluation.csv",
+    "sha256": "bb9fd32de35231837283918f10bb7030f41476c39a381cde46405fb0f3615998"
+  },
+  "image": {
+    "digest": "sha256:f87bcf5fbd355320b780a71b114b617f3675b5459adc0a0a048986087f693da4",
+    "reference": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:8eaef67b-d-p2953539637"
+  },
+  "metrics": {
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "fairness_metric": "equal_opportunity_difference",
+    "group_positive_counts": {
+      "0": 372,
+      "1": 538
+    }
+  },
+  "model": {
+    "path": "/app/model.pkl",
+    "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
+  },
+  "policy": {
+    "id": "credit-demo-v1",
+    "sha256": "ae1fd5794425eb329c478489cd13ca7d74268abd303c9308008e01ed0d0325e3"
+  },
+  "project": "gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
+  "release_id": "candidate-2953539637",
+  "schema_version": "gasket.evidence/v1",
+  "source": {
+    "evaluation_job_id": "17221002557",
+    "pipeline_id": "2953539637",
+    "witness_job_id": ""
+  },
+  "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+  }
+}
