@@ -7,12 +7,12 @@
   "pipeline_id": "2954136491",
   "proof_chain": {
     "blob": "proof-chain.json",
-    "blob_sha256": "c07ce702e370a979e6dbdd3d3a279ce45c8514f5fc08edbce4b44b4b521da320",
+    "blob_sha256": "708a83693db8a1ae58127a0ac11df913c769c02fb86cb7729c776a2d23dcec7d",
     "bundle": "proof-chain.cosign.bundle",
     "rekor": {
-      "integrated_time": 1792137356,
-      "log_index": 3276004247,
-      "url": "https://search.sigstore.dev/?logIndex=3276004247"
+      "integrated_time": 1792137812,
+      "log_index": 3276109404,
+      "url": "https://search.sigstore.dev/?logIndex=3276109404"
     },
     "signed": true,
     "verified_in_job": true,
@@ -21,12 +21,12 @@
   "schema": "gasket.snapshot-signature/v1",
   "snapshot": {
     "blob": "snapshot.json",
-    "blob_sha256": "7124505d74ffd4b69bcbae2ab19db335de6c77282ce0b2b094e8b53bb57b566f",
+    "blob_sha256": "622c8c55f8d79494b7189ae453617aa888d605304b963c37b647e66afc0e03f5",
     "bundle": "snapshot.cosign.bundle",
     "rekor": {
-      "integrated_time": 1792137359,
-      "log_index": 3276004955,
-      "url": "https://search.sigstore.dev/?logIndex=3276004955"
+      "integrated_time": 1792137815,
+      "log_index": 3276110059,
+      "url": "https://search.sigstore.dev/?logIndex=3276110059"
     },
     "signed": true,
     "verified_in_job": true,
