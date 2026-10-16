@@ -2,7 +2,7 @@
  "meta": {
   "partial": true,
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
-  "taken_at": "2026-10-16T19:09:14Z"
+  "taken_at": "2026-10-16T19:18:01Z"
  },
  "runs": [
   {
@@ -27969,6 +27969,22 @@
      ],
      "title": "Policy-change guard: evaluate.py and the evaluation data are protected like the thresholds; the unit-tests job installs git so the guard's git tests run in CI"
     },
+    "e5d91068420cca8fc107f4c554f4f194ff5920af": {
+     "merge_requests": [
+      {
+       "iid": 28,
+       "merge_commit_sha": "39844bbbed7f0f36922e3d0270777faa720849fd",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "gasket/attention.py",
+      "gasket/featured.py",
+      "tests/test_enterprise.py",
+      "tests/test_featured.py"
+     ],
+     "title": "Dashboard: the live release is matched by the commit the service reports (two releases can share a model hash); a designed scenario block is not listed as awaiting repair"
+    },
     "e65148f89a2bc998c7d6568ba9a2193e71547ac1": {
      "merge_requests": [
       {
@@ -28105,6 +28121,23 @@
       "tests/test_enterprise.py"
      ],
      "title": "Merge branch 'fix/pre-freeze' into feat/release-gate-component"
+    },
+    "f78f5bf6d2ae874691d51ba6e1a5906ec2562d9b": {
+     "merge_requests": [
+      {
+       "iid": 28,
+       "merge_commit_sha": "39844bbbed7f0f36922e3d0270777faa720849fd",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "README.md",
+      "dashboard/app.js",
+      "docs/CLAIMS.md",
+      "docs/DEVPOST.md",
+      "docs/VIDEO_SCRIPT.md"
+     ],
+     "title": "Cloud Run wording: each release is a candidate with no traffic, verified, then promoted to the public demo URL (no real users); the runtime facts show the promotion. G6: two builds with identical training inputs produced different model files (pipelines 2956505378 and 2956560385), which is why Gasket binds the evaluation to the exact bytes"
     },
     "fc18ed719724ca443eb7613456737fa35288ed7e": {
      "merge_requests": [],
