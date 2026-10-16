@@ -127,13 +127,22 @@
     var mock = !!(run.deployment && run.deployment.mock);
     return h('span', {}, [st(mock ? 'mock' : 'pass', '@' + run.deploy_job_user, mock ? 'The release job was started by this person; the release is recorded only, no service was deployed (mock).' : 'Release job started by this person.')]);
   }
-  function runtimeStatus(run) {
-    var stage = run.release_stage;
+  // Four separate runtime facts, each from its own record. "Service reported the evidenced hash" is said only when a live check ran for this release.
+  function runtimeFacts(run) {
+    var dep = run.deployment || {}, real = dep.mock === false, rv = run.runtime_verification, live = run.runtime_live, li = run.live_inference;
+    var digest = rv && rv.kind === 'artifact_integrity'
+      ? (rv.verified ? ['pass', 'Artifact digest matches', 'Published artifact digest matches the evidence (no live deploy for this release).'] : ['fail', 'Artifact digest mismatch', rv.failure || ''])
+      : real && dep.registry_digest_preserved ? ['pass', 'Image digest preserved', 'The image copied to Artifact Registry has the digest the Witness approved.'] : ['pending', 'Digest not checked', 'No digest record for this release.'];
+    var ident = live ? (live.verified ? ['pass', 'Live identity verified', 'Service reported the evidenced hash: the live /identity hash equals this release\'s signed evidence (runtime-verify-live).'] : ['fail', 'Live identity mismatch', live.failure || ''])
+      : ['pending', 'Live identity not checked', real ? 'No runtime-verify-live record for this release.' : 'No live deploy for this release.'];
+    var inf = li ? (li.status === 'passed' ? ['pass', 'Live inference passed', li.note] : li.status === 'skipped' ? ['pending', 'Live inference skipped', li.note] : ['fail', 'Live inference failed', li.note || li.failure || ''])
+      : ['pending', 'Live inference not run', real ? 'No live-inference record for this release.' : 'No live deploy for this release.'];
+    return [['Artifact digest', digest], ['Live identity', ident], ['Live inference', inf], ['Production traffic', ['plain', 'Not claimed', 'Gasket checks the released model, not live user traffic.']]];
+  }
+  function runtimeCompact(run) {
     if (run.outcome !== 'released_eligible') return h('span', { class: 'muted', text: 'Not applicable' });
-    if (stage === 'runtime_verified') return st('pass', 'Runtime verified');
-    if (stage === 'artifact_verified') return st('pass', 'Digest verified', 'The published model matches the signed evidence. An artifact-integrity check, not a live-inference test.');
-    if (stage === 'runtime_verify_failed') return st('fail', 'Check failed');
-    return st('pending', 'Not checked');
+    var short = { 'Artifact digest': 'Digest', 'Live identity': 'Identity', 'Live inference': 'Inference', 'Production traffic': 'Traffic: not claimed' };
+    return h('div', { class: 'facts' }, runtimeFacts(run).map(function (f) { return h('div', { class: 'nowrap' }, [st(f[1][0], short[f[0]], f[1][1] + (f[1][2] ? '. ' + f[1][2] : ''))]); }));
   }
   function mrInfo(run) {
     var m = run.mr || { kind: 'undetermined', how: 'not recorded' };
@@ -210,8 +219,12 @@
       step('Sign the evidence', isSigned(run) ? 'pass' : 'pending', blocked ? (isSigned(run) ? 'Signed' : after) : (isSigned(run) ? 'Signed (Sigstore, Rekor)' : 'Not signed')),
       step('Release by a person', blocked ? 'pending' : (run.deploy_job_user ? (mock ? 'mock' : 'pass') : 'pending'),
         blocked ? after : (run.deploy_job_user ? ('Started by @' + run.deploy_job_user + (mock ? '; recorded only, no service deployed' : '')) : 'Waiting for a person')),
-      step('Runtime digest check', run.release_stage === 'artifact_verified' || run.release_stage === 'runtime_verified' ? 'pass' : (run.release_stage === 'runtime_verify_failed' ? 'fail' : 'pending'),
-        blocked ? after : (run.release_stage === 'artifact_verified' ? 'Published model matches the evidence' : run.release_stage === 'runtime_verified' ? 'Service reported the evidenced hash' : 'Not checked'))
+      (function () {
+        var f = runtimeFacts(run), real = run.deployment && run.deployment.mock === false, bad = f.some(function (x) { return x[1][0] === 'fail'; });
+        var ok = real ? f[1][1][0] === 'pass' : f[0][1][0] === 'pass';
+        return step('Runtime checks', bad ? 'fail' : ok ? 'pass' : 'pending', blocked ? after
+          : bad ? 'A runtime check failed' : ok ? (real ? 'Service reported the evidenced hash' : 'Published artifact digest matches the evidence (no live deploy for this release)') : 'Not checked');
+      })()
     ];
     steps = steps.filter(Boolean);
     return h('ol', { class: 'rail', style: '--cols:' + steps.length, 'aria-label': 'Release gate steps' }, steps.map(function (x) {
@@ -247,7 +260,7 @@
     td('Reason code', codes.length ? h('span', { class: 'reason', text: codes.join(', ').replace(/_/g, '_\u200b') }) : h('span', { class: 'muted', text: 'None' }));
     td('Signed', run.outcome === 'released_eligible' || isSigned(run) ? signedStatus(run) : h('span', { class: 'muted', text: 'Not applicable' }));
     td('Released by', releasedBy(run));
-    td('Runtime', runtimeStatus(run));
+    td('Runtime', runtimeCompact(run));
     tr.addEventListener('click', function (e) { if (e.target.closest('a,button')) return; location.hash = '#/releases/' + run.id; });
     return tr;
   }
@@ -258,6 +271,42 @@
   }
 
   // ---------------------------------------------------------------- overview
+  function chainStatus(ch, id) {
+    var text = ch.repair_mr && ch.repair_mr.merged_by && ch.release_run ? 'Repaired via !' + ch.repair_mr.iid + ', released in ' + ch.release_run
+      : ch.repair_mr ? 'Repair !' + ch.repair_mr.iid + (ch.repair_mr.merged_by ? ' merged; not released yet' : ' proposed, not merged') : 'No repair recorded';
+    return h('span', {}, [text, h('div', { class: 'sub' }, [link('#/releases/' + (ch.linked ? ch.linked.block : id) + '/custody', 'Chain of custody: ' + ch.steps_done + ' of ' + ch.steps_total + ' steps recorded')])]);
+  }
+  function liveNow(L) {
+    var sec = section('Live on Cloud Run now', 'Read from the service\'s public /info when this snapshot was taken (' + fmtTime(L.checked_at) + '). It reports what the service runs; the checks below compare it with signed evidence.');
+    if (L.error) { sec.appendChild(empty('The live service could not be read at snapshot time.', L.error)); return sec; }
+    sec.appendChild(h('div', { class: 'panel' }, [kv([
+      ['Service', ext(L.url, L.url)],
+      ['Revision', mono(L.revision || 'not recorded')],
+      ['Model hash', L.model_sha256 ? monoCopy(L.model_sha256, 'live model hash') : 'not recorded'],
+      ['Commit', mono(L.commit || 'not recorded')],
+      ['Release it runs', L.release_run ? h('span', {}, [runLink({ id: L.release_run }, 'Pipeline ' + L.release_run), ' ', L.is_latest ? st('pass', 'Latest eligible release') : st('attn', 'Not the latest eligible release (' + L.latest_eligible + ')')]) : st('attn', 'Matches no deployed release in the records')],
+      ['Last live check', L.last_live_check ? h('span', {}, [runLink({ id: L.last_live_check.run }, 'Pipeline ' + L.last_live_check.run), ', ' + fmtTime(L.last_live_check.created_at)]) : 'not recorded']])]));
+    return sec;
+  }
+  var ACTOR = { agent: 'Duo agent', witness: 'Witness', gate: 'Pipeline check', person: 'Person' };
+  function activityPanel(F) {
+    var sec = section('Agent activity on the featured chain', 'Block ' + F.chain + ' from the first assessment to the live checks. Each step links to its record; a step with no record says so.');
+    sec.appendChild(h('div', { class: 'panel' }, [h('ol', { class: 'flow' }, F.activity.map(function (a) {
+      var label = a.href ? (/^https?:\/\//.test(a.href) ? ext(a.href, a.text) : link(a.href, a.text)) : h('span', { text: a.text });
+      return h('li', {}, [h('div', { class: 'flowbox' + (a.done ? '' : ' decision') }, [h('b', { text: a.name }), ' ', st(a.done ? 'pass' : 'pending', a.done ? ACTOR[a.actor] : 'Not recorded'), h('div', { class: 'sub' }, [label])])]);
+    }))]));
+    return sec;
+  }
+  function stageMap(stages) {
+    var sec = section('DevSecOps stages', 'Each stage links to the GitLab page or job that proves it for the featured release. A stage with no record reads Not run.');
+    sec.appendChild(h('div', { class: 'tablewrap' }, [h('table', { class: 't stack' }, [
+      h('thead', {}, [h('tr', {}, ['Stage', 'Status', 'Record'].map(function (x) { return h('th', { text: x }); }))]),
+      h('tbody', {}, stages.map(function (s) {
+        return h('tr', {}, [h('td', { 'data-label': 'Stage' }, [h('b', { text: s.name })]), h('td', { 'data-label': 'Status' }, [st(s.status === 'done' ? 'pass' : 'pending', s.status === 'done' ? 'Recorded' : 'Not run')]),
+          h('td', { 'data-label': 'Record' }, [s.href ? (/^https?:\/\//.test(s.href) ? ext(s.href, s.text) : link(s.href, s.text)) : h('span', { class: 'muted', text: s.note || 'No record' })])]);
+      }))])]));
+    return sec;
+  }
   function overview(q) {
     q = q || {};
     var main = h('div', {});
@@ -280,6 +329,11 @@
       main.appendChild(gate);
     } else main.appendChild(empty('No release gate to show.', 'A main-branch pipeline with a Witness decision appears here.'));
 
+    var F = DATA.featured || {};
+    if (F.live) main.appendChild(liveNow(F.live));
+    if ((F.activity || []).length) main.appendChild(activityPanel(F));
+    if ((F.stages || []).length) main.appendChild(stageMap(F.stages));
+
     // needs attention + last policy block
     var cols = h('div', { class: 'cols block' });
     var attention = h('div', { class: 'panel' }, [h('h2', { text: 'Needs attention' })]);
@@ -287,7 +341,7 @@
     if (!items.length) attention.appendChild(h('p', { class: 'muted', text: 'Nothing needs attention. Every open item the records can show is closed.' }));
     else attention.appendChild(h('ul', { class: 'attn-list' }, items.map(function (i) {
       var fix = i.fix.external ? ext(i.fix.href, i.fix.label) : link(i.fix.href, i.fix.label);
-      return h('li', {}, [st('attn', i.kind === 'waiting_for_person' ? 'Waiting for a person' : i.kind === 'repair_review' ? 'Repair awaiting review' : i.kind === 'block_awaiting_repair' ? 'Block awaiting repair' : i.kind === 'guard_failed' ? 'Guard check failed' : i.kind === 'separation_of_duties' ? 'Separation of duties' : i.kind === 'policy_change_held' ? 'Held: policy change needs review' : i.kind === 'guard_missing' ? 'Guard missing' : i.kind === 'block_without_cause' ? 'Cause not recorded' : i.kind === 'no_reverification' ? 'Re-verification not run' : 'Unsigned run'), h('p', { text: i.text }), h('p', { class: 'sub' }, ['Fix it here: ', fix])]);
+      return h('li', {}, [st('attn', i.kind === 'waiting_for_person' ? 'Waiting for a person' : i.kind === 'repair_review' ? 'Repair awaiting review' : i.kind === 'block_awaiting_repair' ? 'Block awaiting repair' : i.kind === 'guard_failed' ? 'Guard check failed' : i.kind === 'separation_of_duties' ? 'Separation of duties' : i.kind === 'policy_change_held' ? 'Held: policy change needs review' : i.kind === 'guard_missing' ? 'Guard missing' : i.kind === 'block_without_cause' ? 'Cause not recorded' : i.kind === 'no_reverification' ? 'Re-verification not run' : i.kind === 'live_not_latest' ? 'Live service is behind' : i.kind === 'live_unreadable' ? 'Live service unreadable' : 'Unsigned run'), h('p', { text: i.text }), i.detail ? h('details', { class: 'more' }, [h('summary', { text: 'Why' }), h('p', { class: 'sub', text: i.detail })]) : null, h('p', { class: 'sub' }, ['Fix it here: ', fix])]);
     })));
     cols.appendChild(attention);
 
@@ -307,7 +361,8 @@
         ['Cause', last.cause ? h('span', {}, [last.cause.text, last.cause.fixed_in ? h('span', {}, [' Fixed in ', ext(DATA.project_url + '/-/commit/' + last.cause.fixed_in.sha, last.cause.fixed_in.sha.slice(0, 8))]) : ' No fixing commit is recorded.'])
           : last.fixture ? 'A labelled demo fixture commit that injects a fairness regression, so this block is the expected result.' : 'Not determined from the records.'],
         ['Investigation', ch && ch.issue ? ext(ch.issue.web_url, 'Issue #' + ch.issue.iid) : 'No investigation issue recorded'],
-        ch ? ['Chain of custody', link('#/releases/' + last.id + '/custody', ch.steps_done + ' of ' + ch.steps_total + ' steps recorded')] : null
+        ch && ch.linked ? ['Same regression as', h('span', {}, [runLink({ id: ch.linked.block }, 'Block ' + ch.linked.block), h('div', { class: 'sub', text: ch.linked.why })])] : null,
+        ch ? ['Status', chainStatus(ch, last.id)] : null
       ]));
     }
     cols.appendChild(lastPanel);
@@ -319,7 +374,6 @@
     led.appendChild(ledgerTable(shown.slice(0, 10)));
     led.appendChild(h('p', { style: 'margin-top:12px' }, [link('#/releases' + (q.scope === 'all' ? '?scope=all' : ''), 'See all releases')]));
     main.appendChild(led);
-    if (DATA.snapshot) { var snap = section('Snapshot data', 'This dashboard is a static snapshot. Whether that data is signed:'); snap.appendChild(h('div', { class: 'panel' }, [snapshotSignature()])); main.appendChild(snap); }
     return main;
   }
 
@@ -474,19 +528,6 @@
       h('div', { class: 'track' + (over ? ' over' : ''), role: 'img', 'aria-label': label + ' ' + num(value) + ', limit ' + limit }, [fill, mark]),
       h('div', { class: 'cap', text: (kind === 'max' ? 'Maximum allowed ' : 'Minimum required ') + limit + (unit || '') + '. The vertical marker is the limit.' })]);
   }
-  function digestCheck(run) {
-    var stage = run.release_stage;
-    if (stage === 'artifact_verified' || stage === 'runtime_verified') return st('pass', 'Digest verified', 'The published model matches the signed evidence.');
-    if (stage === 'runtime_verify_failed') return st('fail', 'Check failed');
-    return st('pending', 'Not run');
-  }
-  function liveInferenceCheck(run) {
-    var li = run.live_inference;
-    if (!li) return h('span', {}, [st('pending', 'Not run'), h('div', { class: 'sub', text: 'It runs only after a real Cloud Run deployment, and fails closed there. No live service exists for this release.' })]);
-    if (li.status === 'passed') return h('span', {}, [st('pass', 'Passed'), h('div', { class: 'sub', text: li.note })]);
-    if (li.status === 'skipped') return h('span', {}, [st('pending', 'Skipped'), h('div', { class: 'sub', text: li.note })]);
-    return h('span', {}, [st('fail', 'Failed'), h('div', { class: 'sub', text: li.note || li.failure || '' })]);
-  }
   function decisionTab(run) {
     var el = h('div', {}), m = run.metrics || {}, th = run.thresholds || {}, codes = run.reason_codes || [];
     var d = decision(run);
@@ -518,7 +559,7 @@
       var mock = run.deployment && run.deployment.mock;
       el.appendChild(h('h3', { text: 'Release' }));
       el.appendChild(h('p', { text: mock ? 'The release is recorded, but no service was deployed (the receipt is marked mock). The runtime digest check compares the published model digest with the signed evidence; it is an artifact-integrity check, not a live-inference test.' : 'Release stage: ' + run.release_stage + '.' }));
-      el.appendChild(kv([['Runtime digest check', digestCheck(run)], ['Live inference check', liveInferenceCheck(run)]]));
+      el.appendChild(kv(runtimeFacts(run).map(function (f) { return [f[0], h('span', {}, [st(f[1][0], f[1][1]), f[1][2] ? h('div', { class: 'sub', text: f[1][2] }) : null])]; })));
     }
     el.appendChild(h('details', { class: 'more' }, [h('summary', { text: 'Raw identifiers' }), kv([['Scenario', (SCENARIO[run.scenario] || 'Not a scenario run') + (run.scenario ? ' (key ' + run.scenario + ')' : '')], ['Outcome key', mono(run.outcome)], ['Run kind', mono(run.kind)], ['Ref', mono(run.ref)]])]));
     return el;
@@ -1009,7 +1050,7 @@
         ['Proof chain', h('span', {}, [h('a', { href: 'proof-chain.json', text: 'proof-chain.json' }), ' ', ext(sig.proof_chain.rekor.url, 'Rekor entry #' + sig.proof_chain.rekor.log_index)])],
         ['Verify the snapshot', monoCopy(sig.snapshot.verify_command, 'verify command')],
         ['Verify the proof chain', monoCopy(sig.proof_chain.verify_command, 'verify command')]]));
-      box.appendChild(h('p', { class: 'sub', text: 'Download both files and their .cosign.bundle files into one folder, then run the commands. A signature proves these files came from the publishing pipeline unaltered; it does not prove the data in them is correct.' }));
+      box.appendChild(h('p', { class: 'sub', text: 'The snapshot data files (snapshot.json, proof-chain.json) are signed with Sigstore and logged in Rekor. The page code itself is not signed. Download both files and their .cosign.bundle files into one folder, then run the commands. A signature proves these files came from the publishing pipeline unaltered; it does not prove the data in them is correct.' }));
     } else {
       box.appendChild(h('p', {}, [st('pending', 'Snapshot data not signed')]));
       box.appendChild(h('p', { class: 'sub', text: 'The snapshot and the proof chain are signed when the public dashboard is published from a GitLab pipeline with a Sigstore identity. This copy was not signed, so it is only as trustworthy as where you got it. Each run still links to its own signed evidence.' }));

@@ -1,0 +1,18 @@
+{
+  "approved_at": "2026-10-16T07:17:12Z",
+  "approved_by": "chandran.sivasurya",
+  "base": "8f8d95648ac101ad44cab3a4f0642077a5c799ce",
+  "changed_paths": [
+    ".gitlab-ci.yml"
+  ],
+  "diff_sha256": "99afd0a5cfb9b57b1d74492c2187bb4f01e65c92d5f0af25d517fce66cbc1eca",
+  "head": "67162fd303721aeccc3f526c3962ba0b0cb4e38e",
+  "job_id": "17223974522",
+  "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17223974522",
+  "mr_author": "chandran.sivasurya",
+  "mr_iid": "21",
+  "pipeline_id": "2954009176",
+  "schema": "gasket.policy-change-approval/v1",
+  "self_approval": true,
+  "separation_of_duties": "gap: approved by the author of the change"
+}
