@@ -52,16 +52,16 @@
   "reason_codes": "FAIRNESS_GAP_EXCEEDED",
   "investigation_issue": "#3",
   "repair_merge_request": "!7",
-  "approved_by": "",
-  "merged_by": "",
-  "corrected_pipeline": 2949088932,
+  "approved_by": "chandran.sivasurya",
+  "merged_by": "chandran.sivasurya",
+  "corrected_pipeline": 2953690147,
   "release_pipeline": "",
   "signed": "no",
   "release_started_by": "",
   "runtime_check": "",
-  "steps_recorded": 4,
+  "steps_recorded": 6,
   "steps_total": 9,
-  "missing_steps": "repair_approved, repair_merged, signed_release, release_started, runtime_check"
+  "missing_steps": "signed_release, release_started, runtime_check"
  },
  {
   "blocked_pipeline": 2949088649,

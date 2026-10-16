@@ -37,7 +37,7 @@ The Witness decision was **blocked** with reason code(s) FAIRNESS_GAP_EXCEEDED.
 - Evidence signed: no or not recorded
 - Signer identity: not recorded
 - Verify: `not recorded`
-- Approved by: not recorded
+- Approved by: @chandran.sivasurya
 - Release job started by: not recorded
 
 ## Known limits

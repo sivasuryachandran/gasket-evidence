@@ -1,27 +1,28 @@
 {
- "generated_at": "2026-10-16T04:19:41Z",
+ "generated_at": "2026-10-16T04:47:47Z",
  "outcomes": {
-  "released_eligible": 57,
-  "out_of_scope": 24,
+  "running": 1,
+  "out_of_scope": 25,
+  "released_eligible": 58,
   "no_decision": 7,
   "expected_block": 4,
   "unexpected_block": 1
  },
  "data_quality": {
-  "total_pipelines": 93,
-  "valid_runs": 62,
+  "total_pipelines": 96,
+  "valid_runs": 63,
   "no_decision": 7,
-  "out_of_scope": 24,
-  "running": 0
+  "out_of_scope": 25,
+  "running": 1
  },
  "kpis": {
-  "valid_runs": 62,
+  "valid_runs": 63,
   "correct_blocks": 4,
   "unexpected_blocks": 1,
   "unexpected_passes": 0,
-  "eligible_releases": 57,
+  "eligible_releases": 58,
   "stages": {
-   "eligible": 23,
+   "eligible": 24,
    "awaiting_approval": 8,
    "deployed_mock": 6,
    "artifact_verified": 16,
@@ -29,8 +30,8 @@
    "deployed": 0,
    "runtime_verified": 3
   },
-  "median_witness_seconds": 81.8,
-  "median_pipeline_seconds": 511.1
+  "median_witness_seconds": 82.0,
+  "median_pipeline_seconds": 507.7
  },
  "reason_codes": {
   "FAIRNESS_GAP_EXCEEDED": 4,
@@ -38,7 +39,7 @@
  },
  "scenario_matrix": {
   "d": {
-   "released_eligible": 57,
+   "released_eligible": 58,
    "unexpected_block": 1
   },
   "regression": {
@@ -64,6 +65,7 @@
   "4": 2940522134,
   "5": 2940522124,
   "6": 2940692086,
+  "7": 2953690147,
   "8": 2949092670,
   "9": 2952140351,
   "10": 2952701691,
@@ -82,9 +84,9 @@
    "variants": [
     "D"
    ],
-   "runs": 57,
-   "evidenced_in": 57,
-   "observed_in": 57,
+   "runs": 58,
+   "evidenced_in": 58,
+   "observed_in": 58,
    "metrics": {
     "model_variant": "D",
     "accuracy": 0.7425,
@@ -159,7 +161,7 @@
     "security": 7
    }
   },
-  "scope_differs": 10,
+  "scope_differs": 11,
   "percentages_shown": true,
   "items": [
    {
@@ -185,12 +187,12 @@
    },
    {
     "mr_iid": 4,
-    "pipeline_id": 2940522134,
+    "pipeline_id": 2953702652,
     "duo_scope": [
      "model"
     ],
     "witness_scope": [
-     "model"
+     "ambiguous"
     ],
     "duo_risk": "high",
     "witness_risk": "high",
@@ -202,7 +204,7 @@
     "evidence_duo_only": [
      "data_identity"
     ],
-    "scope_differs": false,
+    "scope_differs": true,
     "session": "not recorded",
     "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9355036",
     "session_copy": null,
@@ -549,6 +551,709 @@
  },
  "runs": [
   {
+   "id": 2953702652,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953702652",
+   "ref": "refs/merge-requests/4/head",
+   "kind": "merge_request",
+   "mr_iid": 4,
+   "sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+   "created_at": "2026-10-16T04:45:58.319Z",
+   "status": "running",
+   "scenario": null,
+   "wall_seconds": 76.3,
+   "stage_seconds": {
+    "package": 31.4,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "running",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "live_inference": null,
+   "security": null,
+   "policy_change": {
+    "status": "not_recorded"
+   },
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "impact-check",
+    "train-models",
+    "unit-tests"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": null,
+    "image_digest": null,
+    "image_digest_observed": null,
+    "data_sha256": null,
+    "policy_id": null,
+    "policy_sha256": null,
+    "commit_sha": null,
+    "release_id": null
+   },
+   "job_count": 8,
+   "failed_jobs": [],
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792109860",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": {
+    "agent_session": "not recorded",
+    "changed_paths": [],
+    "commit_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+    "duo_available": true,
+    "duo_reason": "Training code in build_variant_d drops the equal-opportunity calibration and uses one global 0.5 threshold for both groups, which changes the model artifact and is likely to regress fairness. Fresh fairness and accuracy evidence plus artifact identity are required.",
+    "duo_required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "data_identity",
+     "fairness"
+    ],
+    "duo_risk_level": "high",
+    "duo_scope": [
+     "model"
+    ],
+    "overridden": true,
+    "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, security. Duo proposed scope model, risk high, evidence: accuracy, artifact_identity, data_identity, fairness. The stricter, deterministic requirement wins.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "data_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "ambiguous"
+    ],
+    "unsupported_duo_evidence": []
+   },
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17222016635,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17222016635/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2953702652/impact-final.json"
+    }
+   ],
+   "commit_title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'",
+   "mr": {
+    "kind": "mr",
+    "iid": 4,
+    "how": "a merge request pipeline"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "change_scope": [
+    "model"
+   ],
+   "seal": null,
+   "model_card": null
+  },
+  {
+   "id": 2953694080,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953694080",
+   "ref": "refs/workloads/008694729bd",
+   "kind": "duo_workload",
+   "mr_iid": null,
+   "sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
+   "created_at": "2026-10-16T04:41:13.302Z",
+   "status": "success",
+   "scenario": null,
+   "wall_seconds": 77.0,
+   "stage_seconds": {
+    "package": null,
+    "evaluate": null,
+    "secure": null,
+    "bind": null,
+    "witness": null
+   },
+   "deploy_job_state": null,
+   "outcome": "out_of_scope",
+   "trust": null,
+   "trust_label": null,
+   "release_stage": null,
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "live_inference": null,
+   "security": null,
+   "policy_change": {
+    "status": "not_recorded"
+   },
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "workload"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": null,
+    "image_digest": null,
+    "image_digest_observed": null,
+    "data_sha256": null,
+    "policy_id": null,
+    "policy_sha256": null,
+    "commit_sha": null,
+    "release_id": null
+   },
+   "job_count": 1,
+   "failed_jobs": [],
+   "reason_codes": null,
+   "checks": null,
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43260749/custom-flow-1.png?v=1791742848",
+    "name": "Gasket Release Investigator",
+    "username": "ai-gasket-release-investigator-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-release-investigator-gitlab-ai-hackathon",
+    "kind": "duo"
+   },
+   "witness_job_url": null,
+   "evidenced_model_sha256": null,
+   "observed_model_sha256": null,
+   "metrics": null,
+   "thresholds": null,
+   "impact": null,
+   "has_decision": false,
+   "has_manifest": false,
+   "evidence_links": [],
+   "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
+   "mr": {
+    "kind": "undetermined",
+    "iid": null,
+    "how": "the commit is not the head or merge commit of one merge request"
+   },
+   "fixture": true,
+   "cause": null,
+   "stopped_at": null,
+   "change_scope": [
+    "model"
+   ],
+   "seal": null,
+   "model_card": null
+  },
+  {
+   "id": 2953690147,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953690147",
+   "ref": "refs/merge-requests/7/head",
+   "kind": "merge_request",
+   "mr_iid": 7,
+   "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
+   "created_at": "2026-10-16T04:39:01.268Z",
+   "status": "success",
+   "scenario": "d",
+   "wall_seconds": 298.6,
+   "stage_seconds": {
+    "package": 71.0,
+    "evaluate": 44.8,
+    "secure": 39.8,
+    "bind": 17.3,
+    "witness": 82.6
+   },
+   "deploy_job_state": null,
+   "outcome": "released_eligible",
+   "trust": "trusted",
+   "trust_label": "Trusted / Verified",
+   "release_stage": "eligible",
+   "signature": null,
+   "provenance": null,
+   "runtime_verification": null,
+   "live_inference": null,
+   "security": null,
+   "policy_change": {
+    "status": "not_recorded"
+   },
+   "reverification": null,
+   "model_registration": null,
+   "release": null,
+   "incident": null,
+   "requirements_reported": false,
+   "jobs_ran": [
+    "bind-evidence",
+    "evaluate-model",
+    "gasket-witness",
+    "impact-check",
+    "package-image",
+    "repair-scope",
+    "security-scan",
+    "train-models",
+    "unit-tests"
+   ],
+   "deployment": null,
+   "deploy_job_url": null,
+   "deploy_job_user": null,
+   "identity": {
+    "image_reference": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:ee4008d1-d-p2953690147",
+    "image_digest": "sha256:e8252cc7cc7c59cf7a0ffa9a54be176582880168c95059bd43bae7e5aa7888a3",
+    "image_digest_observed": "sha256:e8252cc7cc7c59cf7a0ffa9a54be176582880168c95059bd43bae7e5aa7888a3",
+    "data_sha256": "bb9fd32de35231837283918f10bb7030f41476c39a381cde46405fb0f3615998",
+    "policy_id": "credit-demo-v1",
+    "policy_sha256": "ae1fd5794425eb329c478489cd13ca7d74268abd303c9308008e01ed0d0325e3",
+    "commit_sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
+    "release_id": "candidate-2953690147"
+   },
+   "job_count": 9,
+   "failed_jobs": [],
+   "reason_codes": [],
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "impact": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792109860",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya",
+    "kind": null
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932468",
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "impact": {
+    "changed_paths": [
+     "demo-model/train.py"
+    ],
+    "commit_sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
+    "duo_available": false,
+    "overridden": false,
+    "reason": "No Duo opinion was available; deterministic analysis alone was used.",
+    "required_evidence": [
+     "accuracy",
+     "artifact_identity",
+     "fairness",
+     "security"
+    ],
+    "risk_level": "high",
+    "scope": [
+     "model"
+    ]
+   },
+   "has_decision": true,
+   "has_manifest": true,
+   "evidence_links": [
+    {
+     "key": "decision",
+     "label": "Witness decision",
+     "file": "witness-decision.json",
+     "job_id": 17221932468,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932468/artifacts/raw/witness-decision.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2953690147/witness-decision.json"
+    },
+    {
+     "key": "manifest",
+     "label": "Evidence manifest",
+     "file": "evidence-out/manifest.json",
+     "job_id": 17221932468,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932468/artifacts/raw/evidence-out/manifest.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2953690147/manifest.json"
+    },
+    {
+     "key": "metrics",
+     "label": "Metrics",
+     "file": "evidence-out/metrics.json",
+     "job_id": 17221932465,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932465/artifacts/raw/evidence-out/metrics.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2953690147/metrics.json"
+    },
+    {
+     "key": "impact",
+     "label": "Impact analysis",
+     "file": "impact-final.json",
+     "job_id": 17221932460,
+     "link_only": false,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932460/artifacts/raw/impact-final.json",
+     "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2953690147/impact-final.json"
+    },
+    {
+     "key": "sbom",
+     "label": "SBOM of the release image (CycloneDX)",
+     "file": "security-out/sbom.cdx.json",
+     "job_id": 17221932466,
+     "link_only": true,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932466/artifacts/raw/security-out/sbom.cdx.json"
+    },
+    {
+     "key": "trivy",
+     "label": "Container scan (Trivy JSON)",
+     "file": "security-out/trivy.json",
+     "job_id": 17221932466,
+     "link_only": true,
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932466/artifacts/raw/security-out/trivy.json"
+    }
+   ],
+   "commit_title": "Restore equal-opportunity calibration in build_variant_d",
+   "mr": {
+    "kind": "mr",
+    "iid": 7,
+    "how": "a merge request pipeline"
+   },
+   "fixture": false,
+   "cause": null,
+   "stopped_at": null,
+   "change_scope": [
+    "model"
+   ],
+   "seal": {
+    "evidenced": [
+     {
+      "text": "e0c2",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5654",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5cbd",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "e896",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "4bf9",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "674b",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9e36",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "695f",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "f32c",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bb06",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "a332",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "8490",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "c96a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9f79",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bc7a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "207d",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     }
+    ],
+    "observed": [
+     {
+      "text": "e0c2",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5654",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "5cbd",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "e896",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "4bf9",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "674b",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9e36",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "695f",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "f32c",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bb06",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "a332",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "8490",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "c96a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "9f79",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "bc7a",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     },
+     {
+      "text": "207d",
+      "diff": [
+       false,
+       false,
+       false,
+       false
+      ]
+     }
+    ],
+    "identical": true,
+    "differing": 0,
+    "evidenced_full": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "observed_full": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
+   },
+   "model_card": "runs/2953690147/model-card.md"
+  },
+  {
    "id": 2953624892,
    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953624892",
    "ref": "main",
@@ -556,9 +1261,9 @@
    "mr_iid": null,
    "sha": "5d588592571401fc547fa27e39cc99d9ee7e5fb7",
    "created_at": "2026-10-16T04:07:47.104Z",
-   "status": "running",
+   "status": "success",
    "scenario": "d",
-   "wall_seconds": 623.7,
+   "wall_seconds": 766.5,
    "stage_seconds": {
     "package": 70.8,
     "evaluate": 48.4,
@@ -813,6 +1518,7 @@
     "package-image",
     "pages",
     "policy-change-check",
+    "publish-public-dashboard",
     "release-evidence",
     "runtime-verify-live",
     "secret_detection",
@@ -3289,9 +3995,9 @@
    "mr_iid": null,
    "sha": "8eaef67b1fead0bd4441cf2918cef3ef88ee3267",
    "created_at": "2026-10-16T03:20:03.690Z",
-   "status": "success",
+   "status": "running",
    "scenario": "d",
-   "wall_seconds": 1146.9,
+   "wall_seconds": 790.6,
    "stage_seconds": {
     "package": 83.2,
     "evaluate": 41.1,
@@ -3546,7 +4252,6 @@
     "package-image",
     "pages",
     "policy-change-check",
-    "publish-public-dashboard",
     "release-evidence",
     "runtime-verify-live",
     "secret_detection",
@@ -17800,13 +18505,13 @@
    "fixture": false,
    "cause": null,
    "stopped_at": {
-    "text": "Stopped before the gate: guard rejection. The guard job repair-scope rejected this merge request: it changes no files against its target branch, and a repair must change training code. The job log is not readable without a login, so this is read from the merge request's empty diff.",
+    "text": "Stopped before the gate: guard failed, reason not determined. The guard job repair-scope failed (script_failure). Its log is not readable without a login, so whether it rejected the change or hit a tooling problem is not recorded.",
     "job": "repair-scope",
     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188514490",
     "guard": {
-     "kind": "guard_rejection",
-     "label": "Guard rejection",
-     "text": "The guard job repair-scope rejected this merge request: it changes no files against its target branch, and a repair must change training code. The job log is not readable without a login, so this is read from the merge request's empty diff."
+     "kind": "undetermined",
+     "label": "Guard failed, reason not determined",
+     "text": "The guard job repair-scope failed (script_failure). Its log is not readable without a login, so whether it rejected the change or hit a tooling problem is not recorded."
     }
    },
    "change_scope": [
@@ -18422,9 +19127,9 @@
    ],
    "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
    "mr": {
-    "kind": "mr",
-    "iid": 4,
-    "how": "the head commit of this merge request"
+    "kind": "undetermined",
+    "iid": null,
+    "how": "the commit is not the head or merge commit of one merge request"
    },
    "fixture": true,
    "cause": null,
@@ -18806,9 +19511,9 @@
    "evidence_links": [],
    "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
    "mr": {
-    "kind": "mr",
-    "iid": 4,
-    "how": "the head commit of this merge request"
+    "kind": "undetermined",
+    "iid": null,
+    "how": "the commit is not the head or merge commit of one merge request"
    },
    "fixture": true,
    "cause": null,
@@ -18891,9 +19596,9 @@
    "evidence_links": [],
    "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
    "mr": {
-    "kind": "mr",
-    "iid": 4,
-    "how": "the head commit of this merge request"
+    "kind": "undetermined",
+    "iid": null,
+    "how": "the commit is not the head or merge commit of one merge request"
    },
    "fixture": true,
    "cause": null,
@@ -25115,9 +25820,9 @@
    "evidence_links": [],
    "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
    "mr": {
-    "kind": "mr",
-    "iid": 4,
-    "how": "the head commit of this merge request"
+    "kind": "undetermined",
+    "iid": null,
+    "how": "the commit is not the head or merge commit of one merge request"
    },
    "fixture": true,
    "cause": null,
@@ -25289,9 +25994,9 @@
    "evidence_links": [],
    "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
    "mr": {
-    "kind": "mr",
-    "iid": 4,
-    "how": "the head commit of this merge request"
+    "kind": "undetermined",
+    "iid": null,
+    "how": "the commit is not the head or merge commit of one merge request"
    },
    "fixture": true,
    "cause": null,
@@ -25399,13 +26104,13 @@
    "created_at": "2026-10-13T00:22:19.642Z",
    "status": "failed",
    "scenario": "regression",
-   "wall_seconds": 1281.9,
+   "wall_seconds": 274723.9,
    "stage_seconds": {
     "package": 68.5,
     "evaluate": 38.6,
     "secure": 34.2,
     "bind": 17.1,
-    "witness": 79.9
+    "witness": 87.8
    },
    "deploy_job_state": null,
    "outcome": "expected_block",
@@ -25454,7 +26159,7 @@
      "name": "gasket-witness",
      "status": "failed",
      "failure_reason": "script_failure",
-     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255"
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221939265"
     }
    ],
    "reason_codes": [
@@ -25480,7 +26185,7 @@
     "web_url": "https://gitlab.com/chandran.sivasurya",
     "kind": null
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255",
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221939265",
    "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
    "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
    "metrics": {
@@ -25536,18 +26241,18 @@
      "key": "decision",
      "label": "Witness decision",
      "file": "witness-decision.json",
-     "job_id": 17126474255,
+     "job_id": 17221939265,
      "link_only": false,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255/artifacts/raw/witness-decision.json",
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221939265/artifacts/raw/witness-decision.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522134/witness-decision.json"
     },
     {
      "key": "manifest",
      "label": "Evidence manifest",
      "file": "evidence-out/manifest.json",
-     "job_id": 17126474255,
+     "job_id": 17221939265,
      "link_only": false,
-     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255/artifacts/raw/evidence-out/manifest.json",
+     "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221939265/artifacts/raw/evidence-out/manifest.json",
      "view_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/blob/main/dashboard/data/evidence/2940522134/manifest.json"
     },
     {
@@ -39898,6 +40603,24 @@
      ],
      "title": "Merge branch 'fix/live-inference-load' into 'main'"
     },
+    "8efb5ff16d6063b503263d059b195c811f343bde": {
+     "merge_requests": [
+      {
+       "iid": 7,
+       "merge_commit_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+       "state": "merged"
+      },
+      {
+       "iid": 4,
+       "merge_commit_sha": null,
+       "state": "opened"
+      }
+     ],
+     "paths": [
+      "demo-model/train.py"
+     ],
+     "title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'"
+    },
     "8f0a18ab708cb9c21121106c369aa1964063b584": {
      "merge_requests": [],
      "paths": [
@@ -40302,26 +41025,6 @@
    },
    "recent": [
     {
-     "message": "Release runs table: compact time, drop scenario/witness columns and related-work link so it fits without sideways scroll\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "2d5c49fb58b569acc36b2e147f0346d6ae5b7f38",
-     "title": "Release runs table: compact time, drop scenario/witness columns and related-work link so it fits without sideways scroll"
-    },
-    {
-     "message": "Dashboard: green Deploy button (tooltip explains it opens the GitLab pipeline) replaces the text links\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "4e05b687053afee011cf20a170658ea0d365e807",
-     "title": "Dashboard: green Deploy button (tooltip explains it opens the GitLab pipeline) replaces the text links"
-    },
-    {
-     "message": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "b0984ce01357ad4f814911f9269511e55b949a7b",
-     "title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github"
-    },
-    {
-     "message": "Stage tracker: a mock deployment turns Deployed green with a dashed border and the label (mock); Runtime verified stays off\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "18397168936b5862403b537f7428901695774c13",
-     "title": "Stage tracker: a mock deployment turns Deployed green with a dashed border and the label (mock); Runtime verified stays off"
-    },
-    {
      "message": "Deploy status bar: Deploy button becomes Deployment running / Deployed (blue) / failed or canceled (red) from the synced job state\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
      "sha": "c86f0110a32659f1c3ef41fcedd71ed64793b898",
      "title": "Deploy status bar: Deploy button becomes Deployment running / Deployed (blue) / failed or canceled (red) from the synced job state"
@@ -40417,14 +41120,14 @@
      "title": "Tests: build the passing model from variant B so unit tests do not fail on a demo regression in variant D"
     },
     {
-     "message": "Restore equal-opportunity calibration in build_variant_d\n\nReverses the injected regression: the same code change the earlier repair made (a481ed4). Thresholds come from the training data only.\nNo policy, threshold, validation or Witness change.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
-     "sha": "24b612db747a34b3855a353ee672296d867926eb",
-     "title": "Restore equal-opportunity calibration in build_variant_d"
-    },
-    {
      "message": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)\n\nReproduces the earlier injected regression so the Witness blocks it. Demo only.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
      "sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
      "title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)"
+    },
+    {
+     "message": "Restore equal-opportunity calibration in build_variant_d\n\nReverses the injected regression: the same code change the earlier repair made (a481ed4). Thresholds come from the training data only.\nNo policy, threshold, validation or Witness change.\n\nCo-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>\n",
+     "sha": "24b612db747a34b3855a353ee672296d867926eb",
+     "title": "Restore equal-opportunity calibration in build_variant_d"
     },
     {
      "message": "Merge branch 'duo-demo/c-fix-fairness-regression' into 'duo-demo/b-fairness-regression'\n\ndemo: fix fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!5",
@@ -40792,13 +41495,33 @@
      "title": "Merge branch 'fix/snapshot-never-silently-partial' into 'main'"
     },
     {
-     "message": "Merge branch 'repair/issue-3' into 'main'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
-     "sha": "e1070e5a8c133a868393fc031001c579f190d042",
-     "title": "Merge branch 'repair/issue-3' into 'main'"
+     "message": "Service page: describe what the demo is for instead of a disclaimer\n",
+     "sha": "40896772849d23ddae5bde3060f6ff2512e4597c",
+     "title": "Service page: describe what the demo is for instead of a disclaimer"
+    },
+    {
+     "message": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
+     "sha": "1590676c5b3f5e4bbe03c0b9e929f25fa696f8fa",
+     "title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'"
+    },
+    {
+     "message": "Docs: the updated Repair flow is pasted on the Flows page (maintainer-reported); its target is not yet seen because no repair has run since\n",
+     "sha": "a6b277bf4384131e22b22cb868876ebed1e9c9d4",
+     "title": "Docs: the updated Repair flow is pasted on the Flows page (maintainer-reported); its target is not yet seen because no repair has run since"
+    },
+    {
+     "message": "Docs: a fourth Investigator trigger (the re-run of !4's Witness job) and the repair guard passing on !7's real diff\n",
+     "sha": "20fef6e21d76703850210b25074a886d57ffd34e",
+     "title": "Docs: a fourth Investigator trigger (the re-run of !4's Witness job) and the repair guard passing on !7's real diff"
+    },
+    {
+     "message": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'\n\nRestore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
+     "sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+     "title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'"
     },
     {
      "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
-     "sha": "e98966d3f75eb67c769e9eafe2908cf47e344ded",
+     "sha": "8d28b5e67bd195db29b0c6b77f28e559e2641b8b",
      "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
     }
    ]
@@ -41420,8 +42143,13 @@
    },
    {
     "approvals": {
-     "approved": false,
-     "approved_by": [],
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
      "required": 1,
      "rules": [
       {
@@ -41438,20 +42166,26 @@
      "username": "chandran.sivasurya",
      "web_url": "https://gitlab.com/chandran.sivasurya"
     },
-    "changes_count": 0,
+    "changes_count": 1,
     "created_at": "2026-10-15T02:35:10.119Z",
-    "draft": true,
+    "draft": false,
     "head_sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
     "iid": 7,
-    "merge_commit_sha": null,
-    "merged_by": null,
+    "merge_commit_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792109860",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
     "repairs_issue": 3,
     "session": null,
     "source_branch": "repair/issue-3",
     "squash_commit_sha": null,
-    "state": "opened",
-    "target_branch": "main",
-    "title": "Draft: Restore equal-opportunity calibration in build_variant_d",
+    "state": "merged",
+    "target_branch": "duo-demo/b-fairness-regression",
+    "title": "Restore equal-opportunity calibration in build_variant_d",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/7"
    },
    {
@@ -41555,8 +42289,13 @@
    },
    {
     "approvals": {
-     "approved": false,
-     "approved_by": [],
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
      "required": 1,
      "rules": [
       {
@@ -41581,10 +42320,10 @@
      "username": "chandran.sivasurya",
      "web_url": "https://gitlab.com/chandran.sivasurya"
     },
-    "changes_count": 1,
+    "changes_count": 0,
     "created_at": "2026-10-13T00:15:57.194Z",
     "draft": false,
-    "head_sha": "223e37694477cc9f36c1a2719b5a9cadab506581",
+    "head_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
     "iid": 4,
     "merge_commit_sha": null,
     "merged_by": null,
@@ -41755,7 +42494,7 @@
  },
  "snapshot": {
   "date": "2026-10-16",
-  "taken_at": "2026-10-16T04:19:41Z",
+  "taken_at": "2026-10-16T04:47:47Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null
@@ -41792,6 +42531,8 @@
    ],
    "issues": [],
    "run_ids": [
+    2953702652,
+    2953690147,
     2953607493,
     2953566518,
     2953527323,
@@ -41968,31 +42709,31 @@
    "blocked_cause": null,
    "repair_mr": {
     "iid": 7,
-    "title": "Draft: Restore equal-opportunity calibration in build_variant_d",
-    "state": "opened",
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "state": "merged",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/7",
-    "draft": true,
+    "draft": false,
     "session": null,
-    "approved_by": [],
-    "merged_by": null,
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya",
     "session_copy": null,
     "session_trigger": null,
     "session_url": null,
     "session_flow": "Release Repair"
    },
    "promotion_mr": null,
-   "corrected_run": 2949088932,
+   "corrected_run": 2953690147,
    "corrected_outcome": "released_eligible",
    "release_run": null,
    "release_stage": null,
    "release_started_by": null,
    "signed": false,
    "deployment": null,
-   "steps_done": 4,
+   "steps_done": 6,
    "steps_total": 9,
    "missing": [
-    "repair_approved",
-    "repair_merged",
     "signed_release",
     "release_started",
     "runtime_check"
@@ -42046,13 +42787,13 @@
    "key": "pipelines",
    "label": "CI/CD pipelines",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines",
-   "evidence": "69 release pipelines recorded"
+   "evidence": "71 release pipelines recorded"
   },
   {
    "key": "merge_requests",
    "label": "Merge requests",
    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=all",
-   "evidence": "19 merge requests, 14 merged"
+   "evidence": "19 merge requests, 15 merged"
   },
   {
    "key": "duo_flows",
@@ -42439,7 +43180,7 @@
      "security": 7
     }
    },
-   "scope_differs": 10,
+   "scope_differs": 11,
    "percentages_shown": true
   },
   "assessments": 14
@@ -42502,7 +43243,7 @@
    {
     "name": "A repair merge request may only change training code",
     "enforced": true,
-    "evidence": "Yes, as an early signal: the repair-scope CI job runs on merge requests from repair/ branches and reads its rules from the target branch. It is not tamper-proof; protected branches and required review are the real control (docs/SETUP.md). Last recorded guard failure: !7, guard rejection."
+    "evidence": "Yes, as an early signal: the repair-scope CI job runs on merge requests from repair/ branches and reads its rules from the target branch. It is not tamper-proof; protected branches and required review are the real control (docs/SETUP.md). Last recorded guard failure: !7, guard failed, reason not determined."
    }
   ],
   "protected_paths": [
@@ -42580,35 +43321,13 @@
  },
  "attention": [
   {
-   "kind": "repair_review",
-   "run": null,
-   "mr": 7,
-   "text": "Repair merge request !7 is a draft awaiting review. Its guard check: guard rejection.",
-   "fix": {
-    "label": "Review !7 in GitLab",
-    "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/7",
-    "external": true
-   }
-  },
-  {
-   "kind": "guard_failed",
-   "run": 2949089257,
-   "mr": 7,
-   "guard": "guard_rejection",
-   "text": "Guard rejection on !7 (job repair-scope). The guard job repair-scope rejected this merge request: it changes no files against its target branch, and a repair must change training code. The job log is not readable without a login, so this is read from the merge request's empty diff.",
-   "fix": {
-    "label": "Open the guard job in GitLab",
-    "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188514490",
-    "external": true
-   }
-  },
-  {
    "kind": "separation_of_duties",
    "run": null,
    "mrs": [
     1,
     2,
     6,
+    7,
     8,
     9,
     10,
@@ -42621,7 +43340,7 @@
     18,
     19
    ],
-   "text": "Releases through !1, !2, !6, !8, !9, !10, !11, !12, !14, !15, !16, !17, !18, !19 were approved by the person who wrote the change. That is a separation-of-duties gap; this project has one member, so no independent approval was possible.",
+   "text": "Releases through !1, !2, !6, !7, !8, !9, !10, !11, !12, !14, !15, !16, !17, !18, !19 were approved by the person who wrote the change. That is a separation-of-duties gap; this project has one member, so no independent approval was possible.",
    "fix": {
     "label": "See these merge requests and their releases",
     "href": "#/releases?group=mr",
@@ -42651,10 +43370,10 @@
     "iso": "Operation; planning",
     "slsa": "Verification of build inputs before release (not a SLSA level)",
     "status": "Operating",
-    "status_detail": "62 Witness decisions recorded",
+    "status_detail": "63 Witness decisions recorded",
     "evidence": {
-     "label": "Release case file 2953624892",
-     "href": "#/releases/2953624892",
+     "label": "Release case file 2953690147",
+     "href": "#/releases/2953690147",
      "external": false
     }
    },
@@ -42667,10 +43386,10 @@
     "iso": "Performance evaluation",
     "slsa": "Not applicable",
     "status": "Operating",
-    "status_detail": "51 runs with recomputed metrics",
+    "status_detail": "52 runs with recomputed metrics",
     "evidence": {
-     "label": "Release case file 2953624892",
-     "href": "#/releases/2953624892",
+     "label": "Release case file 2953690147",
+     "href": "#/releases/2953690147",
      "external": false
     }
    },
@@ -42715,7 +43434,7 @@
     "iso": "Leadership and operation",
     "slsa": "Two-person review is not met with one member",
     "status": "Partly met",
-    "status_detail": "14 merge requests with an approval record; 14 are self-approvals (single-member demo project)",
+    "status_detail": "16 merge requests with an approval record; 16 are self-approvals (single-member demo project)",
     "evidence": {
      "label": "Merge requests in GitLab",
      "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests?state=merged",
@@ -42805,6 +43524,36 @@
    "pipeline_url"
   ],
   "ledger": [
+   {
+    "pipeline_id": 2953702652,
+    "created_at": "2026-10-16T04:45:58.319Z",
+    "ref": "refs/merge-requests/4/head",
+    "commit": "8efb5ff16d60",
+    "commit_title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'",
+    "scope": "model",
+    "merge_request": "!4",
+    "decision": "running",
+    "reason_codes": "",
+    "signed": "no",
+    "release_started_by": "",
+    "runtime_check": "not applicable",
+    "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953702652"
+   },
+   {
+    "pipeline_id": 2953690147,
+    "created_at": "2026-10-16T04:39:01.268Z",
+    "ref": "refs/merge-requests/7/head",
+    "commit": "ee4008d15cea",
+    "commit_title": "Restore equal-opportunity calibration in build_variant_d",
+    "scope": "model",
+    "merge_request": "!7",
+    "decision": "Eligible",
+    "reason_codes": "",
+    "signed": "no",
+    "release_started_by": "",
+    "runtime_check": "not checked",
+    "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953690147"
+   },
    {
     "pipeline_id": 2953624892,
     "created_at": "2026-10-16T04:07:47.104Z",
@@ -43232,7 +43981,7 @@
     "commit": "223e37694477",
     "commit_title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d (fairness regression)",
     "scope": "model",
-    "merge_request": "!4",
+    "merge_request": "not determined",
     "decision": "Blocked",
     "reason_codes": "FAIRNESS_GAP_EXCEEDED",
     "signed": "no",
@@ -43911,16 +44660,16 @@
     "reason_codes": "FAIRNESS_GAP_EXCEEDED",
     "investigation_issue": "#3",
     "repair_merge_request": "!7",
-    "approved_by": "",
-    "merged_by": "",
-    "corrected_pipeline": 2949088932,
+    "approved_by": "chandran.sivasurya",
+    "merged_by": "chandran.sivasurya",
+    "corrected_pipeline": 2953690147,
     "release_pipeline": "",
     "signed": "no",
     "release_started_by": "",
     "runtime_check": "",
-    "steps_recorded": 4,
+    "steps_recorded": 6,
     "steps_total": 9,
-    "missing_steps": "repair_approved, repair_merged, signed_release, release_started, runtime_check"
+    "missing_steps": "signed_release, release_started, runtime_check"
    },
    {
     "blocked_pipeline": 2949088649,

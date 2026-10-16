@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-16T04:19:41Z",
+ "generated_at": "2026-10-16T04:47:47Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -150,31 +150,31 @@
    "blocked_cause": null,
    "repair_mr": {
     "iid": 7,
-    "title": "Draft: Restore equal-opportunity calibration in build_variant_d",
-    "state": "opened",
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "state": "merged",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/7",
-    "draft": true,
+    "draft": false,
     "session": null,
-    "approved_by": [],
-    "merged_by": null,
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya",
     "session_copy": null,
     "session_trigger": null,
     "session_url": null,
     "session_flow": "Release Repair"
    },
    "promotion_mr": null,
-   "corrected_run": 2949088932,
+   "corrected_run": 2953690147,
    "corrected_outcome": "released_eligible",
    "release_run": null,
    "release_stage": null,
    "release_started_by": null,
    "signed": false,
    "deployment": null,
-   "steps_done": 4,
+   "steps_done": 6,
    "steps_total": 9,
    "missing": [
-    "repair_approved",
-    "repair_merged",
     "signed_release",
     "release_started",
     "runtime_check"
@@ -458,7 +458,7 @@
     "policy_identity": "passed",
     "security": "passed"
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17126474255"
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221939265"
   },
   "2949088649": {
    "id": 2949088649,
@@ -502,12 +502,12 @@
    },
    "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188511358"
   },
-  "2949088932": {
-   "id": 2949088932,
-   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2949088932",
-   "ref": "repair/issue-3",
+  "2953690147": {
+   "id": 2953690147,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2953690147",
+   "ref": "refs/merge-requests/7/head",
    "sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
-   "created_at": "2026-10-15T02:35:03.737Z",
+   "created_at": "2026-10-16T04:39:01.268Z",
    "outcome": "released_eligible",
    "reason_codes": [],
    "release_stage": "eligible",
@@ -533,6 +533,7 @@
     "data_identity": "passed",
     "fairness": "passed",
     "image_identity": "passed",
+    "impact": "passed",
     "metrics_match": "passed",
     "metrics_recomputed": "passed",
     "model_identity": "passed",
@@ -540,7 +541,7 @@
     "policy_identity": "passed",
     "security": "passed"
    },
-   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17188512830"
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17221932468"
   }
  }
 }

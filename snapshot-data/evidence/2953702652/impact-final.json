@@ -1,0 +1,31 @@
+{
+  "agent_session": "not recorded",
+  "changed_paths": [],
+  "commit_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+  "duo_available": true,
+  "duo_reason": "Training code in build_variant_d drops the equal-opportunity calibration and uses one global 0.5 threshold for both groups, which changes the model artifact and is likely to regress fairness. Fresh fairness and accuracy evidence plus artifact identity are required.",
+  "duo_required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "data_identity",
+    "fairness"
+  ],
+  "duo_risk_level": "high",
+  "duo_scope": [
+    "model"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, security. Duo proposed scope model, risk high, evidence: accuracy, artifact_identity, data_identity, fairness. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "data_identity",
+    "fairness",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous"
+  ],
+  "unsupported_duo_evidence": []
+}
