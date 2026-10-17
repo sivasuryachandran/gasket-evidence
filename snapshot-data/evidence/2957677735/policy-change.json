@@ -1,12 +1,12 @@
 {
-  "base": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
+  "base": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
   "base_is": "the pushed range",
   "changed_paths": [],
   "diff_sha256": null,
-  "files_changed": 39,
-  "head": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+  "files_changed": 1,
+  "head": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
   "mr_iid": null,
-  "pipeline_id": "2957863141",
+  "pipeline_id": "2957677735",
   "pipeline_source": "push",
   "protected_paths": [
     ".gitlab-ci.yml",

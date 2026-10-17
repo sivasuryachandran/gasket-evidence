@@ -32,7 +32,7 @@
   },
   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
   "note": "Live inference check passed: the running service reproduces the evaluated model's metrics on the fixed holdout, within the policy thresholds.",
-  "pipeline_id": "2957863141",
+  "pipeline_id": "2957677735",
   "schema": "gasket.live-inference/v1",
   "service_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
   "status": "passed",

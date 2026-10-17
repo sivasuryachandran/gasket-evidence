@@ -1,15 +1,15 @@
 {
   "approval": {
     "approvals": [],
-    "deployment_id": 1626694520,
+    "deployment_id": 1626612627,
     "status": "running"
   },
-  "approved_image_digest": "sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9",
+  "approved_image_digest": "sha256:f494dfd95c547ba89b663da1cabb92a35461f0a2be58cc5e887683c907ce237c",
   "candidate": {
-    "revision": "gasket-model-00044-lin",
-    "url": "https://candidate-p2957863141---gasket-model-6xgh5t4mzq-uc.a.run.app"
+    "revision": "gasket-model-00038-rov",
+    "url": "https://candidate-p2957677735---gasket-model-6xgh5t4mzq-uc.a.run.app"
   },
-  "candidate_revision_digest": "sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9",
+  "candidate_revision_digest": "sha256:f494dfd95c547ba89b663da1cabb92a35461f0a2be58cc5e887683c907ce237c",
   "candidate_verification": {
     "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
     "score_cases_checked": 8,
@@ -19,22 +19,22 @@
   "expected_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
   "mock": false,
   "mode": "cloudrun",
-  "pipeline_id": "2957863141",
+  "pipeline_id": "2957677735",
   "previous_revision_still_serving": false,
   "previous_revisions": {
-    "gasket-model-00042-xig": 100
+    "gasket-model-00036-guw": 100
   },
   "previous_state": {
     "production_identity": {
       "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
     },
     "revisions": {
-      "gasket-model-00042-xig": {
-        "image_digest": "sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9"
+      "gasket-model-00036-guw": {
+        "image_digest": "sha256:44577be553a1cd88f99093be7345abdf47077b6f4da344b43b9452db4f4157e4"
       }
     },
     "traffic": {
-      "gasket-model-00042-xig": 100
+      "gasket-model-00036-guw": 100
     }
   },
   "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
@@ -43,12 +43,12 @@
     "score_cases_checked": 8,
     "score_cases_matched": 8
   },
-  "promoted_revision": "gasket-model-00044-lin",
+  "promoted_revision": "gasket-model-00038-rov",
   "region": "us-central1",
   "registry_digest_preserved": true,
-  "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9",
+  "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:f494dfd95c547ba89b663da1cabb92a35461f0a2be58cc5e887683c907ce237c",
   "service": "gasket-model",
-  "source_image": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:1c00dbd4-d-p2957863141",
+  "source_image": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:d5d9e250-d-p2957677735",
   "stage_reached": "verified",
   "succeeded": true,
   "traffic_changed": true
