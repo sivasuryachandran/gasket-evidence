@@ -1,14 +1,17 @@
 {
  "meta": {
   "live_service": {
-   "checked_at": "2026-10-17T06:09:13Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-17T06:14:00Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app"
   },
   "note": "Static snapshot of public GitLab data; not live.",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "snapshot_date": "2026-10-17",
-  "taken_at": "2026-10-17T06:09:13Z"
+  "taken_at": "2026-10-17T06:14:00Z"
  },
  "runs": [
   {
@@ -214,19 +217,19 @@
     {
      "allow_failure": true,
      "artifact_types": [],
-     "duration": 25.685236677,
+     "duration": 26.937364081,
      "failure_reason": null,
      "finished_at": null,
-     "id": 17252614771,
+     "id": 17252650300,
      "name": "publish-public-dashboard",
      "stage": "report",
-     "started_at": "2026-10-17T06:08:48.892Z",
+     "started_at": "2026-10-17T06:13:34.422Z",
      "status": "running",
      "user": {
       "name": "siva surya",
       "username": "chandran.sivasurya"
      },
-     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17252614771"
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17252650300"
     },
     {
      "allow_failure": false,
@@ -638,7 +641,7 @@
     "sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
     "source": "push",
     "status": "running",
-    "updated_at": "2026-10-17T06:08:48.868Z",
+    "updated_at": "2026-10-17T06:13:34.348Z",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957863141"
    }
   },
