@@ -8,7 +8,7 @@
     "spec_version": "1.6"
   },
   "scan": {
-    "artifact": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:d5d9e250-d-p2957677735",
+    "artifact": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:1c00dbd4-d-p2957863141",
     "scanner": "Trivy",
     "targets": 2,
     "total": 173,

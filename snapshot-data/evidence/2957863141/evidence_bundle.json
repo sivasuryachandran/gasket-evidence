@@ -12,14 +12,14 @@
       "sbom": "present",
       "security": "passed"
     },
-    "commit_sha": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
+    "commit_sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
     "evaluation_data": {
       "path": "data/evaluation.csv",
       "sha256": "bb9fd32de35231837283918f10bb7030f41476c39a381cde46405fb0f3615998"
     },
     "image": {
-      "digest": "sha256:f494dfd95c547ba89b663da1cabb92a35461f0a2be58cc5e887683c907ce237c",
-      "reference": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:d5d9e250-d-p2957677735"
+      "digest": "sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9",
+      "reference": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:1c00dbd4-d-p2957863141"
     },
     "metrics": {
       "accuracy": 0.7425,
@@ -39,11 +39,11 @@
       "sha256": "ae1fd5794425eb329c478489cd13ca7d74268abd303c9308008e01ed0d0325e3"
     },
     "project": "gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
-    "release_id": "candidate-2957677735",
+    "release_id": "candidate-2957863141",
     "schema_version": "gasket.evidence/v1",
     "source": {
-      "evaluation_job_id": "17250966693",
-      "pipeline_id": "2957677735",
+      "evaluation_job_id": "17251983030",
+      "pipeline_id": "2957863141",
       "witness_job_id": ""
     },
     "thresholds": {
@@ -52,21 +52,21 @@
     }
   },
   "pipeline": {
-    "commit": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
-    "id": "2957677735",
+    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+    "id": "2957863141",
     "project_path": "gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
     "ref": "main",
-    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957677735"
+    "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957863141"
   },
   "policy_change": {
-    "base": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+    "base": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
     "base_is": "the pushed range",
     "changed_paths": [],
     "diff_sha256": null,
-    "files_changed": 1,
-    "head": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
+    "files_changed": 39,
+    "head": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
     "mr_iid": null,
-    "pipeline_id": "2957677735",
+    "pipeline_id": "2957863141",
     "pipeline_source": "push",
     "protected_paths": [
       ".gitlab-ci.yml",
@@ -111,11 +111,11 @@
     },
     "decision": "pass",
     "expected": {
-      "image_digest": "sha256:f494dfd95c547ba89b663da1cabb92a35461f0a2be58cc5e887683c907ce237c",
+      "image_digest": "sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9",
       "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
     },
     "observed": {
-      "image_digest": "sha256:f494dfd95c547ba89b663da1cabb92a35461f0a2be58cc5e887683c907ce237c",
+      "image_digest": "sha256:8b06923f1b23e0257fe96ab43bcc99c7cb5b78cffa08ed1cfb08e00998562bb9",
       "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d"
     },
     "policy_id": "credit-demo-v1",
@@ -129,8 +129,8 @@
         "1": 538
       }
     },
-    "release_id": "candidate-2957677735",
+    "release_id": "candidate-2957863141",
     "required_evidence": [],
-    "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250966697"
+    "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17251983035"
   }
 }
