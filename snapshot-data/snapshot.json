@@ -1,7 +1,7 @@
 {
  "meta": {
   "live_service": {
-   "checked_at": "2026-10-17T00:33:27Z",
+   "checked_at": "2026-10-17T00:55:49Z",
    "commit": "65ff26cb41c5313a6815af6921f02fa0990ce097",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -11,9 +11,821 @@
   "note": "Static snapshot of public GitLab data; not live.",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "snapshot_date": "2026-10-17",
-  "taken_at": "2026-10-17T00:33:27Z"
+  "taken_at": "2026-10-17T00:55:49Z"
  },
  "runs": [
+  {
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya"
+   },
+   "artifact_sources": {
+    "decision": {
+     "job": "gasket-witness",
+     "job_id": 17250097258,
+     "path": "witness-decision.json"
+    },
+    "manifest": {
+     "job": "gasket-witness",
+     "job_id": 17250097258,
+     "path": "evidence-out/manifest.json"
+    },
+    "metrics": {
+     "job": "evaluate-model",
+     "job_id": 17250097254,
+     "path": "evidence-out/metrics.json"
+    },
+    "requirements": {
+     "job": "gasket-witness",
+     "job_id": 17250097258,
+     "path": "requirements.json"
+    },
+    "sbom": {
+     "job": "security-scan",
+     "job_id": 17250097255,
+     "link_only": true,
+     "path": "security-out/sbom.cdx.json"
+    },
+    "trivy": {
+     "job": "security-scan",
+     "job_id": 17250097255,
+     "link_only": true,
+     "path": "security-out/trivy.json"
+    }
+   },
+   "evidence_files": {
+    "decision": "evidence/2957527455/witness-decision.json",
+    "manifest": "evidence/2957527455/manifest.json",
+    "metrics": "evidence/2957527455/metrics.json",
+    "requirements": "evidence/2957527455/requirements.json"
+   },
+   "evidence_sha256": {
+    "decision": "c89642b33cacaaab79295b80c6e38724948244880bdfb2b8c6fbab69306b74ec",
+    "manifest": "dfac532357be6472861fd8108c463120f14838667f69d71f6a5f965f5f4a5b3c",
+    "metrics": "1b90c5e617d7206cc77e8fa8e642800ac721eaeaa996e8cbaa959bc442dade80",
+    "requirements": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+   },
+   "jobs": [
+    {
+     "allow_failure": true,
+     "artifact_types": [
+      "archive",
+      "cyclonedx",
+      "dependency_scanning",
+      "metadata",
+      "trace"
+     ],
+     "duration": 24.486928,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:49:46.238Z",
+     "id": 17250097269,
+     "name": "dependency-scanning",
+     "stage": "test",
+     "started_at": "2026-10-17T00:49:21.751Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097269"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "secret_detection",
+      "trace"
+     ],
+     "duration": 14.606407,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:49:36.264Z",
+     "id": 17250097268,
+     "name": "secret_detection",
+     "stage": "test",
+     "started_at": "2026-10-17T00:49:21.658Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097268"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [],
+     "duration": 24.889170153,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097267,
+     "name": "pages",
+     "stage": "report",
+     "started_at": "2026-10-17T00:55:25.171Z",
+     "status": "running",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097267"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [],
+     "duration": 24.953193504,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097266,
+     "name": "publish-public-dashboard",
+     "stage": "report",
+     "started_at": "2026-10-17T00:55:25.132Z",
+     "status": "running",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097266"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [],
+     "duration": null,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097265,
+     "name": "open-incident-runtime",
+     "stage": "report",
+     "started_at": null,
+     "status": "created",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097265"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [],
+     "duration": null,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097264,
+     "name": "release-evidence",
+     "stage": "report",
+     "started_at": null,
+     "status": "created",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097264"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [],
+     "duration": null,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097263,
+     "name": "live-inference-check",
+     "stage": "runtime",
+     "started_at": null,
+     "status": "created",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097263"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [],
+     "duration": null,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097262,
+     "name": "runtime-verify-live",
+     "stage": "runtime",
+     "started_at": null,
+     "status": "created",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097262"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [],
+     "duration": null,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097261,
+     "name": "deploy-cloudrun",
+     "stage": "deploy",
+     "started_at": null,
+     "status": "created",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097261"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [],
+     "duration": null,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097260,
+     "name": "sign-evidence",
+     "stage": "attest",
+     "started_at": null,
+     "status": "created",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097260"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata"
+     ],
+     "duration": 25.128027792,
+     "failure_reason": null,
+     "finished_at": null,
+     "id": 17250097259,
+     "name": "policy-change-check",
+     "stage": "release",
+     "started_at": "2026-10-17T00:55:25.012Z",
+     "status": "running",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097259"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "annotations",
+      "archive",
+      "metadata"
+     ],
+     "duration": 71.920206,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:55:23.354Z",
+     "id": 17250097258,
+     "name": "gasket-witness",
+     "stage": "release",
+     "started_at": "2026-10-17T00:54:11.434Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097258"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata"
+     ],
+     "duration": 17.453541,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:54:09.383Z",
+     "id": 17250097257,
+     "name": "bind-evidence",
+     "stage": "bind",
+     "started_at": "2026-10-17T00:53:51.930Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097257"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [
+      "archive",
+      "container_scanning",
+      "cyclonedx",
+      "metadata",
+      "trace"
+     ],
+     "duration": 53.664737,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:53:34.169Z",
+     "id": 17250097256,
+     "name": "container_scanning",
+     "stage": "secure",
+     "started_at": "2026-10-17T00:52:40.504Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097256"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "dotenv",
+      "metadata",
+      "trace"
+     ],
+     "duration": 36.543614,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:53:17.027Z",
+     "id": 17250097255,
+     "name": "security-scan",
+     "stage": "secure",
+     "started_at": "2026-10-17T00:52:40.484Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097255"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata"
+     ],
+     "duration": 69.978226,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:53:50.343Z",
+     "id": 17250097254,
+     "name": "evaluate-model",
+     "stage": "evaluate",
+     "started_at": "2026-10-17T00:52:40.365Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097254"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "dotenv",
+      "metadata",
+      "trace"
+     ],
+     "duration": 67.460726,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:52:38.734Z",
+     "id": 17250097253,
+     "name": "package-image",
+     "stage": "package",
+     "started_at": "2026-10-17T00:51:31.274Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097253"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 40.220913,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:50:30.806Z",
+     "id": 17250097252,
+     "name": "train-models",
+     "stage": "verify",
+     "started_at": "2026-10-17T00:49:50.585Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097252"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "trace"
+     ],
+     "duration": 99.16616,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:51:29.723Z",
+     "id": 17250097251,
+     "name": "unit-tests",
+     "stage": "verify",
+     "started_at": "2026-10-17T00:49:50.557Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097251"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 27.409988,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:49:48.969Z",
+     "id": 17250097250,
+     "name": "dependency-scanning:python-resolution",
+     "stage": ".pre",
+     "started_at": "2026-10-17T00:49:21.559Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250097250"
+    }
+   ],
+   "pipeline": {
+    "created_at": "2026-10-17T00:49:20.968Z",
+    "id": 2957527455,
+    "ref": "main",
+    "sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+    "source": "push",
+    "status": "running",
+    "updated_at": "2026-10-17T00:49:21.863Z",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957527455"
+   }
+  },
+  {
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43303860/custom-flow-2.png?v=1791851705",
+    "name": "Gasket Artifact Impact Analyst",
+    "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon",
+    "web_url": "https://gitlab.com/ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon"
+   },
+   "artifact_sources": {},
+   "evidence_files": {},
+   "evidence_sha256": {},
+   "jobs": [
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "trace"
+     ],
+     "duration": 53.541836,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:43:59.663Z",
+     "id": 17250035414,
+     "name": "workload",
+     "stage": "build",
+     "started_at": "2026-10-17T00:43:06.121Z",
+     "status": "success",
+     "user": {
+      "name": "Gasket Artifact Impact Analyst",
+      "username": "ai-gasket-artifact-impact-analyst-gitlab-ai-hackathon"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250035414"
+    }
+   ],
+   "pipeline": {
+    "created_at": "2026-10-17T00:43:05.144Z",
+    "id": 2957517004,
+    "ref": "refs/workloads/c7313b39b61",
+    "sha": "13be62d7b53cfef81cd1c2d27aa3b7b94db51182",
+    "source": "duo_workflow",
+    "status": "success",
+    "updated_at": "2026-10-17T00:44:01.076Z",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957517004"
+   }
+  },
+  {
+   "actor": {
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+    "name": "siva surya",
+    "username": "chandran.sivasurya",
+    "web_url": "https://gitlab.com/chandran.sivasurya"
+   },
+   "artifact_sources": {
+    "decision": {
+     "job": "gasket-witness",
+     "job_id": 17250034095,
+     "path": "witness-decision.json"
+    },
+    "impact": {
+     "job": "impact-check",
+     "job_id": 17250034087,
+     "path": "impact-final.json"
+    },
+    "manifest": {
+     "job": "gasket-witness",
+     "job_id": 17250034095,
+     "path": "evidence-out/manifest.json"
+    },
+    "metrics": {
+     "job": "evaluate-model",
+     "job_id": 17250034091,
+     "path": "evidence-out/metrics.json"
+    },
+    "policy_change": {
+     "job": "policy-change-check",
+     "job_id": 17250034096,
+     "path": "policy-change.json"
+    },
+    "requirements": {
+     "job": "gasket-witness",
+     "job_id": 17250034095,
+     "path": "requirements.json"
+    },
+    "sbom": {
+     "job": "security-scan",
+     "job_id": 17250034092,
+     "link_only": true,
+     "path": "security-out/sbom.cdx.json"
+    },
+    "trivy": {
+     "job": "security-scan",
+     "job_id": 17250034092,
+     "link_only": true,
+     "path": "security-out/trivy.json"
+    }
+   },
+   "evidence_files": {
+    "decision": "evidence/2957516876/witness-decision.json",
+    "impact": "evidence/2957516876/impact-final.json",
+    "manifest": "evidence/2957516876/manifest.json",
+    "metrics": "evidence/2957516876/metrics.json",
+    "policy_change": "evidence/2957516876/policy-change.json",
+    "requirements": "evidence/2957516876/requirements.json"
+   },
+   "evidence_sha256": {
+    "decision": "70f8e2b22285dbe10401ba6481de0eed91fdba5f0f94df06a5a5bb93270e3d66",
+    "impact": "eb796919b27b25cf8a92970a6021fd52a9ebcf7f0f345276a1eace12c46adf63",
+    "manifest": "91726150e40d6fe876a60eb2544c57e8b949de8f3cb2d57fcb78b727bbcfa139",
+    "metrics": "1b90c5e617d7206cc77e8fa8e642800ac721eaeaa996e8cbaa959bc442dade80",
+    "policy_change": "90c1ff5db22c26242acd0cde19a2285ecc8b49f2c71d9141989ba91e4738e8a8",
+    "requirements": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+   },
+   "jobs": [
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 24.312291,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:49:16.737Z",
+     "id": 17250034096,
+     "name": "policy-change-check",
+     "stage": "release",
+     "started_at": "2026-10-17T00:48:52.424Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034096"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "annotations",
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 82.29705,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:48:50.897Z",
+     "id": 17250034095,
+     "name": "gasket-witness",
+     "stage": "release",
+     "started_at": "2026-10-17T00:47:28.600Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034095"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 30.799129,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:47:25.495Z",
+     "id": 17250034094,
+     "name": "bind-evidence",
+     "stage": "bind",
+     "started_at": "2026-10-17T00:46:54.696Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034094"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [
+      "archive",
+      "container_scanning",
+      "cyclonedx",
+      "metadata",
+      "trace"
+     ],
+     "duration": 53.806149,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:47:08.194Z",
+     "id": 17250034093,
+     "name": "container_scanning",
+     "stage": "secure",
+     "started_at": "2026-10-17T00:46:14.387Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034093"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "dotenv",
+      "metadata",
+      "trace"
+     ],
+     "duration": 37.440148,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:46:51.777Z",
+     "id": 17250034092,
+     "name": "security-scan",
+     "stage": "secure",
+     "started_at": "2026-10-17T00:46:14.337Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034092"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 38.69495,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:46:52.997Z",
+     "id": 17250034091,
+     "name": "evaluate-model",
+     "stage": "evaluate",
+     "started_at": "2026-10-17T00:46:14.302Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034091"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "dotenv",
+      "metadata",
+      "trace"
+     ],
+     "duration": 73.276614,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:46:12.608Z",
+     "id": 17250034090,
+     "name": "package-image",
+     "stage": "package",
+     "started_at": "2026-10-17T00:44:59.332Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034090"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 36.194744,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:44:07.070Z",
+     "id": 17250034089,
+     "name": "train-models",
+     "stage": "verify",
+     "started_at": "2026-10-17T00:43:30.875Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034089"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "trace"
+     ],
+     "duration": 87.008553,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:44:57.763Z",
+     "id": 17250034088,
+     "name": "unit-tests",
+     "stage": "verify",
+     "started_at": "2026-10-17T00:43:30.755Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034088"
+    },
+    {
+     "allow_failure": false,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 44.73982,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:44:15.380Z",
+     "id": 17250034087,
+     "name": "impact-check",
+     "stage": "verify",
+     "started_at": "2026-10-17T00:43:30.640Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034087"
+    },
+    {
+     "allow_failure": true,
+     "artifact_types": [
+      "archive",
+      "metadata",
+      "trace"
+     ],
+     "duration": 30.853947,
+     "failure_reason": null,
+     "finished_at": "2026-10-17T00:43:29.049Z",
+     "id": 17250034086,
+     "name": "dependency-scanning:python-resolution",
+     "stage": ".pre",
+     "started_at": "2026-10-17T00:42:58.195Z",
+     "status": "success",
+     "user": {
+      "name": "siva surya",
+      "username": "chandran.sivasurya"
+     },
+     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17250034086"
+    }
+   ],
+   "pipeline": {
+    "created_at": "2026-10-17T00:42:57.618Z",
+    "id": 2957516876,
+    "ref": "refs/merge-requests/34/head",
+    "sha": "13be62d7b53cfef81cd1c2d27aa3b7b94db51182",
+    "source": "merge_request_event",
+    "status": "success",
+    "updated_at": "2026-10-17T00:49:18.206Z",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957516876"
+   }
+  },
   {
    "actor": {
     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
@@ -153,15 +965,17 @@
    "jobs": [
     {
      "allow_failure": true,
-     "artifact_types": [],
-     "duration": 23.539828515,
+     "artifact_types": [
+      "trace"
+     ],
+     "duration": 116.55191,
      "failure_reason": null,
-     "finished_at": null,
+     "finished_at": "2026-10-17T00:35:01.065Z",
      "id": 17249943112,
      "name": "publish-public-dashboard",
      "stage": "report",
      "started_at": "2026-10-17T00:33:04.514Z",
-     "status": "running",
+     "status": "success",
      "user": {
       "name": "siva surya",
       "username": "chandran.sivasurya"
@@ -172,7 +986,8 @@
      "allow_failure": false,
      "artifact_types": [
       "archive",
-      "metadata"
+      "metadata",
+      "trace"
      ],
      "duration": 129.062113,
      "failure_reason": null,
@@ -576,8 +1391,8 @@
     "ref": "main",
     "sha": "65ff26cb41c5313a6815af6921f02fa0990ce097",
     "source": "push",
-    "status": "running",
-    "updated_at": "2026-10-17T00:33:04.481Z",
+    "status": "success",
+    "updated_at": "2026-10-17T00:35:02.417Z",
     "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957154026"
    }
   },
@@ -36385,6 +37200,20 @@
      ],
      "title": "Docs: record the Google Cloud setup and the clear guard path, list what is left, recommend protecting the publish token"
     },
+    "13be62d7b53cfef81cd1c2d27aa3b7b94db51182": {
+     "merge_requests": [
+      {
+       "iid": 34,
+       "merge_commit_sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "gasket/records.py",
+      "tests/test_records.py"
+     ],
+     "title": "A run on the same commit as a labelled fixture run is the fixture too (cycle C's repair/issue-9 runs before the repair commit); each run keeps its own changed files"
+    },
     "16ad75edfe710256ed1a2e94eb034a6ca2f10ad6": {
      "merge_requests": [
       {
@@ -37693,6 +38522,25 @@
      ],
      "title": "Daily dashboard refresh: refresh-public-dashboard runs only in a schedule that sets GASKET_SCHEDULE=refresh; a snapshot it takes is labelled Refreshed daily"
     },
+    "d4e87a8474fd2146bd84f5573bc54df4946afd8c": {
+     "merge_requests": [
+      {
+       "iid": 34,
+       "merge_commit_sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+       "state": "merged"
+      }
+     ],
+     "paths": [
+      "gasket/attention.py",
+      "gasket/collect.py",
+      "gasket/records.py",
+      "gasket/snapshot.py",
+      "tests/test_enterprise.py",
+      "tests/test_records.py",
+      "tests/test_snapshot_cache.py"
+     ],
+     "title": "Merge branch 'fix/fixture-runs' into 'main'"
+    },
     "d9cc17192bc23a2d9bf8506ee5850619ec032c5d": {
      "merge_requests": [],
      "paths": [
@@ -37961,31 +38809,6 @@
     }
    },
    "recent": [
-    {
-     "message": "Docs: say what to do when the project settings page returns 404 for the maintainer's role\n",
-     "sha": "e65148f89a2bc998c7d6568ba9a2193e71547ac1",
-     "title": "Docs: say what to do when the project settings page returns 404 for the maintainer's role"
-    },
-    {
-     "message": "Docs: record the maintainer's actual role and what it can and cannot do\n",
-     "sha": "82726b3451451cee167902db099206bae36c7a96",
-     "title": "Docs: record the maintainer's actual role and what it can and cannot do"
-    },
-    {
-     "message": "README: quote the diagram labels so it renders, mark the live inference check as Cloud Run only, drop a stale test count\n",
-     "sha": "aff67ccba781ae6aeb2e1636b196cb9ca6f2e0c0",
-     "title": "README: quote the diagram labels so it renders, mark the live inference check as Cloud Run only, drop a stale test count"
-    },
-    {
-     "message": "Merge branch 'docs/final-completion' into 'main'\n\nFinal documentation set: claims register, judge-first README, architecture,...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!14",
-     "sha": "58e516f789760d14edf1bcff37aa630a33d211a6",
-     "title": "Merge branch 'docs/final-completion' into 'main'"
-    },
-    {
-     "message": "Merge branch 'docs/final-completion' into 'main'\n\nFinal documentation set: claims register, judge-first README, architecture,...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!14",
-     "sha": "389331a3f635a973764f3874911e79f5f446ea4f",
-     "title": "Merge branch 'docs/final-completion' into 'main'"
-    },
     {
      "message": "Collector: cap the total time spent waiting out a rate limit (240 s) and the whole snapshot (900 s), log each wait and progress, and stop with a clear message so publish-public-dashboard cannot hang silently\n",
      "sha": "4f267853463024f8595d656fb7e2674d2e82fdb4",
@@ -38460,6 +39283,31 @@
      "message": "Snapshot: reuse the recorded approvals and diff size of merged and closed merge requests (the publishing job kept stopping on GitLab's rate limit reading approval_state for all 33)\n",
      "sha": "35ecf7c7e0675848e5d8e6f23fdbe1deb9e047f5",
      "title": "Snapshot: reuse the recorded approvals and diff size of merged and closed merge requests (the publishing job kept stopping on GitLab's rate limit reading approval_state for all 33)"
+    },
+    {
+     "message": "Pipelines of a merge request titled as the labelled demo fixture are the regression scenario even when the head is a merge commit; a block whose chain has an investigation is not listed as having no cause (four cycle C blocks were)\n",
+     "sha": "f1ff65657d928827e2c17ab7f462ca3349110fe0",
+     "title": "Pipelines of a merge request titled as the labelled demo fixture are the regression scenario even when the head is a merge commit; a block whose chain has an investigation is not listed as having no cause (four cycle C blocks were)"
+    },
+    {
+     "message": "Merge fix/snapshot-mr-cache into fix/fixture-runs\n",
+     "sha": "6581103fa46123b6039db5156110e10454857ca4",
+     "title": "Merge fix/snapshot-mr-cache into fix/fixture-runs"
+    },
+    {
+     "message": "A run on the same commit as a labelled fixture run is the fixture too (cycle C's repair/issue-9 runs before the repair commit); each run keeps its own changed files\n",
+     "sha": "13be62d7b53cfef81cd1c2d27aa3b7b94db51182",
+     "title": "A run on the same commit as a labelled fixture run is the fixture too (cycle C's repair/issue-9 runs before the repair commit); each run keeps its own changed files"
+    },
+    {
+     "message": "Merge branch 'fix/fixture-runs' into 'main'\n\nSnapshot: reuse the recorded approvals and diff size of merged and closed...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!34",
+     "sha": "a929240adc25f2f8bedb5ac6b406c50cf0b2ed06",
+     "title": "Merge branch 'fix/fixture-runs' into 'main'"
+    },
+    {
+     "message": "Merge branch 'fix/fixture-runs' into 'main'\n\nSnapshot: reuse the recorded approvals and diff size of merged and closed...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!34",
+     "sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+     "title": "Merge branch 'fix/fixture-runs' into 'main'"
     }
    ]
   },
@@ -38636,6 +39484,53 @@
    }
   ],
   "merge_requests": [
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 7,
+    "created_at": "2026-10-17T00:42:56.052Z",
+    "draft": false,
+    "head_sha": "13be62d7b53cfef81cd1c2d27aa3b7b94db51182",
+    "iid": 34,
+    "merge_commit_sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/fixture-runs",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Snapshot: reuse the recorded approvals and diff size of merged and closed...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/34"
+   },
    {
     "approvals": {
      "approved": true,
@@ -39114,7 +40009,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39127,7 +40022,7 @@
     "iid": 23,
     "merge_commit_sha": "7454a220e868eae1cac91da7441aa2f5cccf4b88",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39161,7 +40056,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39174,7 +40069,7 @@
     "iid": 22,
     "merge_commit_sha": "0d036dbc8bb5a9f53a7f5ac4eba750ad358c2982",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39208,7 +40103,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39221,7 +40116,7 @@
     "iid": 21,
     "merge_commit_sha": "67162fd303721aeccc3f526c3962ba0b0cb4e38e",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39620,7 +40515,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39633,7 +40528,7 @@
     "iid": 12,
     "merge_commit_sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39667,7 +40562,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -39680,7 +40575,7 @@
     "iid": 11,
     "merge_commit_sha": "95ecf1200264010706658df60b01e7c7932f1de2",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",

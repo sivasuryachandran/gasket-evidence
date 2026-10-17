@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-17T00:33:27Z",
+ "generated_at": "2026-10-17T00:55:49Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -382,7 +382,7 @@
    "blocked_reasons": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
-   "blocked_outcome": "unexpected_block",
+   "blocked_outcome": "expected_block",
    "blocked_cause": null,
    "repair_mr": {
     "iid": 31,
@@ -458,7 +458,7 @@
    "blocked_reasons": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
-   "blocked_outcome": "unexpected_block",
+   "blocked_outcome": "expected_block",
    "blocked_cause": null,
    "repair_mr": {
     "iid": 31,
@@ -539,7 +539,7 @@
    "blocked_reasons": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
-   "blocked_outcome": "unexpected_block",
+   "blocked_outcome": "expected_block",
    "blocked_cause": null,
    "repair_mr": {
     "iid": 31,
@@ -620,7 +620,7 @@
    "blocked_reasons": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
-   "blocked_outcome": "unexpected_block",
+   "blocked_outcome": "expected_block",
    "blocked_cause": null,
    "repair_mr": null,
    "promotion_mr": null,
@@ -1084,7 +1084,7 @@
    "ref": "refs/merge-requests/29/head",
    "sha": "bf9ab3dacbff23d56a8cd7284c4a1cc87e2d1f60",
    "created_at": "2026-10-16T19:39:18.768Z",
-   "outcome": "unexpected_block",
+   "outcome": "expected_block",
    "reason_codes": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
@@ -1126,7 +1126,7 @@
    "ref": "repair/issue-9",
    "sha": "bf9ab3dacbff23d56a8cd7284c4a1cc87e2d1f60",
    "created_at": "2026-10-16T19:56:38.113Z",
-   "outcome": "unexpected_block",
+   "outcome": "expected_block",
    "reason_codes": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
@@ -1168,7 +1168,7 @@
    "ref": "repair/issue-9",
    "sha": "bf9ab3dacbff23d56a8cd7284c4a1cc87e2d1f60",
    "created_at": "2026-10-16T20:04:55.849Z",
-   "outcome": "unexpected_block",
+   "outcome": "expected_block",
    "reason_codes": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
@@ -1210,7 +1210,7 @@
    "ref": "refs/merge-requests/29/head",
    "sha": "e0b230dc2687b442abc633b5f1abc2cbe6a54d0a",
    "created_at": "2026-10-16T20:38:43.971Z",
-   "outcome": "unexpected_block",
+   "outcome": "expected_block",
    "reason_codes": [
     "FAIRNESS_GAP_EXCEEDED"
    ],
