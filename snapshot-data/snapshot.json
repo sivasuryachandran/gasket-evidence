@@ -37128,6 +37128,1602 @@
     }
    },
    "recent": []
-  }
+  },
+  "merge_requests": [
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 7,
+    "created_at": "2026-10-17T00:42:56.052Z",
+    "draft": false,
+    "head_sha": "13be62d7b53cfef81cd1c2d27aa3b7b94db51182",
+    "iid": 34,
+    "merge_commit_sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/fixture-runs",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Snapshot: reuse the recorded approvals and diff size of merged and closed...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/34"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 15,
+    "created_at": "2026-10-16T21:47:33.784Z",
+    "draft": false,
+    "head_sha": "5629e5daa70ec60b79e595493a79cc1963cadbc9",
+    "iid": 33,
+    "merge_commit_sha": "65ff26cb41c5313a6815af6921f02fa0990ce097",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/cycle-c",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Cycle C recorded: A6 proven by !31 (repair into...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/33"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-16T20:18:07.489Z",
+    "draft": false,
+    "head_sha": "f7f4fbb2b2d3feb4398498d23dca735b430d6f9a",
+    "iid": 32,
+    "merge_commit_sha": "2bfc666c3c152598202678342e3084920cb40e34",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/fixture-test-drift",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Fixture patch test steps aside, with a stated reason, where the training code...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/32"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-16T20:05:16.554Z",
+    "draft": false,
+    "head_sha": "16ad75edfe710256ed1a2e94eb034a6ca2f10ad6",
+    "iid": 31,
+    "merge_commit_sha": "df1dbd19ebc63df89920945eaf411da8d64e71d3",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": 9,
+    "session": null,
+    "source_branch": "repair/issue-9",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "duo-demo/c-fairness-regression",
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/31"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-16T19:30:42.807Z",
+    "draft": false,
+    "head_sha": "1f5d90c118b0f1141f379d0cf46b5d4989c8f5fb",
+    "iid": 30,
+    "merge_commit_sha": "6ba1947f493fc6522c637f663df296a3e324ba90",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/fixture-aware-tests",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Fixture tests step aside, with a stated reason, on a branch that carries the...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/30"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-16T19:19:41.048Z",
+    "draft": false,
+    "head_sha": "df1dbd19ebc63df89920945eaf411da8d64e71d3",
+    "iid": 29,
+    "merge_commit_sha": "3f2796c9a6a3c4007dbfe4c62eb30ecda904e6df",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/c-fairness-regression",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/29"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 13,
+    "created_at": "2026-10-16T18:34:15.523Z",
+    "draft": false,
+    "head_sha": "5c29afe1169e8842edbbde9eb2508260638f40f7",
+    "iid": 28,
+    "merge_commit_sha": "39844bbbed7f0f36922e3d0270777faa720849fd",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/live-match",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Dashboard: the live release is matched by the commit the service reports (two...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/28"
+   },
+   {
+    "approvals": {
+     "approved": false,
+     "approved_by": [],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": null,
+    "created_at": "2026-10-16T18:13:53.433Z",
+    "draft": true,
+    "head_sha": "0a6977ecb8150a9ca0746b2087e72a8bf05dadc5",
+    "iid": 27,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/container-scanning-proven",
+    "squash_commit_sha": null,
+    "state": "closed",
+    "target_branch": "main",
+    "title": "Draft: Docs/container scanning proven",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/27"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 6,
+    "created_at": "2026-10-16T18:05:39.761Z",
+    "draft": false,
+    "head_sha": "0a6977ecb8150a9ca0746b2087e72a8bf05dadc5",
+    "iid": 26,
+    "merge_commit_sha": "f2176157a1da05008faccaa81cfb2fc3e9171e05",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/container-scanning-proven",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "CLAIMS X9 proven: GitLab Container Scanning ran on the release image's digest...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/26"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 5,
+    "created_at": "2026-10-16T17:20:13.301Z",
+    "draft": false,
+    "head_sha": "88f294c38162955f7385ac2151de53854a43ac3b",
+    "iid": 25,
+    "merge_commit_sha": "99a24be4f803b4f969b7d9b17b75a9b74dc81ffd",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "feat/container-scanning",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "GitLab Container Scanning of the Witness-checked image (by digest) on main and...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/25"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 8,
+    "created_at": "2026-10-16T17:19:55.899Z",
+    "draft": false,
+    "head_sha": "2baba60f2b0fb2b0bc8acb08c146acac8cc87e3d",
+    "iid": 24,
+    "merge_commit_sha": "79bdfd6109f30b11e8a8e958fdeb3ad7ee802c87",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792138756",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/investigator-automatic",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Investigator automatic: Proven from issues #5, #6 and #7, opened by the...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/24"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 11,
+    "created_at": "2026-10-16T08:19:44.136Z",
+    "draft": false,
+    "head_sha": "22ab333076d15878a73a65f179a505fd2420e4d5",
+    "iid": 23,
+    "merge_commit_sha": "7454a220e868eae1cac91da7441aa2f5cccf4b88",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/proof-polish",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Docs: weekly re-verification and the daily dashboard refresh both ran on...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/23"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 15,
+    "created_at": "2026-10-16T07:39:41.697Z",
+    "draft": false,
+    "head_sha": "f0494acf925acc4f02d394238970dcf1492ec021",
+    "iid": 22,
+    "merge_commit_sha": "0d036dbc8bb5a9f53a7f5ac4eba750ad358c2982",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/schedules",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Schedules: re-verification finds the signed bundle through the newest GitLab...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/22"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 30,
+    "created_at": "2026-10-16T06:45:41.828Z",
+    "draft": false,
+    "head_sha": "81b53cdbe56a8b75bafaa0528b007975cc19fa98",
+    "iid": 21,
+    "merge_commit_sha": "67162fd303721aeccc3f526c3962ba0b0cb4e38e",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/final-pass",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Docs: the chain for block 2940522134 is complete (9 of 9), and the runtime...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/21"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 18,
+    "created_at": "2026-10-16T05:28:03.010Z",
+    "draft": false,
+    "head_sha": "232aac564ca16fbe44cac93ecb745b2fa7d972e1",
+    "iid": 20,
+    "merge_commit_sha": "8f8d95648ac101ad44cab3a4f0642077a5c799ce",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "feat/service-page-and-about",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Docs: the updated Repair flow is pasted on the Flows page...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/20"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 6,
+    "created_at": "2026-10-16T04:01:22.376Z",
+    "draft": false,
+    "head_sha": "db2ea670bbf4b1d381f27d8f041a018a96f585ce",
+    "iid": 19,
+    "merge_commit_sha": "5d588592571401fc547fa27e39cc99d9ee7e5fb7",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/snapshot-never-silently-partial",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Snapshot: a rate limit, server error or timeout is never read as not found (it...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/19"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 9,
+    "created_at": "2026-10-16T03:38:00.570Z",
+    "draft": false,
+    "head_sha": "f0f351ee151c1d5f57de81f878541ee32386a6d2",
+    "iid": 18,
+    "merge_commit_sha": "0069197c7c1555d94b1492172e7cb636bdf491ca",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/cloud-run-proven",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Docs: Cloud Run deployment and the live inference check are proven (pipeline...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/18"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 17,
+    "created_at": "2026-10-16T03:13:22.926Z",
+    "draft": false,
+    "head_sha": "329e072cad6605f3b88098c1a553a313f471d5d3",
+    "iid": 17,
+    "merge_commit_sha": "8eaef67b1fead0bd4441cf2918cef3ef88ee3267",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/live-inference-load",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Live inference check: make demo-model importable before unpickling the...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/17"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 5,
+    "created_at": "2026-10-16T02:44:53.220Z",
+    "draft": false,
+    "head_sha": "65e2355e6a0b23ab02a251a3197bb424b405f8db",
+    "iid": 16,
+    "merge_commit_sha": "c12b30f821081d1d235eae96bf456485676b9b97",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/cloudrun-copy-by-digest",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Cloud Run deploy: copy the image by digest without its tag (skopeo refuses a...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/16"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 7,
+    "created_at": "2026-10-16T02:17:39.065Z",
+    "draft": false,
+    "head_sha": "0f4707f7be83f6d8dceed3e3b00d2884f38fe12c",
+    "iid": 15,
+    "merge_commit_sha": "1ce64752d9fb013f0dc167da0d65af6131d18e61",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/collector-time-budget",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Collector: cap the total time spent waiting out a rate limit (240 s) and the...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/15"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 24,
+    "created_at": "2026-10-16T01:22:10.498Z",
+    "draft": false,
+    "head_sha": "aff67ccba781ae6aeb2e1636b196cb9ca6f2e0c0",
+    "iid": 14,
+    "merge_commit_sha": "389331a3f635a973764f3874911e79f5f446ea4f",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "docs/final-completion",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Final documentation set: claims register, judge-first README, architecture,...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/14"
+   },
+   {
+    "approvals": {
+     "approved": false,
+     "approved_by": [],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": null,
+    "created_at": "2026-10-16T01:10:28.535Z",
+    "draft": true,
+    "head_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+    "iid": 13,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/collector-rate-limit",
+    "squash_commit_sha": null,
+    "state": "closed",
+    "target_branch": "main",
+    "title": "Draft: Fix/collector rate limit",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/13"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 2,
+    "created_at": "2026-10-15T22:25:06.543Z",
+    "draft": false,
+    "head_sha": "c0fe5414456d09ad5e0aade75c035927d340c7e7",
+    "iid": 12,
+    "merge_commit_sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/collector-rate-limit",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Collector: wait as long as GitLab's Retry-After asks (else 15, 30, 60, 90...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/12"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 24,
+    "created_at": "2026-10-15T21:43:32.445Z",
+    "draft": false,
+    "head_sha": "dbccecf7178c632bd5b2bf5f02f72de807d88cc8",
+    "iid": 11,
+    "merge_commit_sha": "95ecf1200264010706658df60b01e7c7932f1de2",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "feat/policy-change-guard",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Policy-change guard: a change to the gate's own rules is held...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/11"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 14,
+    "created_at": "2026-10-15T20:35:32.920Z",
+    "draft": false,
+    "head_sha": "f6cf651232e532ecef3b28d2240dd75b6e19c36f",
+    "iid": 10,
+    "merge_commit_sha": "1bff1ae06bb8e4745c221cfa53e6eb1c833dedce",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "feat/release-gate-component",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Release gate as a CI/CD component: package-image, evaluate-model,...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/10"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 33,
+    "created_at": "2026-10-15T17:14:34.003Z",
+    "draft": false,
+    "head_sha": "975840aa714bb572f5ef1dceca1c293f119e1610",
+    "iid": 9,
+    "merge_commit_sha": "46b712f6f256857d27afbeb7be9740b7c66ce5c2",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "fix/pre-freeze",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Pre-freeze: chain counts the recorded block as step 1, ledger Scope column...",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/9"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 34,
+    "created_at": "2026-10-15T02:36:43.049Z",
+    "draft": false,
+    "head_sha": "213409317011644a9e571a0fc56377107ec6c2cf",
+    "iid": 8,
+    "merge_commit_sha": "b53322311ed6e3f9466ed7f958c54a01c35b7c4b",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "feat/dashboard-v3",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Dashboard v3: product redesign, records-based linking, LICENSE as documentation",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/8"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-15T02:35:10.119Z",
+    "draft": false,
+    "head_sha": "ee4008d15cea12f7ac92a4a6fc013a558994a1bd",
+    "iid": 7,
+    "merge_commit_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": 3,
+    "session": null,
+    "source_branch": "repair/issue-3",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "duo-demo/b-fairness-regression",
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/7"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-13T02:07:03.251Z",
+    "draft": false,
+    "head_sha": "24291b1080040ed8c1d479183b5b6b0acb50faec",
+    "iid": 6,
+    "merge_commit_sha": "1a594c7247bbaa9069943d2061ee58c77fbcdb88",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "chore/license-holder",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "chore: copyright holder is Siva Surya Chandran",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/6"
+   },
+   {
+    "approvals": {
+     "approved": false,
+     "approved_by": [],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-13T00:15:59.392Z",
+    "draft": false,
+    "head_sha": "24b612db747a34b3855a353ee672296d867926eb",
+    "iid": 5,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/c-fix-fairness-regression",
+    "squash_commit_sha": null,
+    "state": "closed",
+    "target_branch": "duo-demo/b-fairness-regression",
+    "title": "demo: fix fairness regression",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/5"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 0,
+    "created_at": "2026-10-13T00:15:57.194Z",
+    "draft": false,
+    "head_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+    "iid": 4,
+    "merge_commit_sha": "b1506498dae131594167d42ecba8f2cfea700a55",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/b-fairness-regression",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "demo: fairness regression",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/4"
+   },
+   {
+    "approvals": {
+     "approved": false,
+     "approved_by": [],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [
+     {
+      "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+      "kind": null,
+      "name": "siva surya",
+      "username": "chandran.sivasurya",
+      "web_url": "https://gitlab.com/chandran.sivasurya"
+     }
+    ],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-13T00:15:54.871Z",
+    "draft": false,
+    "head_sha": "8957539405059715c6c4745953fddaafcc98c0e9",
+    "iid": 3,
+    "merge_commit_sha": null,
+    "merged_by": null,
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "duo-demo/a-clean-change",
+    "squash_commit_sha": null,
+    "state": "closed",
+    "target_branch": "main",
+    "title": "demo: clean change",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/3"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-12T18:47:18.895Z",
+    "draft": false,
+    "head_sha": "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a",
+    "iid": 2,
+    "merge_commit_sha": "ee44173914e68e02e1490234849721e23fc3ebf6",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": null,
+    "session": null,
+    "source_branch": "demo/injected-calibration-regression",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "main",
+    "title": "Promote verified repair to main",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/2"
+   },
+   {
+    "approvals": {
+     "approved": true,
+     "approved_by": [
+      {
+       "name": "siva surya",
+       "username": "chandran.sivasurya"
+      }
+     ],
+     "required": 1,
+     "rules": [
+      {
+       "name": "Repair review",
+       "required": 1
+      }
+     ]
+    },
+    "assignees": [],
+    "author": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "changes_count": 1,
+    "created_at": "2026-10-11T18:38:31.684Z",
+    "draft": false,
+    "head_sha": "a481ed466c3bc04cbb611ebe4f2fccb1b8a2a99b",
+    "iid": 1,
+    "merge_commit_sha": "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a",
+    "merged_by": {
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792196240",
+     "kind": null,
+     "name": "siva surya",
+     "username": "chandran.sivasurya",
+     "web_url": "https://gitlab.com/chandran.sivasurya"
+    },
+    "repairs_issue": 2,
+    "session": "9299455",
+    "source_branch": "repair/issue-2",
+    "squash_commit_sha": null,
+    "state": "merged",
+    "target_branch": "demo/injected-calibration-regression",
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/1"
+   }
+  ]
  }
 }
