@@ -5,3 +5,7 @@ blocked_pipeline,reason_codes,investigation_issue,repair_merge_request,approved_
 2940522134,FAIRNESS_GAP_EXCEEDED,#3,!7,chandran.sivasurya,chandran.sivasurya,2953690147,2953719107,yes,chandran.sivasurya,Live identity verified,9,9,
 2949088649,FAIRNESS_GAP_EXCEEDED,#3,!7,chandran.sivasurya,chandran.sivasurya,2953690147,2953719107,yes,chandran.sivasurya,Live identity verified,9,9,
 2956396432,MODEL_HASH_MISMATCH,#8,,,,,,no,,,2,9,"repair, repair_approved, repair_merged, corrected_run, signed_release, release_started, runtime_check"
+2956795940,FAIRNESS_GAP_EXCEEDED,#9,!31,chandran.sivasurya,chandran.sivasurya,2956970867,2957104159,yes,chandran.sivasurya,Live identity verified,9,9,
+2956846469,FAIRNESS_GAP_EXCEEDED,#9,!31,chandran.sivasurya,chandran.sivasurya,2956970867,2957104159,yes,chandran.sivasurya,Live identity verified,9,9,
+2956873072,FAIRNESS_GAP_EXCEEDED,#9,!31,chandran.sivasurya,chandran.sivasurya,2956970867,2957104159,yes,chandran.sivasurya,Live identity verified,9,9,
+2956970791,FAIRNESS_GAP_EXCEEDED,#10,,,,,,no,,,2,9,"repair, repair_approved, repair_merged, corrected_run, signed_release, release_started, runtime_check"

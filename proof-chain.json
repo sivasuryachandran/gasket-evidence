@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-16T18:18:08Z",
+ "generated_at": "2026-10-17T00:33:27Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -199,9 +199,9 @@
      "chandran.sivasurya"
     ],
     "merged_by": "chandran.sivasurya",
-    "session_copy": null,
-    "session_trigger": null,
-    "session_url": null,
+    "session_copy": "evidence/duo-sessions/9504613-mr7-release-repair.png",
+    "session_trigger": "mention",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9504613",
     "session_flow": "Release Repair"
    },
    "promotion_mr": {
@@ -275,9 +275,9 @@
      "chandran.sivasurya"
     ],
     "merged_by": "chandran.sivasurya",
-    "session_copy": null,
-    "session_trigger": null,
-    "session_url": null,
+    "session_copy": "evidence/duo-sessions/9504613-mr7-release-repair.png",
+    "session_trigger": "mention",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9504613",
     "session_flow": "Release Repair"
    },
    "promotion_mr": {
@@ -344,6 +344,283 @@
     "MODEL_HASH_MISMATCH"
    ],
    "blocked_outcome": "expected_block",
+   "blocked_cause": null,
+   "repair_mr": null,
+   "promotion_mr": null,
+   "corrected_run": null,
+   "corrected_outcome": null,
+   "release_run": null,
+   "release_stage": null,
+   "release_started_by": null,
+   "signed": false,
+   "deployment": null,
+   "steps_done": 2,
+   "steps_total": 9,
+   "missing": [
+    "repair",
+    "repair_approved",
+    "repair_merged",
+    "corrected_run",
+    "signed_release",
+    "release_started",
+    "runtime_check"
+   ]
+  },
+  {
+   "issue": {
+    "iid": 9,
+    "title": "Gasket investigation: pipeline 2956795940 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/9",
+    "session": null,
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9623432",
+    "session_flow": "Release Investigator",
+    "session_copy": "evidence/duo-sessions/9623432-pipeline2956795940-investigator.png",
+    "session_trigger": "automatic"
+   },
+   "blocked_run": 2956795940,
+   "blocked_reasons": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "blocked_outcome": "unexpected_block",
+   "blocked_cause": null,
+   "repair_mr": {
+    "iid": 31,
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "state": "merged",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/31",
+    "draft": false,
+    "session": null,
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya",
+    "session_copy": "evidence/duo-sessions/9623840-mr31-release-repair.png",
+    "session_trigger": "mention",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9623840",
+    "session_flow": "Release Repair"
+   },
+   "promotion_mr": {
+    "iid": 29,
+    "title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d...",
+    "state": "merged",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/29",
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya"
+   },
+   "corrected_run": 2956970867,
+   "corrected_outcome": "released_eligible",
+   "release_run": 2957104159,
+   "release_stage": "runtime_verified",
+   "release_started_by": "chandran.sivasurya",
+   "signed": true,
+   "deployment": {
+    "mock": false,
+    "mode": "cloudrun",
+    "succeeded": true,
+    "stage_reached": "verified",
+    "service": "gasket-model",
+    "promoted_revision": "gasket-model-00028-jod",
+    "previous_revision_still_serving": false,
+    "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "registry_digest_preserved": true,
+    "approved_image_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "candidate_revision_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "executed_by": "chandran.sivasurya",
+    "approval": {
+     "approvals": [],
+     "deployment_id": 1626398424,
+     "status": "running"
+    },
+    "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+    "candidate_verified": true,
+    "production_verified": true
+   },
+   "steps_done": 9,
+   "steps_total": 9,
+   "missing": []
+  },
+  {
+   "issue": {
+    "iid": 9,
+    "title": "Gasket investigation: pipeline 2956795940 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/9",
+    "session": null,
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9623432",
+    "session_flow": "Release Investigator",
+    "session_copy": "evidence/duo-sessions/9623432-pipeline2956795940-investigator.png",
+    "session_trigger": "automatic"
+   },
+   "blocked_run": 2956846469,
+   "blocked_reasons": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "blocked_outcome": "unexpected_block",
+   "blocked_cause": null,
+   "repair_mr": {
+    "iid": 31,
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "state": "merged",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/31",
+    "draft": false,
+    "session": null,
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya",
+    "session_copy": "evidence/duo-sessions/9623840-mr31-release-repair.png",
+    "session_trigger": "mention",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9623840",
+    "session_flow": "Release Repair"
+   },
+   "promotion_mr": {
+    "iid": 29,
+    "title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d...",
+    "state": "merged",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/29",
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya"
+   },
+   "corrected_run": 2956970867,
+   "corrected_outcome": "released_eligible",
+   "release_run": 2957104159,
+   "release_stage": "runtime_verified",
+   "release_started_by": "chandran.sivasurya",
+   "signed": true,
+   "deployment": {
+    "mock": false,
+    "mode": "cloudrun",
+    "succeeded": true,
+    "stage_reached": "verified",
+    "service": "gasket-model",
+    "promoted_revision": "gasket-model-00028-jod",
+    "previous_revision_still_serving": false,
+    "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "registry_digest_preserved": true,
+    "approved_image_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "candidate_revision_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "executed_by": "chandran.sivasurya",
+    "approval": {
+     "approvals": [],
+     "deployment_id": 1626398424,
+     "status": "running"
+    },
+    "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+    "candidate_verified": true,
+    "production_verified": true
+   },
+   "steps_done": 9,
+   "steps_total": 9,
+   "missing": [],
+   "linked": {
+    "block": 2956795940,
+    "branch": "repair/issue-9",
+    "why": "Same regression: FAIRNESS_GAP_EXCEEDED on repair/issue-9, a branch the repair !31 touched, before the corrected run."
+   }
+  },
+  {
+   "issue": {
+    "iid": 9,
+    "title": "Gasket investigation: pipeline 2956795940 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/9",
+    "session": null,
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9623432",
+    "session_flow": "Release Investigator",
+    "session_copy": "evidence/duo-sessions/9623432-pipeline2956795940-investigator.png",
+    "session_trigger": "automatic"
+   },
+   "blocked_run": 2956873072,
+   "blocked_reasons": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "blocked_outcome": "unexpected_block",
+   "blocked_cause": null,
+   "repair_mr": {
+    "iid": 31,
+    "title": "Restore equal-opportunity calibration in build_variant_d",
+    "state": "merged",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/31",
+    "draft": false,
+    "session": null,
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya",
+    "session_copy": "evidence/duo-sessions/9623840-mr31-release-repair.png",
+    "session_trigger": "mention",
+    "session_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/automate/agent-sessions/9623840",
+    "session_flow": "Release Repair"
+   },
+   "promotion_mr": {
+    "iid": 29,
+    "title": "DEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d...",
+    "state": "merged",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/merge_requests/29",
+    "approved_by": [
+     "chandran.sivasurya"
+    ],
+    "merged_by": "chandran.sivasurya"
+   },
+   "corrected_run": 2956970867,
+   "corrected_outcome": "released_eligible",
+   "release_run": 2957104159,
+   "release_stage": "runtime_verified",
+   "release_started_by": "chandran.sivasurya",
+   "signed": true,
+   "deployment": {
+    "mock": false,
+    "mode": "cloudrun",
+    "succeeded": true,
+    "stage_reached": "verified",
+    "service": "gasket-model",
+    "promoted_revision": "gasket-model-00028-jod",
+    "previous_revision_still_serving": false,
+    "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "registry_digest_preserved": true,
+    "approved_image_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "candidate_revision_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "executed_by": "chandran.sivasurya",
+    "approval": {
+     "approvals": [],
+     "deployment_id": 1626398424,
+     "status": "running"
+    },
+    "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+    "candidate_verified": true,
+    "production_verified": true
+   },
+   "steps_done": 9,
+   "steps_total": 9,
+   "missing": [],
+   "linked": {
+    "block": 2956795940,
+    "branch": "repair/issue-9",
+    "why": "Same regression: FAIRNESS_GAP_EXCEEDED on repair/issue-9, a branch the repair !31 touched, before the corrected run."
+   }
+  },
+  {
+   "issue": {
+    "iid": 10,
+    "title": "Gasket investigation: pipeline 2956970791 - POLICY BLOCK - FAIRNESS_GAP_EXCEEDED",
+    "state": "opened",
+    "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/work_items/10",
+    "session": null,
+    "session_url": null,
+    "session_flow": "Release Investigator",
+    "session_copy": null,
+    "session_trigger": null
+   },
+   "blocked_run": 2956970791,
+   "blocked_reasons": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "blocked_outcome": "unexpected_block",
    "blocked_cause": null,
    "repair_mr": null,
    "promotion_mr": null,
@@ -800,6 +1077,276 @@
     "security": "passed"
    },
    "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17242409580"
+  },
+  "2956795940": {
+   "id": 2956795940,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956795940",
+   "ref": "refs/merge-requests/29/head",
+   "sha": "bf9ab3dacbff23d56a8cd7284c4a1cc87e2d1f60",
+   "created_at": "2026-10-16T19:39:18.768Z",
+   "outcome": "unexpected_block",
+   "reason_codes": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "release_stage": null,
+   "deployment": null,
+   "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7842,
+    "fairness_gap": 0.1421,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.9888
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "failed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245463788"
+  },
+  "2956846469": {
+   "id": 2956846469,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956846469",
+   "ref": "repair/issue-9",
+   "sha": "bf9ab3dacbff23d56a8cd7284c4a1cc87e2d1f60",
+   "created_at": "2026-10-16T19:56:38.113Z",
+   "outcome": "unexpected_block",
+   "reason_codes": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "release_stage": null,
+   "deployment": null,
+   "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7842,
+    "fairness_gap": 0.1421,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.9888
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "failed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245804375"
+  },
+  "2956873072": {
+   "id": 2956873072,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956873072",
+   "ref": "repair/issue-9",
+   "sha": "bf9ab3dacbff23d56a8cd7284c4a1cc87e2d1f60",
+   "created_at": "2026-10-16T20:04:55.849Z",
+   "outcome": "unexpected_block",
+   "reason_codes": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "release_stage": null,
+   "deployment": null,
+   "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7842,
+    "fairness_gap": 0.1421,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.9888
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "failed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245964755"
+  },
+  "2956970791": {
+   "id": 2956970791,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956970791",
+   "ref": "refs/merge-requests/29/head",
+   "sha": "e0b230dc2687b442abc633b5f1abc2cbe6a54d0a",
+   "created_at": "2026-10-16T20:38:43.971Z",
+   "outcome": "unexpected_block",
+   "reason_codes": [
+    "FAIRNESS_GAP_EXCEEDED"
+   ],
+   "release_stage": null,
+   "deployment": null,
+   "evidenced_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "observed_model_sha256": "9a0d961ee72dadec7978607bec96a8f57c139b67231388072d408bf825694282",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7842,
+    "fairness_gap": 0.1421,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.9888
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "failed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17246629888"
+  },
+  "2956970867": {
+   "id": 2956970867,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956970867",
+   "ref": "refs/merge-requests/31/head",
+   "sha": "16ad75edfe710256ed1a2e94eb034a6ca2f10ad6",
+   "created_at": "2026-10-16T20:38:46.497Z",
+   "outcome": "released_eligible",
+   "reason_codes": [],
+   "release_stage": "eligible",
+   "deployment": null,
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "impact": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17246630451"
+  },
+  "2957104159": {
+   "id": 2957104159,
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2957104159",
+   "ref": "main",
+   "sha": "3f2796c9a6a3c4007dbfe4c62eb30ecda904e6df",
+   "created_at": "2026-10-16T21:28:59.194Z",
+   "outcome": "released_eligible",
+   "reason_codes": [],
+   "release_stage": "runtime_verified",
+   "deployment": {
+    "mock": false,
+    "mode": "cloudrun",
+    "succeeded": true,
+    "stage_reached": "verified",
+    "service": "gasket-model",
+    "promoted_revision": "gasket-model-00028-jod",
+    "previous_revision_still_serving": false,
+    "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "registry_digest_preserved": true,
+    "approved_image_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "candidate_revision_digest": "sha256:3555a26991ae2dfe68950096a5a7023c0aa32d2e6c6193b39fba54d48d072b3b",
+    "executed_by": "chandran.sivasurya",
+    "approval": {
+     "approvals": [],
+     "deployment_id": 1626398424,
+     "status": "running"
+    },
+    "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+    "candidate_verified": true,
+    "production_verified": true
+   },
+   "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "metrics": {
+    "model_variant": "D",
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "per_group_true_positive_rate": {
+     "0": 0.8468,
+     "1": 0.8383
+    }
+   },
+   "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+   },
+   "checks": {
+    "accuracy": "passed",
+    "commit": "passed",
+    "data_identity": "passed",
+    "fairness": "passed",
+    "image_identity": "passed",
+    "metrics_match": "passed",
+    "metrics_recomputed": "passed",
+    "model_identity": "passed",
+    "pipeline_identity": "passed",
+    "policy_identity": "passed",
+    "security": "passed"
+   },
+   "witness_job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17247576642"
   }
  }
 }

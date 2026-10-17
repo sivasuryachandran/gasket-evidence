@@ -1,18 +1,18 @@
 {
   "certificate_identity": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main",
-  "commit": "f2176157a1da05008faccaa81cfb2fc3e9171e05",
+  "commit": "65ff26cb41c5313a6815af6921f02fa0990ce097",
   "method": "cosign v2.4.1 keyless (Sigstore), GitLab CI identity",
   "note": "The signatures prove these two files were produced by this project's publishing pipeline and are unaltered since. They do not prove the data in them is correct; each run in the snapshot links to its own evidence.",
   "oidc_issuer": "https://gitlab.com",
-  "pipeline_id": "2956560385",
+  "pipeline_id": "2957154026",
   "proof_chain": {
     "blob": "proof-chain.json",
-    "blob_sha256": "b7dd13b51b4dad3148ed8155f8c81ebdbd701081bffb05e42484665d5f715c53",
+    "blob_sha256": "fad64693b5539325ebda3069c8cf71c2fed09423a70a161b66eda5c26dc894b1",
     "bundle": "proof-chain.cosign.bundle",
     "rekor": {
-      "integrated_time": 1792174759,
-      "log_index": 3282993770,
-      "url": "https://search.sigstore.dev/?logIndex=3282993770"
+      "integrated_time": 1792197273,
+      "log_index": 3286871930,
+      "url": "https://search.sigstore.dev/?logIndex=3286871930"
     },
     "signed": true,
     "verified_in_job": true,
@@ -21,12 +21,12 @@
   "schema": "gasket.snapshot-signature/v1",
   "snapshot": {
     "blob": "snapshot.json",
-    "blob_sha256": "bc46e9b1e58b3fe6fcf8d799f9007e0dd589ea9da6c7f5f2fb3c267c85098a05",
+    "blob_sha256": "16a55a43ede85388a30a56267734c0457ec154a26e2569c415f5c47a960d4ab9",
     "bundle": "snapshot.cosign.bundle",
     "rekor": {
-      "integrated_time": 1792174765,
-      "log_index": 3282994552,
-      "url": "https://search.sigstore.dev/?logIndex=3282994552"
+      "integrated_time": 1792197286,
+      "log_index": 3286872764,
+      "url": "https://search.sigstore.dev/?logIndex=3286872764"
     },
     "signed": true,
     "verified_in_job": true,

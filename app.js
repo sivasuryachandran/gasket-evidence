@@ -137,12 +137,12 @@
       : ['pending', 'Live identity not checked', real ? 'No runtime-verify-live record for this release.' : 'No live deploy for this release.'];
     var inf = li ? (li.status === 'passed' ? ['pass', 'Live inference passed', li.note] : li.status === 'skipped' ? ['pending', 'Live inference skipped', li.note] : ['fail', 'Live inference failed', li.note || li.failure || ''])
       : ['pending', 'Live inference not run', real ? 'No live-inference record for this release.' : 'No live deploy for this release.'];
-    return [['Artifact digest', digest], ['Live identity', ident], ['Live inference', inf], ['Production traffic', ['plain', 'Not claimed', real ? 'A public Cloud Run revision was deployed and its identity and inference verified. Production traffic promotion is not claimed.' : 'Gasket checks the released model, not live user traffic.']]];
+    return [['Artifact digest', digest], ['Live identity', ident], ['Live inference', inf], ['Promotion', real ? (dep.succeeded ? ['pass', 'Verified candidate promoted', 'Each release is deployed as a candidate revision with no traffic, verified through /identity and /score, and only then promoted to serve the public demo URL. It\'s a demo service: there are no real users or production traffic.'] : ['fail', 'Not promoted', 'The candidate was not promoted; the previous revision kept serving.']) : ['pending', 'No live deploy', 'No live deploy for this release.']]];
   }
   function runtimeCompact(run) {
     if (run.outcome !== 'released_eligible') return h('span', { class: 'muted', text: 'Not applicable' });
-    var short = { 'Artifact digest': 'Digest', 'Live identity': 'Identity', 'Live inference': 'Inference', 'Production traffic': 'Traffic: not claimed' };
-    return h('div', { class: 'facts' }, runtimeFacts(run).map(function (f) { return h('div', { class: 'nowrap' }, [st(f[1][0], short[f[0]], f[1][1] + (f[1][2] ? '. ' + f[1][2] : ''))]); }));
+    var short = { 'Artifact digest': 'Digest', 'Live identity': 'Identity', 'Live inference': 'Inference', 'Promotion': 'Promoted' };
+    return h('div', { class: 'facts' }, runtimeFacts(run).map(function (f) { return h('div', { class: 'nowrap' }, [st(f[1][0], f[0] === 'Promotion' && f[1][0] !== 'pass' ? f[1][1] : short[f[0]], f[1][1] + (f[1][2] ? '. ' + f[1][2] : ''))]); }));
   }
   function mrInfo(run) {
     var m = run.mr || { kind: 'undetermined', how: 'not recorded' };
@@ -281,7 +281,7 @@
     return h('span', {}, [text, h('div', { class: 'sub' }, [link('#/releases/' + (ch.linked ? ch.linked.block : id) + '/custody', 'Chain of custody: ' + ch.steps_done + ' of ' + ch.steps_total + ' steps recorded')])]);
   }
   function liveNow(L) {
-    var sec = section('Live on Cloud Run now', 'Read from the service\'s public /info when this snapshot was taken (' + fmtTime(L.checked_at) + '). It reports what the service runs; the checks below compare it with signed evidence. A public Cloud Run revision was deployed and its identity and inference verified. Production traffic promotion is not claimed.');
+    var sec = section('Live on Cloud Run now', 'Read from the service\'s public /info when this snapshot was taken (' + fmtTime(L.checked_at) + '). It reports what the service runs; the checks below compare it with signed evidence. Each release is deployed as a candidate revision with no traffic, verified through /identity and /score, and only then promoted to serve the public demo URL. It\'s a demo service: there are no real users or production traffic.');
     if (L.error) { sec.appendChild(empty('The live service could not be read at snapshot time.', L.error)); return sec; }
     sec.appendChild(h('div', { class: 'panel' }, [kv([
       ['Service', ext(L.url, L.url)],
