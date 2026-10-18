@@ -4,15 +4,15 @@
   "method": "cosign v2.4.1 keyless (Sigstore), GitLab CI identity",
   "note": "The signatures prove these two files were produced by this project's publishing pipeline and are unaltered since. They do not prove the data in them is correct; each run in the snapshot links to its own evidence.",
   "oidc_issuer": "https://gitlab.com",
-  "pipeline_id": "2957863141",
+  "pipeline_id": "2959700280",
   "proof_chain": {
     "blob": "proof-chain.json",
-    "blob_sha256": "acd5e17fcc6155f9c230cd17729e3ccd2d4e00e6e67b2a6144284b1320765eb7",
+    "blob_sha256": "bc3754daeedd29274cfa224effcc862cde6efcf0fad1f6ca298856f59e6c6abb",
     "bundle": "proof-chain.cosign.bundle",
     "rekor": {
-      "integrated_time": 1792217685,
-      "log_index": 3290640499,
-      "url": "https://search.sigstore.dev/?logIndex=3290640499"
+      "integrated_time": 1792299776,
+      "log_index": 3306523281,
+      "url": "https://search.sigstore.dev/?logIndex=3306523281"
     },
     "signed": true,
     "verified_in_job": true,
@@ -21,12 +21,12 @@
   "schema": "gasket.snapshot-signature/v1",
   "snapshot": {
     "blob": "snapshot.json",
-    "blob_sha256": "77275856cc3a295fca704a69125fb6b802a27affa9fd7361d7ef1294d97e8956",
+    "blob_sha256": "bacc17a6c0c726ce62b9ef61af50afd02fbf9c7d11ad88cf493f57dd86669b3c",
     "bundle": "snapshot.cosign.bundle",
     "rekor": {
-      "integrated_time": 1792217686,
-      "log_index": 3290640645,
-      "url": "https://search.sigstore.dev/?logIndex=3290640645"
+      "integrated_time": 1792299779,
+      "log_index": 3306523630,
+      "url": "https://search.sigstore.dev/?logIndex=3306523630"
     },
     "signed": true,
     "verified_in_job": true,
