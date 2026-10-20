@@ -1,0 +1,35 @@
+{
+  "agent_session": "9579158",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "gasket/cli.py",
+    "gasket/collect.py",
+    "gasket/deploy.py",
+    "tests/test_collect.py",
+    "tests/test_deploy.py"
+  ],
+  "commit_sha": "65e2355e6a0b23ab02a251a3197bb424b405f8db",
+  "duo_available": true,
+  "duo_reason": "The image-copy logic in the Cloud Run deploy path changed how the source reference is built, so the digest-pinned artifact identity should be re-verified. The remaining changes are snapshot request pacing and tests, with no model, data, policy or dependency changes.",
+  "duo_required_evidence": [
+    "artifact_identity"
+  ],
+  "duo_risk_level": "medium",
+  "duo_scope": [
+    "serving"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope serving, risk medium, evidence: artifact_identity. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous"
+  ],
+  "unsupported_duo_evidence": []
+}

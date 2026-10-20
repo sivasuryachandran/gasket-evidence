@@ -1,0 +1,19 @@
+{
+  "changed_paths": [
+    "demo-model/train.py"
+  ],
+  "commit_sha": "7bbaacac3850028c3058df33d674caeacad90e9f",
+  "duo_available": false,
+  "overridden": false,
+  "reason": "No Duo opinion was available; deterministic analysis alone was used.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "model"
+  ]
+}

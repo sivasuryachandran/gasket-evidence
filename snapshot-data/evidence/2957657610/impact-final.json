@@ -1,0 +1,23 @@
+{
+  "agent_session": "9631219",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "README.md"
+  ],
+  "commit_sha": "3e11714dfbfb3e6ad8b7b545ea29e208094eb306",
+  "duo_available": true,
+  "duo_reason": "Only README.md changed, updating release, job and Rekor references in documentation. No model, data, evaluation, serving, security or policy files are touched.",
+  "duo_required_evidence": [],
+  "duo_risk_level": "low",
+  "duo_scope": [
+    "documentation-only"
+  ],
+  "overridden": false,
+  "reason": "Duo's assessment matched the deterministic diff analysis.",
+  "required_evidence": [],
+  "risk_level": "low",
+  "scope": [
+    "documentation-only"
+  ],
+  "unsupported_duo_evidence": []
+}

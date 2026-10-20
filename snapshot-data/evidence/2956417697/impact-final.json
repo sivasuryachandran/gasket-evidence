@@ -1,0 +1,36 @@
+{
+  "agent_session": "9616619",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "ci/security-scans.yml",
+    "dashboard/app.js",
+    "gasket/analyze.py",
+    "gasket/collect.py",
+    "tests/test_ci_jobs.py"
+  ],
+  "commit_sha": "a05d6339d50449eed0578edf4d85aedcaacac71e",
+  "duo_available": true,
+  "duo_reason": "Adds an informational, non-blocking container scan of the release image digest plus dashboard reporting; the model, data, serving code, thresholds and the Trivy release-evidence scan are unchanged.",
+  "duo_required_evidence": [
+    "artifact_identity",
+    "security"
+  ],
+  "duo_risk_level": "low",
+  "duo_scope": [
+    "security"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope security, risk low, evidence: artifact_identity, security. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous"
+  ],
+  "unsupported_duo_evidence": []
+}

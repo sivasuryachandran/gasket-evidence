@@ -1,0 +1,110 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "gasket_note": "SLSA-style provenance, signed. Self-generated; not a GitLab-native SLSA Level 3 attestation.",
+  "predicate": {
+    "buildConfig": {
+      "steps": [
+        {
+          "step": "verify",
+          "what": "unit tests; train models A-D"
+        },
+        {
+          "step": "package",
+          "what": "build the release image and push it, extract the model by digest"
+        },
+        {
+          "step": "evaluate",
+          "what": "evaluate the model taken from that image on the evaluation data"
+        },
+        {
+          "step": "secure",
+          "what": "Trivy scan and SBOM of the release image"
+        },
+        {
+          "step": "bind",
+          "what": "write the evidence manifest binding hashes to metrics"
+        },
+        {
+          "step": "release",
+          "what": "the Witness re-derives identity, recomputes metrics and decides"
+        },
+        {
+          "step": "attest",
+          "what": "sign the evidence bundle and this provenance (Sigstore keyless)"
+        }
+      ]
+    },
+    "buildType": "https://gitlab.com/gasket/ci-pipeline/v1",
+    "builder": {
+      "id": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines (GitLab CI, gitlab-hosted runner)"
+    },
+    "invocation": {
+      "configSource": {
+        "digest": {
+          "sha1": "99a24be4f803b4f969b7d9b17b75a9b74dc81ffd"
+        },
+        "entryPoint": ".gitlab-ci.yml",
+        "uri": "git+https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket@refs/heads/main"
+      },
+      "environment": {
+        "commit": "99a24be4f803b4f969b7d9b17b75a9b74dc81ffd",
+        "pipeline_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956505378"
+      },
+      "parameters": {
+        "pipeline_id": "2956505378",
+        "ref": "main",
+        "source": "push"
+      }
+    },
+    "materials": [
+      {
+        "digest": {
+          "sha1": "99a24be4f803b4f969b7d9b17b75a9b74dc81ffd"
+        },
+        "uri": "git+https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket"
+      },
+      {
+        "digest": {
+          "sha256": "bb9fd32de35231837283918f10bb7030f41476c39a381cde46405fb0f3615998"
+        },
+        "uri": "data/evaluation.csv"
+      },
+      {
+        "digest": {
+          "sha256": "ae1fd5794425eb329c478489cd13ca7d74268abd303c9308008e01ed0d0325e3"
+        },
+        "uri": "policy:credit-demo-v1"
+      },
+      {
+        "digest": {
+          "sha256": "c8e2d798f7e122ad2f6ac887c2d335d63a80e4587fd0b8e31d35e1e98881056f"
+        },
+        "uri": "model.pkl"
+      }
+    ],
+    "metadata": {
+      "buildInvocationId": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2956505378",
+      "completeness": {
+        "environment": false,
+        "materials": true,
+        "parameters": true
+      },
+      "reproducible": false
+    }
+  },
+  "predicateType": "https://slsa.dev/provenance/v0.2",
+  "subject": [
+    {
+      "digest": {
+        "sha256": "c8e2d798f7e122ad2f6ac887c2d335d63a80e4587fd0b8e31d35e1e98881056f"
+      },
+      "name": "model.pkl"
+    },
+    {
+      "digest": {
+        "sha256": "b9a3c1f063e64db68a8c303c820590a23751f3ad0c7fe62d74c0515ab0ae6834"
+      },
+      "name": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:99a24be4-d-p2956505378"
+    }
+  ]
+}
