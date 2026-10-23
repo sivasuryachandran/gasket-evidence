@@ -1,0 +1,53 @@
+{
+  "approval": {
+    "approvals": [],
+    "deployment_id": 1624513013,
+    "status": "running"
+  },
+  "approved_image_digest": "sha256:5262202489ff1b5b3ae9dd762c230faa446570a8e55b3b4e33d3db2b9333f99c",
+  "candidate": {
+    "revision": "gasket-model-00002-mol",
+    "url": "https://candidate-p2953475514---gasket-model-6xgh5t4mzq-uc.a.run.app"
+  },
+  "candidate_revision_digest": "sha256:5262202489ff1b5b3ae9dd762c230faa446570a8e55b3b4e33d3db2b9333f99c",
+  "candidate_verification": {
+    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "score_cases_checked": 8,
+    "score_cases_matched": 8
+  },
+  "executed_by": "chandran.sivasurya",
+  "expected_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+  "mock": false,
+  "mode": "cloudrun",
+  "pipeline_id": "2953475514",
+  "previous_revision_still_serving": false,
+  "previous_revisions": {
+    "gasket-model-00001-6tl": 100
+  },
+  "previous_state": {
+    "production_identity": "no /identity (not a Gasket revision)",
+    "revisions": {
+      "gasket-model-00001-6tl": {
+        "image_digest": "sha256:e2a01cf1e784fcc57c558ed2b1d1f76456de90771c0ad99ae3b6f57722c7dbf3"
+      }
+    },
+    "traffic": {
+      "gasket-model-00001-6tl": 100
+    }
+  },
+  "production_url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+  "production_verification": {
+    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "score_cases_checked": 8,
+    "score_cases_matched": 8
+  },
+  "promoted_revision": "gasket-model-00002-mol",
+  "region": "us-central1",
+  "registry_digest_preserved": true,
+  "registry_image": "us-central1-docker.pkg.dev/gasket-demo/gasket/gasket-model@sha256:5262202489ff1b5b3ae9dd762c230faa446570a8e55b3b4e33d3db2b9333f99c",
+  "service": "gasket-model",
+  "source_image": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:c12b30f8-d-p2953475514",
+  "stage_reached": "verified",
+  "succeeded": true,
+  "traffic_changed": true
+}

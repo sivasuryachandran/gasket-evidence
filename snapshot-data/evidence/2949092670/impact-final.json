@@ -1,0 +1,70 @@
+{
+  "agent_session": "9504680",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "README.md",
+    "dashboard/app.js",
+    "dashboard/fonts/LICENSE.txt",
+    "dashboard/fonts/inter-latin-400-normal.woff2",
+    "dashboard/fonts/inter-latin-500-normal.woff2",
+    "dashboard/fonts/inter-latin-600-normal.woff2",
+    "dashboard/fonts/inter-latin-700-normal.woff2",
+    "dashboard/fonts/public-sans-latin-400-normal.woff2",
+    "dashboard/fonts/public-sans-latin-600-normal.woff2",
+    "dashboard/index.html",
+    "dashboard/styles.css",
+    "docs/AGENTS.md",
+    "gasket/agents.py",
+    "gasket/analyze.py",
+    "gasket/attention.py",
+    "gasket/brand.py",
+    "gasket/chain.py",
+    "gasket/collect.py",
+    "gasket/controls.py",
+    "gasket/coverage.py",
+    "gasket/dashboard.py",
+    "gasket/impact.py",
+    "gasket/people.py",
+    "gasket/policyview.py",
+    "gasket/records.py",
+    "gasket/seal.py",
+    "gasket/snapshot.py",
+    "tests/test_chain.py",
+    "tests/test_design_rules.py",
+    "tests/test_export.py",
+    "tests/test_impact.py",
+    "tests/test_records.py",
+    "tests/test_theme.py",
+    "tests/test_views.py"
+  ],
+  "commit_sha": "213409317011644a9e571a0fc56377107ec6c2cf",
+  "duo_available": true,
+  "duo_reason": "The diff was truncated, so only 6 of 34 changed files were visible. The MR also changes how LICENSE is classified for scope, which is policy-adjacent and could not be verified. Scope is marked ambiguous rather than guessed lower.",
+  "duo_required_evidence": [
+    "artifact_identity",
+    "policy_identity",
+    "security"
+  ],
+  "duo_risk_level": "medium",
+  "duo_scope": [
+    "ambiguous",
+    "policy",
+    "serving"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous, documentation-only (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, policy, serving, risk medium, evidence: artifact_identity, policy_identity, security. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "policy_identity",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous",
+    "documentation-only"
+  ],
+  "unsupported_duo_evidence": []
+}

@@ -1,0 +1,38 @@
+{
+  "base": "232aac564ca16fbe44cac93ecb745b2fa7d972e1",
+  "base_is": "merge request diff base",
+  "changed_paths": [
+    ".gitlab-ci.yml"
+  ],
+  "diff_sha256": "99afd0a5cfb9b57b1d74492c2187bb4f01e65c92d5f0af25d517fce66cbc1eca",
+  "files_changed": 30,
+  "head": "81b53cdbe56a8b75bafaa0528b007975cc19fa98",
+  "mr_iid": "21",
+  "pipeline_id": "2953956979",
+  "pipeline_source": "merge_request_event",
+  "protected_paths": [
+    ".gitlab-ci.yml",
+    "data/evaluation.csv",
+    "demo-model/evaluate.py",
+    "gasket/attest.py",
+    "gasket/evidence.py",
+    "gasket/hashing.py",
+    "gasket/image.py",
+    "gasket/impact.py",
+    "gasket/manifest.py",
+    "gasket/policy.py",
+    "gasket/policychange.py",
+    "gasket/reeval.py",
+    "gasket/repair_scope.py",
+    "gasket/witness.py",
+    "policies/",
+    "policy/protected-paths.yml",
+    "scripts/check_repair_scope.py",
+    "scripts/policy_change_ci.sh",
+    "scripts/witness_ci.sh",
+    "templates/release-gate/template.yml"
+  ],
+  "reason": "POLICY_CHANGE_REQUIRES_REVIEW",
+  "schema": "gasket.policy-change/v1",
+  "status": "hold"
+}

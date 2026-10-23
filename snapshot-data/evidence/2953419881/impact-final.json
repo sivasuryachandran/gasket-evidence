@@ -1,0 +1,36 @@
+{
+  "agent_session": "9578732",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "docs/CLAIMS.md",
+    "docs/ENTERPRISE.md",
+    "docs/GCP_SETUP.md",
+    "docs/STATUS.md",
+    "gasket/cli.py",
+    "gasket/collect.py",
+    "tests/test_collect.py"
+  ],
+  "commit_sha": "0f4707f7be83f6d8dceed3e3b00d2884f38fe12c",
+  "duo_available": true,
+  "duo_reason": "Dashboard snapshot collector gets time budgets, logging and a clean failure exit, plus docs status updates; no model, data, evaluation, threshold, dependency or serving change is visible. Scope is marked ambiguous because gasket/cli.py is shared with gate commands and protected-path status should be confirmed.",
+  "duo_required_evidence": [],
+  "duo_risk_level": "low",
+  "duo_scope": [
+    "ambiguous"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous, documentation-only (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, risk low, evidence: none. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous",
+    "documentation-only"
+  ],
+  "unsupported_duo_evidence": []
+}

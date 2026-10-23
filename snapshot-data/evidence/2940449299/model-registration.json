@@ -1,0 +1,5 @@
+{
+  "reason": "creating the registered model failed with HTTP 401",
+  "registered": false,
+  "schema": "gasket.model-registration/v1"
+}

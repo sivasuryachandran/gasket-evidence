@@ -1,0 +1,34 @@
+{
+  "agent_session": "9624375",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "tests/test_regression_fixture.py"
+  ],
+  "commit_sha": "f7f4fbb2b2d3feb4398498d23dca735b430d6f9a",
+  "duo_available": true,
+  "duo_reason": "Test-only change, but it adds a skip path to a fairness/accuracy regression fixture test, so that check may not run on reworded repair branches. Evaluation evidence must come from the Witness rather than this test.",
+  "duo_required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness"
+  ],
+  "duo_risk_level": "medium",
+  "duo_scope": [
+    "ambiguous",
+    "model"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, model, risk medium, evidence: accuracy, artifact_identity, fairness. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous"
+  ],
+  "unsupported_duo_evidence": []
+}
