@@ -1,9 +1,0 @@
-{
-  "approval": "not recorded",
-  "digest": "sha256:eb2d5de60cee62c40646a5b69f42186164db18648c00de81abc310d3b1246a8d",
-  "executed_by": "chandran.sivasurya",
-  "image": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:b0984ce0-d-p2940189834",
-  "mock": true,
-  "mode": "mock",
-  "pipeline": "2940189834"
-}

@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T05:03:03Z",
+ "generated_at": "2026-10-23T05:12:02Z",
  "outcomes": {
   "out_of_scope": 70,
   "released_eligible": 96,
@@ -1066,9 +1066,9 @@
    "mr_iid": null,
    "sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "created_at": "2026-10-23T05:02:01.222Z",
-   "status": "running",
+   "status": "success",
    "scenario": null,
-   "wall_seconds": 33.5,
+   "wall_seconds": 585.5,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -1097,7 +1097,8 @@
    "incident": null,
    "requirements_reported": false,
    "jobs_ran": [
-    "dependency-scanning:python-resolution"
+    "dependency-scanning:python-resolution",
+    "refresh-public-dashboard"
    ],
    "deployment": null,
    "deploy_job_url": null,
@@ -77621,13 +77622,16 @@
  },
  "snapshot": {
   "date": "2026-10-23",
-  "taken_at": "2026-10-23T05:03:03Z",
+  "taken_at": "2026-10-23T05:12:02Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
-  "refresh": "daily",
+  "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-23T05:03:03Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-23T05:12:02Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app"
   }
  },
@@ -81747,16 +81751,6 @@
  },
  "attention": [
   {
-   "kind": "live_unreadable",
-   "run": null,
-   "text": "The live service could not be read at snapshot time (TimeoutError: The read operation timed out).",
-   "fix": {
-    "label": "Open the service",
-    "href": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-    "external": true
-   }
-  },
-  {
    "kind": "separation_of_duties",
    "run": null,
    "mrs": [
@@ -82094,16 +82088,19 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-23T05:03:03Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-23T05:12:02Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-   "release_run": null,
+   "release_run": 2957863141,
    "last_live_check": {
     "run": 2957863141,
     "created_at": "2026-10-17T04:28:48.538Z"
    },
    "latest_eligible": 2957863141,
-   "is_latest": false
+   "is_latest": true
   }
  },
  "exports": {
