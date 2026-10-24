@@ -1,5 +1,0 @@
-{
-  "opened": false,
-  "reason": "GASKET_INCIDENT_TOKEN is not set, so no incident was opened (the job token cannot create issues)",
-  "schema": "gasket.incident/v1"
-}
