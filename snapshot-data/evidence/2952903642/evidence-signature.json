@@ -1,0 +1,36 @@
+{
+  "certificate_identity": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main",
+  "commit": "95ecf1200264010706658df60b01e7c7932f1de2",
+  "evidence": {
+    "blob": "evidence_bundle.json",
+    "blob_sha256": "aff1d8649cb055eb1c696ba2f0b4b114ab9ef7580d0a818723e4a765ecf636e7",
+    "bundle": "evidence.cosign.bundle",
+    "rekor": {
+      "integrated_time": 1792102406,
+      "log_index": 3269728926,
+      "url": "https://search.sigstore.dev/?logIndex=3269728926"
+    },
+    "signed": true,
+    "verified_in_job": true,
+    "verify_command": "cosign verify-blob evidence_bundle.json --bundle evidence.cosign.bundle --certificate-identity \"https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main\" --certificate-oidc-issuer \"https://gitlab.com\""
+  },
+  "method": "cosign v2.4.1 keyless (Sigstore), GitLab CI identity",
+  "note": "The signature proves the evidence was produced by this pipeline's identity and is unaltered. It does not assert that a person reviewed its correctness.",
+  "oidc_issuer": "https://gitlab.com",
+  "pipeline_id": "2952903642",
+  "provenance": {
+    "blob": "provenance.json",
+    "blob_sha256": "b3fea91efe3fac86953e2d10c36bbfca7d5aabeb2115f1bbaf1c468900241eec",
+    "bundle": "provenance.cosign.bundle",
+    "rekor": {
+      "integrated_time": 1792102416,
+      "log_index": 3269730811,
+      "url": "https://search.sigstore.dev/?logIndex=3269730811"
+    },
+    "signed": true,
+    "verified_in_job": true,
+    "verify_command": "cosign verify-blob provenance.json --bundle provenance.cosign.bundle --certificate-identity \"https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket//.gitlab-ci.yml@refs/heads/main\" --certificate-oidc-issuer \"https://gitlab.com\""
+  },
+  "provenance_note": "SLSA-style provenance, signed. Self-generated; not a GitLab-native SLSA Level 3 attestation.",
+  "schema": "gasket.signature/v1"
+}

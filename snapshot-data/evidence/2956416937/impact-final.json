@@ -1,0 +1,37 @@
+{
+  "agent_session": "9616600",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    "README.md",
+    "docs/AGENTS.md",
+    "docs/CLAIMS.md",
+    "docs/DEVPOST.md",
+    "docs/STATUS.md",
+    "evidence/duo-sessions.json",
+    "evidence/duo-sessions/9583403-pipeline2953906287-investigator.png",
+    "gasket/agents.py"
+  ],
+  "commit_sha": "2baba60f2b0fb2b0bc8acb08c146acac8cc87e3d",
+  "duo_available": true,
+  "duo_reason": "Changes are documentation, evidence records and one descriptive string in gasket/agents.py, with no model, data, serving, dependency or policy change. A Python file and a JSON evidence file changed, so the scope is marked ambiguous rather than documentation-only.",
+  "duo_required_evidence": [],
+  "duo_risk_level": "low",
+  "duo_scope": [
+    "ambiguous"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous, documentation-only (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, risk low, evidence: none. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous",
+    "documentation-only"
+  ],
+  "unsupported_duo_evidence": []
+}

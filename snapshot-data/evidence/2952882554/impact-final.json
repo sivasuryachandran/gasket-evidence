@@ -1,0 +1,61 @@
+{
+  "agent_session": "9572567",
+  "agent_session_source": "GitLab system note: started session",
+  "changed_paths": [
+    ".gitlab-ci.yml",
+    "dashboard/app.js",
+    "dashboard/styles.css",
+    "docs/AGENTS.md",
+    "docs/ENTERPRISE.md",
+    "docs/STATUS.md",
+    "duo/release-repair.yml",
+    "gasket/analyze.py",
+    "gasket/attention.py",
+    "gasket/attest.py",
+    "gasket/cli.py",
+    "gasket/collect.py",
+    "gasket/dashboard.py",
+    "gasket/policychange.py",
+    "gasket/policyview.py",
+    "gasket/snapshot.py",
+    "policy/protected-paths.yml",
+    "scripts/policy_change_ci.sh",
+    "scripts/sign_evidence_ci.sh",
+    "tests/test_ci_graph.py",
+    "tests/test_duo_flows.py",
+    "tests/test_policy_guard.py",
+    "tests/test_prefreeze.py",
+    "tests/test_release_gate_component.py"
+  ],
+  "commit_sha": "dbccecf7178c632bd5b2bf5f02f72de807d88cc8",
+  "duo_available": true,
+  "duo_reason": "The MR adds a new approval gate for changes to the release policy and CI. It changes the signed evidence bundle and the repair flow target. The MR reports 24 changed files but only 20 diffs were visible, so .gitlab-ci.yml and the release-gate template were not reviewed.",
+  "duo_required_evidence": [
+    "artifact_identity",
+    "policy_identity",
+    "security"
+  ],
+  "duo_risk_level": "high",
+  "duo_scope": [
+    "ambiguous",
+    "policy",
+    "security",
+    "serving"
+  ],
+  "overridden": true,
+  "reason": "Deterministic analysis of the changed paths classified this as scope ambiguous, documentation-only (risk high), requiring evidence: accuracy, artifact_identity, fairness, sbom, security. Duo proposed scope ambiguous, policy, security, serving, risk high, evidence: artifact_identity, policy_identity, security. The stricter, deterministic requirement wins.",
+  "required_evidence": [
+    "accuracy",
+    "artifact_identity",
+    "fairness",
+    "policy_identity",
+    "sbom",
+    "security"
+  ],
+  "risk_level": "high",
+  "scope": [
+    "ambiguous",
+    "documentation-only"
+  ],
+  "unsupported_duo_evidence": []
+}
