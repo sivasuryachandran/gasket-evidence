@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T05:54:38Z",
+ "generated_at": "2026-10-25T06:56:58Z",
  "outcomes": {
   "out_of_scope": 73,
   "released_eligible": 96,
@@ -59,9 +59,9 @@
  },
  "reverification": {
   "latest": {
-   "run_id": 2959762954,
-   "created_at": "2026-10-18T05:55:18.727Z",
-   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2959762954",
+   "run_id": 2985963789,
+   "created_at": "2026-10-25T05:54:27.850Z",
+   "web_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2985963789",
    "label": "Scheduled re-verification on a fixed holdout - not live production-traffic monitoring.",
    "flagged": false,
    "flags": [],
@@ -88,7 +88,7 @@
    "baseline_pipeline": "2957863141",
    "tolerance": 0.0001
   },
-  "count": 3,
+  "count": 4,
   "flagged": 0,
   "failed_to_run": [
    {
@@ -1066,9 +1066,9 @@
    "mr_iid": null,
    "sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "created_at": "2026-10-25T05:54:27.850Z",
-   "status": "running",
+   "status": "success",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 68.8,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -1091,12 +1091,41 @@
    "policy_change": {
     "status": "not_recorded"
    },
-   "reverification": null,
+   "reverification": {
+    "label": "Scheduled re-verification on a fixed holdout - not live production-traffic monitoring.",
+    "flagged": false,
+    "flags": [],
+    "metrics": {
+     "accuracy": 0.7425,
+     "fairness_gap": 0.0085,
+     "group_positive_counts": {
+      "0": 372,
+      "1": 538
+     }
+    },
+    "signed_baseline": {
+     "accuracy": 0.7425,
+     "fairness_gap": 0.0085
+    },
+    "drift": {
+     "accuracy": 0.0,
+     "fairness_gap": 0.0
+    },
+    "thresholds": {
+     "maximum_fairness_gap": 0.05,
+     "minimum_accuracy": 0.72
+    },
+    "baseline_pipeline": "2957863141",
+    "tolerance": 0.0001
+   },
    "model_registration": null,
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "dependency-scanning:python-resolution",
+    "scheduled-reverify"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "deploy_job_user": null,
@@ -77901,16 +77930,13 @@
  },
  "snapshot": {
   "date": "2026-10-25",
-  "taken_at": "2026-10-25T05:54:38Z",
+  "taken_at": "2026-10-25T06:56:58Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-25T05:54:38Z",
-   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
-   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
-   "model_variant": "D",
-   "revision": "gasket-model-00044-lin",
+   "checked_at": "2026-10-25T06:56:58Z",
+   "error": "TimeoutError: The read operation timed out",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app"
   }
  },
@@ -78733,8 +78759,8 @@
   {
    "key": "reverification",
    "label": "Scheduled re-verification",
-   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2959762954",
-   "evidence": "ran in pipeline 2959762954"
+   "url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2985963789",
+   "evidence": "ran in pipeline 2985963789"
   }
  ],
  "agents": {
@@ -82030,6 +82056,16 @@
  },
  "attention": [
   {
+   "kind": "live_unreadable",
+   "run": null,
+   "text": "The live service could not be read at snapshot time (TimeoutError: The read operation timed out).",
+   "fix": {
+    "label": "Open the service",
+    "href": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
+    "external": true
+   }
+  },
+  {
    "kind": "separation_of_duties",
    "run": null,
    "mrs": [
@@ -82200,7 +82236,7 @@
     "iso": "Performance evaluation",
     "slsa": "Not applicable",
     "status": "Operating",
-    "status_detail": "3 scheduled re-verifications",
+    "status_detail": "4 scheduled re-verifications",
     "evidence": {
      "label": "Pipeline schedules in GitLab",
      "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipeline_schedules",
@@ -82355,7 +82391,7 @@
     "name": "Monitor",
     "status": "done",
     "text": "Scheduled re-verification",
-    "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2959762954",
+    "href": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/pipelines/2985963789",
     "note": null
    },
    {
@@ -82367,19 +82403,16 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-25T05:54:38Z",
-   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
-   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
-   "model_variant": "D",
-   "revision": "gasket-model-00044-lin",
+   "checked_at": "2026-10-25T06:56:58Z",
+   "error": "TimeoutError: The read operation timed out",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-   "release_run": 2957863141,
+   "release_run": null,
    "last_live_check": {
     "run": 2957863141,
     "created_at": "2026-10-17T04:28:48.538Z"
    },
    "latest_eligible": 2957863141,
-   "is_latest": true
+   "is_latest": false
   }
  },
  "exports": {
