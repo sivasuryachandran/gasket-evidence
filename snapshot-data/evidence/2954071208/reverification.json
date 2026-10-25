@@ -1,0 +1,30 @@
+{
+  "baseline_pipeline": "2954009176",
+  "drift": {
+    "accuracy": 0.0,
+    "fairness_gap": 0.0
+  },
+  "flagged": false,
+  "flags": [],
+  "label": "Scheduled re-verification on a fixed holdout - not live production-traffic monitoring.",
+  "metrics": {
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085,
+    "group_positive_counts": {
+      "0": 372,
+      "1": 538
+    }
+  },
+  "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+  "schema": "gasket.reverification/v1",
+  "signed_baseline": {
+    "accuracy": 0.7425,
+    "fairness_gap": 0.0085
+  },
+  "signed_baseline_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+  "thresholds": {
+    "maximum_fairness_gap": 0.05,
+    "minimum_accuracy": 0.72
+  },
+  "tolerance": 0.0001
+}

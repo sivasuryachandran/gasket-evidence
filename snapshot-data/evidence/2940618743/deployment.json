@@ -1,0 +1,14 @@
+{
+  "approval": "not recorded",
+  "digest": "sha256:f1ec1daa234ca4561b43feca7f95b9c112ff0b5fa087846239ced9305e76964c",
+  "executed_by": "chandran.sivasurya",
+  "image": "registry.gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/release:5b346b3d-d-p2940618743",
+  "mock": true,
+  "mode": "mock",
+  "pipeline": "2940618743",
+  "published_artifact": {
+    "bytes": 1052,
+    "sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+    "url": "https://gitlab.com/api/v4/projects/87495719/packages/generic/gasket-model/p2940618743/model.pkl"
+  }
+}
