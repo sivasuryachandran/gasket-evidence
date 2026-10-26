@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-26T04:59:30Z",
+ "generated_at": "2026-10-26T05:15:29Z",
  "outcomes": {
   "out_of_scope": 74,
   "released_eligible": 96,
@@ -1066,9 +1066,9 @@
    "mr_iid": null,
    "sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "created_at": "2026-10-26T04:59:19.295Z",
-   "status": "running",
+   "status": "success",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 534.4,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -1096,7 +1096,10 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "dependency-scanning:python-resolution",
+    "refresh-public-dashboard"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "deploy_job_user": null,
@@ -1115,7 +1118,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1235,7 +1238,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1329,7 +1332,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1423,7 +1426,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1517,7 +1520,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1611,7 +1614,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1705,7 +1708,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1799,7 +1802,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1893,7 +1896,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -2013,7 +2016,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -2107,7 +2110,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -2201,7 +2204,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792904381",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -78021,12 +78024,12 @@
  },
  "snapshot": {
   "date": "2026-10-26",
-  "taken_at": "2026-10-26T04:59:30Z",
+  "taken_at": "2026-10-26T05:15:29Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-26T04:59:30Z",
+   "checked_at": "2026-10-26T05:15:29Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -82487,7 +82490,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-26T04:59:30Z",
+   "checked_at": "2026-10-26T05:15:29Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
