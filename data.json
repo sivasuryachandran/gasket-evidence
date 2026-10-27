@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T04:59:28Z",
+ "generated_at": "2026-10-27T05:15:31Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -1066,9 +1066,9 @@
    "mr_iid": null,
    "sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "created_at": "2026-10-27T04:59:16.850Z",
-   "status": "running",
+   "status": "success",
    "scenario": null,
-   "wall_seconds": null,
+   "wall_seconds": 514.8,
    "stage_seconds": {
     "package": null,
     "evaluate": null,
@@ -1096,7 +1096,10 @@
    "release": null,
    "incident": null,
    "requirements_reported": false,
-   "jobs_ran": [],
+   "jobs_ran": [
+    "dependency-scanning:python-resolution",
+    "refresh-public-dashboard"
+   ],
    "deployment": null,
    "deploy_job_url": null,
    "deploy_job_user": null,
@@ -1115,7 +1118,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1209,7 +1212,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1329,7 +1332,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1423,7 +1426,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1517,7 +1520,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1611,7 +1614,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1705,7 +1708,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1799,7 +1802,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1893,7 +1896,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -1987,7 +1990,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -2107,7 +2110,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -2201,7 +2204,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -2295,7 +2298,7 @@
    "reason_codes": null,
    "checks": null,
    "actor": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "name": "siva surya",
     "username": "chandran.sivasurya",
     "web_url": "https://gitlab.com/chandran.sivasurya",
@@ -66452,18 +66455,16 @@
     "security-scan": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17123981231",
     "package-image": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17123981229"
    },
-   "commit_title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github",
+   "commit_title": null,
    "mr": {
-    "kind": "direct",
+    "kind": "undetermined",
     "iid": null,
-    "how": "GitLab lists no merge request for this commit"
+    "how": "GitLab's merge request list for this commit could not be read"
    },
    "fixture": false,
    "cause": null,
    "stopped_at": null,
-   "change_scope": [
-    "pipeline"
-   ],
+   "change_scope": null,
    "seal": {
     "evidenced": [
      {
@@ -75243,14 +75244,6 @@
      ],
      "title": "README: quote the diagram labels so it renders, mark the live inference check as Cloud Run only, drop a stale test count"
     },
-    "b0984ce01357ad4f814911f9269511e55b949a7b": {
-     "merge_requests": [],
-     "paths": [
-      "deploy/github-sync.yml",
-      "scripts/publish_public_dashboard.sh"
-     ],
-     "title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github"
-    },
     "b1506498dae131594167d42ecba8f2cfea700a55": {
      "merge_requests": [
       {
@@ -78115,13 +78108,16 @@
  },
  "snapshot": {
   "date": "2026-10-27",
-  "taken_at": "2026-10-27T04:59:28Z",
+  "taken_at": "2026-10-27T05:15:31Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-27T04:59:28Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-27T05:15:31Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app"
   }
  },
@@ -82241,16 +82237,6 @@
  },
  "attention": [
   {
-   "kind": "live_unreadable",
-   "run": null,
-   "text": "The live service could not be read at snapshot time (TimeoutError: The read operation timed out).",
-   "fix": {
-    "label": "Open the service",
-    "href": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-    "external": true
-   }
-  },
-  {
    "kind": "separation_of_duties",
    "run": null,
    "mrs": [
@@ -82588,16 +82574,19 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-27T04:59:28Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-27T05:15:31Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-   "release_run": null,
+   "release_run": 2957863141,
    "last_live_check": {
     "run": 2957863141,
     "created_at": "2026-10-17T04:28:48.538Z"
    },
    "latest_eligible": 2957863141,
-   "is_latest": false
+   "is_latest": true
   }
  },
  "exports": {
@@ -84107,9 +84096,9 @@
     "created_at": "2026-10-12T21:27:10.520Z",
     "ref": "main",
     "commit": "b0984ce01357",
-    "commit_title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github",
-    "scope": "pipeline",
-    "merge_request": "direct to main",
+    "commit_title": "",
+    "scope": "not recorded",
+    "merge_request": "not determined",
     "decision": "Eligible",
     "reason_codes": "",
     "signed": "no",
