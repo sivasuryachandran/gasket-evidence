@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T05:15:31Z",
+ "generated_at": "2026-10-27T08:15:58Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -66455,16 +66455,18 @@
     "security-scan": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17123981231",
     "package-image": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17123981229"
    },
-   "commit_title": null,
+   "commit_title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github",
    "mr": {
-    "kind": "undetermined",
+    "kind": "direct",
     "iid": null,
-    "how": "GitLab's merge request list for this commit could not be read"
+    "how": "GitLab lists no merge request for this commit"
    },
    "fixture": false,
    "cause": null,
    "stopped_at": null,
-   "change_scope": null,
+   "change_scope": [
+    "pipeline"
+   ],
    "seal": {
     "evidenced": [
      {
@@ -75244,6 +75246,14 @@
      ],
      "title": "README: quote the diagram labels so it renders, mark the live inference check as Cloud Run only, drop a stale test count"
     },
+    "b0984ce01357ad4f814911f9269511e55b949a7b": {
+     "merge_requests": [],
+     "paths": [
+      "deploy/github-sync.yml",
+      "scripts/publish_public_dashboard.sh"
+     ],
+     "title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github"
+    },
     "b1506498dae131594167d42ecba8f2cfea700a55": {
      "merge_requests": [
       {
@@ -76419,7 +76429,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76432,7 +76442,7 @@
     "iid": 36,
     "merge_commit_sha": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76466,7 +76476,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76479,7 +76489,7 @@
     "iid": 35,
     "merge_commit_sha": "d5d9e250ae788c00dcb5f5750c86d0b15c0eafbb",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76513,7 +76523,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76526,7 +76536,7 @@
     "iid": 34,
     "merge_commit_sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76560,7 +76570,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76573,7 +76583,7 @@
     "iid": 33,
     "merge_commit_sha": "65ff26cb41c5313a6815af6921f02fa0990ce097",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76607,7 +76617,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76620,7 +76630,7 @@
     "iid": 32,
     "merge_commit_sha": "2bfc666c3c152598202678342e3084920cb40e34",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76654,7 +76664,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76667,7 +76677,7 @@
     "iid": 31,
     "merge_commit_sha": "df1dbd19ebc63df89920945eaf411da8d64e71d3",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76701,7 +76711,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76714,7 +76724,7 @@
     "iid": 30,
     "merge_commit_sha": "6ba1947f493fc6522c637f663df296a3e324ba90",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76748,7 +76758,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76761,7 +76771,7 @@
     "iid": 29,
     "merge_commit_sha": "3f2796c9a6a3c4007dbfe4c62eb30ecda904e6df",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76795,7 +76805,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76808,7 +76818,7 @@
     "iid": 28,
     "merge_commit_sha": "39844bbbed7f0f36922e3d0270777faa720849fd",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76837,7 +76847,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76878,7 +76888,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76891,7 +76901,7 @@
     "iid": 26,
     "merge_commit_sha": "f2176157a1da05008faccaa81cfb2fc3e9171e05",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76925,7 +76935,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76938,7 +76948,7 @@
     "iid": 25,
     "merge_commit_sha": "99a24be4f803b4f969b7d9b17b75a9b74dc81ffd",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76972,7 +76982,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -76985,7 +76995,7 @@
     "iid": 24,
     "merge_commit_sha": "79bdfd6109f30b11e8a8e958fdeb3ad7ee802c87",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77019,7 +77029,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77032,7 +77042,7 @@
     "iid": 23,
     "merge_commit_sha": "7454a220e868eae1cac91da7441aa2f5cccf4b88",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77066,7 +77076,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77079,7 +77089,7 @@
     "iid": 22,
     "merge_commit_sha": "0d036dbc8bb5a9f53a7f5ac4eba750ad358c2982",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77113,7 +77123,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77126,7 +77136,7 @@
     "iid": 21,
     "merge_commit_sha": "67162fd303721aeccc3f526c3962ba0b0cb4e38e",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77160,7 +77170,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77173,7 +77183,7 @@
     "iid": 20,
     "merge_commit_sha": "8f8d95648ac101ad44cab3a4f0642077a5c799ce",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77207,7 +77217,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77220,7 +77230,7 @@
     "iid": 19,
     "merge_commit_sha": "5d588592571401fc547fa27e39cc99d9ee7e5fb7",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77254,7 +77264,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77267,7 +77277,7 @@
     "iid": 18,
     "merge_commit_sha": "0069197c7c1555d94b1492172e7cb636bdf491ca",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77301,7 +77311,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77314,7 +77324,7 @@
     "iid": 17,
     "merge_commit_sha": "8eaef67b1fead0bd4441cf2918cef3ef88ee3267",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77348,7 +77358,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77361,7 +77371,7 @@
     "iid": 16,
     "merge_commit_sha": "c12b30f821081d1d235eae96bf456485676b9b97",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77395,7 +77405,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77408,7 +77418,7 @@
     "iid": 15,
     "merge_commit_sha": "1ce64752d9fb013f0dc167da0d65af6131d18e61",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77442,7 +77452,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77455,7 +77465,7 @@
     "iid": 14,
     "merge_commit_sha": "389331a3f635a973764f3874911e79f5f446ea4f",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77484,7 +77494,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77525,7 +77535,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77538,7 +77548,7 @@
     "iid": 12,
     "merge_commit_sha": "0a44eee85d855e5b1c006dce72da98b75e5c492a",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77572,7 +77582,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77585,7 +77595,7 @@
     "iid": 11,
     "merge_commit_sha": "95ecf1200264010706658df60b01e7c7932f1de2",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77619,7 +77629,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77632,7 +77642,7 @@
     "iid": 10,
     "merge_commit_sha": "1bff1ae06bb8e4745c221cfa53e6eb1c833dedce",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77666,7 +77676,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77679,7 +77689,7 @@
     "iid": 9,
     "merge_commit_sha": "46b712f6f256857d27afbeb7be9740b7c66ce5c2",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77768,7 +77778,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -77781,7 +77791,7 @@
     "iid": 7,
     "merge_commit_sha": "8efb5ff16d6063b503263d059b195c811f343bde",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -78013,7 +78023,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -78026,7 +78036,7 @@
     "iid": 2,
     "merge_commit_sha": "ee44173914e68e02e1490234849721e23fc3ebf6",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -78060,7 +78070,7 @@
     },
     "assignees": [],
     "author": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -78073,7 +78083,7 @@
     "iid": 1,
     "merge_commit_sha": "eda043ba2f4f6ba0f5bad2a36524bc201e4cd35a",
     "merged_by": {
-     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+     "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
      "kind": null,
      "name": "siva surya",
      "username": "chandran.sivasurya",
@@ -78108,12 +78118,12 @@
  },
  "snapshot": {
   "date": "2026-10-27",
-  "taken_at": "2026-10-27T05:15:31Z",
+  "taken_at": "2026-10-27T08:15:58Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-27T05:15:31Z",
+   "checked_at": "2026-10-27T08:15:58Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -78124,7 +78134,7 @@
  "people": [
   {
    "profile": {
-    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1792990779",
+    "avatar_url": "https://gitlab.com/uploads/-/system/user/avatar/43241733/avatar.png?v=1793077175",
     "kind": null,
     "name": "siva surya",
     "username": "chandran.sivasurya",
@@ -82574,7 +82584,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-27T05:15:31Z",
+   "checked_at": "2026-10-27T08:15:58Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -84096,9 +84106,9 @@
     "created_at": "2026-10-12T21:27:10.520Z",
     "ref": "main",
     "commit": "b0984ce01357",
-    "commit_title": "",
-    "scope": "not recorded",
-    "merge_request": "not determined",
+    "commit_title": "Public dashboard sync workflow (GitHub Actions: GitLab webhook, 10-minute fallback); publish script keeps .github",
+    "scope": "pipeline",
+    "merge_request": "direct to main",
     "decision": "Eligible",
     "reason_codes": "",
     "signed": "no",
