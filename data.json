@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T02:39:35Z",
+ "generated_at": "2026-10-30T08:59:14Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -75736,6 +75736,26 @@
    },
    "recent": [
     {
+     "message": "Docs: a fourth Investigator trigger (the re-run of !4's Witness job) and the repair guard passing on !7's real diff\n",
+     "sha": "20fef6e21d76703850210b25074a886d57ffd34e",
+     "title": "Docs: a fourth Investigator trigger (the re-run of !4's Witness job) and the repair guard passing on !7's real diff"
+    },
+    {
+     "message": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'\n\nRestore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!7",
+     "sha": "8efb5ff16d6063b503263d059b195c811f343bde",
+     "title": "Merge branch 'repair/issue-3' into 'duo-demo/b-fairness-regression'"
+    },
+    {
+     "message": "Merge branch 'duo-demo/b-fairness-regression' into 'main'\n\ndemo: fairness regression\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!4",
+     "sha": "b1506498dae131594167d42ecba8f2cfea700a55",
+     "title": "Merge branch 'duo-demo/b-fairness-regression' into 'main'"
+    },
+    {
+     "message": "Service page: describe what the demo is for instead of a disclaimer\n",
+     "sha": "f6e18300cccef61f3987d7e7dad463606c99cb7d",
+     "title": "Service page: describe what the demo is for instead of a disclaimer"
+    },
+    {
      "message": "Docs: the updated Repair flow is pasted on the Flows page (maintainer-reported); its target is not yet seen because no repair has run since\n",
      "sha": "76429f3f23b1ccd04ae8c94e7268caf7dcf5117e",
      "title": "Docs: the updated Repair flow is pasted on the Flows page (maintainer-reported); its target is not yet seen because no repair has run since"
@@ -75759,11 +75779,6 @@
      "message": "About page shows the logo; the MIT copyright line is on the dashboard footer, evidence pages, service page and README\n",
      "sha": "232aac564ca16fbe44cac93ecb745b2fa7d972e1",
      "title": "About page shows the logo; the MIT copyright line is on the dashboard footer, evidence pages, service page and README"
-    },
-    {
-     "message": "Merge branch 'feat/service-page-and-about' into 'main'\n\nDocs: the updated Repair flow is pasted on the Flows page...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!20",
-     "sha": "d172092958bb4df447ff6c01b77e064c8c396f8e",
-     "title": "Merge branch 'feat/service-page-and-about' into 'main'"
     },
     {
      "message": "Merge branch 'feat/service-page-and-about' into 'main'\n\nDocs: the updated Repair flow is pasted on the Flows page...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!20",
@@ -75807,11 +75822,6 @@
     },
     {
      "message": "Merge branch 'fix/final-pass' into 'main'\n\nDocs: the chain for block 2940522134 is complete (9 of 9), and the runtime...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!21",
-     "sha": "27bab14a32694bb05c05ce26beda711ff265cddd",
-     "title": "Merge branch 'fix/final-pass' into 'main'"
-    },
-    {
-     "message": "Merge branch 'fix/final-pass' into 'main'\n\nDocs: the chain for block 2940522134 is complete (9 of 9), and the runtime...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!21",
      "sha": "67162fd303721aeccc3f526c3962ba0b0cb4e38e",
      "title": "Merge branch 'fix/final-pass' into 'main'"
     },
@@ -75819,11 +75829,6 @@
      "message": "Schedules: re-verification finds the signed bundle through the newest GitLab Release (the latest successful pipeline on main can be a scheduled one with no signing job); a schedule whose description says refresh runs the dashboard refresh (the schedule form here has no variables); a merge with no net file change says so instead of Not recorded; R6 proven by scheduled pipeline 2954071208\n",
      "sha": "f0494acf925acc4f02d394238970dcf1492ec021",
      "title": "Schedules: re-verification finds the signed bundle through the newest GitLab Release (the latest successful pipeline on main can be a scheduled one with no signing job); a schedule whose description says refresh runs the dashboard refresh (the schedule form here has no variables); a merge with no net file change says so instead of Not recorded; R6 proven by scheduled pipeline 2954071208"
-    },
-    {
-     "message": "Merge branch 'fix/schedules' into 'main'\n\nSchedules: re-verification finds the signed bundle through the newest GitLab...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!22",
-     "sha": "665874e86a4236694411a2981015c04d72f7dc16",
-     "title": "Merge branch 'fix/schedules' into 'main'"
     },
     {
      "message": "Merge branch 'fix/schedules' into 'main'\n\nSchedules: re-verification finds the signed bundle through the newest GitLab...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!22",
@@ -75849,11 +75854,6 @@
      "message": "Proof polish: guard, Cloud Run, approval, container scanning and repair-targeting wording; R6 and R7 proven by the scheduled runs; the video follows one chain (2940522134); cycle C noted as prepared\n",
      "sha": "22ab333076d15878a73a65f179a505fd2420e4d5",
      "title": "Proof polish: guard, Cloud Run, approval, container scanning and repair-targeting wording; R6 and R7 proven by the scheduled runs; the video follows one chain (2940522134); cycle C noted as prepared"
-    },
-    {
-     "message": "Merge branch 'docs/proof-polish' into 'main'\n\nDocs: weekly re-verification and the daily dashboard refresh both ran on...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!23",
-     "sha": "4d74ccb59e81ccd2e62405a9eb40f745787296f0",
-     "title": "Merge branch 'docs/proof-polish' into 'main'"
     },
     {
      "message": "Merge branch 'docs/proof-polish' into 'main'\n\nDocs: weekly re-verification and the daily dashboard refresh both ran on...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!23",
@@ -78118,12 +78118,12 @@
  },
  "snapshot": {
   "date": "2026-10-30",
-  "taken_at": "2026-10-30T02:39:35Z",
+  "taken_at": "2026-10-30T08:59:14Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-30T02:39:35Z",
+   "checked_at": "2026-10-30T08:59:14Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -82584,7 +82584,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-30T02:39:35Z",
+   "checked_at": "2026-10-30T08:59:14Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
