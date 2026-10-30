@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T15:47:18Z",
+ "generated_at": "2026-10-30T20:11:12Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -75736,6 +75736,31 @@
    },
    "recent": [
     {
+     "message": "Merge branch 'docs/cloud-run-proven' into 'main'\n\nDocs: Cloud Run deployment and the live inference check are proven (pipeline...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!18",
+     "sha": "0069197c7c1555d94b1492172e7cb636bdf491ca",
+     "title": "Merge branch 'docs/cloud-run-proven' into 'main'"
+    },
+    {
+     "message": "Snapshot: a rate limit, server error or timeout is never read as not found (it dropped 19 commits from the published dashboard and hid three blocks' causes); a stop keeps the commits read so far; a pipeline still running is not called unsigned\n",
+     "sha": "db2ea670bbf4b1d381f27d8f041a018a96f585ce",
+     "title": "Snapshot: a rate limit, server error or timeout is never read as not found (it dropped 19 commits from the published dashboard and hid three blocks' causes); a stop keeps the commits read so far; a pipeline still running is not called unsigned"
+    },
+    {
+     "message": "Merge branch 'fix/snapshot-never-silently-partial' into 'main'\n\nSnapshot: a rate limit, server error or timeout is never read as not found (it...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!19",
+     "sha": "5d588592571401fc547fa27e39cc99d9ee7e5fb7",
+     "title": "Merge branch 'fix/snapshot-never-silently-partial' into 'main'"
+    },
+    {
+     "message": "Service page: describe what the demo is for instead of a disclaimer\n",
+     "sha": "40896772849d23ddae5bde3060f6ff2512e4597c",
+     "title": "Service page: describe what the demo is for instead of a disclaimer"
+    },
+    {
+     "message": "Docs: the updated Repair flow is pasted on the Flows page (maintainer-reported); its target is not yet seen because no repair has run since\n",
+     "sha": "a6b277bf4384131e22b22cb868876ebed1e9c9d4",
+     "title": "Docs: the updated Repair flow is pasted on the Flows page (maintainer-reported); its target is not yet seen because no repair has run since"
+    },
+    {
      "message": "Docs: a fourth Investigator trigger (the re-run of !4's Witness job) and the repair guard passing on !7's real diff\n",
      "sha": "20fef6e21d76703850210b25074a886d57ffd34e",
      "title": "Docs: a fourth Investigator trigger (the re-run of !4's Witness job) and the repair guard passing on !7's real diff"
@@ -75891,11 +75916,6 @@
      "title": "CLAIMS G2 proven: pipeline 2956396432 on scenario/b-stale blocked with MODEL_HASH_MISMATCH (job 17242409580)"
     },
     {
-     "message": "Merge branch 'docs/investigator-automatic' into 'main'\n\nInvestigator automatic: Proven from issues #5, #6 and #7, opened by the...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!24",
-     "sha": "8c2f46cadba9f03a617965747e33bf1f6d2125be",
-     "title": "Merge branch 'docs/investigator-automatic' into 'main'"
-    },
-    {
      "message": "Container Scanning: take package-image's image variables (the template's dependencies: [] blocked them, so the scan ran on '@'); stop with a reason if they are missing\n",
      "sha": "2e38694838375cf2b3f6945569e6549bce6380e7",
      "title": "Container Scanning: take package-image's image variables (the template's dependencies: [] blocked them, so the scan ran on '@'); stop with a reason if they are missing"
@@ -75912,11 +75932,6 @@
     },
     {
      "message": "Merge branch 'feat/container-scanning' into 'main'\n\nGitLab Container Scanning of the Witness-checked image (by digest) on main and...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!25",
-     "sha": "efe0bfaf5d8eab0e9a3737fc2627505d32691ab4",
-     "title": "Merge branch 'feat/container-scanning' into 'main'"
-    },
-    {
-     "message": "Merge branch 'feat/container-scanning' into 'main'\n\nGitLab Container Scanning of the Witness-checked image (by digest) on main and...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!25",
      "sha": "99a24be4f803b4f969b7d9b17b75a9b74dc81ffd",
      "title": "Merge branch 'feat/container-scanning' into 'main'"
     },
@@ -75924,11 +75939,6 @@
      "message": "CLAIMS X9 proven: GitLab Container Scanning ran on the release image's digest in main pipeline 2956505378 and kept its report; findings seen in MR !25's security report (saved copy); the Secure stage names it\n",
      "sha": "0a6977ecb8150a9ca0746b2087e72a8bf05dadc5",
      "title": "CLAIMS X9 proven: GitLab Container Scanning ran on the release image's digest in main pipeline 2956505378 and kept its report; findings seen in MR !25's security report (saved copy); the Secure stage names it"
-    },
-    {
-     "message": "Merge branch 'docs/container-scanning-proven' into 'main'\n\nCLAIMS X9 proven: GitLab Container Scanning ran on the release image's digest...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!26",
-     "sha": "a8f84a71d989575b1105a452a3526946b0e1c76d",
-     "title": "Merge branch 'docs/container-scanning-proven' into 'main'"
     },
     {
      "message": "Merge branch 'docs/container-scanning-proven' into 'main'\n\nCLAIMS X9 proven: GitLab Container Scanning ran on the release image's digest...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!26",
@@ -75957,11 +75967,6 @@
     },
     {
      "message": "Merge branch 'fix/live-match' into 'main'\n\nDashboard: the live release is matched by the commit the service reports (two...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!28",
-     "sha": "c43e90956721dc01ec7abd7cbd08942fc3e6de42",
-     "title": "Merge branch 'fix/live-match' into 'main'"
-    },
-    {
-     "message": "Merge branch 'fix/live-match' into 'main'\n\nDashboard: the live release is matched by the commit the service reports (two...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!28",
      "sha": "39844bbbed7f0f36922e3d0270777faa720849fd",
      "title": "Merge branch 'fix/live-match' into 'main'"
     },
@@ -75969,11 +75974,6 @@
      "message": "Fixture tests step aside, with a stated reason, on a branch that carries the labelled demo fixture, so its pipeline reaches the Witness (MR !29 stopped at unit-tests)\n",
      "sha": "1f5d90c118b0f1141f379d0cf46b5d4989c8f5fb",
      "title": "Fixture tests step aside, with a stated reason, on a branch that carries the labelled demo fixture, so its pipeline reaches the Witness (MR !29 stopped at unit-tests)"
-    },
-    {
-     "message": "Merge branch 'fix/fixture-aware-tests' into 'main'\n\nFixture tests step aside, with a stated reason, on a branch that carries the...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!30",
-     "sha": "29b7d84c0c6e9fc9499a53862463a97222cd517d",
-     "title": "Merge branch 'fix/fixture-aware-tests' into 'main'"
     },
     {
      "message": "Merge branch 'fix/fixture-aware-tests' into 'main'\n\nFixture tests step aside, with a stated reason, on a branch that carries the...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!30",
@@ -78118,13 +78118,16 @@
  },
  "snapshot": {
   "date": "2026-10-30",
-  "taken_at": "2026-10-30T15:47:18Z",
+  "taken_at": "2026-10-30T20:11:12Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-30T15:47:18Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-30T20:11:12Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app"
   }
  },
@@ -82244,16 +82247,6 @@
  },
  "attention": [
   {
-   "kind": "live_unreadable",
-   "run": null,
-   "text": "The live service could not be read at snapshot time (TimeoutError: The read operation timed out).",
-   "fix": {
-    "label": "Open the service",
-    "href": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-    "external": true
-   }
-  },
-  {
    "kind": "separation_of_duties",
    "run": null,
    "mrs": [
@@ -82591,16 +82584,19 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-30T15:47:18Z",
-   "error": "TimeoutError: The read operation timed out",
+   "checked_at": "2026-10-30T20:11:12Z",
+   "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
+   "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
+   "model_variant": "D",
+   "revision": "gasket-model-00044-lin",
    "url": "https://gasket-model-6xgh5t4mzq-uc.a.run.app",
-   "release_run": null,
+   "release_run": 2957863141,
    "last_live_check": {
     "run": 2957863141,
     "created_at": "2026-10-17T04:28:48.538Z"
    },
    "latest_eligible": 2957863141,
-   "is_latest": false
+   "is_latest": true
   }
  },
  "exports": {
