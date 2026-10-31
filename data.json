@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T23:52:38Z",
+ "generated_at": "2026-10-31T03:57:46Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -75736,6 +75736,16 @@
    },
    "recent": [
     {
+     "message": "Cloud Run deploy: copy the image by digest without its tag (skopeo refuses a tag and a digest together) and make the test double refuse it too; pace snapshot requests so they stay under GitLab's rate limit\n",
+     "sha": "65e2355e6a0b23ab02a251a3197bb424b405f8db",
+     "title": "Cloud Run deploy: copy the image by digest without its tag (skopeo refuses a tag and a digest together) and make the test double refuse it too; pace snapshot requests so they stay under GitLab's rate limit"
+    },
+    {
+     "message": "Merge branch 'fix/cloudrun-copy-by-digest' into 'main'\n\nCloud Run deploy: copy the image by digest without its tag (skopeo refuses a...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!16",
+     "sha": "c12b30f821081d1d235eae96bf456485676b9b97",
+     "title": "Merge branch 'fix/cloudrun-copy-by-digest' into 'main'"
+    },
+    {
      "message": "Live inference check: make demo-model importable before unpickling the evaluated model (it failed in CI with ModuleNotFoundError: fair_model) and fail closed with a record when the model cannot be loaded\n",
      "sha": "ea22268ea3d2660b9d8f5410cf4c40ab391246f9",
      "title": "Live inference check: make demo-model importable before unpickling the evaluated model (it failed in CI with ModuleNotFoundError: fair_model) and fail closed with a record when the model cannot be loaded"
@@ -76097,11 +76107,6 @@
     },
     {
      "message": "Merge branch 'fix/fixture-runs' into 'main'\n\nSnapshot: reuse the recorded approvals and diff size of merged and closed...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!34",
-     "sha": "a929240adc25f2f8bedb5ac6b406c50cf0b2ed06",
-     "title": "Merge branch 'fix/fixture-runs' into 'main'"
-    },
-    {
-     "message": "Merge branch 'fix/fixture-runs' into 'main'\n\nSnapshot: reuse the recorded approvals and diff size of merged and closed...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!34",
      "sha": "d4e87a8474fd2146bd84f5573bc54df4946afd8c",
      "title": "Merge branch 'fix/fixture-runs' into 'main'"
     },
@@ -76109,11 +76114,6 @@
      "message": "README: verify-it-yourself and the Release row point at release 2957104159 (job 17247576644, Rekor 3284985001); ran the command: Verified OK, one added byte fails\n",
      "sha": "3e11714dfbfb3e6ad8b7b545ea29e208094eb306",
      "title": "README: verify-it-yourself and the Release row point at release 2957104159 (job 17247576644, Rekor 3284985001); ran the command: Verified OK, one added byte fails"
-    },
-    {
-     "message": "Merge branch 'docs/readme-verify-release' into 'main'\n\nREADME: verify-it-yourself and the Release row point at release 2957104159...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!35",
-     "sha": "b5dd551135fe54de56c127b44d0e8008fea3b357",
-     "title": "Merge branch 'docs/readme-verify-release' into 'main'"
     },
     {
      "message": "Merge branch 'docs/readme-verify-release' into 'main'\n\nREADME: verify-it-yourself and the Release row point at release 2957104159...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!35",
@@ -78117,13 +78117,13 @@
   ]
  },
  "snapshot": {
-  "date": "2026-10-30",
-  "taken_at": "2026-10-30T23:52:38Z",
+  "date": "2026-10-31",
+  "taken_at": "2026-10-31T03:57:46Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-30T23:52:38Z",
+   "checked_at": "2026-10-31T03:57:46Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -82584,7 +82584,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-30T23:52:38Z",
+   "checked_at": "2026-10-31T03:57:46Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
