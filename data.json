@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T20:11:12Z",
+ "generated_at": "2026-10-30T23:52:38Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -75736,6 +75736,26 @@
    },
    "recent": [
     {
+     "message": "Live inference check: make demo-model importable before unpickling the evaluated model (it failed in CI with ModuleNotFoundError: fair_model) and fail closed with a record when the model cannot be loaded\n",
+     "sha": "ea22268ea3d2660b9d8f5410cf4c40ab391246f9",
+     "title": "Live inference check: make demo-model importable before unpickling the evaluated model (it failed in CI with ModuleNotFoundError: fair_model) and fail closed with a record when the model cannot be loaded"
+    },
+    {
+     "message": "Snapshot: reuse unchanged finished pipelines from the previous snapshot (hash-checked) and save progress when GitLab rate limits, so publish-public-dashboard resumes instead of starting over; service gets /health (Cloud Run reserves /healthz); claims record the Cloud Run deployment and the Investigator's automatic trigger from three public pipeline pairs\n",
+     "sha": "329e072cad6605f3b88098c1a553a313f471d5d3",
+     "title": "Snapshot: reuse unchanged finished pipelines from the previous snapshot (hash-checked) and save progress when GitLab rate limits, so publish-public-dashboard resumes instead of starting over; service gets /health (Cloud Run reserves /healthz); claims record the Cloud Run deployment and the Investigator's automatic trigger from three public pipeline pairs"
+    },
+    {
+     "message": "Merge branch 'fix/live-inference-load' into 'main'\n\nLive inference check: make demo-model importable before unpickling the...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!17",
+     "sha": "8eaef67b1fead0bd4441cf2918cef3ef88ee3267",
+     "title": "Merge branch 'fix/live-inference-load' into 'main'"
+    },
+    {
+     "message": "Docs: Cloud Run deployment and the live inference check are proven (pipeline 2953539637); the release step is real since 2026-10-16 and earlier releases were recorded only; Devpost gets its Google Cloud section\n",
+     "sha": "f0f351ee151c1d5f57de81f878541ee32386a6d2",
+     "title": "Docs: Cloud Run deployment and the live inference check are proven (pipeline 2953539637); the release step is real since 2026-10-16 and earlier releases were recorded only; Devpost gets its Google Cloud section"
+    },
+    {
      "message": "Merge branch 'docs/cloud-run-proven' into 'main'\n\nDocs: Cloud Run deployment and the live inference check are proven (pipeline...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!18",
      "sha": "0069197c7c1555d94b1492172e7cb636bdf491ca",
      "title": "Merge branch 'docs/cloud-run-proven' into 'main'"
@@ -75997,11 +76017,6 @@
     },
     {
      "message": "Merge branch 'fix/fixture-test-drift' into 'main'\n\nFixture patch test steps aside, with a stated reason, where the training code...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!32",
-     "sha": "0579e28f191d9f8827e67d3248c97a6997b6b653",
-     "title": "Merge branch 'fix/fixture-test-drift' into 'main'"
-    },
-    {
-     "message": "Merge branch 'fix/fixture-test-drift' into 'main'\n\nFixture patch test steps aside, with a stated reason, where the training code...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!32",
      "sha": "2bfc666c3c152598202678342e3084920cb40e34",
      "title": "Merge branch 'fix/fixture-test-drift' into 'main'"
     },
@@ -76016,19 +76031,9 @@
      "title": "Merge duo-demo/c-fairness-regression into repair/issue-9 (picks up the fixture test fix; the repair's diff is unchanged)"
     },
     {
-     "message": "Merge branch 'repair/issue-9' into 'duo-demo/c-fairness-regression'\n\nDraft: Restore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!31",
-     "sha": "de1367e5930e7640b5d02eb4c09635ea42d1891a",
-     "title": "Merge branch 'repair/issue-9' into 'duo-demo/c-fairness-regression'"
-    },
-    {
      "message": "Merge branch 'repair/issue-9' into 'duo-demo/c-fairness-regression'\n\nRestore equal-opportunity calibration in build_variant_d\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!31",
      "sha": "df1dbd19ebc63df89920945eaf411da8d64e71d3",
      "title": "Merge branch 'repair/issue-9' into 'duo-demo/c-fairness-regression'"
-    },
-    {
-     "message": "Merge branch 'duo-demo/c-fairness-regression' into 'main'\n\nDEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!29",
-     "sha": "e4436265b2d398d5288a6d76b899badf0bad5002",
-     "title": "Merge branch 'duo-demo/c-fairness-regression' into 'main'"
     },
     {
      "message": "Merge branch 'duo-demo/c-fairness-regression' into 'main'\n\nDEMO FIXTURE: drop the equal-opportunity calibration in build_variant_d...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!29",
@@ -76064,11 +76069,6 @@
      "message": "Saved copy: 9623558-issue9-repair-failed-workflow-lock\n",
      "sha": "5629e5daa70ec60b79e595493a79cc1963cadbc9",
      "title": "Saved copy: 9623558-issue9-repair-failed-workflow-lock"
-    },
-    {
-     "message": "Merge branch 'docs/cycle-c' into 'main'\n\nCycle C recorded: A6 proven by !31 (repair into...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!33",
-     "sha": "0da340bb7220eb239e56ac4eb293983930c00373",
-     "title": "Merge branch 'docs/cycle-c' into 'main'"
     },
     {
      "message": "Merge branch 'docs/cycle-c' into 'main'\n\nCycle C recorded: A6 proven by !31 (repair into...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!33",
@@ -78118,12 +78118,12 @@
  },
  "snapshot": {
   "date": "2026-10-30",
-  "taken_at": "2026-10-30T20:11:12Z",
+  "taken_at": "2026-10-30T23:52:38Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-30T20:11:12Z",
+   "checked_at": "2026-10-30T23:52:38Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -82584,7 +82584,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-30T20:11:12Z",
+   "checked_at": "2026-10-30T23:52:38Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
