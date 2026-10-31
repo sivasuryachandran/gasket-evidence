@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T03:57:46Z",
+ "generated_at": "2026-10-31T10:15:14Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -75736,6 +75736,11 @@
    },
    "recent": [
     {
+     "message": "Merge branch 'fix/collector-time-budget' into 'main'\n\nCollector: cap the total time spent waiting out a rate limit (240 s) and the...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!15",
+     "sha": "1ce64752d9fb013f0dc167da0d65af6131d18e61",
+     "title": "Merge branch 'fix/collector-time-budget' into 'main'"
+    },
+    {
      "message": "Cloud Run deploy: copy the image by digest without its tag (skopeo refuses a tag and a digest together) and make the test double refuse it too; pace snapshot requests so they stay under GitLab's rate limit\n",
      "sha": "65e2355e6a0b23ab02a251a3197bb424b405f8db",
      "title": "Cloud Run deploy: copy the image by digest without its tag (skopeo refuses a tag and a digest together) and make the test double refuse it too; pace snapshot requests so they stay under GitLab's rate limit"
@@ -76224,11 +76229,6 @@
      "message": "Gallery image 15-end-card\n",
      "sha": "16a647eec044f6ed9e244bc1800ffdfa8b04dc53",
      "title": "Gallery image 15-end-card"
-    },
-    {
-     "message": "Merge branch 'docs/video-url' into 'main'\n\nDocs: the demo video link (README header, DEVPOST links, SUBMISSION...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!36",
-     "sha": "8c908c60f250d9805bb66638701d8722813d88ee",
-     "title": "Merge branch 'docs/video-url' into 'main'"
     },
     {
      "message": "Merge branch 'docs/video-url' into 'main'\n\nDocs: the demo video link (README header, DEVPOST links, SUBMISSION...\n\nSee merge request gitlab-ai-hackathon/transcend-october-2026/43241733/gasket!36",
@@ -78118,12 +78118,12 @@
  },
  "snapshot": {
   "date": "2026-10-31",
-  "taken_at": "2026-10-31T03:57:46Z",
+  "taken_at": "2026-10-31T10:15:14Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-10-31T03:57:46Z",
+   "checked_at": "2026-10-31T10:15:14Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -82584,7 +82584,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-10-31T03:57:46Z",
+   "checked_at": "2026-10-31T10:15:14Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
