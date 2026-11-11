@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-11T15:38:36Z",
+ "generated_at": "2026-11-11T22:15:26Z",
  "note": "Synthetic data and a demo policy. Evidence is hash-bound; main-branch runs since signing was added are signed with Sigstore keyless (see each run's signature record). Fields missing here were not recorded.",
  "chains": [
   {
@@ -52,14 +52,7 @@
    "release_stage": "deployed_mock",
    "release_started_by": "chandran.sivasurya",
    "signed": false,
-   "deployment": {
-    "mock": true,
-    "mode": "mock",
-    "executed_by": "chandran.sivasurya",
-    "approval": "not recorded",
-    "candidate_verified": false,
-    "production_verified": false
-   },
+   "deployment": null,
    "steps_done": 7,
    "steps_total": 9,
    "missing": [
@@ -117,14 +110,7 @@
    "release_stage": "deployed_mock",
    "release_started_by": "chandran.sivasurya",
    "signed": false,
-   "deployment": {
-    "mock": true,
-    "mode": "mock",
-    "executed_by": "chandran.sivasurya",
-    "approval": "not recorded",
-    "candidate_verified": false,
-    "production_verified": false
-   },
+   "deployment": null,
    "steps_done": 7,
    "steps_total": 9,
    "missing": [
@@ -773,14 +759,7 @@
    "outcome": "released_eligible",
    "reason_codes": [],
    "release_stage": "deployed_mock",
-   "deployment": {
-    "mock": true,
-    "mode": "mock",
-    "executed_by": "chandran.sivasurya",
-    "approval": "not recorded",
-    "candidate_verified": false,
-    "production_verified": false
-   },
+   "deployment": null,
    "evidenced_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "observed_model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "metrics": {

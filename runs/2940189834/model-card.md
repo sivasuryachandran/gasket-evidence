@@ -38,11 +38,10 @@ The Witness decision was **pass**.
 - Signer identity: not recorded
 - Verify: `not recorded`
 - Approved by: not recorded
-- Release job started by: @chandran.sivasurya (the release is recorded only; no service was deployed)
+- Release job started by: @chandran.sivasurya
 
 ## Known limits
 
 - The data is synthetic and the thresholds are this project's own demonstration rule, not a legal or regulatory standard.
 - Fairness is measured with one metric (equal opportunity difference) between two groups; it says nothing about other groups or measures.
 - The signature proves the evidence came from this pipeline and is unaltered. It does not assert that a person reviewed its correctness.
-- The deployment for this release is a labelled demonstration: a receipt was recorded and no service was deployed.
