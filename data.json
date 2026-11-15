@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T16:46:41Z",
+ "generated_at": "2026-11-15T21:21:42Z",
  "outcomes": {
   "out_of_scope": 75,
   "released_eligible": 96,
@@ -10656,8 +10656,8 @@
    "container_scanning": {
     "status": "success",
     "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17246629886",
-    "report": true,
-    "report_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17246629886/artifacts/download?file_type=container_scanning"
+    "report": false,
+    "report_url": null
    },
    "policy_change": {
     "status": "clear",
@@ -14278,8 +14278,8 @@
    "container_scanning": {
     "status": "success",
     "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245463786",
-    "report": true,
-    "report_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245463786/artifacts/download?file_type=container_scanning"
+    "report": false,
+    "report_url": null
    },
    "policy_change": {
     "status": "clear",
@@ -14976,8 +14976,8 @@
    "container_scanning": {
     "status": "success",
     "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245428455",
-    "report": true,
-    "report_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17245428455/artifacts/download?file_type=container_scanning"
+    "report": false,
+    "report_url": null
    },
    "policy_change": {
     "status": "clear",
@@ -17978,8 +17978,8 @@
    "container_scanning": {
     "status": "success",
     "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17244242333",
-    "report": true,
-    "report_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17244242333/artifacts/download?file_type=container_scanning"
+    "report": false,
+    "report_url": null
    },
    "policy_change": {
     "status": "clear",
@@ -18600,8 +18600,8 @@
    "container_scanning": {
     "status": "success",
     "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17244128491",
-    "report": true,
-    "report_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17244128491/artifacts/download?file_type=container_scanning"
+    "report": false,
+    "report_url": null
    },
    "policy_change": {
     "status": "clear",
@@ -22945,8 +22945,8 @@
    "container_scanning": {
     "status": "success",
     "job_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17242705755",
-    "report": true,
-    "report_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket/-/jobs/17242705755/artifacts/download?file_type=container_scanning"
+    "report": false,
+    "report_url": null
    },
    "policy_change": {
     "status": "clear",
@@ -78022,12 +78022,12 @@
  },
  "snapshot": {
   "date": "2026-11-15",
-  "taken_at": "2026-11-15T16:46:41Z",
+  "taken_at": "2026-11-15T21:21:42Z",
   "project_url": "https://gitlab.com/gitlab-ai-hackathon/transcend-october-2026/43241733/gasket",
   "note": "Static snapshot of public GitLab data; not live.",
   "refresh": null,
   "live_service": {
-   "checked_at": "2026-11-15T16:46:41Z",
+   "checked_at": "2026-11-15T21:21:42Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
@@ -82474,7 +82474,7 @@
    }
   ],
   "live": {
-   "checked_at": "2026-11-15T16:46:41Z",
+   "checked_at": "2026-11-15T21:21:42Z",
    "commit": "1c00dbd4b1e4696c2553012dd18a01e8813bc702",
    "model_sha256": "e0c256545cbde8964bf9674b9e36695ff32cbb06a3328490c96a9f79bc7a207d",
    "model_variant": "D",
